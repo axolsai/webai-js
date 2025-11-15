@@ -1,0 +1,33 @@
+{
+  "name": "@axols/webai-js",
+  "version": "0.0.1",
+  "publishConfig": {
+    "access": "public"
+  },
+  "description": "A free, open source library to embed powerful AI models directly into your web applications. Run AI in the front-end with complete data privacy and zero hosting costs. Compatible with major front-end frameworks like React, Next.js, Vue, etc.",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "homepage": "https://www.webai-js.com",
+  "keywords": [
+    "Web AI",
+    "Local AI",
+    "Transformers JS",
+    "AI in the Browser",
+    "WebGPU"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch"
+  },
+  "author": "Axols WebAI",
+  "license": "Apache-2.0",
+  "type": "commonjs",
+  "dependencies": {
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "@webgpu/types": "^0.1.66"
+  }
+}
