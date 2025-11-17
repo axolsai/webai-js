@@ -1,9 +1,9 @@
-// src/WebAI.ts - Main class (Open Source Version)
+// src/WebAI.ts
 import { ModelManager } from "./managers/webai-model-manager";
 import { QueueManager } from "./managers/webai-queue-manager";
 import { WorkerManager } from "./managers/webai-worker-manager";
 import { REMOTE_WORKER_ENDPOINT, VERSION } from "./utils/constants";
-import { WebAIMode, WebAIDevice, WebAIPrecision, WebAIPriorities, ProgressType } from "./utils/types";
+import { WebAIMode, WebAIDevice, WebAIPrecision, WebAIPriorities, ProgressType, AuthRetryOptions, OnAuthCallback } from "./utils/types";
 import { checkIsModelDownloaded, checkIsWebGPUAvailable, checkStorageQuota } from "./utils/utils";
 
 export class WebAI {
@@ -11,6 +11,8 @@ export class WebAI {
   private _modelId: string;
   private _dev: boolean;
   private _workerPath?: string;
+  private _onAuth?: OnAuthCallback;
+  private _authRetryOptions?: AuthRetryOptions;
   private _isWebGPUAvailable: boolean | null = null;
   private _storageQuota: StorageEstimate | null = null;
   private _isInitialized: boolean = false;
@@ -20,26 +22,47 @@ export class WebAI {
   private _queueManager: QueueManager;
   private _modelManager: ModelManager;
  
-  constructor({
+  private constructor({
     modelId,
     dev = false,
     workerPath,
+    onAuth,
+    authRetryOptions,
   }: {
     modelId: string;
     dev?: boolean;
     workerPath?: string;
+    onAuth?: OnAuthCallback;
+    authRetryOptions?: AuthRetryOptions;
   }) {
     this._modelId = modelId;
     this._dev = dev;
     this._workerPath = workerPath;
+    this._onAuth = onAuth;
+    this._authRetryOptions = authRetryOptions;
 
-    // Initialize managers
-    this._workerManager = new WorkerManager(this.#getWorkerPath(), this._modelId);
+    // Initialize managers - pass isDev, onAuth, and authRetryOptions to ModelManager
+    this._workerManager = new WorkerManager(this.#getWorkerPath(), modelId);
     this._queueManager = new QueueManager();
-    this._modelManager = new ModelManager(modelId, this._workerManager);
-    
-    // Initialize the instance
-    this.#createInstance();
+    this._modelManager = new ModelManager(modelId, this._workerManager, dev, onAuth, authRetryOptions);
+  }
+
+  static async create({
+    modelId,
+    dev = false,
+    workerPath,
+    onAuth,
+    authRetryOptions,
+  }: {
+    modelId: string;
+    dev?: boolean;
+    workerPath?: string;
+    onAuth?: OnAuthCallback;
+    authRetryOptions?: AuthRetryOptions;
+  }): Promise<WebAI> {
+    const instance = new WebAI({ modelId, dev, workerPath, onAuth, authRetryOptions });
+    await instance.#createInstance();
+    return instance;
   }
 
   async #createInstance(): Promise<void> {
@@ -217,14 +240,11 @@ export class WebAI {
     }
 
     // Otherwise, use the default remote worker endpoint
-    const basePath = `${REMOTE_WORKER_ENDPOINT}/models/${this._modelId}/worker`;
+    const basePath = `${REMOTE_WORKER_ENDPOINT}/models/${this._modelId}/js-worker`;
     const workerFile = `${this._modelId}.worker.js`;
     
-    if (this._dev) {
-      return `${basePath}/dev/${workerFile}`;
-    } else {
-      return `${basePath}/${workerFile}`;
-    }
+    return `${basePath}/${workerFile}`;
+ 
   }
 
   get modelId(): string {

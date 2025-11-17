@@ -4,16 +4,21 @@ import {
     WebAIPrecision,
     SupportedPrecisionsDevicesMapType,
     ProgressType,
-    WebAIPriorities
+    WebAIPriorities,
+    OnAuthCallback,
+    AuthRetryOptions
   } from "../utils/types";
   import { checkIsModelDownloaded, clearModelCache } from "../utils/utils";
-  import { createWorkerError, isWorkerError } from "../utils/errors";
-import { WorkerManager } from "./webai-worker-manager";
-
+  import { createWorkerError } from "../utils/errors";
+  import { WorkerManager } from "./webai-worker-manager";
+  import { logStartDownload, logEndDownload, logFailedDownload } from "../utils/download-logs";
   
   export class ModelManager {
     private _modelId: string;
+    private _isDev: boolean = false;
     private _workerManager: WorkerManager | null = null; 
+    private _onAuth?: OnAuthCallback;
+    private _authRetryOptions?: AuthRetryOptions;
     private _mode: WebAIMode | null = null;
     private _precision: WebAIPrecision | null = null;
     private _device: WebAIDevice | null = null;
@@ -23,9 +28,60 @@ import { WorkerManager } from "./webai-worker-manager";
     private _doesSupportStreamGeneration: boolean | null = null;
     private _externalInterrupt: boolean | null = null;
   
-    constructor(modelId: string, workerManager: WorkerManager | null = null) {
+    constructor(
+      modelId: string, 
+      workerManager: WorkerManager | null = null, 
+      isDev: boolean = false,
+      onAuth?: OnAuthCallback,
+      authRetryOptions?: AuthRetryOptions
+    ) {
       this._modelId = modelId;
       this._workerManager = workerManager;
+      this._isDev = isDev;
+      this._onAuth = onAuth;
+      this._authRetryOptions = authRetryOptions;
+    }
+  
+    /**
+     * Attempts to get an auth token with retry logic
+     */
+    private async getAuthToken(): Promise<string | undefined> {
+      if (!this._onAuth) {
+        return undefined;
+      }
+  
+      const maxRetries = this._authRetryOptions?.maxRetries ?? 3;
+      const baseRetryInterval = this._authRetryOptions?.retryInterval ?? 2000;
+      const exponentialBackoff = this._authRetryOptions?.exponentialBackoff ?? true;
+  
+      for (let attempt = 0; attempt <= maxRetries; attempt++) {
+        try {
+          const token = await this._onAuth();
+          if (token && typeof token === 'string') {
+            return token;
+          }
+          throw new Error("onAuth callback did not return a valid token string");
+        } catch (error) {
+          console.error(`Auth attempt ${attempt + 1} failed:`, error);
+          
+          if (attempt < maxRetries) {
+            const waitTime = exponentialBackoff 
+              ? baseRetryInterval * Math.pow(2, attempt)
+              : baseRetryInterval;
+            
+            console.log(`Retrying in ${waitTime}ms...`);
+            await new Promise(resolve => setTimeout(resolve, waitTime));
+          } else {
+            console.error("All auth retry attempts failed");
+            throw createWorkerError(
+              `Failed to get auth token after ${maxRetries + 1} attempts`,
+              'initialization_failed'
+            );
+          }
+        }
+      }
+  
+      return undefined;
     }
   
     async checkModelSupports(worker: Worker | null): Promise<void> {
@@ -169,176 +225,240 @@ import { WorkerManager } from "./webai-worker-manager";
     }
   
     async downloadModel(
-      worker: Worker | null,
-      precision: WebAIPrecision,
-      downloadProgressCallback?: (progress: ProgressType) => void,
-      callbackThrottle: number = 500,
-    ): Promise<boolean> {
-      if (!worker) {
-        throw createWorkerError(
-          "Worker is not initialized",
-          'initialization_failed'
-        );
-      }
-  
-      const modelKeys = this._supportedPrecisionsDevicesMap?.[precision]?.modelKeys || [];
-      
-      // Check if model is already downloaded
-      const isModelDownloaded = await checkIsModelDownloaded(
-        precision,
-        modelKeys,
-        this._modelId
-      );
-      
-      if (isModelDownloaded) {
-        // Model already exists - report 100% if callback provided
-        if (downloadProgressCallback) {
-          const actualSize = this._supportedPrecisionsDevicesMap?.[precision]?.size || 0;
-          downloadProgressCallback({
-            file: `${precision} models`,
-            name: this._modelId,
-            loaded: actualSize,
-            total: actualSize,
-            status: "downloaded",
-            progress: 100
-          });
+        worker: Worker | null,
+        precision: WebAIPrecision,
+        downloadProgressCallback?: (progress: ProgressType) => void,
+        callbackThrottle: number = 500,
+      ): Promise<boolean> {
+        if (!worker) {
+          throw createWorkerError(
+            "Worker is not initialized",
+            'initialization_failed'
+          );
         }
-        return true;
-      }
-  
-      // Model needs to be downloaded
-      return new Promise((resolve, reject) => {
-        let lastProgressUpdate = 0;
-        const fileProgress: Record<string, ProgressType> = {};
-  
-        const cleanup = () => {
-          worker.removeEventListener("message", handleMessage);
-          worker.removeEventListener("error", handleError);
-        };
-  
-        const handleMessage = async (event: MessageEvent) => {
-          if (event.data.type === "error") {
-            cleanup();
-            reject(createWorkerError(
-              event.data.data.message || "Download error",
-              'runtime_error'
-            ));
-            return;
+      
+        const modelKeys = this._supportedPrecisionsDevicesMap?.[precision]?.modelKeys || [];
+        
+        // Check if model is already downloaded
+        const isModelDownloaded = await checkIsModelDownloaded(
+          precision,
+          modelKeys,
+          this._modelId
+        );
+        
+        if (isModelDownloaded) {
+          // Model already exists - report 100% if callback provided
+          if (downloadProgressCallback) {
+            const actualSize = this._supportedPrecisionsDevicesMap?.[precision]?.size || 0;
+            downloadProgressCallback({
+              file: `${precision} models`,
+              name: this._modelId,
+              loaded: actualSize,
+              total: actualSize,
+              status: "downloaded",
+              progress: 100
+            });
           }
-  
-          // Handle download progress updates
-          if (event.data.type === "downloadProgress") {
-            const progressData = event.data.data;
-            const filename = progressData.file;
-            
-            if (!filename) return;
-            
-            const matchedKey = modelKeys.find(key => filename.includes(key));
-            const now = Date.now();
-            
-            if (matchedKey && (now - lastProgressUpdate > callbackThrottle)) {
-              fileProgress[matchedKey] = progressData;
-  
-              // Only report aggregated progress when all keys have data
-              const allKeysPresent = modelKeys.every(key => fileProgress[key] !== undefined);
-  
-              if (allKeysPresent && downloadProgressCallback) {
-                let totalLoaded = 0;
-                let totalSize = 0;
-  
-                modelKeys.forEach(key => {
-                  totalLoaded += fileProgress[key].loaded;
-                  totalSize += fileProgress[key].total;
-                });
-  
-                const progress = (totalLoaded / totalSize) * 100;
-                
-                if (progress >= 0 && progress <= 100) {
-                  downloadProgressCallback({
-                    file: `${precision} models`,
-                    name: this._modelId,
-                    loaded: totalLoaded,
-                    total: totalSize,
-                    status: "downloading",
-                    progress: progress
+          return true;
+        }
+      
+        // Get the price for this model/precision (default to 0 for free models)
+        const price = this._supportedPrecisionsDevicesMap?.[precision]?.price || 0;
+      
+        // Get auth token if onAuth is provided
+        let authToken: string | undefined;
+        try {
+          authToken = await this.getAuthToken();
+        } catch (error) {
+          // If auth fails, throw the error and don't proceed with download
+          throw createWorkerError(
+            `Failed to get auth token: ${error instanceof Error ? error.message : 'Unknown error'}`,
+            'initialization_failed'
+          );
+        }
+      
+        // Start logging the download - if this fails, don't proceed
+        let downloadId: string | null = null;
+        try {
+          downloadId = await logStartDownload(
+            this._modelId,
+            precision,
+            price,
+            this._isDev,
+            undefined, // clientIdentifier will be extracted from token on server
+            authToken
+          );
+          console.log(`Download started with ID: ${downloadId}`);
+        } catch (error) {
+          // Don't proceed with download if logging fails
+          throw createWorkerError(
+            `Failed to log download start: ${error instanceof Error ? error.message : 'Unknown error'}. Download aborted.`,
+            'initialization_failed'
+          );
+        }
+      
+        // Model needs to be downloaded
+        return new Promise((resolve, reject) => {
+          let lastProgressUpdate = 0;
+          const fileProgress: Record<string, ProgressType> = {};
+      
+          const cleanup = () => {
+            worker.removeEventListener("message", handleMessage);
+            worker.removeEventListener("error", handleError);
+          };
+      
+          const handleMessage = async (event: MessageEvent) => {
+            if (event.data.type === "error") {
+              cleanup();
+              
+              // Log download failure
+              if (downloadId) {
+                await logFailedDownload(downloadId);
+              }
+              
+              reject(createWorkerError(
+                event.data.data.message || "Download error",
+                'runtime_error'
+              ));
+              return;
+            }
+      
+            // Handle download progress updates
+            if (event.data.type === "downloadProgress") {
+              const progressData = event.data.data;
+              const filename = progressData.file;
+              
+              if (!filename) return;
+              
+              const matchedKey = modelKeys.find(key => filename.includes(key));
+              const now = Date.now();
+              
+              if (matchedKey && (now - lastProgressUpdate > callbackThrottle)) {
+                fileProgress[matchedKey] = progressData;
+      
+                // Only report aggregated progress when all keys have data
+                const allKeysPresent = modelKeys.every(key => fileProgress[key] !== undefined);
+      
+                if (allKeysPresent && downloadProgressCallback) {
+                  let totalLoaded = 0;
+                  let totalSize = 0;
+      
+                  modelKeys.forEach(key => {
+                    totalLoaded += fileProgress[key].loaded;
+                    totalSize += fileProgress[key].total;
                   });
+      
+                  const progress = (totalLoaded / totalSize) * 100;
+                  
+                  if (progress >= 0 && progress <= 100) {
+                    downloadProgressCallback({
+                      file: `${precision} models`,
+                      name: this._modelId,
+                      loaded: totalLoaded,
+                      total: totalSize,
+                      status: "downloading",
+                      progress: progress
+                    });
+                  }
                 }
                 lastProgressUpdate = now;
               }
+              return;
             }
-            return;
-          }
-  
-          // Handle download completion
-          if (event.data.type === "download" && event.data.data.status === "success") {
-            if (downloadProgressCallback) {
-              const actualSize = this._supportedPrecisionsDevicesMap?.[precision]?.size || 0;
-              downloadProgressCallback({
-                file: `${precision} models`,
-                name: this._modelId,
-                loaded: actualSize,
-                total: actualSize,
-                status: "downloaded",
-                progress: 100
-              });
-            }
-  
-            cleanup();
-  
-            // Reload worker after successful download
-            if (this._workerManager) {
-              try {
-                console.log("Reloading worker after successful download...");
-                await this._workerManager.reloadWorker();
-                
-                if (!this._workerManager.worker) {
-                  throw createWorkerError(
-                    "Worker is null after reload",
-                    'initialization_failed'
-                  );
-                }
-                
-                // Re-check model supports with the new worker instance
-                await this.checkModelSupports(this._workerManager.worker);
-                
-              } catch (error) {
-                console.error("Failed to reload worker after download:", error);
-                reject(createWorkerError(
-                  "Failed to reload worker after download",
-                  'initialization_failed'
-                ));
-                return;
+      
+            // Handle download completion
+            if (event.data.type === "download" && event.data.data.status === "success") {
+              if (downloadProgressCallback) {
+                const actualSize = this._supportedPrecisionsDevicesMap?.[precision]?.size || 0;
+                downloadProgressCallback({
+                  file: `${precision} models`,
+                  name: this._modelId,
+                  loaded: actualSize,
+                  total: actualSize,
+                  status: "downloaded",
+                  progress: 100
+                });
               }
+      
+              cleanup();
+      
+              // Log download success
+              if (downloadId) {
+                await logEndDownload(downloadId);
+              }
+      
+              // Reload worker after successful download
+              if (this._workerManager) {
+                try {
+                  console.log("Reloading worker after successful download...");
+                  await this._workerManager.reloadWorker();
+                  
+                  if (!this._workerManager.worker) {
+                    throw createWorkerError(
+                      "Worker is null after reload",
+                      'initialization_failed'
+                    );
+                  }
+                  
+                  // Re-check model supports with the new worker instance
+                  await this.checkModelSupports(this._workerManager.worker);
+                  
+                } catch (error) {
+                  console.error("Failed to reload worker after download:", error);
+                  
+                  // Log failure if reload fails
+                  if (downloadId) {
+                    await logFailedDownload(downloadId);
+                  }
+                  
+                  reject(createWorkerError(
+                    "Failed to reload worker after download",
+                    'initialization_failed'
+                  ));
+                  return;
+                }
+              }
+      
+              resolve(true);
             }
-  
-            resolve(true);
+          };
+      
+          const handleError = async (error: ErrorEvent) => {
+            cleanup();
+            
+            // Log download failure
+            if (downloadId) {
+              await logFailedDownload(downloadId);
+            }
+            
+            reject(createWorkerError(
+              `Worker error during download: ${error.message}`,
+              'runtime_error'
+            ));
+          };
+      
+          worker.addEventListener("message", handleMessage);
+          worker.addEventListener("error", handleError);
+      
+          try {
+            worker.postMessage({type: "download", data: {precision}});
+          } catch (error) {
+            cleanup();
+            
+            // Log download failure
+            if (downloadId) {
+              logFailedDownload(downloadId).catch(console.error);
+            }
+            
+            reject(createWorkerError(
+              error instanceof Error
+                ? `Failed to send download request: ${error.message}`
+                : "Failed to send download request: Unknown error",
+              'runtime_error'
+            ));
           }
-        };
-  
-        const handleError = (error: ErrorEvent) => {
-          cleanup();
-          reject(createWorkerError(
-            `Worker error during download: ${error.message}`,
-            'runtime_error'
-          ));
-        };
-  
-        worker.addEventListener("message", handleMessage);
-        worker.addEventListener("error", handleError);
-  
-        try {
-          worker.postMessage({type: "download", data: {precision}});
-        } catch (error) {
-          cleanup();
-          reject(createWorkerError(
-            error instanceof Error
-              ? `Failed to send download request: ${error.message}`
-              : "Failed to send download request: Unknown error",
-            'runtime_error'
-          ));
-        }
-      });
-    }
+        });
+      }
   
     private validateInitConfig(
       mode: WebAIMode,

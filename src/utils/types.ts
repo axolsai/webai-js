@@ -28,3 +28,12 @@ export type SupportedPrecisionsDevicesMapType = {
         modelKeys: string[];
     }
 }
+
+
+export type AuthRetryOptions = {
+    maxRetries?: number;
+    retryInterval?: number;
+    exponentialBackoff?: boolean;
+  };
+  
+  export type OnAuthCallback = () => Promise<string>;
