@@ -1,11 +1,15 @@
 # @axols/webai-js
 
+
 [![npm version](https://img.shields.io/npm/v/@axols/webai-js.svg)](https://www.npmjs.com/package/@axols/webai-js)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://github.com/axols/webai-js/blob/main/LICENSE)
 
 Run AI models directly in your users' browsers with zero server-side infrastructure.
 
 **[📖 Documentation](https://www.webai-js.com/models/whisper-base/api-reference/v1/get-started/basic-usage)** | **[🎮 Playground](https://www.webai-js.com/models/whisper-base/playground)** | **[🤖 Models Hub](https://www.webai-js.com/models)** | **[👨🏻‍💻 Discord Community](https://discord.gg/RkpAKgZC)**
+
+
+![test](https://assets.axolsai.com/web-assets/images/webai-js-banner.png)
 
 ## 🚀 Overview
 
@@ -17,11 +21,10 @@ Axols WebAI.js is an open-source library that enables client-side AI inference d
 - 🌐 **Pure Client-Side**: Run AI models entirely in the browser
 - 🔒 **Privacy-First**: Data never leaves the user's device
 - 📦 **Zero Backend Costs**: No server infrastructure needed
+- 🚀 **Easy Setup**: No headaches with packages - just one simple installation
 - 🎯 **Standardized API**: Same interface across all models
-- ⚡ **Smart Auto-Mode**: Automatically optimizes for device capabilities
 - 🔄 **Streaming Support**: Real-time generation with streaming
-- 💾 **Efficient Caching**: Models downloaded once, cached locally
-- 🛠️ **Framework Agnostic**: Works with React, Vue, Angular, Next.js, and more
+- 🛠️ **Framework Compatible**: Works with React, Vue, Angular, Next.js, and more
 
 ## 📦 Installation
 
