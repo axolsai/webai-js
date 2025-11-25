@@ -7,52 +7,41 @@ import {
 // Configuration
 // ==========================================
 const CONFIG = {
-  MODEL_ID: "rmbg-ormbg",
+  MODEL_ID: "rmbg-briaai-1.4",
   EXTERNAL_INTERRUPT: true,
   SUPPORTED_MODES: ["webai"],
   SUPPORTED_PRECISIONS_DEVICES_MAP: {
-    uint8: {
-      size: 44315205,
-      modelKeys: ["model_uint8.onnx"],
-      supportedDevices: ["wasm"],
-      speed: {
-        wasm: 4,
-      },
-    },
-    q4f16: {
-      size: 88117949,
-      modelKeys: ["model_q4f16.onnx"],
-      supportedDevices: ["wasm"],
-      speed: {
-        wasm: 4,
-      },
-    },
-    q8: {
-      size: 44315205,
-      modelKeys: ["model_quantized.onnx"],
-      supportedDevices: ["wasm"],
-      speed: {
-        wasm: 4,
-      },
-    },
     fp16: {
-      size: 88117930,
+      size: 88217533,
       modelKeys: ["model_fp16.onnx"],
-      supportedDevices: ["wasm"],
+      supportedDevices: ["webgpu", "wasm"],
       speed: {
-        wasm: 4,
+        webgpu: 10,
+        wasm: 5,
       },
     },
     fp32: {
-      size: 176116019,
+      size: 176153355,
       modelKeys: ["model.onnx"],
-      supportedDevices: ["wasm"],
+      supportedDevices: ["webgpu", "wasm"],
       speed: {
-        wasm: 4,
+        webgpu: 10,
+        wasm: 5,
+      },
+    },
+    q8: {
+      size: 44403226,
+      modelKeys: ["model_quantized.onnx"],
+      supportedDevices: ["webgpu", "wasm"],
+      speed: {
+        webgpu: 5,
+        wasm: 5,
       },
     },
   },
-  DEFAULT_MODEL_CONFIG: {},
+  DEFAULT_MODEL_CONFIG: {
+    processingResolution: { width: 1024, height: 1024 },
+  },
   DEFAULT_GENERATION_CONFIG: {
     return_mask: true, // Whether to return the mask
     return_image: true, // Whether to return the masked image
@@ -340,7 +329,7 @@ class WebAIModel {
 
   async generate(data) {
     return safeWorkerOperation(async () => {
-      const { userInput, generateConfig } = data;
+      const { userInput, modelConfig, generateConfig } = data;
 
       if (!this.pipe || !this.precision || !this.device) {
         throw new Error(
@@ -373,7 +362,36 @@ class WebAIModel {
           );
         }
 
-        const output = await this.pipe(userInput.image_blob_url);
+        // Apply merged model config if provided
+        const finalModelConfig = mergeConfigs(
+          CONFIG.DEFAULT_MODEL_CONFIG,
+          modelConfig,
+        );
+
+        // Validate processing resolution if provided
+        if (finalModelConfig.processingResolution) {
+          const width = this._validateDimension(
+            finalModelConfig.processingResolution.width,
+          );
+          const height = this._validateDimension(
+            finalModelConfig.processingResolution.height,
+          );
+          finalModelConfig.processingResolution = { width, height };
+        }
+
+        // Note: BiRefNet pipeline doesn't have the same processor config setup as MODNet
+        // The processing resolution would need to be handled differently depending on the pipeline implementation
+        // For now, we'll pass it through the pipeline call if supported
+        const pipelineOptions = {};
+        if (finalModelConfig.processingResolution) {
+          pipelineOptions.processing_resolution =
+            finalModelConfig.processingResolution;
+        }
+
+        const output = await this.pipe(
+          userInput.image_blob_url,
+          pipelineOptions,
+        );
 
         const processingTime = performance.now() - startTime;
 

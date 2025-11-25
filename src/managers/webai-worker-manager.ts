@@ -40,6 +40,7 @@ export class WorkerManager {
         const workerPath = this._workerPath + "?t=" + Date.now();
         const workerFetchResponse = await fetch(workerPath, {
           cache: "no-store",
+          redirect: "follow",
         });
 
         if (!workerFetchResponse.ok) {

@@ -13,6 +13,6 @@
         "outDir": "dist",
         "types": ["@webgpu/types"]
     },
-    "include": ["src"],
+    "include": ["src", "model-workers"],
     "exclude": ["node_modules"]
 }

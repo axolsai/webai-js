@@ -1,3 +1,4 @@
+// index.ts
 export * from './webai';
 export * from './utils/types';
 export * from './utils/errors';

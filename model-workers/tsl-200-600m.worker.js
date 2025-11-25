@@ -1,29 +1,30 @@
+// Import dependencies
 import {
-  env,
   pipeline,
+  env,
 } from "https://cdn.jsdelivr.net/npm/@huggingface/transformers@latest";
 
 // ==========================================
 // Configuration
 // ==========================================
 const CONFIG = {
-  MODEL_ID: "rmbg-ben2",
+  MODEL_ID: "tsl-200-600m",
   EXTERNAL_INTERRUPT: true,
   SUPPORTED_MODES: ["webai"],
   SUPPORTED_PRECISIONS_DEVICES_MAP: {
-    fp16: {
-      size: 234719689,
-      modelKeys: ["model_fp16.onnx"],
-      supportedDevices: ["webgpu"],
-      speed: {
-        webgpu: 9.5,
-      },
+    q8: {
+      size: 419120483,
+      modelKeys: ["model_quantized.onnx"],
+      supportedDevices: ["wasm"],
+      speed: { wasm: 6 },
     },
   },
-  DEFAULT_MODEL_CONFIG: {},
+  DEFAULT_MODEL_CONFIG: {
+    src_lang: null,
+    tgt_lang: null,
+  },
   DEFAULT_GENERATION_CONFIG: {
-    return_mask: true, // Whether to return the mask
-    return_image: true, // Whether to return the masked image
+    skip_special_tokens: true,
   },
 };
 
@@ -81,8 +82,37 @@ function checkModelSupports() {
   };
 }
 
+// Deep merge function for nested configurations
+function deepMerge(target, source) {
+  const result = { ...target };
+
+  for (const key in source) {
+    if (source.hasOwnProperty(key)) {
+      if (
+        source[key] !== null &&
+        typeof source[key] === "object" &&
+        !Array.isArray(source[key])
+      ) {
+        if (
+          result[key] &&
+          typeof result[key] === "object" &&
+          !Array.isArray(result[key])
+        ) {
+          result[key] = deepMerge(result[key], source[key]);
+        } else {
+          result[key] = { ...source[key] };
+        }
+      } else {
+        result[key] = source[key];
+      }
+    }
+  }
+
+  return result;
+}
+
 function mergeConfigs(defaults, userConfig) {
-  return { ...defaults, ...(userConfig || {}) };
+  return deepMerge(defaults, userConfig || {});
 }
 
 // ==========================================
@@ -101,150 +131,12 @@ class WebAIModel {
     this.device = device;
   }
 
-  // Helper to validate dimension (ensure divisible by 32 for optimal performance)
-  _validateDimension(dim) {
-    if (!dim || isNaN(dim) || dim < 32) {
-      throw new Error(
-        `Invalid dimension: ${dim}. Must be a number greater than or equal to 32.`,
-      );
-    }
-    return Math.round(dim / 32) * 32;
-  }
-
-  // Helper method to convert tensor data to blob URL and mask - optimized version
-  async _convertTensorToBlob(tensorOutput, returnImage, returnMask) {
-    const { data, width, height, channels } = tensorOutput;
-    const result = {};
-
-    // Create canvases only as needed
-    let canvas, ctx, maskCanvas, maskCtx;
-
-    if (returnImage) {
-      canvas = new OffscreenCanvas(width, height);
-      ctx = canvas.getContext("2d");
-    }
-
-    if (returnMask) {
-      maskCanvas = new OffscreenCanvas(width, height);
-      maskCtx = maskCanvas.getContext("2d");
-    }
-
-    // Create ImageData objects only as needed
-    let imageData, maskImageData;
-
-    if (returnImage) {
-      imageData = ctx.createImageData(width, height);
-    }
-
-    if (returnMask) {
-      maskImageData = maskCtx.createImageData(width, height);
-    }
-
-    // Convert tensor data to RGBA format
-    const pixelCount = width * height;
-    for (let i = 0; i < pixelCount; i++) {
-      const tensorIndex = i * channels;
-      const pixelIndex = i * 4;
-
-      if (channels === 4) {
-        // RGBA format
-        if (returnImage) {
-          imageData.data[pixelIndex] = data[tensorIndex];
-          imageData.data[pixelIndex + 1] = data[tensorIndex + 1];
-          imageData.data[pixelIndex + 2] = data[tensorIndex + 2];
-          imageData.data[pixelIndex + 3] = data[tensorIndex + 3];
-        }
-
-        // Create mask from alpha channel
-        if (returnMask) {
-          const alpha = data[tensorIndex + 3];
-          maskImageData.data[pixelIndex] = alpha;
-          maskImageData.data[pixelIndex + 1] = alpha;
-          maskImageData.data[pixelIndex + 2] = alpha;
-          maskImageData.data[pixelIndex + 3] = 255;
-        }
-      } else if (channels === 3) {
-        // RGB format - add full opacity
-        if (returnImage) {
-          imageData.data[pixelIndex] = data[tensorIndex];
-          imageData.data[pixelIndex + 1] = data[tensorIndex + 1];
-          imageData.data[pixelIndex + 2] = data[tensorIndex + 2];
-          imageData.data[pixelIndex + 3] = 255;
-        }
-
-        // Create white mask for RGB
-        if (returnMask) {
-          maskImageData.data[pixelIndex] = 255;
-          maskImageData.data[pixelIndex + 1] = 255;
-          maskImageData.data[pixelIndex + 2] = 255;
-          maskImageData.data[pixelIndex + 3] = 255;
-        }
-      } else if (channels === 1) {
-        // Grayscale - treat as alpha mask
-        const value = data[tensorIndex];
-
-        if (returnImage) {
-          imageData.data[pixelIndex] = 0;
-          imageData.data[pixelIndex + 1] = 0;
-          imageData.data[pixelIndex + 2] = 0;
-          imageData.data[pixelIndex + 3] = value;
-        }
-
-        // Create grayscale mask
-        if (returnMask) {
-          maskImageData.data[pixelIndex] = value;
-          maskImageData.data[pixelIndex + 1] = value;
-          maskImageData.data[pixelIndex + 2] = value;
-          maskImageData.data[pixelIndex + 3] = 255;
-        }
-      }
-    }
-
-    const outputMimeType = "image/png";
-
-    // Process only what's needed
-    const promises = [];
-
-    if (returnImage) {
-      ctx.putImageData(imageData, 0, 0);
-      promises.push(
-        canvas
-          .convertToBlob({
-            type: outputMimeType,
-            quality: 1.0,
-          })
-          .then((blob) => {
-            result.resultBlobUrl = URL.createObjectURL(blob);
-            result.size = blob.size;
-            result.mimeType = outputMimeType;
-          }),
-      );
-    }
-
-    if (returnMask) {
-      maskCtx.putImageData(maskImageData, 0, 0);
-      promises.push(
-        maskCanvas
-          .convertToBlob({
-            type: outputMimeType,
-            quality: 1.0,
-          })
-          .then((blob) => {
-            result.maskBlobUrl = URL.createObjectURL(blob);
-          }),
-      );
-    }
-
-    await Promise.all(promises);
-    return result;
-  }
-
   async downloadModel(precision) {
     if (!precision) {
       throw new Error("Precision must be set to download the model");
     }
 
-    await pipeline("background-removal", this.model_id, {
+    await pipeline("translation", this.model_id, {
       dtype: precision,
       progress_callback: (progress) => {
         self.postMessage({
@@ -256,7 +148,9 @@ class WebAIModel {
 
     self.postMessage({
       type: "download",
-      data: { status: "success" },
+      data: {
+        status: "success",
+      },
     });
   }
 
@@ -278,7 +172,7 @@ class WebAIModel {
       );
     }
 
-    this.pipe = await pipeline("background-removal", this.model_id, {
+    this.pipe = await pipeline("translation", this.model_id, {
       dtype: this.precision,
       device: this.device,
       progress_callback: (progress) => {
@@ -291,7 +185,7 @@ class WebAIModel {
   }
 
   async generate(data) {
-    const { userInput, generateConfig } = data;
+    const { userInput, modelConfig } = data;
 
     if (!this.pipe || !this.precision || !this.device) {
       throw new Error(
@@ -299,64 +193,37 @@ class WebAIModel {
       );
     }
 
+    // Check if already generating to prevent concurrent operations
     if (modelState.isGenerating) {
       throw new Error(
         "A generation is already in progress. Please wait or interrupt the current generation.",
       );
     }
 
-    const finalGenerateConfig = mergeConfigs(
-      CONFIG.DEFAULT_GENERATION_CONFIG,
-      generateConfig,
-    );
-
     modelState.isGenerating = true;
-    const startTime = performance.now();
 
     try {
-      if (
-        !userInput.image_blob_url ||
-        !userInput.image_blob_url.startsWith("blob:")
-      ) {
-        throw new Error(
-          "Missing or invalid image_blob_url. Please provide a valid blob URL.",
-        );
-      }
+      const finalModelConfig = mergeConfigs(
+        CONFIG.DEFAULT_MODEL_CONFIG,
+        modelConfig,
+      );
 
-      const output = await this.pipe(userInput.image_blob_url);
-
-      const processingTime = performance.now() - startTime;
-
-      // Convert tensor data to blob URL and get metadata - only process what's needed
-      const { resultBlobUrl, maskBlobUrl, size, mimeType } =
-        await this._convertTensorToBlob(
-          output[0],
-          finalGenerateConfig.return_image,
-          finalGenerateConfig.return_mask,
-        );
-
-      // User controls what to return
-      const result = {
-        processing_time: processingTime,
-      };
-
-      // Return masked image if requested
-      if (finalGenerateConfig.return_image && resultBlobUrl) {
-        result.result = resultBlobUrl;
-        result.size = size;
-        result.mimeType = mimeType;
-      }
-
-      // Return mask if requested
-      if (finalGenerateConfig.return_mask && maskBlobUrl) {
-        result.result_mask = maskBlobUrl;
+      const translations = [];
+      for (const text of userInput.texts) {
+        const result = await this.pipe(text, {
+          ...finalModelConfig,
+        });
+        // NLLB returns array of translations, we take the first one
+        translations.push(result[0]["translation_text"]);
       }
 
       self.postMessage({
         type: "generated",
         data: {
           status: "success",
-          result,
+          result: {
+            result: translations,
+          },
         },
       });
     } finally {
@@ -364,7 +231,7 @@ class WebAIModel {
     }
   }
 
-  generateStream() {
+  async generateStream() {
     throw new Error("Stream generation is not supported for this model type");
   }
 }
@@ -379,9 +246,12 @@ async function handleMessage(event) {
   try {
     switch (type) {
       case "init":
+        // Prevent multiple simultaneous initialization
         if (modelState.isInitializing) {
           throw new Error("Model is already initializing. Please wait.");
         }
+
+        // Check required params
         if (!data.precision || !data.device) {
           throw new Error(
             "Init message must contain both precision and device parameters",
@@ -421,6 +291,7 @@ async function handleMessage(event) {
         break;
 
       case "generate":
+        // Check if model is initialized
         if (!modelState.isInitialized) {
           throw new Error(
             "Model not initialized. You must call init first to set precision and device.",
@@ -435,16 +306,23 @@ async function handleMessage(event) {
         break;
 
       case "generateStream":
+        // Check if model is initialized
         if (!modelState.isInitialized) {
           throw new Error(
             "Model not initialized. You must call init first to set precision and device.",
           );
         }
-        MODEL.generateStream();
+
+        await MODEL.generateStream(data);
         break;
 
       case "interrupt":
-        // External interrupt - placeholder for future implementation
+        // External interrupt
+        modelState.isGenerating = false;
+        self.postMessage({
+          type: "interrupted",
+          data: { status: "success" },
+        });
         break;
 
       case "clearMemory":
@@ -453,7 +331,9 @@ async function handleMessage(event) {
         modelState.isGenerating = false;
         self.postMessage({
           type: "clearMemory",
-          data: { status: "success" },
+          data: {
+            status: "success",
+          },
         });
         break;
 
@@ -503,6 +383,7 @@ function initializeApp() {
 
   self.addEventListener("message", handleMessage);
 
+  // Notify that worker is ready
   self.postMessage({
     type: "worker initialized",
     data: {
@@ -512,4 +393,5 @@ function initializeApp() {
   });
 }
 
+// Start the application
 initializeApp();
