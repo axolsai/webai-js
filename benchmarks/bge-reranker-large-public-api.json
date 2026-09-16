@@ -1,0 +1,40 @@
+{
+  "passed": true,
+  "configuration": {
+    "precision": "int8",
+    "device": "wasm"
+  },
+  "manifestDiscovered": true,
+  "downloadProgressEvents": 21592,
+  "cache": {
+    "downloaded": true,
+    "reinitialized": true,
+    "deleted": true,
+    "otherModelPreserved": true
+  },
+  "invalidInputRejected": true,
+  "invalidConfigRejected": true,
+  "unknownConfigRejected": true,
+  "unsupportedStreamingRejected": true,
+  "clearMemoryVerified": true,
+  "topKRawScoresVerified": true,
+  "runtime": {
+    "durationMs": 723
+  },
+  "nativeOutput": {
+    "results": [
+      {
+        "document": "Paris is the capital and largest city of France.",
+        "score": 0.999780921294677,
+        "logit": 8.425860404968262,
+        "originalIndex": 0
+      },
+      {
+        "document": "Whales are large marine mammals that live in the ocean.",
+        "score": 0.00007877317868450697,
+        "logit": -9.448859214782715,
+        "originalIndex": 1
+      }
+    ]
+  }
+}

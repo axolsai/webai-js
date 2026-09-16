@@ -1,6 +1,5 @@
 // Error category enum can still be useful for consistency
 export enum ErrorCategory {
-    AUTHENTICATION = 'AuthError',
     VALIDATION = 'ValidationError',
     NETWORK = 'NetworkError',
     SYSTEM = 'SystemError',
@@ -8,7 +7,7 @@ export enum ErrorCategory {
     UNEXPECTED = 'UnexpectedError',
     RESOURCE = 'ResourceError'
   }
-  
+
   // Helper function to create standardized error messages
   export function createError(
     message: string, 
@@ -44,27 +43,7 @@ export enum ErrorCategory {
     return null;
   }
   
-  // Auth error types
-  export type AuthErrorType = 
-    | 'expired_token' 
-    | 'invalid_token' 
-    | 'missing_token' 
-    | 'insufficient_permissions' 
-    | 'rate_limited' 
-    | 'other' 
-    | 'refresh_failed' 
-    | 'onAuth_callback_error' 
-    | 'missing_auth';
-  
-  // Helper for creating auth errors
-  export function createAuthError(
-    message: string, 
-    type: AuthErrorType, 
-    details: Record<string, any> = {}
-  ): Error {
-    return createError(message, ErrorCategory.AUTHENTICATION, type, details);
-  }
-  
+
   // Worker error types
   export type WorkerErrorType = 
     | 'initialization_failed'
@@ -73,6 +52,7 @@ export enum ErrorCategory {
     | 'worker_terminated'
     | 'resource_limit_exceeded'
     | 'worker_timeout'
+    | 'interrupted'
     |'security_error'
   
   // Helper for creating worker errors
@@ -115,12 +95,7 @@ export enum ErrorCategory {
            (!type || errorInfo.type === type);
   }
   
-  // Specific helper for auth errors
-  export function isAuthError(error: any): boolean {
-    const errorInfo = identifyError(error);
-    return errorInfo?.category === ErrorCategory.AUTHENTICATION;
-  }
-  
+
   // Specific helper for worker errors
   export function isWorkerError(error: any): boolean {
     const errorInfo = identifyError(error);
@@ -132,5 +107,3 @@ export enum ErrorCategory {
     const errorInfo = identifyError(error);
     return errorInfo?.category === ErrorCategory.NETWORK;
   }
-  
-  

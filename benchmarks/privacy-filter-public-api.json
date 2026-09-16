@@ -1,0 +1,39 @@
+{
+  "passed": true,
+  "configuration": {
+    "precision": "q4",
+    "device": "webgpu"
+  },
+  "manifestDiscovered": true,
+  "downloadProgressEvents": 29172,
+  "cache": {
+    "cold": false,
+    "downloaded": false,
+    "deleted": true,
+    "otherModelPreserved": true
+  },
+  "invalidInputRejected": true,
+  "unsupportedStreamingRejected": true,
+  "clearMemoryVerified": true,
+  "runtime": {
+    "durationMs": 913.2999999821186
+  },
+  "nativeOutput": {
+    "entities": [
+      {
+        "entityGroup": "private_person",
+        "score": 0.9999957978725433,
+        "word": " Harry Potter",
+        "start": null,
+        "end": null
+      },
+      {
+        "entityGroup": "private_email",
+        "score": 0.9999990728166368,
+        "word": " harry.potter@hogwarts.edu",
+        "start": null,
+        "end": null
+      }
+    ]
+  }
+}

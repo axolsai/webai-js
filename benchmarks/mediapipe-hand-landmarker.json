@@ -1,0 +1,9 @@
+{
+  "schemaVersion": "1.0",
+  "model": { "id": "mediapipe-hand-landmarker", "provider": "Google MediaPipe", "license": "Apache-2.0", "sourceRepository": "google-ai-edge/mediapipe", "artifactRepository": "mediapipe-models/hand_landmarker/hand_landmarker", "artifactRevision": "hand-landmarker-float16-generation-1682480005356399", "artifactLastUpdated": "2023-04-26T03:33:25.000Z" },
+  "runtime": { "engine": { "name": "MediaPipe Tasks Vision", "version": "1.0.1", "backend": "WASM CPU", "workerBridge": "classic-worker-inside-module-worker" } },
+  "fixture": { "file": "test-app/public/test-images/mediapipe-hand-test.jpg", "url": "https://raw.githubusercontent.com/google-ai-edge/mediapipe-samples/7f3cf17410db91f8e084a46f7517df15bce3479a/examples/hand_landmarker/android/app/src/androidTest/assets/test_image.jpg", "size": 33051, "sha1": "d44bc4fbfbc8587039ab32df880162dca7fe842e", "width": 640, "height": 427, "license": "Apache-2.0", "sourceRevision": "google-ai-edge/mediapipe-samples@7f3cf17410db91f8e084a46f7517df15bce3479a" },
+  "testedAt": "2026-09-09T06:08:00.000Z",
+  "environment": "Codex in-app Chromium 151 on macOS; module worker with adapter-local classic MediaPipe worker bridge",
+  "results": [{ "precision": "fp16", "device": "wasm", "status": "pass", "runtime": { "loadMs": 2261.4, "inferenceMs": 82.6, "totalMs": 2344, "grade": "excellent" }, "quality": { "grade": "pass", "expectedHandCount": 1, "actualHandCount": 1, "imageLandmarkCount": 21, "worldLandmarkCount": 21, "handedness": "Right", "handednessScore": 0.703342080116272 }, "cleanup": { "taskClosed": true, "modelCacheCleared": true, "deletedEntriesAcrossMediaPipeCases": 2 } }]
+}

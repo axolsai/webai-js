@@ -1,0 +1,92 @@
+{
+  "schemaVersion": "1.0",
+  "model": {
+    "id": "parakeet-ctc-0.6b-litert",
+    "displayName": "Parakeet CTC 0.6B — LiteRT",
+    "provider": "NVIDIA",
+    "license": "CC-BY-4.0",
+    "sourceRepository": "nvidia/parakeet-ctc-0.6b",
+    "sourceRevision": "ad09ba1cc62743fbc9814de5d2016fca9096485a",
+    "sourceLastUpdated": "2025-09-25T16:13:20.000Z",
+    "artifactRepository": "litert-community/parakeet-ctc-0.6b",
+    "artifactRevision": "034a59229998af53fcb939a4ecca85ffd25a55f0",
+    "artifactLastUpdated": "2026-05-08T01:02:43.000Z"
+  },
+  "runtime": {
+    "engine": {
+      "name": "LiteRT.js",
+      "version": "2.5.3",
+      "workerBridge": "classic-worker-inside-module-worker"
+    },
+    "frontend": {
+      "name": "Transformers.js ParakeetFeatureExtractor",
+      "version": "4.2.0"
+    }
+  },
+  "tensorSignature": {
+    "inputs": [
+      { "name": "args_0", "shape": [1, 500, 80], "dtype": "float32" }
+    ],
+    "outputs": [
+      { "name": "output_0", "shape": [1, 63, 1025], "dtype": "float32" }
+    ]
+  },
+  "fixture": {
+    "file": "test-app/public/test-audio/parakeet-standard-5s.wav",
+    "size": 160078,
+    "sha1": "0bb4bb6a81be205145f2eaeea4b4bfb81e5de1ab",
+    "durationSeconds": 5,
+    "sampleRate": 16000,
+    "channels": 1,
+    "derivedFrom": "test-app/public/test-audio/whisper-standard.mp3",
+    "preprocessing": "First five seconds, decoded to mono 16 kHz PCM; 501 frontend frames cropped to the graph's fixed 500-frame input."
+  },
+  "testedAt": "2026-09-09T05:38:58.000Z",
+  "environment": "Codex in-app Chromium 151 on macOS; module worker with adapter-local classic LiteRT worker bridge",
+  "qualityGate": {
+    "required": "Successful initialization and inference, non-empty non-repetitive English transcript, and acceptable word error rate against the fixture reference.",
+    "status": "not-reached"
+  },
+  "candidates": [
+    {
+      "precision": "int8-weights-float32-io",
+      "artifact": "parakeet_ctc_0.6b_5s_i8.tflite",
+      "weightsSize": 596365072,
+      "device": "wasm",
+      "status": "fail",
+      "fullyAccelerated": false,
+      "runtime": { "load": "pass", "inference": "timeout/unresponsive", "inferenceMs": null, "grade": "unusable" },
+      "error": "The fixed-shape graph initialized, but real inference did not return and made its browser tab unresponsive beyond the test window. No transcript was produced."
+    },
+    {
+      "precision": "int8-weights-float32-io",
+      "artifact": "parakeet_ctc_0.6b_5s_i8.tflite",
+      "weightsSize": 596365072,
+      "device": "webgpu",
+      "status": "fail",
+      "fullyAccelerated": false,
+      "runtime": { "load": "pass", "inference": "fail", "inferenceMs": null, "grade": "unusable" },
+      "error": "Aborted(). Build with -sASSERTIONS for more info."
+    },
+    {
+      "precision": "float32",
+      "artifact": "parakeet_ctc_0.6b_5s_f32.tflite",
+      "weightsSize": 2348753728,
+      "device": "wasm",
+      "status": "rejected-preflight",
+      "error": "The 2.349 GB weight file plus compilation and tensor memory cannot fit safely inside LiteRT.js's current browser/WASM memory boundary; downloading it would not establish usable support."
+    },
+    {
+      "precision": "float32",
+      "artifact": "parakeet_ctc_0.6b_5s_f32.tflite",
+      "weightsSize": 2348753728,
+      "device": "webgpu",
+      "status": "rejected-preflight",
+      "error": "The 2.349 GB weight file plus compilation and tensor memory cannot fit safely inside LiteRT.js's current browser runtime, and the smaller int8 graph already aborts on this backend."
+    }
+  ],
+  "conclusion": {
+    "publishWorker": false,
+    "reason": "No LiteRT.js device/precision combination completed real inference and passed the transcription quality gate."
+  }
+}

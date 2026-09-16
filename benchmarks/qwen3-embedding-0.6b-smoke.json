@@ -1,0 +1,262 @@
+{
+  "contractVersion": "1.0",
+  "model": {
+    "id": "qwen3-embedding-0.6b",
+    "displayName": "Qwen3 Embedding 0.6B",
+    "provider": "Qwen",
+    "providerUrl": "https://qwenlm.github.io/",
+    "license": "Apache-2.0",
+    "licenseUrl": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+    "lastUpdated": "2026-04-20T02:45:58.000Z",
+    "sourceRepository": "Qwen/Qwen3-Embedding-0.6B",
+    "repository": "onnx-community/Qwen3-Embedding-0.6B-ONNX",
+    "artifactRevision": "c25a394dd583836952667c12f008335071b3f43d",
+    "artifactLastUpdated": "2026-04-03T22:00:13.000Z",
+    "task": "feature-extraction",
+    "description": "A 0.6B-parameter multilingual model that produces normalized 1024-dimensional text embeddings for semantic retrieval in the browser.",
+    "intendedUses": [
+      "Multilingual and cross-lingual semantic search and retrieval.",
+      "Clustering, similarity, and classification prototypes."
+    ],
+    "limitations": [
+      "Retrieval quality depends on language, domain, input quality, and correct query instructions.",
+      "Semantic similarity is not factual verification and can encode training-data bias.",
+      "Long inputs are truncated and should be chunked.",
+      "Quantization can change ranking margins."
+    ]
+  },
+  "runtime": {
+    "engine": {
+      "name": "Transformers.js",
+      "version": "4.2.0"
+    },
+    "precisions": {
+      "q4f16": {
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "weightsSize": 567458583,
+        "size": 583347839,
+        "modelKeys": [
+          "model_q4f16.onnx"
+        ],
+        "dtype": "q4f16",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4": {
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "weightsSize": 914121462,
+        "size": 930010718,
+        "modelKeys": [
+          "model_q4.onnx"
+        ],
+        "dtype": "q4",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q8": {
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "weightsSize": 613527631,
+        "size": 629416887,
+        "modelKeys": [
+          "model_quantized.onnx"
+        ],
+        "dtype": "q8",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "fp16": {
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "weightsSize": 1200510818,
+        "size": 1216400074,
+        "modelKeys": [
+          "model_fp16.onnx"
+        ],
+        "dtype": "fp16",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "fp32": {
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "weightsSize": 2400598343,
+        "size": 2416487599,
+        "modelKeys": [
+          "model.onnx"
+        ],
+        "dtype": "fp32",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      }
+    }
+  },
+  "benchmark": {
+    "report": "benchmarks/qwen3-embedding-0.6b.json",
+    "testedAt": "2026-09-10T09:09:47.924Z",
+    "fixture": {
+      "file": "qwen3-embedding-0.6b.json",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/qwen3-embedding-0.6b.json",
+      "size": 649,
+      "sha1": "1de6f9cb512dd37a77b155454b595322c5eeff9f"
+    },
+    "candidates": {
+      "q4f16": {
+        "weightsSize": 567458583,
+        "size": 583347839,
+        "modelKeys": [
+          "model_q4f16.onnx"
+        ],
+        "dtype": "q4f16",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4": {
+        "weightsSize": 914121462,
+        "size": 930010718,
+        "modelKeys": [
+          "model_q4.onnx"
+        ],
+        "dtype": "q4",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q8": {
+        "weightsSize": 613527631,
+        "size": 629416887,
+        "modelKeys": [
+          "model_quantized.onnx"
+        ],
+        "dtype": "q8",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "fp16": {
+        "weightsSize": 1200510818,
+        "size": 1216400074,
+        "modelKeys": [
+          "model_fp16.onnx"
+        ],
+        "dtype": "fp16",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "fp32": {
+        "weightsSize": 2400598343,
+        "size": 2416487599,
+        "modelKeys": [
+          "model.onnx"
+        ],
+        "dtype": "fp32",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      }
+    },
+    "qualityGate": "Finite normalized 1024d vectors, distinct rows, and positive cosine exceeds negative by at least 0.1.",
+    "invalidatedBy": [
+      "artifact revision change",
+      "runtime version change",
+      "fixture or quality gate change",
+      "browser/backend change"
+    ],
+    "results": [
+      {
+        "precision": "q8",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 66670.5,
+          "inferenceMs": 1592.1999999284744,
+          "totalMs": 69483.70000004768,
+          "grade": "very-slow",
+          "embeddingsPerSecond": 1.8841854039283805
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "quality": {
+          "shape": true,
+          "finite": true,
+          "normalized": true,
+          "distinct": true,
+          "positive": 0.7245530378560616,
+          "negative": 0.1637014312180877,
+          "margin": 0.560851606637974,
+          "minimumMargin": 0.1,
+          "grade": "semantic-retrieval-pass"
+        },
+        "nativeOutput": {
+          "rows": 3,
+          "dimensions": 1024
+        }
+      },
+      {
+        "precision": "q8",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 65435.89999997616,
+          "inferenceMs": 1977,
+          "totalMs": 68633.5,
+          "grade": "very-slow",
+          "embeddingsPerSecond": 1.5174506828528072
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "quality": {
+          "shape": true,
+          "finite": true,
+          "normalized": true,
+          "distinct": true,
+          "positive": 0.7357656955931853,
+          "negative": 0.16017590331793105,
+          "margin": 0.5755897922752542,
+          "minimumMargin": 0.1,
+          "grade": "semantic-retrieval-pass"
+        },
+        "nativeOutput": {
+          "rows": 3,
+          "dimensions": 1024
+        }
+      }
+    ],
+    "environment": "Headless Chrome on macOS; Transformers.js 4.2.0"
+  }
+}

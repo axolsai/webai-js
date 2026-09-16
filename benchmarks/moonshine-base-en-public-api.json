@@ -1,0 +1,27 @@
+{
+  "passed": true,
+  "configuration": {
+    "precision": "q4",
+    "device": "webgpu"
+  },
+  "manifestDiscovered": true,
+  "downloadProgressEvents": 4053,
+  "cache": {
+    "cold": false,
+    "downloaded": true,
+    "reinitialized": true,
+    "deleted": true,
+    "otherModelPreserved": true
+  },
+  "invalidInputRejected": true,
+  "invalidConfigRejected": true,
+  "wordErrorRate": 0.12121212121212122,
+  "unsupportedStreamingRejected": true,
+  "clearMemoryVerified": true,
+  "runtime": {
+    "durationMs": 843.4000000059605
+  },
+  "nativeOutput": {
+    "text": "You know, this scientific method, which I very much believe in, where something is true to the degree that it is testably so, and otherwise you're really just talking about preferences or untestable beliefs, or that kind of thing. So, ends up being somewhat of a semantic question where we were conflating a lot of things with the word intelligence."
+  }
+}

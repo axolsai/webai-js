@@ -1,0 +1,50 @@
+{
+  "contractVersion": "1.0",
+  "model": {
+    "id": "mobilenet-v2-litert",
+    "repository": "litert-community/MobileNet-v2",
+    "artifactRevision": "a847f8dd803c5471b44e57fed3be772c0d382214",
+    "license": "BSD-3-Clause"
+  },
+  "runtime": {
+    "engine": { "name": "LiteRT.js", "version": "2.5.3", "workerBridge": "classic-worker-inside-module-worker" }
+  },
+  "benchmark": {
+    "schemaVersion": "1.0",
+    "startedAt": "2026-09-08T17:40:40.000Z",
+    "finishedAt": "2026-09-08T17:40:57.000Z",
+    "fixture": {
+      "file": "modnet-portrait-pexels-5965592.jpg",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+      "size": 78124,
+      "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818",
+      "width": 1024,
+      "height": 683,
+      "license": "Pexels License"
+    },
+    "qualityGate": { "expectedTopClass": 869, "expectedTopLabel": "trench coat", "maximumTopFiveLogitDifferenceAcrossBackends": 0.0001 },
+    "environment": { "browser": "Headless Chrome 151", "os": "macOS", "runtime": "LiteRT.js 2.5.3" },
+    "results": [
+      {
+        "precision": "fp32",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": { "loadMs": 6547.8, "inferenceMs": 28, "totalMs": 6575.8, "grade": "excellent" },
+        "quality": { "grade": "pass", "expectedTopClass": 869, "actualTopClass": 869 },
+        "fullyAccelerated": true,
+        "output": [{ "label": "trench coat", "classIndex": 869, "score": 11.794501304626465 }, { "label": "fur coat", "classIndex": 568, "score": 10.66884708404541 }, { "label": "stole", "classIndex": 824, "score": 9.912620544433594 }, { "label": "miniskirt, mini", "classIndex": 655, "score": 9.30361270904541 }, { "label": "hoopskirt, crinoline", "classIndex": 601, "score": 9.201292037963867 }],
+        "cleanup": { "modelDisposed": true, "tensorsDisposed": true, "modelCacheClearedBeforeCase": true }
+      },
+      {
+        "precision": "fp32",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": { "loadMs": 6382, "inferenceMs": 22, "totalMs": 6404, "grade": "excellent" },
+        "quality": { "grade": "pass", "expectedTopClass": 869, "actualTopClass": 869, "maximumTopFiveLogitDifference": 0.000011 },
+        "fullyAccelerated": true,
+        "output": [{ "label": "trench coat", "classIndex": 869, "score": 11.794500350952148 }, { "label": "fur coat", "classIndex": 568, "score": 10.66885757446289 }, { "label": "stole", "classIndex": 824, "score": 9.912614822387695 }, { "label": "miniskirt, mini", "classIndex": 655, "score": 9.303616523742676 }, { "label": "hoopskirt, crinoline", "classIndex": 601, "score": 9.201287269592285 }],
+        "cleanup": { "modelDisposed": true, "tensorsDisposed": true, "modelCacheClearedBeforeCase": true }
+      }
+    ]
+  }
+}

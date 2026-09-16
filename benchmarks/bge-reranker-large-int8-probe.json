@@ -1,0 +1,219 @@
+{
+  "contractVersion": "1.0",
+  "model": {
+    "id": "bge-reranker-large",
+    "displayName": "BGE Reranker Large — Cross-Encoder Ranking",
+    "provider": "Beijing Academy of Artificial Intelligence (BAAI)",
+    "providerUrl": "https://huggingface.co/BAAI",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/FlagOpen/FlagEmbedding/blob/master/LICENSE",
+    "lastUpdated": "2024-05-11T13:39:02.000Z",
+    "sourceRepository": "BAAI/bge-reranker-large",
+    "sourceRevision": "55611d7bca2a7133960a6d3b71e083071bbfc312",
+    "repository": "Xenova/bge-reranker-large",
+    "artifactRevision": "3c4ff3c9420fb24ea62acd31e3884e09c8827f2a",
+    "artifactLastUpdated": "2025-06-30T19:08:06.000Z",
+    "task": "text-ranking",
+    "description": "A large Chinese-and-English cross-encoder running locally with Transformers.js. It scores paired queries and candidate passages and returns ranked documents with original indices, raw logits and optional sigmoid scores.",
+    "intendedUses": [
+      "Rerank a bounded candidate set from lexical or embedding retrieval.",
+      "Chinese/English search and RAG ranking prototypes.",
+      "Browser cross-encoder performance comparison."
+    ],
+    "limitations": [
+      "Every query-document pair requires inference; this is not a whole-corpus embedding index.",
+      "Even INT8 weights exceed 561 MB; FP32 uses external weights exceeding 2.2 GB and may hit browser memory or cache limits.",
+      "Scores are relative relevance signals, not calibrated probabilities, factuality checks or safety judgments.",
+      "Long paired inputs are truncated at max_length and can lose important evidence.",
+      "Accuracy can degrade for unsupported languages, specialized domains, adversarial input and missing context.",
+      "Training biases and incorrect rankings require review before consequential decisions."
+    ]
+  },
+  "runtime": {
+    "engine": {
+      "name": "Transformers.js",
+      "version": "4.2.0"
+    },
+    "precisions": {
+      "int8": {
+        "weightsSize": 561674733,
+        "size": 583843468,
+        "dtype": "int8",
+        "modelKeys": [
+          "model_int8.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm"
+        ]
+      }
+    }
+  },
+  "benchmark": {
+    "report": "benchmarks/bge-reranker-large.json",
+    "testedAt": "2026-09-15T20:29:45.732Z",
+    "fixture": {
+      "file": "bge-m3.json",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/bge-m3.json",
+      "size": 500,
+      "sha1": "75a7770d06fc312ddeb39987712a8b4bbe6f1e08",
+      "source": "Original WebAI semantic retrieval fixture, reused unchanged.",
+      "license": "MIT",
+      "licenseUrl": "https://opensource.org/license/mit/",
+      "preprocessing": "First text is the query; remaining texts are candidate documents; paired tokenizer truncates at max_length."
+    },
+    "candidates": {
+      "fp32": {
+        "weightsSize": 2240184300,
+        "size": 2262353035,
+        "dtype": "fp32",
+        "modelKeys": [
+          "model.onnx",
+          "model.onnx_data"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "fp16": {
+        "weightsSize": 1120404593,
+        "size": 1142573328,
+        "dtype": "fp16",
+        "modelKeys": [
+          "model_fp16.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "int8": {
+        "weightsSize": 561674733,
+        "size": 583843468,
+        "dtype": "int8",
+        "modelKeys": [
+          "model_int8.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "uint8": {
+        "weightsSize": 561674801,
+        "size": 583843536,
+        "dtype": "uint8",
+        "modelKeys": [
+          "model_uint8.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q8": {
+        "weightsSize": 562938749,
+        "size": 585107484,
+        "dtype": "q8",
+        "modelKeys": [
+          "model_quantized.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4": {
+        "weightsSize": 1220992645,
+        "size": 1243161380,
+        "dtype": "q4",
+        "modelKeys": [
+          "model_q4.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4f16": {
+        "weightsSize": 686315292,
+        "size": 708484027,
+        "dtype": "q4f16",
+        "modelKeys": [
+          "model_q4f16.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "bnb4": {
+        "weightsSize": 1202119453,
+        "size": 1224288188,
+        "dtype": "bnb4",
+        "modelKeys": [
+          "model_bnb4.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      }
+    },
+    "qualityGate": "Finite nondegenerate scores, valid unique document indices and descending order; France passage ranks first and exceeds unrelated whale passage by >=0.25 sigmoid score.",
+    "environment": "Isolated headless Chrome 151 on macOS; Transformers.js 4.2.0",
+    "invalidatedBy": [
+      "artifact revision change",
+      "runtime version change",
+      "fixture or quality-gate change",
+      "browser/backend behavior change"
+    ],
+    "results": [
+      {
+        "precision": "int8",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 65181.59999999404,
+          "inferenceMs": 715.8000000119209,
+          "totalMs": 67118.80000001192,
+          "grade": "slow",
+          "pairsPerSecond": 2.7940765576511484
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 3
+        },
+        "quality": {
+          "finite": true,
+          "descending": true,
+          "correctTop": true,
+          "margin": 0.9997021481159925,
+          "grade": "ranking-pass"
+        },
+        "nativeOutput": {
+          "results": [
+            {
+              "document": "Paris is the capital and largest city of France.",
+              "score": 0.999780921294677,
+              "logit": 8.425860404968262,
+              "originalIndex": 0
+            },
+            {
+              "document": "Whales are large marine mammals that live in the ocean.",
+              "score": 0.00007877317868450697,
+              "logit": -9.448859214782715,
+              "originalIndex": 1
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

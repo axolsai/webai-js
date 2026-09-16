@@ -1,0 +1,377 @@
+{
+  "contractVersion": "1.0",
+  "model": {
+    "id": "f2llm-v2-160m",
+    "displayName": "F2LLM-v2 160M — Multilingual Embeddings",
+    "provider": "CodeFuse",
+    "providerUrl": "https://github.com/codefuse-ai",
+    "license": "Apache-2.0",
+    "licenseUrl": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+    "lastUpdated": "2026-09-03T11:58:16.000Z",
+    "sourceRepository": "codefuse-ai/F2LLM-v2-160M",
+    "repository": "onnx-community/F2LLM-v2-160M-ONNX",
+    "artifactRevision": "7202b3cd72a7f11b4bea90d6c41b67423281360b",
+    "artifactLastUpdated": "2026-08-27T06:44:50.000Z",
+    "task": "feature-extraction",
+    "description": "A compact 640-dimensional multilingual text embedding model for semantic retrieval in the browser.",
+    "intendedUses": [
+      "Multilingual semantic search and retrieval.",
+      "Clustering, similarity, and classification prototypes."
+    ],
+    "limitations": [
+      "Retrieval quality depends on language, domain, input quality, and correct query instructions.",
+      "Semantic similarity is not factual verification and can encode training-data bias.",
+      "Long inputs are truncated and should be chunked.",
+      "Quantization can change ranking margins."
+    ]
+  },
+  "runtime": {
+    "engine": {
+      "name": "Transformers.js",
+      "version": "4.2.0"
+    },
+    "precisions": {
+      "fp32": {
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "weightsSize": 637103196,
+        "size": 652986901,
+        "modelKeys": [
+          "model.onnx"
+        ],
+        "dtype": "fp32",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q8": {
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "weightsSize": 159815176,
+        "size": 175698881,
+        "modelKeys": [
+          "model_quantized.onnx"
+        ],
+        "dtype": "q8",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      }
+    }
+  },
+  "benchmark": {
+    "report": "benchmarks/f2llm-v2-160m.json",
+    "testedAt": "2026-09-09T19:42:54.587Z",
+    "fixture": {
+      "file": "f2llm-v2-160m.json",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/f2llm-v2-160m.json",
+      "size": 576,
+      "sha1": "e8a6ac52dcbb23157d108932572d2c44e173e48a"
+    },
+    "candidates": {
+      "q4f16": {
+        "weightsSize": 229850384,
+        "size": 245734089,
+        "modelKeys": [
+          "model_q4f16.onnx"
+        ],
+        "dtype": "q4f16",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4": {
+        "weightsSize": 428093722,
+        "size": 443977427,
+        "modelKeys": [
+          "model_q4.onnx"
+        ],
+        "dtype": "q4",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q8": {
+        "weightsSize": 159815176,
+        "size": 175698881,
+        "modelKeys": [
+          "model_quantized.onnx"
+        ],
+        "dtype": "q8",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "fp16": {
+        "weightsSize": 318898839,
+        "size": 334782544,
+        "modelKeys": [
+          "model_fp16.onnx"
+        ],
+        "dtype": "fp16",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "fp32": {
+        "weightsSize": 637103196,
+        "size": 652986901,
+        "modelKeys": [
+          "model.onnx"
+        ],
+        "dtype": "fp32",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      }
+    },
+    "invalidatedBy": [
+      "artifact revision change",
+      "runtime version change",
+      "fixture or quality gate change",
+      "browser/backend change"
+    ],
+    "results": [
+      {
+        "precision": "fp32",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 195503.69999992847,
+          "inferenceMs": 232.70000004768372,
+          "totalMs": 197082.29999995232,
+          "grade": "good",
+          "embeddingsPerSecond": 12.89213579452194
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "quality": {
+          "shape": true,
+          "finite": true,
+          "normalized": true,
+          "distinct": true,
+          "positive": 0.3645838599135115,
+          "negative": 0.06252671144200399,
+          "margin": 0.3020571484715075,
+          "minimumMargin": 0.1,
+          "grade": "semantic-retrieval-pass"
+        },
+        "nativeOutput": {
+          "rows": 3,
+          "dimensions": 640
+        }
+      },
+      {
+        "precision": "fp32",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 209231.5,
+          "inferenceMs": 162.79999995231628,
+          "totalMs": 210713.10000002384,
+          "grade": "good",
+          "embeddingsPerSecond": 18.427518432915804
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "quality": {
+          "shape": true,
+          "finite": true,
+          "normalized": true,
+          "distinct": true,
+          "positive": 0.3645836406235758,
+          "negative": 0.06252652260631993,
+          "margin": 0.3020571180172559,
+          "minimumMargin": 0.1,
+          "grade": "semantic-retrieval-pass"
+        },
+        "nativeOutput": {
+          "rows": 3,
+          "dimensions": 640
+        }
+      },
+      {
+        "precision": "fp16",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 235346,
+          "grade": "failed"
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 1, ERROR_MESSAGE: Type Error: Type (tensor(float16)) of output arg (/layers.0/input_layernorm/Cast_output_0) of node (/layers.0/input_layernorm/Cast) does not match expected type (tensor(float))."
+      },
+      {
+        "precision": "fp16",
+        "device": "webgpu",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": null,
+          "grade": "failed"
+        },
+        "error": "page.waitForFunction: Timeout 240000ms exceeded.",
+        "cleanup": {
+          "modelDisposed": false,
+          "cacheClearedAfterCase": false
+        }
+      },
+      {
+        "precision": "q8",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 22567,
+          "inferenceMs": 245.80000007152557,
+          "totalMs": 24192.5,
+          "grade": "good",
+          "embeddingsPerSecond": 12.2050447482792
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "quality": {
+          "shape": true,
+          "finite": true,
+          "normalized": true,
+          "distinct": true,
+          "positive": 0.3559396084753369,
+          "negative": 0.06848773425765681,
+          "margin": 0.2874518742176801,
+          "minimumMargin": 0.1,
+          "grade": "semantic-retrieval-pass"
+        },
+        "nativeOutput": {
+          "rows": 3,
+          "dimensions": 640
+        }
+      },
+      {
+        "precision": "q8",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 22622.300000071526,
+          "inferenceMs": 334.5,
+          "totalMs": 24250.600000023842,
+          "grade": "slow",
+          "embeddingsPerSecond": 8.968609865470851
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "quality": {
+          "shape": true,
+          "finite": true,
+          "normalized": true,
+          "distinct": true,
+          "positive": 0.35796094421969077,
+          "negative": 0.05555077414583186,
+          "margin": 0.3024101700738589,
+          "minimumMargin": 0.1,
+          "grade": "semantic-retrieval-pass"
+        },
+        "nativeOutput": {
+          "rows": 3,
+          "dimensions": 640
+        }
+      },
+      {
+        "precision": "q4",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": null,
+          "grade": "failed"
+        },
+        "error": "page.waitForFunction: Timeout 240000ms exceeded.",
+        "cleanup": {
+          "modelDisposed": false,
+          "cacheClearedAfterCase": false
+        }
+      },
+      {
+        "precision": "q4",
+        "device": "webgpu",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": null,
+          "grade": "failed"
+        },
+        "error": "page.waitForFunction: Timeout 240000ms exceeded.",
+        "cleanup": {
+          "modelDisposed": false,
+          "cacheClearedAfterCase": false
+        }
+      },
+      {
+        "precision": "q4f16",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 143831.60000002384,
+          "grade": "failed"
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 1, ERROR_MESSAGE: Type Error: Type (tensor(float16)) of output arg (/layers.0/input_layernorm/Cast_output_0) of node (/layers.0/input_layernorm/Cast) does not match expected type (tensor(float))."
+      },
+      {
+        "precision": "q4f16",
+        "device": "webgpu",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 182703.80000007153,
+          "grade": "failed"
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 1, ERROR_MESSAGE: Type Error: Type (tensor(float16)) of output arg (/layers.0/input_layernorm/Cast_output_0) of node (/layers.0/input_layernorm/Cast) does not match expected type (tensor(float))."
+      }
+    ],
+    "environment": "Headless Chrome on macOS; Transformers.js 4.2.0",
+    "qualityGate": "Finite normalized 640d vectors, distinct rows, and positive cosine exceeds negative by >= 0.1."
+  }
+}

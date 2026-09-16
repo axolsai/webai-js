@@ -1,0 +1,1350 @@
+{
+  "contractVersion": "1.0",
+  "model": {
+    "id": "rubert-tiny-toxicity",
+    "displayName": "RuBERT Tiny Russian Toxicity",
+    "provider": "cointegrated",
+    "providerUrl": "https://huggingface.co/cointegrated",
+    "license": "MIT",
+    "licenseUrl": "https://huggingface.co/cointegrated/rubert-tiny-toxicity/blob/5d37eff844868e243467e4c38898bad46c271af2/README.md",
+    "lastUpdated": "2026-08-03T08:45:51.000Z",
+    "sourceRepository": "cointegrated/rubert-tiny-toxicity",
+    "sourceRevision": "5d37eff844868e243467e4c38898bad46c271af2",
+    "repository": "onnx-community/rubert-tiny-toxicity-ONNX",
+    "artifactRevision": "3c117322c91030ff04846b72e15509ae7f5232f1",
+    "artifactLastUpdated": "2026-09-09T21:24:18.000Z",
+    "task": "text-classification",
+    "description": "A compact RuBERT model for multilabel toxicity and inappropriateness classification of short informal Russian text, converted by ONNX Community for browser inference with Transformers.js.",
+    "intendedUses": [
+      "Screen short Russian comments for toxicity signals.",
+      "Inspect insult, obscenity, threat, and reputational-danger scores.",
+      "Benchmark local browser text classification across ONNX variants."
+    ],
+    "limitations": [
+      "Designed for short informal Russian text; other languages, long documents, dialects, coded language, and domain-specific usage may be unreliable.",
+      "Scores can encode dataset bias and can produce both false positives and false negatives.",
+      "The dangerous label concerns potential reputational harm and is not interchangeable with toxicity.",
+      "Automated scores require human review before moderation or other consequential decisions.",
+      "The model does not understand speaker intent or broader conversational context."
+    ]
+  },
+  "runtime": {
+    "engine": {
+      "name": "Transformers.js",
+      "version": "4.2.0"
+    },
+    "precisions": {
+      "fp32": {
+        "weightsSize": 47203471,
+        "size": 48153284,
+        "dtype": "fp32",
+        "modelKeys": [
+          "model.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "int8": {
+        "weightsSize": 11929287,
+        "size": 12879100,
+        "dtype": "int8",
+        "modelKeys": [
+          "model_int8.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "uint8": {
+        "weightsSize": 11929298,
+        "size": 12879111,
+        "dtype": "uint8",
+        "modelKeys": [
+          "model_uint8.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q8": {
+        "weightsSize": 11929287,
+        "size": 12879100,
+        "dtype": "q8",
+        "modelKeys": [
+          "model_quantized.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4": {
+        "weightsSize": 39505316,
+        "size": 40455129,
+        "dtype": "q4",
+        "modelKeys": [
+          "model_q4.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "bnb4": {
+        "weightsSize": 39329804,
+        "size": 40279617,
+        "dtype": "bnb4",
+        "modelKeys": [
+          "model_bnb4.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      }
+    }
+  },
+  "benchmark": {
+    "report": "benchmarks/rubert-tiny-toxicity.json",
+    "testedAt": "2026-09-15T13:09:47.219Z",
+    "fixture": {
+      "file": "rubert-tiny-toxicity.json",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/rubert-tiny-toxicity.json",
+      "size": 700,
+      "sha1": "f136212c8f17ea8b87f6c567580ddae3ad924bcc",
+      "source": "Russian examples from the pinned source model card and widget metadata.",
+      "sourceUrl": "https://huggingface.co/cointegrated/rubert-tiny-toxicity/blob/5d37eff844868e243467e4c38898bad46c271af2/README.md",
+      "license": "MIT",
+      "licenseUrl": "https://huggingface.co/cointegrated/rubert-tiny-toxicity/blob/5d37eff844868e243467e4c38898bad46c271af2/README.md",
+      "preprocessing": "Pinned tokenizer truncates each Russian string to max_length."
+    },
+    "candidates": {
+      "fp32": {
+        "weightsSize": 47203471,
+        "size": 48153284,
+        "dtype": "fp32",
+        "modelKeys": [
+          "model.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "int8": {
+        "weightsSize": 11929287,
+        "size": 12879100,
+        "dtype": "int8",
+        "modelKeys": [
+          "model_int8.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "uint8": {
+        "weightsSize": 11929298,
+        "size": 12879111,
+        "dtype": "uint8",
+        "modelKeys": [
+          "model_uint8.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q8": {
+        "weightsSize": 11929287,
+        "size": 12879100,
+        "dtype": "q8",
+        "modelKeys": [
+          "model_quantized.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4": {
+        "weightsSize": 39505316,
+        "size": 40455129,
+        "dtype": "q4",
+        "modelKeys": [
+          "model_q4.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "bnb4": {
+        "weightsSize": 39329804,
+        "size": 40279617,
+        "dtype": "bnb4",
+        "modelKeys": [
+          "model_bnb4.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      }
+    },
+    "qualityGate": "The sourced toxic and safe examples must cross their respective aggregate-toxicity thresholds; every score must be finite and within zero to one.",
+    "environment": "Isolated headless Chrome on macOS; Transformers.js 4.2.0",
+    "invalidatedBy": [
+      "artifact revision change",
+      "runtime version change",
+      "fixture or quality-gate change",
+      "browser/backend behavior change"
+    ],
+    "results": [
+      {
+        "precision": "fp32",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 12711,
+          "inferenceMs": 23.5,
+          "totalMs": 13994.5,
+          "grade": "excellent",
+          "textsPerSecond": 85.1063829787234
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "cases": [
+            {
+              "expected": "toxic",
+              "toxicity": 0.9350118132610571,
+              "finite": true,
+              "thresholdPass": true,
+              "pass": true
+            },
+            {
+              "expected": "safe",
+              "toxicity": 0.04156366386306953,
+              "finite": true,
+              "thresholdPass": true,
+              "pass": true
+            }
+          ],
+          "grade": "toxicity-regression-pass"
+        },
+        "nativeOutput": [
+          {
+            "toxicity": 0.9350118132610571,
+            "isToxic": true,
+            "labels": [
+              {
+                "label": "non-toxic",
+                "score": 0.9715759328922305
+              },
+              {
+                "label": "insult",
+                "score": 0.01808626034086366
+              },
+              {
+                "label": "obscenity",
+                "score": 0.00455508874448884
+              },
+              {
+                "label": "threat",
+                "score": 0.0018975521438808316
+              },
+              {
+                "label": "dangerous",
+                "score": 0.9331105428419957
+              }
+            ]
+          },
+          {
+            "toxicity": 0.04156366386306953,
+            "isToxic": false,
+            "labels": [
+              {
+                "label": "non-toxic",
+                "score": 0.9997978050191719
+              },
+              {
+                "label": "insult",
+                "score": 0.0001904830585223742
+              },
+              {
+                "label": "obscenity",
+                "score": 0.00015297416225430862
+              },
+              {
+                "label": "threat",
+                "score": 0.00017452303090514985
+              },
+              {
+                "label": "dangerous",
+                "score": 0.04136983365496412
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "precision": "fp32",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 10926.90000000596,
+          "inferenceMs": 67.5,
+          "totalMs": 12316.299999982119,
+          "grade": "excellent",
+          "textsPerSecond": 29.62962962962963
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "cases": [
+            {
+              "expected": "toxic",
+              "toxicity": 0.9350118605987066,
+              "finite": true,
+              "thresholdPass": true,
+              "pass": true
+            },
+            {
+              "expected": "safe",
+              "toxicity": 0.041563644956312484,
+              "finite": true,
+              "thresholdPass": true,
+              "pass": true
+            }
+          ],
+          "grade": "toxicity-regression-pass"
+        },
+        "nativeOutput": [
+          {
+            "toxicity": 0.9350118605987066,
+            "isToxic": true,
+            "labels": [
+              {
+                "label": "non-toxic",
+                "score": 0.9715758736343639
+              },
+              {
+                "label": "insult",
+                "score": 0.018086268809087046
+              },
+              {
+                "label": "obscenity",
+                "score": 0.0045551038795061715
+              },
+              {
+                "label": "threat",
+                "score": 0.0018975539500945343
+              },
+              {
+                "label": "dangerous",
+                "score": 0.9331105874848529
+              }
+            ]
+          },
+          {
+            "toxicity": 0.041563644956312484,
+            "isToxic": false,
+            "labels": [
+              {
+                "label": "non-toxic",
+                "score": 0.9997978050191719
+              },
+              {
+                "label": "insult",
+                "score": 0.0001904834217711159
+              },
+              {
+                "label": "obscenity",
+                "score": 0.00015297401638916555
+              },
+              {
+                "label": "threat",
+                "score": 0.00017452286449614427
+              },
+              {
+                "label": "dangerous",
+                "score": 0.04136981474438356
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "precision": "int8",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 7104.700000017881,
+          "inferenceMs": 27,
+          "totalMs": 8447.59999999404,
+          "grade": "excellent",
+          "textsPerSecond": 74.07407407407408
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "cases": [
+            {
+              "expected": "toxic",
+              "toxicity": 0.9346023991888418,
+              "finite": true,
+              "thresholdPass": true,
+              "pass": true
+            },
+            {
+              "expected": "safe",
+              "toxicity": 0.044036901430595354,
+              "finite": true,
+              "thresholdPass": true,
+              "pass": true
+            }
+          ],
+          "grade": "toxicity-regression-pass"
+        },
+        "nativeOutput": [
+          {
+            "toxicity": 0.9346023991888418,
+            "isToxic": true,
+            "labels": [
+              {
+                "label": "non-toxic",
+                "score": 0.9727602397118769
+              },
+              {
+                "label": "insult",
+                "score": 0.01708454906254511
+              },
+              {
+                "label": "obscenity",
+                "score": 0.005637547099829878
+              },
+              {
+                "label": "threat",
+                "score": 0.0019439657563323238
+              },
+              {
+                "label": "dangerous",
+                "score": 0.9327711000703232
+              }
+            ]
+          },
+          {
+            "toxicity": 0.044036901430595354,
+            "isToxic": false,
+            "labels": [
+              {
+                "label": "non-toxic",
+                "score": 0.9997826185538997
+              },
+              {
+                "label": "insult",
+                "score": 0.00020026192769085277
+              },
+              {
+                "label": "obscenity",
+                "score": 0.0001603712438443322
+              },
+              {
+                "label": "threat",
+                "score": 0.00017293625458229795
+              },
+              {
+                "label": "dangerous",
+                "score": 0.043829047606244995
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "precision": "int8",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 6963.299999982119,
+          "inferenceMs": 92.10000002384186,
+          "totalMs": 8382.09999999404,
+          "grade": "excellent",
+          "textsPerSecond": 21.715526595898602
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "cases": [
+            {
+              "expected": "toxic",
+              "toxicity": 0.934602413307888,
+              "finite": true,
+              "thresholdPass": true,
+              "pass": true
+            },
+            {
+              "expected": "safe",
+              "toxicity": 0.04403691161826717,
+              "finite": true,
+              "thresholdPass": true,
+              "pass": true
+            }
+          ],
+          "grade": "toxicity-regression-pass"
+        },
+        "nativeOutput": [
+          {
+            "toxicity": 0.934602413307888,
+            "isToxic": true,
+            "labels": [
+              {
+                "label": "non-toxic",
+                "score": 0.9727602460294335
+              },
+              {
+                "label": "insult",
+                "score": 0.017084541055179227
+              },
+              {
+                "label": "obscenity",
+                "score": 0.005637544426793378
+              },
+              {
+                "label": "threat",
+                "score": 0.0019439648311794053
+              },
+              {
+                "label": "dangerous",
+                "score": 0.9327711150213541
+              }
+            ]
+          },
+          {
+            "toxicity": 0.04403691161826717,
+            "isToxic": false,
+            "labels": [
+              {
+                "label": "non-toxic",
+                "score": 0.9997826183466335
+              },
+              {
+                "label": "insult",
+                "score": 0.0002002621186373538
+              },
+              {
+                "label": "obscenity",
+                "score": 0.00016037139676181397
+              },
+              {
+                "label": "threat",
+                "score": 0.00017293641947871945
+              },
+              {
+                "label": "dangerous",
+                "score": 0.04382905759790673
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "precision": "uint8",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 7128.800000011921,
+          "inferenceMs": 30.19999998807907,
+          "totalMs": 8386.59999999404,
+          "grade": "excellent",
+          "textsPerSecond": 66.22516558905515
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "cases": [
+            {
+              "expected": "toxic",
+              "toxicity": 0.9335621554293603,
+              "finite": true,
+              "thresholdPass": true,
+              "pass": true
+            },
+            {
+              "expected": "safe",
+              "toxicity": 0.04437609576375623,
+              "finite": true,
+              "thresholdPass": true,
+              "pass": true
+            }
+          ],
+          "grade": "toxicity-regression-pass"
+        },
+        "nativeOutput": [
+          {
+            "toxicity": 0.9335621554293603,
+            "isToxic": true,
+            "labels": [
+              {
+                "label": "non-toxic",
+                "score": 0.9729082154501564
+              },
+              {
+                "label": "insult",
+                "score": 0.01614053299012102
+              },
+              {
+                "label": "obscenity",
+                "score": 0.004709228388986715
+              },
+              {
+                "label": "threat",
+                "score": 0.0020601498997127768
+              },
+              {
+                "label": "dangerous",
+                "score": 0.9317121147549365
+              }
+            ]
+          },
+          {
+            "toxicity": 0.04437609576375623,
+            "isToxic": false,
+            "labels": [
+              {
+                "label": "non-toxic",
+                "score": 0.9997874789275643
+              },
+              {
+                "label": "insult",
+                "score": 0.00019228011598559577
+              },
+              {
+                "label": "obscenity",
+                "score": 0.00015161407010620936
+              },
+              {
+                "label": "threat",
+                "score": 0.00016972765921819167
+              },
+              {
+                "label": "dangerous",
+                "score": 0.04417296237665743
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "precision": "uint8",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 7330.5,
+          "inferenceMs": 104.89999997615814,
+          "totalMs": 8656.799999982119,
+          "grade": "good",
+          "textsPerSecond": 19.065776934743216
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "cases": [
+            {
+              "expected": "toxic",
+              "toxicity": 0.9335621697585597,
+              "finite": true,
+              "thresholdPass": true,
+              "pass": true
+            },
+            {
+              "expected": "safe",
+              "toxicity": 0.04437609576375623,
+              "finite": true,
+              "thresholdPass": true,
+              "pass": true
+            }
+          ],
+          "grade": "toxicity-regression-pass"
+        },
+        "nativeOutput": [
+          {
+            "toxicity": 0.9335621697585597,
+            "isToxic": true,
+            "labels": [
+              {
+                "label": "non-toxic",
+                "score": 0.9729082217343494
+              },
+              {
+                "label": "insult",
+                "score": 0.016140525417940976
+              },
+              {
+                "label": "obscenity",
+                "score": 0.004709223919068138
+              },
+              {
+                "label": "threat",
+                "score": 0.0020601489193807867
+              },
+              {
+                "label": "dangerous",
+                "score": 0.9317121299242335
+              }
+            ]
+          },
+          {
+            "toxicity": 0.04437609576375623,
+            "isToxic": false,
+            "labels": [
+              {
+                "label": "non-toxic",
+                "score": 0.9997874789275643
+              },
+              {
+                "label": "insult",
+                "score": 0.00019228011598559577
+              },
+              {
+                "label": "obscenity",
+                "score": 0.00015161407010620936
+              },
+              {
+                "label": "threat",
+                "score": 0.00016972765921819167
+              },
+              {
+                "label": "dangerous",
+                "score": 0.04417296237665743
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "precision": "q8",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 6940.299999982119,
+          "inferenceMs": 27.700000017881393,
+          "totalMs": 8171.299999982119,
+          "grade": "excellent",
+          "textsPerSecond": 72.20216601837274
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "cases": [
+            {
+              "expected": "toxic",
+              "toxicity": 0.9346023991888418,
+              "finite": true,
+              "thresholdPass": true,
+              "pass": true
+            },
+            {
+              "expected": "safe",
+              "toxicity": 0.044036901430595354,
+              "finite": true,
+              "thresholdPass": true,
+              "pass": true
+            }
+          ],
+          "grade": "toxicity-regression-pass"
+        },
+        "nativeOutput": [
+          {
+            "toxicity": 0.9346023991888418,
+            "isToxic": true,
+            "labels": [
+              {
+                "label": "non-toxic",
+                "score": 0.9727602397118769
+              },
+              {
+                "label": "insult",
+                "score": 0.01708454906254511
+              },
+              {
+                "label": "obscenity",
+                "score": 0.005637547099829878
+              },
+              {
+                "label": "threat",
+                "score": 0.0019439657563323238
+              },
+              {
+                "label": "dangerous",
+                "score": 0.9327711000703232
+              }
+            ]
+          },
+          {
+            "toxicity": 0.044036901430595354,
+            "isToxic": false,
+            "labels": [
+              {
+                "label": "non-toxic",
+                "score": 0.9997826185538997
+              },
+              {
+                "label": "insult",
+                "score": 0.00020026192769085277
+              },
+              {
+                "label": "obscenity",
+                "score": 0.0001603712438443322
+              },
+              {
+                "label": "threat",
+                "score": 0.00017293625458229795
+              },
+              {
+                "label": "dangerous",
+                "score": 0.043829047606244995
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "precision": "q8",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 7364.5999999940395,
+          "inferenceMs": 103.7999999821186,
+          "totalMs": 8777.299999982119,
+          "grade": "good",
+          "textsPerSecond": 19.267822739350052
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "cases": [
+            {
+              "expected": "toxic",
+              "toxicity": 0.934602413307888,
+              "finite": true,
+              "thresholdPass": true,
+              "pass": true
+            },
+            {
+              "expected": "safe",
+              "toxicity": 0.04403691161826717,
+              "finite": true,
+              "thresholdPass": true,
+              "pass": true
+            }
+          ],
+          "grade": "toxicity-regression-pass"
+        },
+        "nativeOutput": [
+          {
+            "toxicity": 0.934602413307888,
+            "isToxic": true,
+            "labels": [
+              {
+                "label": "non-toxic",
+                "score": 0.9727602460294335
+              },
+              {
+                "label": "insult",
+                "score": 0.017084541055179227
+              },
+              {
+                "label": "obscenity",
+                "score": 0.005637544426793378
+              },
+              {
+                "label": "threat",
+                "score": 0.0019439648311794053
+              },
+              {
+                "label": "dangerous",
+                "score": 0.9327711150213541
+              }
+            ]
+          },
+          {
+            "toxicity": 0.04403691161826717,
+            "isToxic": false,
+            "labels": [
+              {
+                "label": "non-toxic",
+                "score": 0.9997826183466335
+              },
+              {
+                "label": "insult",
+                "score": 0.0002002621186373538
+              },
+              {
+                "label": "obscenity",
+                "score": 0.00016037139676181397
+              },
+              {
+                "label": "threat",
+                "score": 0.00017293641947871945
+              },
+              {
+                "label": "dangerous",
+                "score": 0.04382905759790673
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "precision": "q4",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 9238.09999999404,
+          "inferenceMs": 28.200000017881393,
+          "totalMs": 10615.399999976158,
+          "grade": "excellent",
+          "textsPerSecond": 70.92198577063178
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "cases": [
+            {
+              "expected": "toxic",
+              "toxicity": 0.9364668352192018,
+              "finite": true,
+              "thresholdPass": true,
+              "pass": true
+            },
+            {
+              "expected": "safe",
+              "toxicity": 0.04499250909369301,
+              "finite": true,
+              "thresholdPass": true,
+              "pass": true
+            }
+          ],
+          "grade": "toxicity-regression-pass"
+        },
+        "nativeOutput": [
+          {
+            "toxicity": 0.9364668352192018,
+            "isToxic": true,
+            "labels": [
+              {
+                "label": "non-toxic",
+                "score": 0.9671982273365832
+              },
+              {
+                "label": "insult",
+                "score": 0.020151466421086322
+              },
+              {
+                "label": "obscenity",
+                "score": 0.004493490399069652
+              },
+              {
+                "label": "threat",
+                "score": 0.001716218358384644
+              },
+              {
+                "label": "dangerous",
+                "score": 0.9343121575442169
+              }
+            ]
+          },
+          {
+            "toxicity": 0.04499250909369301,
+            "isToxic": false,
+            "labels": [
+              {
+                "label": "non-toxic",
+                "score": 0.999783586604786
+              },
+              {
+                "label": "insult",
+                "score": 0.0001999391067854385
+              },
+              {
+                "label": "obscenity",
+                "score": 0.00017460275905938722
+              },
+              {
+                "label": "threat",
+                "score": 0.0001761287305091618
+              },
+              {
+                "label": "dangerous",
+                "score": 0.04478578794290505
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "precision": "q4",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 9954.09999999404,
+          "inferenceMs": 65.80000001192093,
+          "totalMs": 11337.59999999404,
+          "grade": "excellent",
+          "textsPerSecond": 30.39513677260884
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "cases": [
+            {
+              "expected": "toxic",
+              "toxicity": 0.9364668674990755,
+              "finite": true,
+              "thresholdPass": true,
+              "pass": true
+            },
+            {
+              "expected": "safe",
+              "toxicity": 0.04499261126435117,
+              "finite": true,
+              "thresholdPass": true,
+              "pass": true
+            }
+          ],
+          "grade": "toxicity-regression-pass"
+        },
+        "nativeOutput": [
+          {
+            "toxicity": 0.9364668674990755,
+            "isToxic": true,
+            "labels": [
+              {
+                "label": "non-toxic",
+                "score": 0.9671981668243368
+              },
+              {
+                "label": "insult",
+                "score": 0.020151466421086322
+              },
+              {
+                "label": "obscenity",
+                "score": 0.00449347760087686
+              },
+              {
+                "label": "threat",
+                "score": 0.0017162191753370443
+              },
+              {
+                "label": "dangerous",
+                "score": 0.9343121868091139
+              }
+            ]
+          },
+          {
+            "toxicity": 0.04499261126435117,
+            "isToxic": false,
+            "labels": [
+              {
+                "label": "non-toxic",
+                "score": 0.9997835863984426
+              },
+              {
+                "label": "insult",
+                "score": 0.0001999391067854385
+              },
+              {
+                "label": "obscenity",
+                "score": 0.00017460259257437354
+              },
+              {
+                "label": "threat",
+                "score": 0.0001761287305091618
+              },
+              {
+                "label": "dangerous",
+                "score": 0.0447858899385343
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "precision": "bnb4",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 9791.5,
+          "inferenceMs": 29.399999976158142,
+          "totalMs": 11250.299999982119,
+          "grade": "excellent",
+          "textsPerSecond": 68.02721093952024
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "cases": [
+            {
+              "expected": "toxic",
+              "toxicity": 0.9363675383746249,
+              "finite": true,
+              "thresholdPass": true,
+              "pass": true
+            },
+            {
+              "expected": "safe",
+              "toxicity": 0.04664776281947358,
+              "finite": true,
+              "thresholdPass": true,
+              "pass": true
+            }
+          ],
+          "grade": "toxicity-regression-pass"
+        },
+        "nativeOutput": [
+          {
+            "toxicity": 0.9363675383746249,
+            "isToxic": true,
+            "labels": [
+              {
+                "label": "non-toxic",
+                "score": 0.9664682516830108
+              },
+              {
+                "label": "insult",
+                "score": 0.020260913137413437
+              },
+              {
+                "label": "obscenity",
+                "score": 0.0065442262513543325
+              },
+              {
+                "label": "threat",
+                "score": 0.0015904723816170497
+              },
+              {
+                "label": "dangerous",
+                "score": 0.9341598014062383
+              }
+            ]
+          },
+          {
+            "toxicity": 0.04664776281947358,
+            "isToxic": false,
+            "labels": [
+              {
+                "label": "non-toxic",
+                "score": 0.9998001600007551
+              },
+              {
+                "label": "insult",
+                "score": 0.00018700441266915587
+              },
+              {
+                "label": "obscenity",
+                "score": 0.00014492842296206108
+              },
+              {
+                "label": "threat",
+                "score": 0.0001722376840997922
+              },
+              {
+                "label": "dangerous",
+                "score": 0.04645720682840619
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "precision": "bnb4",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 11344.09999999404,
+          "inferenceMs": 88.40000000596046,
+          "totalMs": 12691.300000011921,
+          "grade": "excellent",
+          "textsPerSecond": 22.624434387614794
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "cases": [
+            {
+              "expected": "toxic",
+              "toxicity": 0.9363676153406204,
+              "finite": true,
+              "thresholdPass": true,
+              "pass": true
+            },
+            {
+              "expected": "safe",
+              "toxicity": 0.046647794679911314,
+              "finite": true,
+              "thresholdPass": true,
+              "pass": true
+            }
+          ],
+          "grade": "toxicity-regression-pass"
+        },
+        "nativeOutput": [
+          {
+            "toxicity": 0.9363676153406204,
+            "isToxic": true,
+            "labels": [
+              {
+                "label": "non-toxic",
+                "score": 0.9664681589646571
+              },
+              {
+                "label": "insult",
+                "score": 0.020260965197247113
+              },
+              {
+                "label": "obscenity",
+                "score": 0.006544235551687275
+              },
+              {
+                "label": "threat",
+                "score": 0.0015904746531890362
+              },
+              {
+                "label": "dangerous",
+                "score": 0.934159874726192
+              }
+            ]
+          },
+          {
+            "toxicity": 0.046647794679911314,
+            "isToxic": false,
+            "labels": [
+              {
+                "label": "non-toxic",
+                "score": 0.9998001598102108
+              },
+              {
+                "label": "insult",
+                "score": 0.00018700423436128607
+              },
+              {
+                "label": "obscenity",
+                "score": 0.00014492787018518117
+              },
+              {
+                "label": "threat",
+                "score": 0.00017223751986950638
+              },
+              {
+                "label": "dangerous",
+                "score": 0.04645723851348371
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

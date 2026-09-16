@@ -1,0 +1,9 @@
+{
+  "schemaVersion": "1.0",
+  "model": { "id": "mediapipe-face-detector", "provider": "Google MediaPipe", "license": "Apache-2.0", "sourceRepository": "google-ai-edge/mediapipe", "artifactRepository": "mediapipe-models/face_detector/blaze_face_short_range", "artifactRevision": "blaze-face-short-range-float16-generation-1682480001393569", "artifactLastUpdated": "2023-04-26T03:33:21.000Z" },
+  "runtime": { "engine": { "name": "MediaPipe Tasks Vision", "version": "1.0.1", "backend": "WASM CPU", "workerBridge": "classic-worker-inside-module-worker" } },
+  "fixture": { "file": "test-app/public/test-images/mediapipe-face-test.jpeg", "url": "https://raw.githubusercontent.com/google-ai-edge/mediapipe-samples/7f3cf17410db91f8e084a46f7517df15bce3479a/examples/face_detector/ios/FaceDetectorTests/testImg.jpeg", "size": 251136, "sha1": "531674bd36742b56558d7879cc3c8461f7ddda31", "width": 1280, "height": 853, "license": "Apache-2.0", "sourceRevision": "google-ai-edge/mediapipe-samples@7f3cf17410db91f8e084a46f7517df15bce3479a" },
+  "testedAt": "2026-09-09T06:05:00.000Z",
+  "environment": "Codex in-app Chromium 151 on macOS; module worker with adapter-local classic MediaPipe worker bridge",
+  "results": [{ "precision": "fp16", "device": "wasm", "status": "pass", "runtime": { "loadMs": 127.2, "inferenceMs": 43.1, "totalMs": 170.3, "grade": "excellent" }, "quality": { "grade": "pass", "expectedDetectionCount": 2, "actualDetectionCount": 2, "minimumScore": 0.925397515296936 }, "nativeOutput": { "image": { "width": 1280, "height": 853 }, "boxes": [{ "originX": 126, "originY": 100, "width": 463, "height": 463, "score": 0.9728583097457886 }, { "originX": 616, "originY": 193, "width": 430, "height": 430, "score": 0.925397515296936 }] }, "cleanup": { "taskClosed": true, "modelCacheCleared": true, "deletedEntriesAcrossMediaPipeCases": 2 } }]
+}

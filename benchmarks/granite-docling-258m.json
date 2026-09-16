@@ -1,0 +1,478 @@
+{
+  "contractVersion": "1.0",
+  "model": {
+    "id": "granite-docling-258m",
+    "displayName": "Granite Docling 258M",
+    "provider": "IBM Granite",
+    "providerUrl": "https://www.ibm.com/granite",
+    "license": "Apache-2.0",
+    "licenseUrl": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+    "lastUpdated": "2025-09-23T08:52:16.000Z",
+    "sourceRepository": "ibm-granite/granite-docling-258M",
+    "sourceRevision": "982fe3b40f2fa73c365bdb1bcacf6c81b7184bfe",
+    "repository": "onnx-community/granite-docling-258M-ONNX",
+    "artifactRevision": "e8602580df77443fc3421cf3bae0601da601e5c6",
+    "artifactLastUpdated": "2025-10-07T20:20:28.000Z",
+    "task": "image-text-to-text",
+    "description": "A compact document vision-language model that converts a page image into DocTags preserving text, layout, formulas, tables, charts, and coordinates.",
+    "intendedUses": [
+      "Convert scanned or rendered document pages into structured DocTags.",
+      "Prototype local OCR, layout analysis, and document extraction.",
+      "Benchmark document understanding in browser workers."
+    ],
+    "limitations": [
+      "OCR and layout can be wrong, omitted, duplicated, or hallucinated and require review.",
+      "Small, blurred, rotated, handwritten, multilingual, or complex pages reduce accuracy.",
+      "A single page can require hundreds or thousands of generated tokens and substantial memory.",
+      "DocTags are untrusted extracted content and must not be executed as instructions.",
+      "Do not rely on output alone for legal, medical, financial, identity, or accessibility-critical decisions."
+    ]
+  },
+  "runtime": {
+    "engine": {
+      "name": "Transformers.js",
+      "version": "4.2.0"
+    },
+    "precisions": {
+      "q4": {
+        "weightsSize": 400028103,
+        "size": 406711456,
+        "dtype": "q4",
+        "modelKeys": [
+          "vision_encoder_q4.onnx",
+          "vision_encoder_q4.onnx_data",
+          "embed_tokens_q4.onnx",
+          "embed_tokens_q4.onnx_data",
+          "decoder_model_merged_q4.onnx",
+          "decoder_model_merged_q4.onnx_data"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      }
+    }
+  },
+  "benchmark": {
+    "report": "benchmarks/granite-docling-258m.json",
+    "testedAt": "2026-09-15T17:31:52.019Z",
+    "fixture": {
+      "file": "granite-docling-new-arxiv.png",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/granite-docling-new-arxiv.png",
+      "size": 523477,
+      "sha1": "fa9ee1b276da7ce7374804e1e392b5b60c501a52",
+      "source": "https://huggingface.co/ibm-granite/granite-docling-258M/blob/982fe3b40f2fa73c365bdb1bcacf6c81b7184bfe/assets/new_arxiv.png",
+      "license": "Apache-2.0",
+      "width": 1190,
+      "height": 1540,
+      "licenseUrl": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+      "preprocessing": "Pinned processor with image splitting; deterministic 256-token prefix benchmark."
+    },
+    "candidates": {
+      "fp32": {
+        "weightsSize": 1263876953,
+        "size": 1270560306,
+        "dtype": "fp32",
+        "modelKeys": [
+          "vision_encoder.onnx",
+          "vision_encoder.onnx_data",
+          "embed_tokens.onnx",
+          "embed_tokens.onnx_data",
+          "decoder_model_merged.onnx",
+          "decoder_model_merged.onnx_data"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "fp16": {
+        "weightsSize": 632192648,
+        "size": 638876001,
+        "dtype": "fp16",
+        "modelKeys": [
+          "vision_encoder_fp16.onnx",
+          "vision_encoder_fp16.onnx_data",
+          "embed_tokens_fp16.onnx",
+          "embed_tokens_fp16.onnx_data",
+          "decoder_model_merged_fp16.onnx",
+          "decoder_model_merged_fp16.onnx_data"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q8": {
+        "weightsSize": 320044313,
+        "size": 326727666,
+        "dtype": "q8",
+        "modelKeys": [
+          "vision_encoder_quantized.onnx",
+          "vision_encoder_quantized.onnx_data",
+          "embed_tokens_quantized.onnx",
+          "embed_tokens_quantized.onnx_data",
+          "decoder_model_merged_quantized.onnx",
+          "decoder_model_merged_quantized.onnx_data"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4": {
+        "weightsSize": 400028103,
+        "size": 406711456,
+        "dtype": "q4",
+        "modelKeys": [
+          "vision_encoder_q4.onnx",
+          "vision_encoder_q4.onnx_data",
+          "embed_tokens_q4.onnx",
+          "embed_tokens_q4.onnx_data",
+          "decoder_model_merged_q4.onnx",
+          "decoder_model_merged_q4.onnx_data"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4f16": {
+        "weightsSize": 264311910,
+        "size": 270995263,
+        "dtype": "q4f16",
+        "modelKeys": [
+          "vision_encoder_q4f16.onnx",
+          "vision_encoder_q4f16.onnx_data",
+          "embed_tokens_q4f16.onnx",
+          "embed_tokens_q4f16.onnx_data",
+          "decoder_model_merged_q4f16.onnx",
+          "decoder_model_merged_q4f16.onnx_data"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      }
+    },
+    "qualityGate": "Bounded 256-token page prefix: expected header token recall >= 0.9, >=2 coordinate groups, DocTags, and no degenerate repetition. Streaming equality audited separately for each advertised pair.",
+    "invalidatedBy": [
+      "artifact revision change",
+      "runtime version change",
+      "fixture or quality-gate change",
+      "browser/backend behavior change"
+    ],
+    "results": [
+      {
+        "precision": "fp32",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": 127190.30000001192,
+          "inferenceMs": null,
+          "totalMs": 134755.59999999404,
+          "grade": "failed"
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 10
+        },
+        "error": "Error: failed to call OrtRun(). ERROR_CODE: 6, ERROR_MESSAGE: std::bad_alloc",
+        "quality": {
+          "headerTokenRecall": 0
+        }
+      },
+      {
+        "precision": "fp32",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 130322.30000001192,
+          "inferenceMs": 8250.09999999404,
+          "totalMs": 139901.40000000596,
+          "grade": "slow",
+          "pagesPerSecond": 0.12121065199218464
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 10
+        },
+        "quality": {
+          "nonempty": true,
+          "doctags": true,
+          "content": true,
+          "repetitive": false,
+          "characters": 1036,
+          "grade": "docling-pass",
+          "headerTokenRecall": 1
+        },
+        "nativeOutput": {
+          "text": "<doctag><page_header><loc_115><loc_27><loc_385><loc_35>ENERGY BUDGET OF WASP-121 b from JWST/NIRISS Phase Curve</page_header>\n<page_header><loc_454><loc_27><loc_459><loc_35>9</page_header>\n<text><loc_41><loc_41><loc_238><loc_89>while the kernel weights are structured as (N slice, N time). This precomputation significantly accelerates our calculations, which is essential since the longitudinal slices are at least partially degenerate with one another. Consequently, the fits require more steps and walkers to ensure proper convergence.</text>\n<text><loc_41><loc_89><loc_238><loc_206>To address this, we follow a similar approach to our sinusoidal fits using emcee, but we increase the total number of steps to 100,000 and use 100 walkers. Naively, the fit would include 2 N slice + 1 parameters: N slice for the albedo values, N slice for the emission parameters, and one additional scatter parameter, σ. However, since night-side slices do not contribute to the reflected light component, we exclude these albedo values from the fit"
+        }
+      },
+      {
+        "precision": "fp16",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 50965,
+          "grade": "failed"
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 11
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 1, ERROR_MESSAGE: /mnt/vss/_work/1/s/onnxruntime/core/graph/graph_utils.cc:30 int onnxruntime::graph_utils::GetIndexFromName(const Node &, const std::string &, bool) itr != node_args.end() was false. Attempting to get index by a name which does not exist:InsertedPrecisionFreeCast_/vision_model/encoder/layers.0/layer_norm1/Constant_output_0for node: /vision_model/encoder/layers.0/layer_norm1/Mul/SimplifiedLayerNormFusion/\n",
+        "quality": {
+          "headerTokenRecall": 0
+        }
+      },
+      {
+        "precision": "fp16",
+        "device": "webgpu",
+        "status": "fail",
+        "runtime": {
+          "loadMs": 68164.79999998212,
+          "inferenceMs": 6669,
+          "totalMs": 76209.90000000596,
+          "grade": "slow",
+          "pagesPerSecond": 0.149947518368571
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 11
+        },
+        "quality": {
+          "nonempty": true,
+          "doctags": false,
+          "content": false,
+          "repetitive": true,
+          "characters": 256,
+          "grade": "failed",
+          "headerTokenRecall": 0
+        },
+        "nativeOutput": {
+          "text": "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+        }
+      },
+      {
+        "precision": "q8",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": 37610.90000000596,
+          "inferenceMs": 114990.09999999404,
+          "totalMs": 153973.80000001192,
+          "grade": "very-slow",
+          "pagesPerSecond": 0.008696400820592831
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 12
+        },
+        "quality": {
+          "nonempty": true,
+          "doctags": true,
+          "content": true,
+          "repetitive": true,
+          "characters": 1147,
+          "grade": "failed",
+          "headerTokenRecall": 0.2727272727272727
+        },
+        "nativeOutput": {
+          "text": "<doctag><text><loc_40><loc_47><loc_241><loc_77>while the kernel weights are structured as ( N slice , N time ). This computation significantly accelerate our calculations, which is essentially since the longitudinal slices are at least partially degenerate with one another. Consequently, the fits require more steps and walkers to ensure proper convergence.</text>\n<picture><loc_273><loc_48><loc_454><loc_131></picture>\n<text><loc_40><loc_86><loc_241><loc_205>To address this, we allow a similar approach to our simulation of fits using energy, but we inacreate the total number of steps to 100,000 and use 100 walkers. Nally, the fit would include 2 N slice + 1 parameters: N slice for the allowed values, N time for the allowed values, since the allowed slices do not contribute to the reflected light, N component, we exclude the allowed values from the fit. In any case, our choice of 100 walkers ensures a sufficient number of steps per parameter. Following the captured fraction is calculated, the captured fraction is calculated, the captured fraction is calculated, the captured fraction is calculated, the captured fraction is calculated"
+        }
+      },
+      {
+        "precision": "q8",
+        "device": "webgpu",
+        "status": "fail",
+        "runtime": {
+          "loadMs": 33490.19999998808,
+          "inferenceMs": 107011.80000001192,
+          "totalMs": 141849.5,
+          "grade": "very-slow",
+          "pagesPerSecond": 0.009344763848471745
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 12
+        },
+        "quality": {
+          "nonempty": true,
+          "doctags": true,
+          "content": false,
+          "repetitive": true,
+          "characters": 771,
+          "grade": "failed",
+          "headerTokenRecall": 0.18181818181818182
+        },
+        "nativeOutput": {
+          "text": "<doctag><page_header><loc_115><loc_27><loc_384><loc_34>E N I R G Y B U D G E T OF W A S P - 1 2 1 b F R O M J W S T / N I R I S S P H A S E C U R V E</page_header>\n<page_header><loc_455><loc_27><loc_459><loc_34>9</page_header>\n<picture><loc_272><loc_47><loc_454><loc_131></picture>\n<text><loc_41><loc_42><loc_458><loc_91>while the kernel weights are structured as (N slice,N time). This computation significantly accelerates our calculations, which is essentially the length of slice, N slice, N time, N slice, N slice, N slice, N slice, N slice, N slice, N slice, N slice, N slice, N slice, N slice, N slice, N slice, N slice, N slice, N slice, N slice, N slice, N slice, N slice, N slice, N slice, N slice, N slice, N slice, N slice, N slice, N slice, N slice, N slice,"
+        }
+      },
+      {
+        "precision": "q4",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 41823.5,
+          "inferenceMs": 164716.39999997616,
+          "totalMs": 207799,
+          "grade": "very-slow",
+          "pagesPerSecond": 0.006071040892103911
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 12
+        },
+        "quality": {
+          "nonempty": true,
+          "doctags": true,
+          "content": true,
+          "repetitive": false,
+          "characters": 779,
+          "grade": "docling-pass",
+          "headerTokenRecall": 0.9090909090909091,
+          "streamMatches": true,
+          "accuracyNote": "Minor header OCR substitution; bounded prefix only."
+        },
+        "nativeOutput": {
+          "text": "<doctag><page_header><loc_115><loc_27><loc_387><loc_35>ENERGY BUDGET OF WASP-121 b TROM JWST/NIRISS PHASE CURVE</page_header>\n<page_header><loc_454><loc_28><loc_459><loc_35>9</page_header>\n<chart><loc_273><loc_51><loc_468><loc_133><line_chart><caption><loc_260><loc_141><loc_474><loc_270>Figure 2. Estimated captured flux of the planet assuming the planet radiates as a blackbody. The captured flux is calculated as the ratio of the integrated blackbody emission within the instrument's band pass to the total emission over all wavelengths, i.e., γ = J$_{A}$max B (λ, T) dλ/ ∫ ∫ 0 B (λ, T) dλ. The captured flux fraction is shown for NIRISS SOSS [0.6-2.85 μm] (red line); Hubble WFC3 [1.12-1.64 μm) (dashed green line); NIRSpec G395H (2 $^{t}$effimates. Red dashed lines indicate"
+        }
+      },
+      {
+        "precision": "q4",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 50243,
+          "inferenceMs": 6164.299999982119,
+          "totalMs": 57724.19999998808,
+          "grade": "slow",
+          "pagesPerSecond": 0.1622244212648477
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 12
+        },
+        "quality": {
+          "nonempty": true,
+          "doctags": true,
+          "content": true,
+          "repetitive": false,
+          "characters": 779,
+          "grade": "docling-pass",
+          "headerTokenRecall": 0.9090909090909091,
+          "streamMatches": true,
+          "accuracyNote": "Minor header OCR substitution; bounded prefix only."
+        },
+        "nativeOutput": {
+          "text": "<doctag><page_header><loc_115><loc_27><loc_387><loc_35>ENERGY BUDGET OF WASP-121 b TROM JWST/NIRISS PHASE CURVE</page_header>\n<page_header><loc_454><loc_28><loc_459><loc_35>9</page_header>\n<chart><loc_273><loc_51><loc_468><loc_133><line_chart><caption><loc_260><loc_141><loc_474><loc_270>Figure 2. Estimated captured flux of the planet assuming the planet radiates as a blackbody. The captured flux is calculated as the ratio of the integrated blackbody emission within the instrument's band pass to the total emission over all wavelengths, i.e., γ = J$_{A}$max B (λ, T) dλ/ ∫ ∫ 0 B (λ, T) dλ. The captured flux fraction is shown for NIRISS SOSS [0.6-2.85 μm] (red line); Hubble WFC3 [1.12-1.64 μm) (dashed green line); NIRSpec G395H (2 $^{t}$effimates. Red dashed lines indicate"
+        }
+      },
+      {
+        "precision": "q4f16",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 23969.90000000596,
+          "grade": "failed"
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 10
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 1, ERROR_MESSAGE: /mnt/vss/_work/1/s/onnxruntime/core/graph/graph_utils.cc:30 int onnxruntime::graph_utils::GetIndexFromName(const Node &, const std::string &, bool) itr != node_args.end() was false. Attempting to get index by a name which does not exist:InsertedPrecisionFreeCast_/vision_model/encoder/layers.0/layer_norm1/Constant_output_0for node: /vision_model/encoder/layers.0/layer_norm1/Mul/SimplifiedLayerNormFusion/\n",
+        "quality": {
+          "headerTokenRecall": 0
+        }
+      },
+      {
+        "precision": "q4f16",
+        "device": "webgpu",
+        "status": "fail",
+        "runtime": {
+          "loadMs": 29559,
+          "inferenceMs": 4497.5,
+          "totalMs": 35318.5,
+          "grade": "good",
+          "pagesPerSecond": 0.22234574763757642
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 12
+        },
+        "quality": {
+          "nonempty": true,
+          "doctags": false,
+          "content": false,
+          "repetitive": true,
+          "characters": 256,
+          "grade": "failed",
+          "headerTokenRecall": 0
+        },
+        "nativeOutput": {
+          "text": "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+        }
+      }
+    ],
+    "publicApiAudit": "benchmarks/granite-docling-258m-public-api.json",
+    "lifecycleFailures": [
+      {
+        "precision": "fp32",
+        "device": "webgpu",
+        "status": "fail",
+        "error": "Chrome Cache API put() failed for large external weights; full download detection failed even with --unlimited-storage. Not advertised."
+      }
+    ]
+  }
+}

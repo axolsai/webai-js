@@ -1,0 +1,48 @@
+{
+  "passed": true,
+  "configuration": {
+    "precision": "q8",
+    "device": "wasm"
+  },
+  "manifestDiscovered": true,
+  "downloadProgressEvents": 601,
+  "cache": {
+    "cold": false,
+    "downloaded": true,
+    "reinitialized": true,
+    "deleted": true,
+    "otherModelPreserved": true
+  },
+  "invalidInputRejected": true,
+  "unsupportedStreamingRejected": true,
+  "clearMemoryVerified": true,
+  "runtime": {
+    "durationMs": 23.80000001192093
+  },
+  "nativeOutput": {
+    "toxicity": 0.044036901430595354,
+    "isToxic": false,
+    "labels": [
+      {
+        "label": "non-toxic",
+        "score": 0.9997826185538997
+      },
+      {
+        "label": "insult",
+        "score": 0.00020026192769085277
+      },
+      {
+        "label": "obscenity",
+        "score": 0.0001603712438443322
+      },
+      {
+        "label": "threat",
+        "score": 0.00017293625458229795
+      },
+      {
+        "label": "dangerous",
+        "score": 0.043829047606244995
+      }
+    ]
+  }
+}

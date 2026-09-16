@@ -1,0 +1,43 @@
+{
+  "passed": true,
+  "configuration": {
+    "precision": "q4f16",
+    "device": "webgpu"
+  },
+  "manifestDiscovered": true,
+  "downloadProgressEvents": 1496,
+  "cache": {
+    "cold": false,
+    "downloaded": true,
+    "reinitialized": true,
+    "deleted": true,
+    "otherModelPreserved": true
+  },
+  "invalidInputRejected": true,
+  "unsupportedStreamingRejected": true,
+  "clearMemoryVerified": true,
+  "runtime": {
+    "durationMs": 954.6000000238419
+  },
+  "nativeOutput": {
+    "width": 1024,
+    "height": 683,
+    "segments": [
+      {
+        "label": "building",
+        "score": null,
+        "maskBytes": 699392
+      },
+      {
+        "label": "sky",
+        "score": null,
+        "maskBytes": 699392
+      },
+      {
+        "label": "person",
+        "score": null,
+        "maskBytes": 699392
+      }
+    ]
+  }
+}

@@ -1,0 +1,475 @@
+{
+  "contractVersion": "1.0",
+  "model": {
+    "id": "qwen3.5-0.8b",
+    "displayName": "Qwen3.5 0.8B — Text Chat",
+    "provider": "Qwen / Alibaba Cloud",
+    "license": "Apache-2.0",
+    "lastUpdated": "2026-03-02T11:26:58.000Z",
+    "sourceRepository": "Qwen/Qwen3.5-0.8B",
+    "repository": "onnx-community/Qwen3.5-0.8B-Text-ONNX",
+    "artifactRevision": "1e45daba048899e7f771657ada617ec49350aa91",
+    "artifactLastUpdated": "2026-04-22T22:29:59.000Z",
+    "task": "text-generation",
+    "description": "A compact Qwen3.5 text language model for local conversational generation in a browser through Transformers.js and ONNX Runtime Web.",
+    "intendedUses": [
+      "Local chat, drafting, rewriting, and summarization.",
+      "Benchmarking browser LLM inference."
+    ],
+    "limitations": [
+      "Generated text may be incorrect, unsafe, or fabricated and requires review.",
+      "The model is small and trades reasoning quality for browser memory and speed.",
+      "The tested ONNX artifact may require newer ONNX Runtime Web support."
+    ]
+  },
+  "runtime": {
+    "engine": {
+      "name": "Transformers.js",
+      "version": "4.2.0"
+    },
+    "precisions": {
+      "q4f16": {"supportedDevices":["webgpu"],"weightsSize":469929410,"size":489174504},
+      "q4": {"supportedDevices":["webgpu"],"weightsSize":551247327,"size":570492421},
+      "q8": {"supportedDevices":["webgpu"],"weightsSize":938947493,"size":958192587},
+      "fp16": {"supportedDevices":["webgpu"],"weightsSize":1538945869,"size":1558190963},
+      "fp32": {"supportedDevices":["webgpu"],"weightsSize":3077060202,"size":3096305296}
+    }
+  },
+  "benchmark": {
+    "testedAt": "2026-09-09T15:07:59.318Z",
+    "environment": "Chrome 151.0.7922.176; darwin/arm64; Transformers.js 4.2.0",
+    "fixture": {
+      "file": "qwen3.5-0.8b.json",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/qwen3.5-0.8b.json",
+      "size": 296,
+      "sha1": "842e28ba6ec5218cbc34eb677df214d89064119a"
+    },
+    "candidates": {
+      "q4f16": {
+        "weightsSize": 469929410,
+        "size": 489174504,
+        "modelKeys": [
+          "model_q4f16.onnx",
+          "model_q4f16.onnx_data"
+        ],
+        "dtype": "q4f16",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4": {
+        "weightsSize": 551247327,
+        "size": 570492421,
+        "modelKeys": [
+          "model_q4.onnx",
+          "model_q4.onnx_data"
+        ],
+        "dtype": "q4",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q8": {
+        "weightsSize": 938947493,
+        "size": 958192587,
+        "modelKeys": [
+          "model_quantized.onnx",
+          "model_quantized.onnx_data"
+        ],
+        "dtype": "q8",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "fp16": {
+        "weightsSize": 1538945869,
+        "size": 1558190963,
+        "modelKeys": [
+          "model_fp16.onnx",
+          "model_fp16.onnx_data"
+        ],
+        "dtype": "fp16",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "fp32": {
+        "weightsSize": 3077060202,
+        "size": 3096305296,
+        "modelKeys": [
+          "model.onnx",
+          "model.onnx_data",
+          "model.onnx_data_1"
+        ],
+        "dtype": "fp32",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      }
+    },
+    "qualityGate": "Retain all required current-file constructs, introduce at least one expected edit construct, meet minimum line count, reject empty output and excessive repeated lines, and require stream/final equality.",
+    "invalidatedBy": [
+      "artifact revision change",
+      "runtime version change",
+      "fixture or quality gate change",
+      "browser/backend change"
+    ],
+    "results": [
+      {
+        "precision": "fp32",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 197021.79999995232,
+          "grade": "failed",
+          "firstChunkMs": null,
+          "outputTokens": null,
+          "tokensPerSecond": null
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedBefore": 0,
+          "deletedAfter": 5
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 6, ERROR_MESSAGE: std::bad_alloc",
+        "finishedAt": "2026-09-09T14:51:58.022Z"
+      },
+      {
+        "precision": "fp32",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 198120.39999997616,
+          "inferenceMs": 1234.1000000238419,
+          "totalMs": 201453.29999995232,
+          "grade": "very-slow",
+          "firstChunkMs": 1200.6000000238419,
+          "outputTokens": 2,
+          "tokensPerSecond": 1.6206142127553371
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedBefore": 0,
+          "deletedAfter": 5
+        },
+        "nativeOutput": {
+          "result": "Paris\n",
+          "messages": [
+            {
+              "role": "user",
+              "content": "What is the capital of France? Answer with only the city name."
+            },
+            {
+              "role": "assistant",
+              "content": "Paris\n"
+            }
+          ],
+          "structured_output": false
+        },
+        "streamedText": "Paris\n",
+        "quality": {
+          "grade": "exact-match",
+          "passed": true,
+          "nonEmpty": true,
+          "exactMatch": true,
+          "nonRepetitive": true,
+          "longestRepeatedWordRun": 1,
+          "expected": "Paris"
+        },
+        "streamMatchesFinal": true,
+        "finishedAt": "2026-09-09T14:55:20.313Z"
+      },
+      {
+        "precision": "fp16",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 124902.40000009537,
+          "grade": "failed",
+          "firstChunkMs": null,
+          "outputTokens": null,
+          "tokensPerSecond": null
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedBefore": 0,
+          "deletedAfter": 5
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 6, ERROR_MESSAGE: std::bad_alloc",
+        "finishedAt": "2026-09-09T14:57:26.168Z"
+      },
+      {
+        "precision": "fp16",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 110611.10000002384,
+          "inferenceMs": 767.2000000476837,
+          "totalMs": 113322,
+          "grade": "very-slow",
+          "firstChunkMs": 739.7000000476837,
+          "outputTokens": 2,
+          "tokensPerSecond": 2.606882168763939
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedBefore": 0,
+          "deletedAfter": 5
+        },
+        "nativeOutput": {
+          "result": "Paris\n",
+          "messages": [
+            {
+              "role": "user",
+              "content": "What is the capital of France? Answer with only the city name."
+            },
+            {
+              "role": "assistant",
+              "content": "Paris\n"
+            }
+          ],
+          "structured_output": false
+        },
+        "streamedText": "Paris\n",
+        "quality": {
+          "grade": "exact-match",
+          "passed": true,
+          "nonEmpty": true,
+          "exactMatch": true,
+          "nonRepetitive": true,
+          "longestRepeatedWordRun": 1,
+          "expected": "Paris"
+        },
+        "streamMatchesFinal": true,
+        "finishedAt": "2026-09-09T14:59:20.171Z"
+      },
+      {
+        "precision": "q8",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 75129.5,
+          "grade": "failed",
+          "firstChunkMs": null,
+          "outputTokens": null,
+          "tokensPerSecond": null
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedBefore": 0,
+          "deletedAfter": 5
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 9, ERROR_MESSAGE: Could not find an implementation for GatherBlockQuantized(1) node with name '/model/embed_tokens/Gather_Quant'",
+        "finishedAt": "2026-09-09T15:00:36.056Z"
+      },
+      {
+        "precision": "q8",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 67858,
+          "inferenceMs": 412.2000000476837,
+          "totalMs": 70546.89999997616,
+          "grade": "slow",
+          "firstChunkMs": 399.3000000715256,
+          "outputTokens": 2,
+          "tokensPerSecond": 4.8520135850767545
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedBefore": 0,
+          "deletedAfter": 5
+        },
+        "nativeOutput": {
+          "result": "Paris\n",
+          "messages": [
+            {
+              "role": "user",
+              "content": "What is the capital of France? Answer with only the city name."
+            },
+            {
+              "role": "assistant",
+              "content": "Paris\n"
+            }
+          ],
+          "structured_output": false
+        },
+        "streamedText": "Paris\n",
+        "quality": {
+          "grade": "exact-match",
+          "passed": true,
+          "nonEmpty": true,
+          "exactMatch": true,
+          "nonRepetitive": true,
+          "longestRepeatedWordRun": 1,
+          "expected": "Paris"
+        },
+        "streamMatchesFinal": true,
+        "finishedAt": "2026-09-09T15:01:47.283Z"
+      },
+      {
+        "precision": "q4",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 100653.89999997616,
+          "grade": "failed",
+          "firstChunkMs": null,
+          "outputTokens": null,
+          "tokensPerSecond": null
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedBefore": 0,
+          "deletedAfter": 5
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 9, ERROR_MESSAGE: Could not find an implementation for GatherBlockQuantized(1) node with name '/model/embed_tokens/Gather_Quant'",
+        "finishedAt": "2026-09-09T15:03:28.621Z"
+      },
+      {
+        "precision": "q4",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 88126.89999997616,
+          "inferenceMs": 338.39999997615814,
+          "totalMs": 90527.29999995232,
+          "grade": "slow",
+          "firstChunkMs": 325.2000000476837,
+          "outputTokens": 2,
+          "tokensPerSecond": 5.910165485049968
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedBefore": 0,
+          "deletedAfter": 5
+        },
+        "nativeOutput": {
+          "result": "Paris\n",
+          "messages": [
+            {
+              "role": "user",
+              "content": "What is the capital of France? Answer with only the city name."
+            },
+            {
+              "role": "assistant",
+              "content": "Paris\n"
+            }
+          ],
+          "structured_output": false
+        },
+        "streamedText": "Paris\n",
+        "quality": {
+          "grade": "exact-match",
+          "passed": true,
+          "nonEmpty": true,
+          "exactMatch": true,
+          "nonRepetitive": true,
+          "longestRepeatedWordRun": 1,
+          "expected": "Paris"
+        },
+        "streamMatchesFinal": true,
+        "finishedAt": "2026-09-09T15:04:59.852Z"
+      },
+      {
+        "precision": "q4f16",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 86838.39999997616,
+          "grade": "failed",
+          "firstChunkMs": null,
+          "outputTokens": null,
+          "tokensPerSecond": null
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedBefore": 0,
+          "deletedAfter": 5
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 9, ERROR_MESSAGE: Failed to find kernel for com.microsoft.GatherBlockQuantized(1) (node:'/model/embed_tokens/Gather_Quant' ep:'CPUExecutionProvider'). Kernel not found",
+        "finishedAt": "2026-09-09T15:06:27.261Z"
+      },
+      {
+        "precision": "q4f16",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 89163.19999992847,
+          "inferenceMs": 337,
+          "totalMs": 91295.39999997616,
+          "grade": "slow",
+          "firstChunkMs": 322,
+          "outputTokens": 2,
+          "tokensPerSecond": 5.9347181008902075
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedBefore": 0,
+          "deletedAfter": 5
+        },
+        "nativeOutput": {
+          "result": "Paris\n",
+          "messages": [
+            {
+              "role": "user",
+              "content": "What is the capital of France? Answer with only the city name."
+            },
+            {
+              "role": "assistant",
+              "content": "Paris\n"
+            }
+          ],
+          "structured_output": false
+        },
+        "streamedText": "Paris\n",
+        "quality": {
+          "grade": "exact-match",
+          "passed": true,
+          "nonEmpty": true,
+          "exactMatch": true,
+          "nonRepetitive": true,
+          "longestRepeatedWordRun": 1,
+          "expected": "Paris"
+        },
+        "streamMatchesFinal": true,
+        "finishedAt": "2026-09-09T15:07:59.241Z"
+      }
+    ]
+  }
+}

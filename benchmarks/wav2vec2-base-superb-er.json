@@ -1,0 +1,643 @@
+{
+  "contractVersion": "1.0",
+  "model": {
+    "id": "wav2vec2-base-superb-er",
+    "displayName": "Wav2Vec2 Base SUPERB — Emotion Recognition",
+    "provider": "SUPERB / S3PRL",
+    "providerUrl": "https://github.com/s3prl/s3prl",
+    "license": "Apache-2.0",
+    "licenseUrl": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+    "lastUpdated": "2021-11-04T16:03:36.000Z",
+    "sourceRepository": "superb/wav2vec2-base-superb-er",
+    "repository": "onnx-community/wav2vec2-base-superb-er-ONNX",
+    "artifactRevision": "e2191e9e8b692c19c7d96e2a1d789ab1df5b7259",
+    "artifactLastUpdated": "2026-09-03T11:54:36.000Z",
+    "task": "audio-classification",
+    "description": "An English speech emotion classifier that assigns neutral, happy, angry, and sad scores to a 16 kHz mono waveform in the browser.",
+    "intendedUses": [
+      "Exploratory analysis of broad vocal affect in English speech.",
+      "Benchmarking browser audio-classification inference."
+    ],
+    "limitations": [
+      "The four labels are coarse and do not represent the full range or ambiguity of human emotion.",
+      "Accuracy varies with speaker, accent, acting style, noise, recording quality, and utterance length.",
+      "The model was evaluated on acted English IEMOCAP speech and may not generalize to natural conversation or other languages.",
+      "Emotion predictions are probabilistic and must not be used for medical, employment, policing, surveillance, or other consequential judgments."
+    ]
+  },
+  "runtime": {
+    "engine": {
+      "name": "Transformers.js",
+      "version": "4.2.0"
+    },
+    "precisions": {
+      "fp32": {
+        "weightsSize": 378495202,
+        "size": 378497911,
+        "modelKeys": [
+          "model.onnx"
+        ],
+        "dtype": "fp32",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "fp16": {
+        "weightsSize": 189439719,
+        "size": 189442428,
+        "modelKeys": [
+          "model_fp16.onnx"
+        ],
+        "dtype": "fp16",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4": {
+        "weightsSize": 89861131,
+        "size": 89863840,
+        "modelKeys": [
+          "model_q4.onnx"
+        ],
+        "dtype": "q4",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4f16": {
+        "weightsSize": 66495610,
+        "size": 66498319,
+        "modelKeys": [
+          "model_q4f16.onnx"
+        ],
+        "dtype": "q4f16",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "bnb4": {
+        "weightsSize": 89861131,
+        "size": 89863840,
+        "modelKeys": [
+          "model_bnb4.onnx"
+        ],
+        "dtype": "bnb4",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      }
+    }
+  },
+  "benchmark": {
+    "report": "benchmarks/wav2vec2-base-superb-er.json",
+    "testedAt": "2026-09-12T06:19:51.600Z",
+    "fixture": {
+      "file": "crema-d-1001-dfa-ang.wav",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/crema-d-1001-dfa-ang.wav",
+      "size": 72862,
+      "sha1": "3d62067948a906c4df841268c31a96d3f9d14da5",
+      "durationSeconds": 2.2755625,
+      "sampleRate": 16000,
+      "source": "CREMA-D 1001_DFA_ANG_XX.wav",
+      "license": "ODbL-1.0 / DbCL-1.0",
+      "licenseUrl": "https://github.com/CheyneyComputerScience/CREMA-D/blob/master/LICENSE.txt"
+    },
+    "candidates": {
+      "fp32": {
+        "weightsSize": 378495202,
+        "size": 378497911,
+        "modelKeys": [
+          "model.onnx"
+        ],
+        "dtype": "fp32",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "fp16": {
+        "weightsSize": 189439719,
+        "size": 189442428,
+        "modelKeys": [
+          "model_fp16.onnx"
+        ],
+        "dtype": "fp16",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4": {
+        "weightsSize": 89861131,
+        "size": 89863840,
+        "modelKeys": [
+          "model_q4.onnx"
+        ],
+        "dtype": "q4",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4f16": {
+        "weightsSize": 66495610,
+        "size": 66498319,
+        "modelKeys": [
+          "model_q4f16.onnx"
+        ],
+        "dtype": "q4f16",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "bnb4": {
+        "weightsSize": 89861131,
+        "size": 89863840,
+        "modelKeys": [
+          "model_bnb4.onnx"
+        ],
+        "dtype": "bnb4",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      }
+    },
+    "qualityGate": "Finite normalized scores for four unique labels, with angry ranked first and exceeding the strongest negative by at least 0.1.",
+    "invalidatedBy": [
+      "artifact revision change",
+      "runtime version change",
+      "fixture or quality-gate change",
+      "browser/backend behavior change"
+    ],
+    "results": [
+      {
+        "precision": "fp32",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 33464.90000000037,
+          "inferenceMs": 2355.699999999255,
+          "totalMs": 37299.79999999888,
+          "grade": "good",
+          "realTimeFactor": 0.34507218911064186
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 3
+        },
+        "quality": {
+          "passed": true,
+          "topLabel": "ang",
+          "topScore": 0.984451949596405,
+          "strongestNegative": 0.013625792227685452,
+          "margin": 0.9708261573687196,
+          "scoreSum": 0.9999999908613972
+        },
+        "nativeOutput": [
+          {
+            "label": "ang",
+            "score": 0.984451949596405
+          },
+          {
+            "label": "sad",
+            "score": 0.013625792227685452
+          },
+          {
+            "label": "hap",
+            "score": 0.0012401018757373095
+          },
+          {
+            "label": "neu",
+            "score": 0.0006821471615694463
+          }
+        ]
+      },
+      {
+        "precision": "fp32",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 33550.89999999851,
+          "inferenceMs": 494.40000000037253,
+          "totalMs": 35471.59999999963,
+          "grade": "excellent",
+          "realTimeFactor": 0.07242165398670622
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 3
+        },
+        "quality": {
+          "passed": true,
+          "topLabel": "ang",
+          "topScore": 0.9844475984573364,
+          "strongestNegative": 0.013629676774144173,
+          "margin": 0.9708179216831923,
+          "scoreSum": 1.0000000225263648
+        },
+        "nativeOutput": [
+          {
+            "label": "ang",
+            "score": 0.9844475984573364
+          },
+          {
+            "label": "sad",
+            "score": 0.013629676774144173
+          },
+          {
+            "label": "hap",
+            "score": 0.0012403839500620961
+          },
+          {
+            "label": "neu",
+            "score": 0.0006823633448220789
+          }
+        ]
+      },
+      {
+        "precision": "fp16",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 21450.299999998882,
+          "inferenceMs": 2279.10000000149,
+          "totalMs": 25224.300000000745,
+          "grade": "good",
+          "realTimeFactor": 0.3338515202287332
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "passed": true,
+          "topLabel": "ang",
+          "topScore": 0.9851205945014954,
+          "strongestNegative": 0.01297929510474205,
+          "margin": 0.9721412993967533,
+          "scoreSum": 0.9999999920255505
+        },
+        "nativeOutput": [
+          {
+            "label": "ang",
+            "score": 0.9851205945014954
+          },
+          {
+            "label": "sad",
+            "score": 0.01297929510474205
+          },
+          {
+            "label": "hap",
+            "score": 0.0012390766059979796
+          },
+          {
+            "label": "neu",
+            "score": 0.0006610258133150637
+          }
+        ]
+      },
+      {
+        "precision": "fp16",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 23096.300000000745,
+          "inferenceMs": 590.1999999992549,
+          "totalMs": 25093.10000000149,
+          "grade": "excellent",
+          "realTimeFactor": 0.08645481428573594
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "passed": true,
+          "topLabel": "ang",
+          "topScore": 0.9850996136665344,
+          "strongestNegative": 0.012951347045600414,
+          "margin": 0.972148266620934,
+          "scoreSum": 0.9999999781139195
+        },
+        "nativeOutput": [
+          {
+            "label": "ang",
+            "score": 0.9850996136665344
+          },
+          {
+            "label": "sad",
+            "score": 0.012951347045600414
+          },
+          {
+            "label": "hap",
+            "score": 0.001308287843130529
+          },
+          {
+            "label": "neu",
+            "score": 0.0006407295586541295
+          }
+        ]
+      },
+      {
+        "precision": "q4",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 12507.800000000745,
+          "inferenceMs": 2364.5,
+          "totalMs": 16544.700000001118,
+          "grade": "good",
+          "realTimeFactor": 0.34636124767685644
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "passed": true,
+          "topLabel": "ang",
+          "topScore": 0.9906578660011292,
+          "strongestNegative": 0.006257158238440752,
+          "margin": 0.9844007077626884,
+          "scoreSum": 1.0000000155996531
+        },
+        "nativeOutput": [
+          {
+            "label": "ang",
+            "score": 0.9906578660011292
+          },
+          {
+            "label": "neu",
+            "score": 0.006257158238440752
+          },
+          {
+            "label": "sad",
+            "score": 0.002365496475249529
+          },
+          {
+            "label": "hap",
+            "score": 0.0007194948848336935
+          }
+        ]
+      },
+      {
+        "precision": "q4",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 12514.5,
+          "inferenceMs": 110.79999999888241,
+          "totalMs": 14170.60000000149,
+          "grade": "excellent",
+          "realTimeFactor": 0.01623041921852764
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "passed": true,
+          "topLabel": "ang",
+          "topScore": 0.9906550049781799,
+          "strongestNegative": 0.006258950103074312,
+          "margin": 0.9843960548751056,
+          "scoreSum": 0.9999999923747964
+        },
+        "nativeOutput": [
+          {
+            "label": "ang",
+            "score": 0.9906550049781799
+          },
+          {
+            "label": "neu",
+            "score": 0.006258950103074312
+          },
+          {
+            "label": "sad",
+            "score": 0.0023663199972361326
+          },
+          {
+            "label": "hap",
+            "score": 0.0007197172963060439
+          }
+        ]
+      },
+      {
+        "precision": "q4f16",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 10639.800000000745,
+          "inferenceMs": 2496.699999999255,
+          "totalMs": 14627.799999998882,
+          "grade": "good",
+          "realTimeFactor": 0.3657264229539224
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "passed": true,
+          "topLabel": "ang",
+          "topScore": 0.9908549189567566,
+          "strongestNegative": 0.006106120068579912,
+          "margin": 0.9847487988881767,
+          "scoreSum": 1.0000000230502337
+        },
+        "nativeOutput": [
+          {
+            "label": "ang",
+            "score": 0.9908549189567566
+          },
+          {
+            "label": "neu",
+            "score": 0.006106120068579912
+          },
+          {
+            "label": "sad",
+            "score": 0.002318211365491152
+          },
+          {
+            "label": "hap",
+            "score": 0.0007207726594060659
+          }
+        ]
+      },
+      {
+        "precision": "q4f16",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 11787.099999999627,
+          "inferenceMs": 87.70000000111759,
+          "totalMs": 13422.099999999627,
+          "grade": "excellent",
+          "realTimeFactor": 0.01284664048282825
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "passed": true,
+          "topLabel": "ang",
+          "topScore": 0.9909413456916809,
+          "strongestNegative": 0.005903872195631266,
+          "margin": 0.9850374734960496,
+          "scoreSum": 1.0000000100117177
+        },
+        "nativeOutput": [
+          {
+            "label": "ang",
+            "score": 0.9909413456916809
+          },
+          {
+            "label": "neu",
+            "score": 0.005903872195631266
+          },
+          {
+            "label": "sad",
+            "score": 0.002392378868535161
+          },
+          {
+            "label": "hap",
+            "score": 0.0007624132558703423
+          }
+        ]
+      },
+      {
+        "precision": "bnb4",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 13293.800000000745,
+          "inferenceMs": 2368.89999999851,
+          "totalMs": 17198,
+          "grade": "good",
+          "realTimeFactor": 0.3470057769596909
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "passed": true,
+          "topLabel": "ang",
+          "topScore": 0.9906578660011292,
+          "strongestNegative": 0.006257158238440752,
+          "margin": 0.9844007077626884,
+          "scoreSum": 1.0000000155996531
+        },
+        "nativeOutput": [
+          {
+            "label": "ang",
+            "score": 0.9906578660011292
+          },
+          {
+            "label": "neu",
+            "score": 0.006257158238440752
+          },
+          {
+            "label": "sad",
+            "score": 0.002365496475249529
+          },
+          {
+            "label": "hap",
+            "score": 0.0007194948848336935
+          }
+        ]
+      },
+      {
+        "precision": "bnb4",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 12688.39999999851,
+          "inferenceMs": 109,
+          "totalMs": 14314.099999999627,
+          "grade": "excellent",
+          "realTimeFactor": 0.015966748148351598
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "passed": true,
+          "topLabel": "ang",
+          "topScore": 0.9906550049781799,
+          "strongestNegative": 0.006258950103074312,
+          "margin": 0.9843960548751056,
+          "scoreSum": 0.9999999923747964
+        },
+        "nativeOutput": [
+          {
+            "label": "ang",
+            "score": 0.9906550049781799
+          },
+          {
+            "label": "neu",
+            "score": 0.006258950103074312
+          },
+          {
+            "label": "sad",
+            "score": 0.0023663199972361326
+          },
+          {
+            "label": "hap",
+            "score": 0.0007197172963060439
+          }
+        ]
+      }
+    ],
+    "environment": "Headless Google Chrome on macOS; Transformers.js 4.2.0"
+  }
+}

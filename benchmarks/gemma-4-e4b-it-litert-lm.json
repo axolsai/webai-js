@@ -1,0 +1,76 @@
+{
+  "schemaVersion": "1.0",
+  "model": {
+    "id": "gemma-4-e4b-it-litert-lm",
+    "sourceRepository": "google/gemma-4-E4B-it",
+    "sourceRevision": "ee0ef6023621cff504d758262d4e04895a5af4a2",
+    "artifactRepository": "litert-community/gemma-4-E4B-it-litert-lm",
+    "artifactRevision": "2eee7ac325f20eb8c9ac1d0e972f7c84663062da",
+    "artifact": "gemma-4-E4B-it-web.litertlm",
+    "artifactBytes": 2969059328,
+    "quantization": "Gemma 4 mobile mixed 2-bit/4-bit/8-bit QAT"
+  },
+  "runtime": {
+    "engine": "LiteRT-LM JS",
+    "version": "0.17.0",
+    "moduleWorkerProbe": {
+      "packageImported": true,
+      "engineCreateAvailable": true,
+      "webGPUAvailable": true,
+      "jspiAvailable": true,
+      "directWasmInitialization": false,
+      "directFailure": "The Emscripten WASM loader calls importScripts(), which is unavailable in a module worker.",
+      "adapterLocalClassicWorkerBridge": true,
+      "relativeWasmPathsResolvedAgainst": "https://cdn.jsdelivr.net/npm/@litert-lm/core@0.17.0/wasm/"
+    }
+  },
+  "benchmark": {
+    "startedAt": "2026-09-09T05:07:10.102Z",
+    "finishedAt": "2026-09-09T05:10:20.124Z",
+    "fixture": {
+      "file": "test-app/public/test-prompts/gemma-4-e4b-it-litert-lm.json",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/gemma-4-e4b-it-litert-lm.json",
+      "size": 195,
+      "sha1": "a963a0f87228b86b7c9880699df48d4ab6c33482",
+      "license": "CC0-1.0"
+    },
+    "qualityGate": { "expectedNormalizedOutput": "paris", "requiresNonEmpty": true, "rejectsRepetition": true },
+    "environment": { "browser": "Codex in-app Chromium", "os": "macOS", "backend": "WebGPU", "runtime": "LiteRT-LM JS 0.17.0" },
+    "results": [{
+      "precision": "q4",
+      "device": "webgpu",
+      "status": "pass",
+      "runtime": {
+        "loadMs": 183812.2,
+        "inferenceMs": 6132.6,
+        "totalMs": 189944.8,
+        "timeToFirstTokenMs": 6087.25,
+        "prefillTokensPerSecond": 3.7913129481579166,
+        "prefillTokenCount": 23,
+        "decodeTokensPerSecond": 48.192771084337345,
+        "decodeTokenCount": 2,
+        "grade": "good"
+      },
+      "stream": { "chunkCount": 1, "text": "Paris" },
+      "nativeOutput": {
+        "result": "Paris",
+        "messages": [
+          { "role": "user", "content": "What is the capital of France? Answer with only the city name." },
+          { "role": "assistant", "content": "Paris" }
+        ],
+        "structured_output": false
+      },
+      "quality": { "expected": "Paris", "exactNormalizedMatch": true, "nonEmpty": true, "nonRepetitive": true },
+      "fullyAccelerated": true,
+      "cleanup": {
+        "modelDisposed": true,
+        "conversationsDisposed": true,
+        "modelCacheClearedBeforeCase": true,
+        "modelCacheEntriesClearedBefore": 0,
+        "modelCacheClearedAfterCase": true,
+        "modelCacheEntriesClearedAfter": 1
+      }
+    }],
+    "invalidatedBy": ["model artifact revision change", "LiteRT-LM version change", "fixture or quality-gate change", "browser or WebGPU behavior change"]
+  }
+}

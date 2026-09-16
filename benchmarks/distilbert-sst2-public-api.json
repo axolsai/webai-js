@@ -1,0 +1,51 @@
+{
+  "passed": true,
+  "configuration": {
+    "precision": "int8",
+    "device": "wasm"
+  },
+  "manifestDiscovered": true,
+  "downloadProgressEvents": 2339,
+  "cache": {
+    "cold": false,
+    "downloaded": true,
+    "reinitialized": true,
+    "deleted": true,
+    "otherModelPreserved": true
+  },
+  "invalidInputRejected": true,
+  "invalidConfigRejected": true,
+  "negativeOutput": {
+    "label": "NEGATIVE",
+    "score": 0.9995241222127412,
+    "labels": [
+      {
+        "label": "NEGATIVE",
+        "score": 0.9995241222127412
+      },
+      {
+        "label": "POSITIVE",
+        "score": 0.00047587778725879243
+      }
+    ]
+  },
+  "unsupportedStreamingRejected": true,
+  "clearMemoryVerified": true,
+  "runtime": {
+    "durationMs": 43.69999998807907
+  },
+  "nativeOutput": {
+    "label": "POSITIVE",
+    "score": 0.9997704615574663,
+    "labels": [
+      {
+        "label": "POSITIVE",
+        "score": 0.9997704615574663
+      },
+      {
+        "label": "NEGATIVE",
+        "score": 0.00022953844253375925
+      }
+    ]
+  }
+}

@@ -1,0 +1,180 @@
+{
+  "contractVersion": "1.0",
+  "model": {
+    "id": "granite-docling-258m",
+    "displayName": "Granite Docling 258M",
+    "provider": "IBM Granite",
+    "providerUrl": "https://www.ibm.com/granite",
+    "license": "Apache-2.0",
+    "licenseUrl": "https://huggingface.co/ibm-granite/granite-docling-258M/blob/982fe3b40f2fa73c365bdb1bcacf6c81b7184bfe/LICENSE",
+    "lastUpdated": "2025-09-23T08:52:16.000Z",
+    "sourceRepository": "ibm-granite/granite-docling-258M",
+    "sourceRevision": "982fe3b40f2fa73c365bdb1bcacf6c81b7184bfe",
+    "repository": "onnx-community/granite-docling-258M-ONNX",
+    "artifactRevision": "e8602580df77443fc3421cf3bae0601da601e5c6",
+    "artifactLastUpdated": "2025-10-07T20:20:28.000Z",
+    "task": "image-text-to-text",
+    "description": "A compact document vision-language model that converts a page image into DocTags preserving text, layout, formulas, tables, charts, and coordinates.",
+    "intendedUses": [
+      "Convert scanned or rendered document pages into structured DocTags.",
+      "Prototype local OCR, layout analysis, and document extraction.",
+      "Benchmark document understanding in browser workers."
+    ],
+    "limitations": [
+      "OCR and layout can be wrong, omitted, duplicated, or hallucinated and require review.",
+      "Small, blurred, rotated, handwritten, multilingual, or complex pages reduce accuracy.",
+      "A single page can require hundreds or thousands of generated tokens and substantial memory.",
+      "DocTags are untrusted extracted content and must not be executed as instructions.",
+      "Do not rely on output alone for legal, medical, financial, identity, or accessibility-critical decisions."
+    ]
+  },
+  "runtime": {
+    "engine": {
+      "name": "Transformers.js",
+      "version": "4.2.0"
+    },
+    "precisions": {}
+  },
+  "benchmark": {
+    "report": "benchmarks/granite-docling-258m.json",
+    "testedAt": "2026-09-15T17:08:02.814Z",
+    "fixture": {
+      "file": "granite-docling-new-arxiv.png",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/granite-docling-new-arxiv.png",
+      "size": 523477,
+      "sha1": "fa9ee1b276da7ce7374804e1e392b5b60c501a52",
+      "source": "https://huggingface.co/ibm-granite/granite-docling-258M/blob/982fe3b40f2fa73c365bdb1bcacf6c81b7184bfe/assets/new_arxiv.png",
+      "license": "Apache-2.0"
+    },
+    "candidates": {
+      "fp32": {
+        "weightsSize": 1263876953,
+        "size": 1264796769,
+        "dtype": "fp32",
+        "modelKeys": [
+          "vision_encoder.onnx",
+          "embed_tokens.onnx",
+          "decoder_model_merged.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "fp16": {
+        "weightsSize": 632192648,
+        "size": 633112464,
+        "dtype": "fp16",
+        "modelKeys": [
+          "vision_encoder_fp16.onnx",
+          "embed_tokens_fp16.onnx",
+          "decoder_model_merged_fp16.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q8": {
+        "weightsSize": 320044313,
+        "size": 320964129,
+        "dtype": "q8",
+        "modelKeys": [
+          "vision_encoder_quantized.onnx",
+          "embed_tokens_quantized.onnx",
+          "decoder_model_merged_quantized.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4": {
+        "weightsSize": 400028103,
+        "size": 400947919,
+        "dtype": "q4",
+        "modelKeys": [
+          "vision_encoder_q4.onnx",
+          "embed_tokens_q4.onnx",
+          "decoder_model_merged_q4.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4f16": {
+        "weightsSize": 264311910,
+        "size": 265231726,
+        "dtype": "q4f16",
+        "modelKeys": [
+          "vision_encoder_q4f16.onnx",
+          "embed_tokens_q4f16.onnx",
+          "decoder_model_merged_q4f16.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      }
+    },
+    "qualityGate": "Non-empty, non-repetitive DocTags containing page text, coordinates, and expected astronomy terms; streamed text must equal non-streamed text.",
+    "invalidatedBy": [
+      "artifact revision change",
+      "runtime version change",
+      "fixture or quality-gate change",
+      "browser/backend behavior change"
+    ],
+    "results": [
+      {
+        "precision": "q8",
+        "device": "webgpu",
+        "status": "fail",
+        "runtime": {
+          "loadMs": 33723,
+          "inferenceMs": 33519.30000001192,
+          "totalMs": 68604,
+          "grade": "very-slow",
+          "pagesPerSecond": 0.029833558576689977
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 12
+        },
+        "quality": {
+          "nonempty": true,
+          "doctags": false,
+          "content": false,
+          "repetitive": true,
+          "characters": 120,
+          "grade": "failed"
+        },
+        "nativeOutput": {
+          "text": "<loc_40><loc_47><loc_242><loc_79>ﻣﻬﺎﺳﺘﺮﺧﺎﺑ ﺔﻣﺎﺳﺘﺮﺧﺎﺑ ﺔﻣﺎﺳﺘﺮﺧﺎﺑ ﺔﻣﺎﺳﺘﺮﺧﺎﺑ ﺔﻣﺎﺳﺘﺮﺧﺎﺑ ﺔﻣﺎﺳﺘﺮﺧﺎﺑ ﺔﻣﺎﺳﺘﺮﺧﺎﺑ ﺔﻣﺎﺳﺘﺮﺧﺎﺑ ﺔﻣﺎﺳﺘﺮﺧ"
+        }
+      }
+    ]
+  }
+}

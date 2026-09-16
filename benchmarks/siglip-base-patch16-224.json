@@ -1,0 +1,809 @@
+{
+  "contractVersion": "1.0",
+  "model": {
+    "id": "siglip-base-patch16-224",
+    "displayName": "SigLIP Base Patch16 224 — Zero-Shot Image Classification",
+    "provider": "Google Research",
+    "providerUrl": "https://github.com/google-research/big_vision",
+    "license": "Apache-2.0",
+    "licenseUrl": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+    "lastUpdated": "2024-09-26T08:20:18.000Z",
+    "sourceRepository": "google/siglip-base-patch16-224",
+    "repository": "onnx-community/siglip-base-patch16-224-ONNX",
+    "artifactRevision": "9f0328bdd0eb4f62d0f6c10625f43d882b32102b",
+    "artifactLastUpdated": "2026-09-08T14:57:51.000Z",
+    "task": "zero-shot-image-classification",
+    "description": "A SigLIP vision-language model that compares a 224×224 image with developer-supplied English labels and returns an independent sigmoid score for each label in the browser.",
+    "intendedUses": [
+      "Zero-shot image categorization with custom labels.",
+      "Image-text matching and exploratory content organization."
+    ],
+    "limitations": [
+      "Scores are independent sigmoid probabilities and do not sum to one.",
+      "Accuracy depends heavily on label wording, image framing, resolution, and visual domain.",
+      "The model was trained on English image-text pairs; non-English labels are not validated by this worker.",
+      "Predictions can reflect training-data bias and must not be used as authoritative safety, identity, medical, or legal judgments."
+    ]
+  },
+  "runtime": {
+    "engine": {
+      "name": "Transformers.js",
+      "version": "4.2.0"
+    },
+    "precisions": {
+      "fp32": {
+        "weightsSize": 813080024,
+        "size": 815481404,
+        "modelKeys": [
+          "model.onnx"
+        ],
+        "auxiliaryRepositories": [
+          {
+            "repository": "google/siglip-base-patch16-224",
+            "revision": "7fd15f0689c79d79e38b1c2e2e2370a7bf2761ed",
+            "modelKeys": [
+              "tokenizer.json",
+              "tokenizer_config.json"
+            ]
+          }
+        ],
+        "dtype": "fp32",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q8": {
+        "weightsSize": 210058412,
+        "size": 212459792,
+        "modelKeys": [
+          "model_quantized.onnx"
+        ],
+        "auxiliaryRepositories": [
+          {
+            "repository": "google/siglip-base-patch16-224",
+            "revision": "7fd15f0689c79d79e38b1c2e2e2370a7bf2761ed",
+            "modelKeys": [
+              "tokenizer.json",
+              "tokenizer_config.json"
+            ]
+          }
+        ],
+        "dtype": "q8",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "int8": {
+        "weightsSize": 210058412,
+        "size": 212459792,
+        "modelKeys": [
+          "model_int8.onnx"
+        ],
+        "auxiliaryRepositories": [
+          {
+            "repository": "google/siglip-base-patch16-224",
+            "revision": "7fd15f0689c79d79e38b1c2e2e2370a7bf2761ed",
+            "modelKeys": [
+              "tokenizer.json",
+              "tokenizer_config.json"
+            ]
+          }
+        ],
+        "dtype": "int8",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "uint8": {
+        "weightsSize": 210058502,
+        "size": 212459882,
+        "modelKeys": [
+          "model_uint8.onnx"
+        ],
+        "auxiliaryRepositories": [
+          {
+            "repository": "google/siglip-base-patch16-224",
+            "revision": "7fd15f0689c79d79e38b1c2e2e2370a7bf2761ed",
+            "modelKeys": [
+              "tokenizer.json",
+              "tokenizer_config.json"
+            ]
+          }
+        ],
+        "dtype": "uint8",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4": {
+        "weightsSize": 223867620,
+        "size": 226269000,
+        "modelKeys": [
+          "model_q4.onnx"
+        ],
+        "auxiliaryRepositories": [
+          {
+            "repository": "google/siglip-base-patch16-224",
+            "revision": "7fd15f0689c79d79e38b1c2e2e2370a7bf2761ed",
+            "modelKeys": [
+              "tokenizer.json",
+              "tokenizer_config.json"
+            ]
+          }
+        ],
+        "dtype": "q4",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "bnb4": {
+        "weightsSize": 212956802,
+        "size": 215358182,
+        "modelKeys": [
+          "model_bnb4.onnx"
+        ],
+        "auxiliaryRepositories": [
+          {
+            "repository": "google/siglip-base-patch16-224",
+            "revision": "7fd15f0689c79d79e38b1c2e2e2370a7bf2761ed",
+            "modelKeys": [
+              "tokenizer.json",
+              "tokenizer_config.json"
+            ]
+          }
+        ],
+        "dtype": "bnb4",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      }
+    }
+  },
+  "benchmark": {
+    "report": "benchmarks/siglip-base-patch16-224.json",
+    "testedAt": "2026-09-11T10:36:59.461Z",
+    "fixture": {
+      "file": "modnet-portrait-pexels-5965592.jpg",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+      "size": 78124,
+      "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818",
+      "width": 1024,
+      "height": 683,
+      "license": "Pexels License",
+      "labels": {
+        "file": "siglip-base-patch16-224.json",
+        "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/siglip-base-patch16-224.json",
+        "size": 460,
+        "sha1": "fecc3379e545c31c5fc0dbcd8ca8777189f661e1"
+      }
+    },
+    "candidates": {
+      "fp32": {
+        "weightsSize": 813080024,
+        "size": 815481404,
+        "modelKeys": [
+          "model.onnx"
+        ],
+        "auxiliaryRepositories": [
+          {
+            "repository": "google/siglip-base-patch16-224",
+            "revision": "7fd15f0689c79d79e38b1c2e2e2370a7bf2761ed",
+            "modelKeys": [
+              "tokenizer.json",
+              "tokenizer_config.json"
+            ]
+          }
+        ],
+        "dtype": "fp32",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q8": {
+        "weightsSize": 210058412,
+        "size": 212459792,
+        "modelKeys": [
+          "model_quantized.onnx"
+        ],
+        "auxiliaryRepositories": [
+          {
+            "repository": "google/siglip-base-patch16-224",
+            "revision": "7fd15f0689c79d79e38b1c2e2e2370a7bf2761ed",
+            "modelKeys": [
+              "tokenizer.json",
+              "tokenizer_config.json"
+            ]
+          }
+        ],
+        "dtype": "q8",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "int8": {
+        "weightsSize": 210058412,
+        "size": 212459792,
+        "modelKeys": [
+          "model_int8.onnx"
+        ],
+        "auxiliaryRepositories": [
+          {
+            "repository": "google/siglip-base-patch16-224",
+            "revision": "7fd15f0689c79d79e38b1c2e2e2370a7bf2761ed",
+            "modelKeys": [
+              "tokenizer.json",
+              "tokenizer_config.json"
+            ]
+          }
+        ],
+        "dtype": "int8",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "uint8": {
+        "weightsSize": 210058502,
+        "size": 212459882,
+        "modelKeys": [
+          "model_uint8.onnx"
+        ],
+        "auxiliaryRepositories": [
+          {
+            "repository": "google/siglip-base-patch16-224",
+            "revision": "7fd15f0689c79d79e38b1c2e2e2370a7bf2761ed",
+            "modelKeys": [
+              "tokenizer.json",
+              "tokenizer_config.json"
+            ]
+          }
+        ],
+        "dtype": "uint8",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4": {
+        "weightsSize": 223867620,
+        "size": 226269000,
+        "modelKeys": [
+          "model_q4.onnx"
+        ],
+        "auxiliaryRepositories": [
+          {
+            "repository": "google/siglip-base-patch16-224",
+            "revision": "7fd15f0689c79d79e38b1c2e2e2370a7bf2761ed",
+            "modelKeys": [
+              "tokenizer.json",
+              "tokenizer_config.json"
+            ]
+          }
+        ],
+        "dtype": "q4",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "bnb4": {
+        "weightsSize": 212956802,
+        "size": 215358182,
+        "modelKeys": [
+          "model_bnb4.onnx"
+        ],
+        "auxiliaryRepositories": [
+          {
+            "repository": "google/siglip-base-patch16-224",
+            "revision": "7fd15f0689c79d79e38b1c2e2e2370a7bf2761ed",
+            "modelKeys": [
+              "tokenizer.json",
+              "tokenizer_config.json"
+            ]
+          }
+        ],
+        "dtype": "bnb4",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      }
+    },
+    "qualityGate": "Finite scores in [0,1], unique labels, expected person label ranked first, and its score is at least 10 times the strongest negative.",
+    "invalidatedBy": [
+      "artifact or tokenizer revision change",
+      "runtime version change",
+      "fixture, labels, or quality-gate change",
+      "browser/backend behavior change"
+    ],
+    "results": [
+      {
+        "precision": "fp32",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 900000,
+          "grade": "failed"
+        },
+        "error": "bounded 15-minute cold-load timeout",
+        "cleanup": {
+          "modelDisposed": false,
+          "cacheClearedAfterCase": false
+        }
+      },
+      {
+        "precision": "fp32",
+        "device": "webgpu",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 294053.7000000477,
+          "grade": "failed"
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "error": "Error: network error"
+      },
+      {
+        "precision": "q8",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 114515.10000002384,
+          "inferenceMs": 1586.5,
+          "totalMs": 117637.90000009537,
+          "grade": "very-slow",
+          "imagesPerSecond": 0.6303183107469272
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 5
+        },
+        "quality": {
+          "passed": true,
+          "finite": true,
+          "unique": true,
+          "topLabel": "a portrait photo of a person",
+          "topScore": 0.000056381246395176277,
+          "strongestNegative": 1.3780274343844212E-7,
+          "topToNegativeRatio": 409.1445858649567,
+          "minimumRatio": 10
+        },
+        "nativeOutput": [
+          {
+            "label": "a portrait photo of a person",
+            "score": 0.000056381246395176277
+          },
+          {
+            "label": "a photo of a car",
+            "score": 1.3780274343844212E-7
+          },
+          {
+            "label": "a landscape",
+            "score": 1.2598052023804485E-7
+          }
+        ]
+      },
+      {
+        "precision": "q8",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 135540.5,
+          "inferenceMs": 2057.899999976158,
+          "totalMs": 138845.60000002384,
+          "grade": "very-slow",
+          "imagesPerSecond": 0.4859322610484404
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 5
+        },
+        "quality": {
+          "passed": true,
+          "finite": true,
+          "unique": true,
+          "topLabel": "a portrait photo of a person",
+          "topScore": 0.00007835849828552455,
+          "strongestNegative": 1.6783047840362997E-7,
+          "topToNegativeRatio": 466.89075209017426,
+          "minimumRatio": 10
+        },
+        "nativeOutput": [
+          {
+            "label": "a portrait photo of a person",
+            "score": 0.00007835849828552455
+          },
+          {
+            "label": "a photo of a car",
+            "score": 1.6783047840362997E-7
+          },
+          {
+            "label": "a landscape",
+            "score": 1.625366223834135E-7
+          }
+        ]
+      },
+      {
+        "precision": "int8",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 138866.89999997616,
+          "inferenceMs": 1514.5,
+          "totalMs": 141686,
+          "grade": "very-slow",
+          "imagesPerSecond": 0.6602839220864972
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 5
+        },
+        "quality": {
+          "passed": true,
+          "finite": true,
+          "unique": true,
+          "topLabel": "a portrait photo of a person",
+          "topScore": 0.000056381246395176277,
+          "strongestNegative": 1.3780274343844212E-7,
+          "topToNegativeRatio": 409.1445858649567,
+          "minimumRatio": 10
+        },
+        "nativeOutput": [
+          {
+            "label": "a portrait photo of a person",
+            "score": 0.000056381246395176277
+          },
+          {
+            "label": "a photo of a car",
+            "score": 1.3780274343844212E-7
+          },
+          {
+            "label": "a landscape",
+            "score": 1.2598052023804485E-7
+          }
+        ]
+      },
+      {
+        "precision": "int8",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 22863.099999904633,
+          "inferenceMs": 1630.8000000715256,
+          "totalMs": 26299,
+          "grade": "very-slow",
+          "imagesPerSecond": 0.6131959774074938
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 5
+        },
+        "quality": {
+          "passed": true,
+          "finite": true,
+          "unique": true,
+          "topLabel": "a portrait photo of a person",
+          "topScore": 0.00007835849828552455,
+          "strongestNegative": 1.6783047840362997E-7,
+          "topToNegativeRatio": 466.89075209017426,
+          "minimumRatio": 10
+        },
+        "nativeOutput": [
+          {
+            "label": "a portrait photo of a person",
+            "score": 0.00007835849828552455
+          },
+          {
+            "label": "a photo of a car",
+            "score": 1.6783047840362997E-7
+          },
+          {
+            "label": "a landscape",
+            "score": 1.625366223834135E-7
+          }
+        ]
+      },
+      {
+        "precision": "uint8",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 164437.70000004768,
+          "inferenceMs": 1491.0999999046326,
+          "totalMs": 167500.5,
+          "grade": "very-slow",
+          "imagesPerSecond": 0.6706458319790475
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 5
+        },
+        "quality": {
+          "passed": true,
+          "finite": true,
+          "unique": true,
+          "topLabel": "a portrait photo of a person",
+          "topScore": 0.00005717068779631518,
+          "strongestNegative": 1.8804314549925039E-7,
+          "topToNegativeRatio": 304.0296291817937,
+          "minimumRatio": 10
+        },
+        "nativeOutput": [
+          {
+            "label": "a portrait photo of a person",
+            "score": 0.00005717068779631518
+          },
+          {
+            "label": "a photo of a car",
+            "score": 1.8804314549925039E-7
+          },
+          {
+            "label": "a landscape",
+            "score": 1.5649325746380782E-7
+          }
+        ]
+      },
+      {
+        "precision": "uint8",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 137726.5,
+          "inferenceMs": 1606.8999999761581,
+          "totalMs": 140654.69999992847,
+          "grade": "very-slow",
+          "imagesPerSecond": 0.6223162611331365
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 5
+        },
+        "quality": {
+          "passed": true,
+          "finite": true,
+          "unique": true,
+          "topLabel": "a portrait photo of a person",
+          "topScore": 0.0000776401357143186,
+          "strongestNegative": 1.5467284697479045E-7,
+          "topToNegativeRatio": 501.96357817718894,
+          "minimumRatio": 10
+        },
+        "nativeOutput": [
+          {
+            "label": "a portrait photo of a person",
+            "score": 0.0000776401357143186
+          },
+          {
+            "label": "a landscape",
+            "score": 1.5467284697479045E-7
+          },
+          {
+            "label": "a photo of a car",
+            "score": 1.1392697274459351E-7
+          }
+        ]
+      },
+      {
+        "precision": "q4",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 58338.199999928474,
+          "inferenceMs": 1794.8000000715256,
+          "totalMs": 61489.39999997616,
+          "grade": "very-slow",
+          "imagesPerSecond": 0.5571651437264031
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 5
+        },
+        "quality": {
+          "passed": true,
+          "finite": true,
+          "unique": true,
+          "topLabel": "a portrait photo of a person",
+          "topScore": 0.0001224326842930168,
+          "strongestNegative": 7.488825417567568E-7,
+          "topToNegativeRatio": 163.48716583218723,
+          "minimumRatio": 10
+        },
+        "nativeOutput": [
+          {
+            "label": "a portrait photo of a person",
+            "score": 0.0001224326842930168
+          },
+          {
+            "label": "a landscape",
+            "score": 7.488825417567568E-7
+          },
+          {
+            "label": "a photo of a car",
+            "score": 2.1147380380170944E-7
+          }
+        ]
+      },
+      {
+        "precision": "q4",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 67780.40000009537,
+          "inferenceMs": 277.7999999523163,
+          "totalMs": 69340.70000004768,
+          "grade": "good",
+          "imagesPerSecond": 3.599712023656039
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 5
+        },
+        "quality": {
+          "passed": true,
+          "finite": true,
+          "unique": true,
+          "topLabel": "a portrait photo of a person",
+          "topScore": 0.0001224323350470513,
+          "strongestNegative": 7.488789606213686E-7,
+          "topToNegativeRatio": 163.48748126862228,
+          "minimumRatio": 10
+        },
+        "nativeOutput": [
+          {
+            "label": "a portrait photo of a person",
+            "score": 0.0001224323350470513
+          },
+          {
+            "label": "a landscape",
+            "score": 7.488789606213686E-7
+          },
+          {
+            "label": "a photo of a car",
+            "score": 2.1147138795640785E-7
+          }
+        ]
+      },
+      {
+        "precision": "bnb4",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 30792.700000047684,
+          "inferenceMs": 1597.8999999761581,
+          "totalMs": 33703.90000009537,
+          "grade": "very-slow",
+          "imagesPerSecond": 0.6258213905844676
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 5
+        },
+        "quality": {
+          "passed": true,
+          "finite": true,
+          "unique": true,
+          "topLabel": "a portrait photo of a person",
+          "topScore": 0.00009681785013526678,
+          "strongestNegative": 3.172833089593041E-7,
+          "topToNegativeRatio": 305.14637045620634,
+          "minimumRatio": 10
+        },
+        "nativeOutput": [
+          {
+            "label": "a portrait photo of a person",
+            "score": 0.00009681785013526678
+          },
+          {
+            "label": "a landscape",
+            "score": 3.172833089593041E-7
+          },
+          {
+            "label": "a photo of a car",
+            "score": 5.572021066768684E-8
+          }
+        ]
+      },
+      {
+        "precision": "bnb4",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 84735,
+          "inferenceMs": 1652.6000000238419,
+          "totalMs": 87679.89999997616,
+          "grade": "very-slow",
+          "imagesPerSecond": 0.6051071039486706
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 5
+        },
+        "quality": {
+          "passed": true,
+          "finite": true,
+          "unique": true,
+          "topLabel": "a portrait photo of a person",
+          "topScore": 0.00009681803931016475,
+          "strongestNegative": 3.172833089593041E-7,
+          "topToNegativeRatio": 305.1469666895808,
+          "minimumRatio": 10
+        },
+        "nativeOutput": [
+          {
+            "label": "a portrait photo of a person",
+            "score": 0.00009681803931016475
+          },
+          {
+            "label": "a landscape",
+            "score": 3.172833089593041E-7
+          },
+          {
+            "label": "a photo of a car",
+            "score": 5.572116990038012E-8
+          }
+        ]
+      }
+    ],
+    "environment": "Headless Google Chrome on macOS; Transformers.js 4.2.0"
+  }
+}

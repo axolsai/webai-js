@@ -1,0 +1,769 @@
+{
+  "contractVersion": "1.0",
+  "model": {
+    "id": "granite-embedding-97m-multilingual-r2",
+    "displayName": "Granite Embedding 97M Multilingual R2",
+    "provider": "IBM Granite",
+    "providerUrl": "https://www.ibm.com/granite",
+    "license": "Apache-2.0",
+    "licenseUrl": "https://huggingface.co/ibm-granite/granite-embedding-97m-multilingual-r2/blob/835ad14087e140460703cf0fae09f97d469d65c2/LICENSE",
+    "lastUpdated": "2026-05-18T20:17:17.000Z",
+    "sourceRepository": "ibm-granite/granite-embedding-97m-multilingual-r2",
+    "sourceRevision": "835ad14087e140460703cf0fae09f97d469d65c2",
+    "repository": "onnx-community/granite-embedding-97m-multilingual-r2-ONNX",
+    "artifactRevision": "536a9f241cb3f02a9c5995a1e708c784bd274859",
+    "artifactLastUpdated": "2026-06-21T08:29:51.000Z",
+    "task": "feature-extraction",
+    "description": "A compact 97M-parameter ModernBERT bi-encoder producing normalized 384-dimensional multilingual text embeddings for local retrieval and similarity.",
+    "intendedUses": [
+      "Multilingual and cross-lingual semantic search and retrieval.",
+      "Code, document, passage, and conversational retrieval prototypes.",
+      "Clustering and similarity workflows with human-reviewed thresholds."
+    ],
+    "limitations": [
+      "Enhanced retrieval training covers 52 listed languages and code; quality varies outside them despite broader pretraining.",
+      "Similarity is not factual verification and can reproduce training-data bias.",
+      "Long inputs increase browser memory and latency and should be chunked even though the architecture supports up to 32,768 tokens.",
+      "Quantization may change close rankings; application-specific evaluation is required.",
+      "Do not use similarity alone for consequential decisions about people."
+    ]
+  },
+  "runtime": {
+    "engine": {
+      "name": "Transformers.js",
+      "version": "4.2.0"
+    },
+    "precisions": {
+      "fp32": {
+        "weightsSize": 390004608,
+        "size": 415321225,
+        "dtype": "fp32",
+        "modelKeys": [
+          "model.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "fp16": {
+        "weightsSize": 195200670,
+        "size": 220517287,
+        "dtype": "fp16",
+        "modelKeys": [
+          "model_fp16.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "int8": {
+        "weightsSize": 97858099,
+        "size": 123174716,
+        "dtype": "int8",
+        "modelKeys": [
+          "model_int8.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "uint8": {
+        "weightsSize": 97858133,
+        "size": 123174750,
+        "dtype": "uint8",
+        "modelKeys": [
+          "model_uint8.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q8": {
+        "weightsSize": 97858099,
+        "size": 123174716,
+        "dtype": "q8",
+        "modelKeys": [
+          "model_quantized.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4": {
+        "weightsSize": 294460363,
+        "size": 319776980,
+        "dtype": "q4",
+        "modelKeys": [
+          "model_q4.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4f16": {
+        "weightsSize": 154468150,
+        "size": 179784767,
+        "dtype": "q4f16",
+        "modelKeys": [
+          "model_q4f16.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "bnb4": {
+        "weightsSize": 294460363,
+        "size": 319776980,
+        "dtype": "bnb4",
+        "modelKeys": [
+          "model_bnb4.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      }
+    }
+  },
+  "benchmark": {
+    "report": "benchmarks/granite-embedding-97m-multilingual-r2.json",
+    "testedAt": "2026-09-15T16:25:44.372Z",
+    "fixture": {
+      "file": "granite-embedding-97m-multilingual-r2.json",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/granite-embedding-97m-multilingual-r2.json",
+      "size": 735,
+      "sha1": "721d37a672010fd5ec9cdf564c697319d598e342"
+    },
+    "candidates": {
+      "fp32": {
+        "weightsSize": 390004608,
+        "size": 415321225,
+        "dtype": "fp32",
+        "modelKeys": [
+          "model.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "fp16": {
+        "weightsSize": 195200670,
+        "size": 220517287,
+        "dtype": "fp16",
+        "modelKeys": [
+          "model_fp16.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "int8": {
+        "weightsSize": 97858099,
+        "size": 123174716,
+        "dtype": "int8",
+        "modelKeys": [
+          "model_int8.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "uint8": {
+        "weightsSize": 97858133,
+        "size": 123174750,
+        "dtype": "uint8",
+        "modelKeys": [
+          "model_uint8.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q8": {
+        "weightsSize": 97858099,
+        "size": 123174716,
+        "dtype": "q8",
+        "modelKeys": [
+          "model_quantized.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4": {
+        "weightsSize": 294460363,
+        "size": 319776980,
+        "dtype": "q4",
+        "modelKeys": [
+          "model_q4.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4f16": {
+        "weightsSize": 154468150,
+        "size": 179784767,
+        "dtype": "q4f16",
+        "modelKeys": [
+          "model_q4f16.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "bnb4": {
+        "weightsSize": 294460363,
+        "size": 319776980,
+        "dtype": "bnb4",
+        "modelKeys": [
+          "model_bnb4.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      }
+    },
+    "qualityGate": "Three finite, distinct, normalized 384d vectors; an English query must rank its Japanese answer above an unrelated passage by at least 0.1 cosine.",
+    "environment": "Headless Chrome on macOS; Transformers.js 4.2.0",
+    "invalidatedBy": [
+      "artifact revision change",
+      "runtime version change",
+      "fixture or quality-gate change",
+      "browser/backend behavior change"
+    ],
+    "results": [
+      {
+        "precision": "fp32",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 44256.80000001192,
+          "inferenceMs": 88.90000000596046,
+          "totalMs": 45639.09999999404,
+          "grade": "excellent",
+          "embeddingsPerSecond": 33.745781775015296
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "quality": {
+          "shape": true,
+          "finite": true,
+          "normalized": true,
+          "distinct": true,
+          "positive": 0.9259532456887626,
+          "negative": 0.6901542851041528,
+          "margin": 0.2357989605846098,
+          "minimumMargin": 0.1,
+          "grade": "semantic-retrieval-pass"
+        },
+        "nativeOutput": {
+          "rows": 3,
+          "dimensions": 384
+        }
+      },
+      {
+        "precision": "fp32",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 44079.79999998212,
+          "inferenceMs": 122,
+          "totalMs": 45423,
+          "grade": "excellent",
+          "embeddingsPerSecond": 24.59016393442623
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "quality": {
+          "shape": true,
+          "finite": true,
+          "normalized": true,
+          "distinct": true,
+          "positive": 0.9259531192134285,
+          "negative": 0.6901542423153498,
+          "margin": 0.23579887689807866,
+          "minimumMargin": 0.1,
+          "grade": "semantic-retrieval-pass"
+        },
+        "nativeOutput": {
+          "rows": 3,
+          "dimensions": 384
+        }
+      },
+      {
+        "precision": "fp16",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 29303.29999998212,
+          "grade": "failed"
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 1, ERROR_MESSAGE: Type Error: Type (tensor(float16)) of output arg (/layers.0/attn/rotary_emb/Cast_1_output_0) of node (/layers.0/attn/rotary_emb/Cast_1) does not match expected type (tensor(float))."
+      },
+      {
+        "precision": "fp16",
+        "device": "webgpu",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 27575.29999998212,
+          "grade": "failed"
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 1, ERROR_MESSAGE: Type Error: Type (tensor(float16)) of output arg (/layers.0/attn/rotary_emb/Cast_1_output_0) of node (/layers.0/attn/rotary_emb/Cast_1) does not match expected type (tensor(float))."
+      },
+      {
+        "precision": "int8",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 18007.59999999404,
+          "inferenceMs": 97.80000001192093,
+          "totalMs": 19350.29999998212,
+          "grade": "excellent",
+          "embeddingsPerSecond": 30.674846622027886
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "quality": {
+          "shape": true,
+          "finite": true,
+          "normalized": true,
+          "distinct": true,
+          "positive": 0.8823177193527786,
+          "negative": 0.5999481015019146,
+          "margin": 0.282369617850864,
+          "minimumMargin": 0.1,
+          "grade": "semantic-retrieval-pass"
+        },
+        "nativeOutput": {
+          "rows": 3,
+          "dimensions": 384
+        }
+      },
+      {
+        "precision": "int8",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 18234.59999999404,
+          "inferenceMs": 184.19999998807907,
+          "totalMs": 19668.100000023842,
+          "grade": "good",
+          "embeddingsPerSecond": 16.286644952194095
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "quality": {
+          "shape": true,
+          "finite": true,
+          "normalized": true,
+          "distinct": true,
+          "positive": 0.8823176872969928,
+          "negative": 0.5999480410167466,
+          "margin": 0.2823696462802462,
+          "minimumMargin": 0.1,
+          "grade": "semantic-retrieval-pass"
+        },
+        "nativeOutput": {
+          "rows": 3,
+          "dimensions": 384
+        }
+      },
+      {
+        "precision": "uint8",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 19023.90000000596,
+          "inferenceMs": 96.69999998807907,
+          "totalMs": 20419.09999999404,
+          "grade": "excellent",
+          "embeddingsPerSecond": 31.02378490558255
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "quality": {
+          "shape": true,
+          "finite": true,
+          "normalized": true,
+          "distinct": true,
+          "positive": 0.8717737596771854,
+          "negative": 0.6119479442542025,
+          "margin": 0.2598258154229829,
+          "minimumMargin": 0.1,
+          "grade": "semantic-retrieval-pass"
+        },
+        "nativeOutput": {
+          "rows": 3,
+          "dimensions": 384
+        }
+      },
+      {
+        "precision": "uint8",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 20835.90000000596,
+          "inferenceMs": 252.30000001192093,
+          "totalMs": 22369,
+          "grade": "good",
+          "embeddingsPerSecond": 11.890606420365648
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "quality": {
+          "shape": true,
+          "finite": true,
+          "normalized": true,
+          "distinct": true,
+          "positive": 0.8693715912393482,
+          "negative": 0.6193572420061288,
+          "margin": 0.2500143492332193,
+          "minimumMargin": 0.1,
+          "grade": "semantic-retrieval-pass"
+        },
+        "nativeOutput": {
+          "rows": 3,
+          "dimensions": 384
+        }
+      },
+      {
+        "precision": "q8",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 19433,
+          "inferenceMs": 97.5,
+          "totalMs": 20740.79999998212,
+          "grade": "excellent",
+          "embeddingsPerSecond": 30.769230769230766
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "quality": {
+          "shape": true,
+          "finite": true,
+          "normalized": true,
+          "distinct": true,
+          "positive": 0.8823177193527786,
+          "negative": 0.5999481015019146,
+          "margin": 0.282369617850864,
+          "minimumMargin": 0.1,
+          "grade": "semantic-retrieval-pass"
+        },
+        "nativeOutput": {
+          "rows": 3,
+          "dimensions": 384
+        }
+      },
+      {
+        "precision": "q8",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 19048.29999998212,
+          "inferenceMs": 183.7000000178814,
+          "totalMs": 20532.20000001788,
+          "grade": "good",
+          "embeddingsPerSecond": 16.33097441321709
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "quality": {
+          "shape": true,
+          "finite": true,
+          "normalized": true,
+          "distinct": true,
+          "positive": 0.8823176872969928,
+          "negative": 0.5999480410167466,
+          "margin": 0.2823696462802462,
+          "minimumMargin": 0.1,
+          "grade": "semantic-retrieval-pass"
+        },
+        "nativeOutput": {
+          "rows": 3,
+          "dimensions": 384
+        }
+      },
+      {
+        "precision": "q4",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 35297.89999997616,
+          "inferenceMs": 125.40000000596046,
+          "totalMs": 36728.09999999404,
+          "grade": "excellent",
+          "embeddingsPerSecond": 23.923444974939436
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "quality": {
+          "shape": true,
+          "finite": true,
+          "normalized": true,
+          "distinct": true,
+          "positive": 0.9234198756914827,
+          "negative": 0.6984499903196258,
+          "margin": 0.2249698853718568,
+          "minimumMargin": 0.1,
+          "grade": "semantic-retrieval-pass"
+        },
+        "nativeOutput": {
+          "rows": 3,
+          "dimensions": 384
+        }
+      },
+      {
+        "precision": "q4",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 35796.59999999404,
+          "inferenceMs": 107.40000000596046,
+          "totalMs": 37176.40000000596,
+          "grade": "excellent",
+          "embeddingsPerSecond": 27.932960892304532
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "quality": {
+          "shape": true,
+          "finite": true,
+          "normalized": true,
+          "distinct": true,
+          "positive": 0.92342002894741,
+          "negative": 0.6984500657764473,
+          "margin": 0.22496996317096274,
+          "minimumMargin": 0.1,
+          "grade": "semantic-retrieval-pass"
+        },
+        "nativeOutput": {
+          "rows": 3,
+          "dimensions": 384
+        }
+      },
+      {
+        "precision": "q4f16",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 23773,
+          "grade": "failed"
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 1, ERROR_MESSAGE: Type Error: Type (tensor(float16)) of output arg (/layers.0/attn/rotary_emb/Cast_1_output_0) of node (/layers.0/attn/rotary_emb/Cast_1) does not match expected type (tensor(float))."
+      },
+      {
+        "precision": "q4f16",
+        "device": "webgpu",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 24294.90000000596,
+          "grade": "failed"
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 1, ERROR_MESSAGE: Type Error: Type (tensor(float16)) of output arg (/layers.0/attn/rotary_emb/Cast_1_output_0) of node (/layers.0/attn/rotary_emb/Cast_1) does not match expected type (tensor(float))."
+      },
+      {
+        "precision": "bnb4",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 37582.90000000596,
+          "inferenceMs": 129.59999999403954,
+          "totalMs": 39018.89999997616,
+          "grade": "excellent",
+          "embeddingsPerSecond": 23.14814814921276
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "quality": {
+          "shape": true,
+          "finite": true,
+          "normalized": true,
+          "distinct": true,
+          "positive": 0.9234198756914827,
+          "negative": 0.6984499903196258,
+          "margin": 0.2249698853718568,
+          "minimumMargin": 0.1,
+          "grade": "semantic-retrieval-pass"
+        },
+        "nativeOutput": {
+          "rows": 3,
+          "dimensions": 384
+        }
+      },
+      {
+        "precision": "bnb4",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 34449.20000001788,
+          "inferenceMs": 107.7999999821186,
+          "totalMs": 35773.5,
+          "grade": "excellent",
+          "embeddingsPerSecond": 27.829313548215463
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "quality": {
+          "shape": true,
+          "finite": true,
+          "normalized": true,
+          "distinct": true,
+          "positive": 0.92342002894741,
+          "negative": 0.6984500657764473,
+          "margin": 0.22496996317096274,
+          "minimumMargin": 0.1,
+          "grade": "semantic-retrieval-pass"
+        },
+        "nativeOutput": {
+          "rows": 3,
+          "dimensions": 384
+        }
+      }
+    ]
+  }
+}

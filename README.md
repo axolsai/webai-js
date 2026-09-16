@@ -1,177 +1,123 @@
-# @axols/webai-js
-
+# WebAI.js
 
 [![npm version](https://img.shields.io/npm/v/@axols/webai-js.svg)](https://www.npmjs.com/package/@axols/webai-js)
-[![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://github.com/axols/webai-js/blob/main/LICENSE)
+[![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
 
-Run AI models directly in your users' browsers with zero server-side infrastructure.
+WebAI.js runs AI models in a browser through a consistent JavaScript API. The library manages Web Workers, downloads, caching, request queues, cancellation, and result timing. Each model worker handles its own runtime, inputs, configuration, inference, and cleanup.
 
-**[📖 Documentation](https://www.webai-js.com/models/whisper-base/api-reference/v1/get-started/basic-usage)** | **[🎮 Playground](https://www.webai-js.com/models/whisper-base/playground)** | **[🤖 Models Hub](https://www.webai-js.com/models)** | **[👨🏻‍💻 Discord Community](https://discord.gg/RkpAKgZC)**
+The current collection is in [`model-workers-v4/`](model-workers-v4/). It includes text, speech, image, and multimodal models powered by Transformers.js, LiteRT.js, LiteRT-LM, and MediaPipe.
 
+## What it does
 
-![test](https://assets.axolsai.com/web-assets/images/webai-js-banner.png)
+- Runs supported models on the user's device using WebAssembly or WebGPU, without an inference server.
+- Provides one lifecycle for different tasks: create a worker, initialize a tested configuration, generate a result, and release resources.
+- Lets an app inspect each worker's manifest to discover its inputs, options, output shape, provenance, license, supported precision/device pairs, and benchmark evidence.
+- Reports download progress and returns a common result envelope while preserving each model's native output.
+- Supports token streaming only for workers that explicitly advertise it.
 
-## 🚀 Overview
+The library does **not** include model weights. Workers normally fetch their pinned artifacts from the model provider or browser-artifact repository on first use. Inputs are processed locally by the worker, but model downloads still make network requests. Browser storage, memory, WebGPU availability, and model licenses vary by model and device.
 
-Axols WebAI.js is an open-source library that enables client-side AI inference directly in the browser. Built on top of Transformers.js, WebGPU, and ONNX Runtime, it eliminates the need for server-side AI model hosting and inference infrastructure.
-
-### Key Features
-
-- 🏪 **ONNX Model Hub**: Access a curated pool of browser-optimized ONNX AI models
-- 🌐 **Pure Client-Side**: Run AI models entirely in the browser
-- 🔒 **Privacy-First**: Data never leaves the user's device
-- 📦 **Zero Backend Costs**: No server infrastructure needed
-- 🚀 **Easy Setup**: No headaches with packages - just one simple installation
-- 🎯 **Standardized API**: Same interface across all models
-- 🔄 **Streaming Support**: Real-time generation with streaming
-- 🛠️ **Framework Compatible**: Works with React, Vue, Angular, Next.js, and more
-
-## 📦 Installation
+## Install and try a worker
 
 ```bash
 npm install @axols/webai-js
 ```
 
-## 🎯 Quick Start
+Serve the worker script from your app's public directory. For example, in a Next.js app:
 
-**All our Web AI models are standardized to use the same 3-step API interface:**
-
-```javascript
-import { WebAI } from '@axols/webai-js';
-
-// Step 1: Create a WebAI instance
-const webai = await WebAI.create({
-  modelId: "llama-3.2-1b-instruct"
-});
-
-// Step 2: Initialize (downloads and loads the model)
-await webai.init({
-  mode: "auto", // Automatically selects best configuration
-  onDownloadProgress: (progress) => {
-    console.log(`Download progress: ${progress.progress}%`);
-  }
-});
-
-// Step 3: Generate
-const result = await webai.generate({
-  userInput: {
-     messages: [
-      {
-        role: "user",
-        content: "What is the history of AI?"
-      },
-    ],   
-  }
-});
-
-console.log(result);
-
-// Step 4: Clean up when done
-webai.terminate();
+```bash
+mkdir -p public/workers
+cp node_modules/@axols/webai-js/model-workers-v4/bge-reranker-large.worker.js public/workers/
 ```
 
-## 📖 Core Concepts
+Then use the worker from client-side code:
 
-### Model Lifecycle
+```js
+import { WebAI } from "@axols/webai-js";
 
-1. **Create**: Instantiate a WebAI object with a model ID
-2. **Initialize**: Download (if needed) and load the model into memory
-3. **Generate**: Run inference on user input
-4. **Terminate**: Clean up resources when finished
-
-### Auto Mode
-
-Let WebAI automatically determine the best configuration based on device capabilities:
-
-```javascript
-await webai.init({
-  mode: "auto",
-  onDownloadProgress: (progress) => console.log(progress)
+const ai = await WebAI.create({
+  modelId: "bge-reranker-large",
+  workerPath: "/workers/bge-reranker-large.worker.js",
 });
+
+try {
+  // The manifest is available before the model is downloaded.
+  console.log(ai.modelManifest);
+
+  await ai.init({
+    precision: "int8",
+    device: "wasm",
+    onDownloadProgress: (event) => console.log(event),
+  });
+
+  const { result, runtime } = await ai.generate({
+    userInput: {
+      query: "What is the capital of France?",
+      documents: [
+        "Paris is the capital of France.",
+        "Whales live in the ocean.",
+      ],
+    },
+    modelConfig: { top_k: 2, normalize_scores: true },
+  });
+
+  console.log(result.results); // Ranked passages, scores, logits, and original indices
+  console.log(runtime.durationMs); // Inference time in milliseconds
+} finally {
+  await ai.terminate();
+}
 ```
 
-### Custom Priorities
+`int8`/`wasm` is this worker's verified recommended configuration, not a universal default. Its estimated first download is about 584 MB. Before choosing a configuration for another worker, inspect `ai.modelManifest.runtime.precisions` or its report in [`benchmarks/`](benchmarks/). Only benchmark-passing precision/device pairs are advertised.
 
-Control fallback behavior with custom priority configurations:
+## Model collection
 
-```javascript
-await webai.init({
-  mode: "auto",
-  priorities: [
-    { mode: "webai", precision: "q4", device: "webgpu" },
-    { mode: "webai", precision: "q8", device: "webgpu" },
-    { mode: "webai", precision: "q4", device: "wasm" },
-    { mode: "cloud", precision: "", device: "" }
-  ]
-});
+The v4 directory contains 49 workers. These are examples of the tasks they cover; the [worker directory](model-workers-v4/) is the source of truth for exact model IDs.
+
+| Task | Example workers | What they return |
+| --- | --- | --- |
+| Chat and text generation | `qwen3.5-0.8b`, `apertus-v1.1-0.5b`, Gemma 4 LiteRT-LM workers | Generated text; streaming where implemented |
+| Embeddings and retrieval | `all-minilm-l6-v2`, `bge-small-en-v1.5`, `bge-m3`, `embeddinggemma-300m`, `granite-embedding-97m-multilingual-r2` | Vectors for similarity or search |
+| Reranking | `bge-reranker-base`, `bge-reranker-large` | Query-document relevance rankings |
+| Speech and audio | Whisper variants, Moonshine variants, `cohere-transcribe-03-2026`, `kokoro-82m-v1`, `wav2vec2-base-superb-er` | Transcripts, synthesized audio, or audio labels |
+| Text classification | `distilbert-base-uncased-finetuned-sst-2-english`, `ettinx-nli-xs`, `rubert-tiny-toxicity`, `privacy-filter` | Task-specific labels, scores, or spans |
+| Image understanding | `florence-2-base-ft`, `siglip-base-patch16-224`, `detr-resnet-50`, `depth-anything-v3-small` | Captions, similarity, detections, or depth |
+| Segmentation and matting | `sam-vit-base`, `sam-vit-large`, `segformer-b3-ade20k`, `modnet`, `vitmatte-small-composition-1k` | Masks or alpha mattes |
+| Landmarks and detection | MediaPipe face/hand workers, `yolox-m-litert`, `face-emotion-detection` | Landmarks, boxes, or classification scores |
+
+Each worker has its own required input and output shape. Do not assume that a chat request, an image URL, and an audio buffer are interchangeable just because they use the same `generate()` method. Read the worker's manifest before building a UI for it.
+
+## The v4 worker contract
+
+Every v4 worker sends a startup handshake and answers correlated requests for capability discovery, initialization, download, generation, and memory cleanup. A `contractVersion: "1.0"` manifest describes:
+
+- The original provider, source repository, artifact repository, update dates, SPDX license, and URLs.
+- Accepted inputs, model/generation options, defaults, native output, and supported operations.
+- Exact model-weight bytes, estimated complete first-download bytes, and tested precision/device support.
+- A fixture, quality gate, performance results, failures, and conditions that invalidate the benchmark.
+
+WebAI wraps a successful worker result as `{ result, runtime: { durationMs } }`. The worker's `result` content stays task-specific. Unsupported streaming calls reject instead of silently pretending to stream. Call `clearMemory()` to unload a model while keeping the instance, or `terminate()` when finished. `deleteDownloadedModel()` removes cached model artifacts.
+
+The contract and integration instructions are in [`docs/WORKER_CONTRACT.md`](docs/WORKER_CONTRACT.md) and [`docs/ADDING_MODELS.md`](docs/ADDING_MODELS.md). New workers start from [`docs/worker-template.js`](docs/worker-template.js); [`whisper-tiny.worker.js`](model-workers-v4/whisper-tiny.worker.js) is the complete Transformers.js reference.
+
+## Benchmarks and support claims
+
+An artifact's filename alone does not establish support. Onboarding tests actual model loading and inference in isolated browsers for each candidate precision/backend pair, checks the output against a task-specific quality gate, records timings and failures, and tests the recommended configuration through the public `WebAI` API. Reports are kept in [`benchmarks/`](benchmarks/).
+
+Results are tied to the pinned model artifact, runtime, fixture, quality gate, browser, and backend. They are evidence for the tested environment, not a guarantee of speed or quality on every device. Large models can take substantial time and storage to download; some combinations are intentionally absent from a worker's supported list because they failed loading, inference, or quality checks.
+
+## Development
+
+```bash
+npm run typecheck
+npm run build
+npm pack --dry-run
 ```
 
-## 🔄 Streaming Generation
+The local, Git-ignored `test-app/` contains task-specific playgrounds and benchmark harnesses. When adding a model, follow the full release gate and final v4 audit in [`docs/ADDING_MODELS.md`](docs/ADDING_MODELS.md).
 
-For models that support streaming, provide real-time results:
+## License
 
-```javascript
-const generation = await webai.generateStream({
-  userInput: "Tell me a story",
-  onStream: (chunk) => {
-    console.log(chunk); // Process each chunk as it arrives
-  }
-});
-```
+WebAI.js is licensed under [Apache 2.0](LICENSE). Individual models have their own licenses; inspect each worker's `model.license` and `model.licenseUrl` before use.
 
-📚 **For detailed API reference and usage examples, see the [model-specific documentation](https://www.webai-js.com/models/whisper-base/api-reference/v1/get-started/basic-usage)**
-
-## 💡 Best Practices
-
-- ✅ Always wrap WebAI code in try/catch blocks
-- ✅ Implement progress indicators during downloads
-- ✅ Terminate instances when no longer needed
-- ✅ Monitor device storage and memory usage
-- ✅ Use streaming for better UX with long generations
-- ✅ Test on target devices for performance validation
-
-## 🌍 Browser Compatibility
-
-WebAI.js works in all modern browsers that support:
-- WebAssembly
-- Web Workers
-- WebGPU (recommended for best performance)
-
-## 👥 Community
-
-Join our growing community of developers building with WebAI.js!
-
-- 💬 **[Discord](https://discord.gg/RkpAKgZC)** - Get help, share projects, understand AI trends, and help shape the future of Web AI
-- 💡 **[Discussions](https://github.com/axols/webai-js/discussions)** - Share ideas and feature requests
-
-## 🤝 Contributing
-
-We welcome contributions! You're invited to add more AI models to our platform and contribute to the library. 
-
-👨🏻‍💻 We are currently working on our Contributing Guide. In the meantime, feel free to [join our Discord](https://discord.gg/RkpAKgZC) to discuss how you can contribute!
-
-🐛 For model-specific issues, bugs, or feature requests, please visit the [model issues page](https://www.webai-js.com/models/whisper-base/issues).
-
-## 📄 License
-
-Apache 2.0 - see [LICENSE](LICENSE) file for details
-
-## 🔗 Links
-
-- [Homepage](https://www.webai-js.com)
-- [Documentation](https://www.webai-js.com/models/whisper-base/api-reference/v1/get-started/basic-usage)
-- [Model Hub](https://www.webai-js.com/models)
-- [Playground](https://www.webai-js.com/models/whisper-base/playground)
-- [Examples](https://github.com/axols/webai-examples)
-- [Discord Community](https://discord.gg/RkpAKgZC)
-
-## 🙏 Acknowledgments
-
-Built with:
-- [Transformers.js](https://github.com/xenova/transformers.js)
-- [ONNX Runtime](https://onnxruntime.ai/)
-- [WebGPU](https://www.w3.org/TR/webgpu/)
-
----
-
-Made with ❤️ by Peng Zhang
+Created by Peng Zhang. [Homepage](https://www.webai-js.com) · [Discussions](https://github.com/axols/webai-js/discussions) · [Discord](https://discord.gg/RkpAKgZC)

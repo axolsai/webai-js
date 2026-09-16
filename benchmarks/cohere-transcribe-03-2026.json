@@ -1,0 +1,487 @@
+{
+  "contractVersion": "1.0",
+  "model": {
+    "id": "cohere-transcribe-03-2026",
+    "displayName": "Cohere Transcribe 03-2026 — Multilingual ASR",
+    "provider": "Cohere Labs",
+    "providerUrl": "https://cohere.com/research",
+    "license": "Apache-2.0",
+    "licenseUrl": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+    "lastUpdated": "2026-06-10T15:46:19.000Z",
+    "sourceRepository": "CohereLabs/cohere-transcribe-03-2026",
+    "repository": "onnx-community/cohere-transcribe-03-2026-ONNX",
+    "artifactRevision": "31b1c6211c9000d76b077ddd23b74c9090badeba",
+    "artifactLastUpdated": "2026-03-30T17:27:09.000Z",
+    "task": "automatic-speech-recognition",
+    "description": "A two-billion-parameter multilingual Conformer speech-recognition model that transcribes 16 kHz mono audio locally in the browser.",
+    "intendedUses": [
+      "Client-side transcription in one of fourteen explicitly selected languages.",
+      "Benchmarking multilingual browser speech recognition."
+    ],
+    "limitations": [
+      "The model requires an explicit language and does not reliably detect languages or handle code-switching.",
+      "Accuracy varies with accent, noise, microphone quality, speaking rate, and specialized vocabulary.",
+      "Long or silent recordings can produce omissions or hallucinated text and should be reviewed.",
+      "Transcripts must not be treated as authoritative for safety-critical decisions."
+    ]
+  },
+  "runtime": {
+    "engine": {
+      "name": "Transformers.js",
+      "version": "4.2.0"
+    },
+    "precisions": {
+      "fp32": {
+        "weightsSize": 8263437701,
+        "size": 8264601179,
+        "modelKeys": [
+          "encoder_model.onnx",
+          "decoder_model_merged.onnx"
+        ],
+        "dtype": {
+          "encoder_model": "fp32",
+          "decoder_model_merged": "fp32"
+        },
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "fp16": {
+        "weightsSize": 4132397864,
+        "size": 4133561342,
+        "modelKeys": [
+          "encoder_model_fp16.onnx",
+          "decoder_model_merged_fp16.onnx"
+        ],
+        "dtype": {
+          "encoder_model": "fp16",
+          "decoder_model_merged": "fp16"
+        },
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q8": {
+        "weightsSize": 3068524402,
+        "size": 3069687880,
+        "modelKeys": [
+          "encoder_model_quantized.onnx",
+          "decoder_model_merged_quantized.onnx"
+        ],
+        "dtype": {
+          "encoder_model": "q8",
+          "decoder_model_merged": "q8"
+        },
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4": {
+        "weightsSize": 2126516259,
+        "size": 2127679737,
+        "modelKeys": [
+          "encoder_model_q4.onnx",
+          "decoder_model_merged_q4.onnx"
+        ],
+        "dtype": {
+          "encoder_model": "q4",
+          "decoder_model_merged": "q4"
+        },
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4f16": {
+        "weightsSize": 1535058724,
+        "size": 1536222202,
+        "modelKeys": [
+          "encoder_model_q4f16.onnx",
+          "decoder_model_merged_q4f16.onnx"
+        ],
+        "dtype": {
+          "encoder_model": "q4f16",
+          "decoder_model_merged": "q4f16"
+        },
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      }
+    }
+  },
+  "benchmark": {
+    "report": "benchmarks/cohere-transcribe-03-2026.json",
+    "testedAt": "2026-09-12T13:46:52.787Z",
+    "fixture": {
+      "file": "whisper-standard.mp3",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/whisper-standard.mp3",
+      "size": 471925,
+      "sha1": "5faad1507b5d6bc61a39ca3184db5a7b554a7479",
+      "durationSeconds": 29.49225
+    },
+    "candidates": {
+      "fp32": {
+        "weightsSize": 8263437701,
+        "size": 8264601179,
+        "modelKeys": [
+          "encoder_model.onnx",
+          "decoder_model_merged.onnx"
+        ],
+        "dtype": {
+          "encoder_model": "fp32",
+          "decoder_model_merged": "fp32"
+        },
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "fp16": {
+        "weightsSize": 4132397864,
+        "size": 4133561342,
+        "modelKeys": [
+          "encoder_model_fp16.onnx",
+          "decoder_model_merged_fp16.onnx"
+        ],
+        "dtype": {
+          "encoder_model": "fp16",
+          "decoder_model_merged": "fp16"
+        },
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q8": {
+        "weightsSize": 3068524402,
+        "size": 3069687880,
+        "modelKeys": [
+          "encoder_model_quantized.onnx",
+          "decoder_model_merged_quantized.onnx"
+        ],
+        "dtype": {
+          "encoder_model": "q8",
+          "decoder_model_merged": "q8"
+        },
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4": {
+        "weightsSize": 2126516259,
+        "size": 2127679737,
+        "modelKeys": [
+          "encoder_model_q4.onnx",
+          "decoder_model_merged_q4.onnx"
+        ],
+        "dtype": {
+          "encoder_model": "q4",
+          "decoder_model_merged": "q4"
+        },
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4f16": {
+        "weightsSize": 1535058724,
+        "size": 1536222202,
+        "modelKeys": [
+          "encoder_model_q4f16.onnx",
+          "decoder_model_merged_q4f16.onnx"
+        ],
+        "dtype": {
+          "encoder_model": "q4f16",
+          "decoder_model_merged": "q4f16"
+        },
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      }
+    },
+    "qualityGate": {
+      "referenceTranscriptPath": "/test-audio/whisper-standard.txt",
+      "maximumWordErrorRate": 0.35,
+      "repeatedWordRunLimit": 5,
+      "minimumUniqueWordRatio": 0.2
+    },
+    "invalidatedBy": [
+      "artifact revision change",
+      "runtime version change",
+      "fixture or quality gate change",
+      "browser/backend change"
+    ],
+    "results": [
+      {
+        "precision": "fp32",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": null,
+          "grade": "failed"
+        },
+        "error": "Cold initialization exceeded the bounded 20-minute benchmark timeout.",
+        "cleanup": {
+          "modelDisposed": false,
+          "cacheClearedBeforeCase": false,
+          "cacheClearedAfterCase": false
+        }
+      },
+      {
+        "precision": "fp32",
+        "device": "webgpu",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": null,
+          "grade": "failed"
+        },
+        "error": "Transformers.js module fetch failed in the isolated fresh-browser case; initialization and inference support were not established.",
+        "cleanup": {
+          "modelDisposed": false,
+          "cacheClearedBeforeCase": false,
+          "cacheClearedAfterCase": false
+        }
+      },
+      {
+        "precision": "fp16",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": null,
+          "grade": "failed"
+        },
+        "error": "Transformers.js module fetch failed in the isolated fresh-browser case; initialization and inference support were not established.",
+        "cleanup": {
+          "modelDisposed": false,
+          "cacheClearedBeforeCase": false,
+          "cacheClearedAfterCase": false
+        }
+      },
+      {
+        "precision": "fp16",
+        "device": "webgpu",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": null,
+          "grade": "failed"
+        },
+        "error": "Transformers.js module fetch failed in the isolated fresh-browser case; initialization and inference support were not established.",
+        "cleanup": {
+          "modelDisposed": false,
+          "cacheClearedBeforeCase": false,
+          "cacheClearedAfterCase": false
+        }
+      },
+      {
+        "precision": "q8",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": null,
+          "grade": "failed"
+        },
+        "error": "Transformers.js module fetch failed in the isolated fresh-browser case; initialization and inference support were not established.",
+        "cleanup": {
+          "modelDisposed": false,
+          "cacheClearedBeforeCase": false,
+          "cacheClearedAfterCase": false
+        }
+      },
+      {
+        "precision": "q8",
+        "device": "webgpu",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": null,
+          "grade": "failed"
+        },
+        "error": "Transformers.js module fetch failed in the isolated fresh-browser case; initialization and inference support were not established.",
+        "cleanup": {
+          "modelDisposed": false,
+          "cacheClearedBeforeCase": false,
+          "cacheClearedAfterCase": false
+        }
+      },
+      {
+        "precision": "q4",
+        "device": "wasm",
+        "dtype": {
+          "encoder_model": "q4",
+          "decoder_model_merged": "q4"
+        },
+        "status": "fail",
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntriesBeforeCase": 0,
+          "deletedEntriesAfterCase": 10
+        },
+        "error": "Can't create a session. ERROR_CODE: 9, ERROR_MESSAGE: Could not find an implementation for GatherBlockQuantized(1) node with name '/model/decoder/embed_tokens/Gather_Quant'",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 28049,
+          "grade": "failed"
+        }
+      },
+      {
+        "precision": "q4",
+        "device": "webgpu",
+        "dtype": {
+          "encoder_model": "q4",
+          "decoder_model_merged": "q4"
+        },
+        "status": "pass",
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 10,
+          "cacheClearedBeforeCase": true,
+          "deletedEntriesBeforeCase": 0,
+          "deletedEntriesAfterCase": 10
+        },
+        "loadMs": 215768.8,
+        "inferenceMs": 1832.1,
+        "output": {
+          "result": "You know, there's this scientific method, which I very much believe in, where something is true to the degree that it is testably so. And otherwise, you're really just talking about, you know, preferences or untestable beliefs or that kind of thing. So it ends up being somewhat of a semantic question where we're conflating a lot of things with the word intelligence."
+        },
+        "runtime": {
+          "loadMs": 215768.8,
+          "inferenceMs": 1832.1,
+          "totalMs": 217601,
+          "grade": "excellent",
+          "realTimeFactor": 0.0621,
+          "loadGrade": "slow"
+        },
+        "quality": {
+          "grade": "acceptable",
+          "passed": true,
+          "wordErrorRate": 0.1667,
+          "gibberish": false,
+          "longestRepeatedWordRun": 1,
+          "uniqueWordRatio": 0.8095,
+          "referenceWordCount": 66,
+          "outputWordCount": 63
+        },
+        "runtimePassed": true
+      },
+      {
+        "precision": "q4f16",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": null,
+          "grade": "failed"
+        },
+        "error": "Transformers.js module fetch failed in the isolated fresh-browser case; initialization and inference support were not established.",
+        "cleanup": {
+          "modelDisposed": false,
+          "cacheClearedBeforeCase": false,
+          "cacheClearedAfterCase": false
+        }
+      },
+      {
+        "precision": "q4f16",
+        "device": "webgpu",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": null,
+          "grade": "failed"
+        },
+        "error": "Transformers.js module fetch failed in the isolated fresh-browser case; initialization and inference support were not established.",
+        "cleanup": {
+          "modelDisposed": false,
+          "cacheClearedBeforeCase": false,
+          "cacheClearedAfterCase": false
+        }
+      }
+    ],
+    "schemaVersion": "1.2",
+    "startedAt": "2026-09-12T11:15:02.844Z",
+    "finishedAt": "2026-09-12T11:18:41.835Z",
+    "runtimeScale": {
+      "metric": "real-time factor (inference seconds / audio seconds)",
+      "excellent": "<= 0.25",
+      "good": "<= 0.5",
+      "slow": "<= 1.0",
+      "verySlow": "> 1.0"
+    },
+    "environment": {
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+      "webgpuAvailable": true,
+      "audio": {
+        "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/whisper-standard.mp3",
+        "localPath": "/test-audio/whisper-standard.mp3",
+        "size": 471925,
+        "sha1": "5faad1507b5d6bc61a39ca3184db5a7b554a7479",
+        "durationSeconds": 29.49225,
+        "sampleRate": 16000
+      }
+    },
+    "matrix": {
+      "fp32": {
+        "encoder_model": "fp32",
+        "decoder_model_merged": "fp32"
+      },
+      "fp16": {
+        "encoder_model": "fp16",
+        "decoder_model_merged": "fp16"
+      },
+      "q8": {
+        "encoder_model": "q8",
+        "decoder_model_merged": "q8"
+      },
+      "q4": {
+        "encoder_model": "q4",
+        "decoder_model_merged": "q4"
+      },
+      "q4f16": {
+        "encoder_model": "fp16",
+        "decoder_model_merged": "q4f16"
+      }
+    }
+  }
+}

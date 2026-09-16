@@ -1,0 +1,896 @@
+{
+  "contractVersion": "1.0",
+  "model": {
+    "id": "moonshine-tiny",
+    "displayName": "Moonshine Tiny — English Speech Recognition",
+    "provider": "Moonshine AI / Useful Sensors",
+    "providerUrl": "https://github.com/usefulsensors/moonshine",
+    "license": "MIT",
+    "licenseUrl": "https://opensource.org/license/mit/",
+    "lastUpdated": "2025-01-30T16:07:38.000Z",
+    "sourceRepository": "moonshine-ai/moonshine-tiny",
+    "repository": "onnx-community/moonshine-tiny-ONNX",
+    "artifactRevision": "a6da1241cd305dcd64eab1edbd615f2bb9aabb95",
+    "artifactLastUpdated": "2025-01-17T14:05:00.000Z",
+    "task": "automatic-speech-recognition",
+    "description": "A compact English speech-recognition model that transcribes 16 kHz mono audio locally in the browser.",
+    "intendedUses": [
+      "Client-side English speech transcription.",
+      "Prototyping low-latency browser voice interfaces."
+    ],
+    "limitations": [
+      "The model supports English speech only.",
+      "Accuracy varies with accent, noise, microphone quality, speaking rate, and specialized vocabulary.",
+      "Long or silent recordings can produce omissions or hallucinated text and should be reviewed.",
+      "Transcripts must not be treated as authoritative for safety-critical decisions."
+    ]
+  },
+  "runtime": {
+    "engine": {
+      "name": "Transformers.js",
+      "version": "4.2.0"
+    },
+    "precisions": {
+      "fp32": {
+        "weightsSize": 109109881,
+        "size": 113008569,
+        "modelKeys": [
+          "encoder_model.onnx",
+          "decoder_model_merged.onnx"
+        ],
+        "dtype": {
+          "encoder_model": "fp32",
+          "decoder_model_merged": "fp32"
+        },
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "fp16": {
+        "weightsSize": 91770581,
+        "size": 95669269,
+        "modelKeys": [
+          "encoder_model_fp16.onnx",
+          "decoder_model_merged_fp16.onnx"
+        ],
+        "dtype": {
+          "encoder_model": "fp16",
+          "decoder_model_merged": "fp16"
+        },
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "int8": {
+        "weightsSize": 28109347,
+        "size": 32008035,
+        "modelKeys": [
+          "encoder_model_int8.onnx",
+          "decoder_model_merged_int8.onnx"
+        ],
+        "dtype": {
+          "encoder_model": "int8",
+          "decoder_model_merged": "int8"
+        },
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "uint8": {
+        "weightsSize": 28109400,
+        "size": 32008088,
+        "modelKeys": [
+          "encoder_model_uint8.onnx",
+          "decoder_model_merged_uint8.onnx"
+        ],
+        "dtype": {
+          "encoder_model": "uint8",
+          "decoder_model_merged": "uint8"
+        },
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q8": {
+        "weightsSize": 28180947,
+        "size": 32079635,
+        "modelKeys": [
+          "encoder_model_quantized.onnx",
+          "decoder_model_merged_quantized.onnx"
+        ],
+        "dtype": {
+          "encoder_model": "q8",
+          "decoder_model_merged": "q8"
+        },
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4": {
+        "weightsSize": 55382958,
+        "size": 59281646,
+        "modelKeys": [
+          "encoder_model_q4.onnx",
+          "decoder_model_merged_q4.onnx"
+        ],
+        "dtype": {
+          "encoder_model": "q4",
+          "decoder_model_merged": "q4"
+        },
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4f16": {
+        "weightsSize": 56024215,
+        "size": 59922903,
+        "modelKeys": [
+          "encoder_model_q4f16.onnx",
+          "decoder_model_merged_q4f16.onnx"
+        ],
+        "dtype": {
+          "encoder_model": "q4f16",
+          "decoder_model_merged": "q4f16"
+        },
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "bnb4": {
+        "weightsSize": 54388824,
+        "size": 58287512,
+        "modelKeys": [
+          "encoder_model_bnb4.onnx",
+          "decoder_model_merged_bnb4.onnx"
+        ],
+        "dtype": {
+          "encoder_model": "bnb4",
+          "decoder_model_merged": "bnb4"
+        },
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      }
+    }
+  },
+  "benchmark": {
+    "report": "benchmarks/moonshine-tiny.json",
+    "testedAt": "2026-09-10T11:58:01.358Z",
+    "fixture": {
+      "file": "whisper-standard.mp3",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/whisper-standard.mp3",
+      "size": 471925,
+      "sha1": "5faad1507b5d6bc61a39ca3184db5a7b554a7479",
+      "durationSeconds": 29.49225
+    },
+    "candidates": {
+      "fp32": {
+        "weightsSize": 109109881,
+        "size": 113008569,
+        "modelKeys": [
+          "encoder_model.onnx",
+          "decoder_model_merged.onnx"
+        ],
+        "dtype": {
+          "encoder_model": "fp32",
+          "decoder_model_merged": "fp32"
+        },
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "fp16": {
+        "weightsSize": 91770581,
+        "size": 95669269,
+        "modelKeys": [
+          "encoder_model_fp16.onnx",
+          "decoder_model_merged_fp16.onnx"
+        ],
+        "dtype": {
+          "encoder_model": "fp16",
+          "decoder_model_merged": "fp16"
+        },
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "int8": {
+        "weightsSize": 28109347,
+        "size": 32008035,
+        "modelKeys": [
+          "encoder_model_int8.onnx",
+          "decoder_model_merged_int8.onnx"
+        ],
+        "dtype": {
+          "encoder_model": "int8",
+          "decoder_model_merged": "int8"
+        },
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "uint8": {
+        "weightsSize": 28109400,
+        "size": 32008088,
+        "modelKeys": [
+          "encoder_model_uint8.onnx",
+          "decoder_model_merged_uint8.onnx"
+        ],
+        "dtype": {
+          "encoder_model": "uint8",
+          "decoder_model_merged": "uint8"
+        },
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q8": {
+        "weightsSize": 28180947,
+        "size": 32079635,
+        "modelKeys": [
+          "encoder_model_quantized.onnx",
+          "decoder_model_merged_quantized.onnx"
+        ],
+        "dtype": {
+          "encoder_model": "q8",
+          "decoder_model_merged": "q8"
+        },
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4": {
+        "weightsSize": 55382958,
+        "size": 59281646,
+        "modelKeys": [
+          "encoder_model_q4.onnx",
+          "decoder_model_merged_q4.onnx"
+        ],
+        "dtype": {
+          "encoder_model": "q4",
+          "decoder_model_merged": "q4"
+        },
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4f16": {
+        "weightsSize": 56024215,
+        "size": 59922903,
+        "modelKeys": [
+          "encoder_model_q4f16.onnx",
+          "decoder_model_merged_q4f16.onnx"
+        ],
+        "dtype": {
+          "encoder_model": "q4f16",
+          "decoder_model_merged": "q4f16"
+        },
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "bnb4": {
+        "weightsSize": 54388824,
+        "size": 58287512,
+        "modelKeys": [
+          "encoder_model_bnb4.onnx",
+          "decoder_model_merged_bnb4.onnx"
+        ],
+        "dtype": {
+          "encoder_model": "bnb4",
+          "decoder_model_merged": "bnb4"
+        },
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      }
+    },
+    "qualityGate": {
+      "referenceTranscriptPath": "/test-audio/whisper-standard.txt",
+      "maximumWordErrorRate": 0.35,
+      "repeatedWordRunLimit": 5,
+      "minimumUniqueWordRatio": 0.2
+    },
+    "invalidatedBy": [
+      "artifact revision change",
+      "runtime version change",
+      "fixture or quality gate change",
+      "browser/backend change"
+    ],
+    "results": [
+      {
+        "precision": "fp32",
+        "device": "wasm",
+        "dtype": {
+          "encoder_model": "fp32",
+          "decoder_model_merged": "fp32"
+        },
+        "status": "pass",
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 8
+        },
+        "loadMs": 15533,
+        "inferenceMs": 1272,
+        "output": {
+          "result": "You know, this is this scientific method which I've very much believe in, where something is true to the degree that it is testably so. And otherwise, you're really just talking about, you know, preferences or an untestable belief, so that kind of thing. So, ends up being somewhat of a semantic question where we are conflating a lot of things with the word intelligence."
+        },
+        "runtime": {
+          "loadMs": 15533,
+          "inferenceMs": 1272,
+          "totalMs": 16805,
+          "grade": "excellent",
+          "realTimeFactor": 0.0431,
+          "loadGrade": "moderate"
+        },
+        "quality": {
+          "grade": "excellent",
+          "passed": true,
+          "wordErrorRate": 0.1212,
+          "gibberish": false,
+          "longestRepeatedWordRun": 1,
+          "uniqueWordRatio": 0.8,
+          "referenceWordCount": 66,
+          "outputWordCount": 65
+        },
+        "runtimePassed": true
+      },
+      {
+        "precision": "fp32",
+        "device": "webgpu",
+        "dtype": {
+          "encoder_model": "fp32",
+          "decoder_model_merged": "fp32"
+        },
+        "status": "pass",
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 8
+        },
+        "loadMs": 18054.7,
+        "inferenceMs": 736.6,
+        "output": {
+          "result": "You know, this is this scientific method which I've very much believe in, where something is true to the degree that it is testably so. And otherwise, you're really just talking about, you know, preferences or an untestable belief, so that kind of thing. So, ends up being somewhat of a semantic question where we are conflating a lot of things with the word intelligence."
+        },
+        "runtime": {
+          "loadMs": 18054.7,
+          "inferenceMs": 736.6,
+          "totalMs": 18791.3,
+          "grade": "excellent",
+          "realTimeFactor": 0.025,
+          "loadGrade": "moderate"
+        },
+        "quality": {
+          "grade": "excellent",
+          "passed": true,
+          "wordErrorRate": 0.1212,
+          "gibberish": false,
+          "longestRepeatedWordRun": 1,
+          "uniqueWordRatio": 0.8,
+          "referenceWordCount": 66,
+          "outputWordCount": 65
+        },
+        "runtimePassed": true
+      },
+      {
+        "precision": "fp16",
+        "device": "wasm",
+        "dtype": {
+          "encoder_model": "fp16",
+          "decoder_model_merged": "fp16"
+        },
+        "status": "fail",
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 7
+        },
+        "error": "Can't create a session. ERROR_CODE: 1, ERROR_MESSAGE: /mnt/vss/_work/1/s/onnxruntime/core/graph/graph_utils.cc:30 int onnxruntime::graph_utils::GetIndexFromName(const Node &, const std::string &, bool) itr != node_args.end() was false. Attempting to get index by a name which does not exist:InsertedPrecisionFreeCast_/layers.0/input_layernorm/Constant_output_0for node: /layers.0/input_layernorm/Mul/SimplifiedLayerNormFusion/\n",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 9066.8,
+          "grade": "failed"
+        }
+      },
+      {
+        "precision": "fp16",
+        "device": "webgpu",
+        "dtype": {
+          "encoder_model": "fp16",
+          "decoder_model_merged": "fp16"
+        },
+        "status": "fail",
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 8
+        },
+        "error": "Can't create a session. ERROR_CODE: 1, ERROR_MESSAGE: /mnt/vss/_work/1/s/onnxruntime/core/graph/graph.cc:1491 void onnxruntime::Graph::InitializeStateFromModelFileGraphProto() This is an invalid model. Subgraph output (logits) is an outer scope value being returned directly. Please update the model to add an Identity node between the outer scope value and the subgraph output.\n",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 15757.3,
+          "grade": "failed"
+        }
+      },
+      {
+        "precision": "int8",
+        "device": "wasm",
+        "dtype": {
+          "encoder_model": "int8",
+          "decoder_model_merged": "int8"
+        },
+        "status": "fail",
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 8
+        },
+        "error": "Can't create a session. ERROR_CODE: 1, ERROR_MESSAGE: qdq_actions.cc:137 TransposeDQWeightsForMatMulNBits Missing required scale: model.decoder.embed_tokens.weight_merged_0_scale for node: model.decoder.embed_tokens.weight_transposed_DequantizeLinear",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 7714.1,
+          "grade": "failed"
+        }
+      },
+      {
+        "precision": "int8",
+        "device": "webgpu",
+        "dtype": {
+          "encoder_model": "int8",
+          "decoder_model_merged": "int8"
+        },
+        "status": "pass",
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 8
+        },
+        "loadMs": 9480.1,
+        "inferenceMs": 3847.7,
+        "output": {
+          "result": "You know, this is this scientific method which I've ever actually believe in, where something is true to the degree that it is testably so. And otherwise, you're really just talking about, you know, preferences or, well, untestable beliefs or that kind of thing. So, ends up being somewhat of a semantic question where we are conflating a lot of things with the word intelligent."
+        },
+        "runtime": {
+          "loadMs": 9480.1,
+          "inferenceMs": 3847.7,
+          "totalMs": 13327.8,
+          "grade": "excellent",
+          "realTimeFactor": 0.1305,
+          "loadGrade": "fast"
+        },
+        "quality": {
+          "grade": "acceptable",
+          "passed": true,
+          "wordErrorRate": 0.1818,
+          "gibberish": false,
+          "longestRepeatedWordRun": 1,
+          "uniqueWordRatio": 0.8,
+          "referenceWordCount": 66,
+          "outputWordCount": 65
+        },
+        "runtimePassed": true
+      },
+      {
+        "precision": "uint8",
+        "device": "wasm",
+        "dtype": {
+          "encoder_model": "uint8",
+          "decoder_model_merged": "uint8"
+        },
+        "status": "fail",
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 8
+        },
+        "error": "Can't create a session. ERROR_CODE: 1, ERROR_MESSAGE: qdq_actions.cc:137 TransposeDQWeightsForMatMulNBits Missing required scale: model.decoder.embed_tokens.weight_merged_0_scale for node: model.decoder.embed_tokens.weight_transposed_DequantizeLinear",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 7562.6,
+          "grade": "failed"
+        }
+      },
+      {
+        "precision": "uint8",
+        "device": "webgpu",
+        "dtype": {
+          "encoder_model": "uint8",
+          "decoder_model_merged": "uint8"
+        },
+        "status": "pass",
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 8
+        },
+        "loadMs": 7643.2,
+        "inferenceMs": 3085.9,
+        "output": {
+          "result": "You know, this is this scientific method which I've very much believed in, where something is true to the degree that it is testably so. And otherwise, you're really just talking about, you know, preferences or, well, untestable beliefs or that kind of thing. So, ends up being somewhat of a semantic question where we are conflating a lot of things with the word intelligent."
+        },
+        "runtime": {
+          "loadMs": 7643.2,
+          "inferenceMs": 3085.9,
+          "totalMs": 10729.1,
+          "grade": "excellent",
+          "realTimeFactor": 0.1046,
+          "loadGrade": "fast"
+        },
+        "quality": {
+          "grade": "acceptable",
+          "passed": true,
+          "wordErrorRate": 0.1667,
+          "gibberish": false,
+          "longestRepeatedWordRun": 1,
+          "uniqueWordRatio": 0.8,
+          "referenceWordCount": 66,
+          "outputWordCount": 65
+        },
+        "runtimePassed": true
+      },
+      {
+        "precision": "q8",
+        "device": "wasm",
+        "dtype": {
+          "encoder_model": "q8",
+          "decoder_model_merged": "q8"
+        },
+        "status": "fail",
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 8
+        },
+        "error": "Can't create a session. ERROR_CODE: 1, ERROR_MESSAGE: qdq_actions.cc:137 TransposeDQWeightsForMatMulNBits Missing required scale: model.decoder.embed_tokens.weight_merged_0_scale for node: model.decoder.embed_tokens.weight_transposed_DequantizeLinear",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 7743.5,
+          "grade": "failed"
+        }
+      },
+      {
+        "precision": "q8",
+        "device": "webgpu",
+        "dtype": {
+          "encoder_model": "q8",
+          "decoder_model_merged": "q8"
+        },
+        "status": "pass",
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 8
+        },
+        "loadMs": 7502.3,
+        "inferenceMs": 2761.1,
+        "output": {
+          "result": "You know, this is this scientific method which I've very much believe in, where something is true to the degree that it is testably so. And otherwise, you're really just talking about, you know, preferences or an untestable belief, so that kind of thing. So, ends up being somewhat of a semantic question where we are conflating a lot of things with the word intelligence."
+        },
+        "runtime": {
+          "loadMs": 7502.3,
+          "inferenceMs": 2761.1,
+          "totalMs": 10263.4,
+          "grade": "excellent",
+          "realTimeFactor": 0.0936,
+          "loadGrade": "fast"
+        },
+        "quality": {
+          "grade": "excellent",
+          "passed": true,
+          "wordErrorRate": 0.1212,
+          "gibberish": false,
+          "longestRepeatedWordRun": 1,
+          "uniqueWordRatio": 0.8,
+          "referenceWordCount": 66,
+          "outputWordCount": 65
+        },
+        "runtimePassed": true
+      },
+      {
+        "precision": "q4",
+        "device": "wasm",
+        "dtype": {
+          "encoder_model": "q4",
+          "decoder_model_merged": "q4"
+        },
+        "status": "pass",
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 8
+        },
+        "loadMs": 9484,
+        "inferenceMs": 2064.3,
+        "output": {
+          "result": "You know, there's this scientific method which I've very much believed in where something is true to the degree that it is testably so. And otherwise you're really just talking about preferences or untestable beliefs or that kind of thing. So, then there's a being somewhat of a semantic question where we're conflating a lot of things with the word intelligence."
+        },
+        "runtime": {
+          "loadMs": 9484,
+          "inferenceMs": 2064.3,
+          "totalMs": 11548.3,
+          "grade": "excellent",
+          "realTimeFactor": 0.07,
+          "loadGrade": "fast"
+        },
+        "quality": {
+          "grade": "acceptable",
+          "passed": true,
+          "wordErrorRate": 0.2121,
+          "gibberish": false,
+          "longestRepeatedWordRun": 1,
+          "uniqueWordRatio": 0.8197,
+          "referenceWordCount": 66,
+          "outputWordCount": 61
+        },
+        "runtimePassed": true
+      },
+      {
+        "precision": "q4",
+        "device": "webgpu",
+        "dtype": {
+          "encoder_model": "q4",
+          "decoder_model_merged": "q4"
+        },
+        "status": "pass",
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 8
+        },
+        "loadMs": 10346.4,
+        "inferenceMs": 699.2,
+        "output": {
+          "result": "You know, there's this scientific method which I've very much believed in where something is true to the degree that it is testably so. And otherwise you're really just talking about preferences or untestable beliefs or that kind of thing. So, then there's a being somewhat of a semantic question where we're conflating a lot of things with the word intelligence."
+        },
+        "runtime": {
+          "loadMs": 10346.4,
+          "inferenceMs": 699.2,
+          "totalMs": 11045.7,
+          "grade": "excellent",
+          "realTimeFactor": 0.0237,
+          "loadGrade": "moderate"
+        },
+        "quality": {
+          "grade": "acceptable",
+          "passed": true,
+          "wordErrorRate": 0.2121,
+          "gibberish": false,
+          "longestRepeatedWordRun": 1,
+          "uniqueWordRatio": 0.8197,
+          "referenceWordCount": 66,
+          "outputWordCount": 61
+        },
+        "runtimePassed": true
+      },
+      {
+        "precision": "q4f16",
+        "device": "wasm",
+        "dtype": {
+          "encoder_model": "fp16",
+          "decoder_model_merged": "q4f16"
+        },
+        "status": "fail",
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 7
+        },
+        "error": "Can't create a session. ERROR_CODE: 1, ERROR_MESSAGE: /mnt/vss/_work/1/s/onnxruntime/core/graph/graph_utils.cc:30 int onnxruntime::graph_utils::GetIndexFromName(const Node &, const std::string &, bool) itr != node_args.end() was false. Attempting to get index by a name which does not exist:InsertedPrecisionFreeCast_/layers.0/input_layernorm/Constant_output_0for node: /layers.0/input_layernorm/Mul/SimplifiedLayerNormFusion/\n",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 11463.5,
+          "grade": "failed"
+        }
+      },
+      {
+        "precision": "q4f16",
+        "device": "webgpu",
+        "dtype": {
+          "encoder_model": "fp16",
+          "decoder_model_merged": "q4f16"
+        },
+        "status": "fail",
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 8
+        },
+        "error": "Can't create a session. ERROR_CODE: 1, ERROR_MESSAGE: /mnt/vss/_work/1/s/onnxruntime/core/graph/graph.cc:1491 void onnxruntime::Graph::InitializeStateFromModelFileGraphProto() This is an invalid model. Subgraph output (logits) is an outer scope value being returned directly. Please update the model to add an Identity node between the outer scope value and the subgraph output.\n",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 11188.2,
+          "grade": "failed"
+        }
+      },
+      {
+        "precision": "bnb4",
+        "device": "wasm",
+        "dtype": {
+          "encoder_model": "bnb4",
+          "decoder_model_merged": "bnb4"
+        },
+        "status": "pass",
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 8
+        },
+        "loadMs": 10672,
+        "inferenceMs": 1647.3,
+        "output": {
+          "result": "You know, this is the scientific method which I've very much believed in, where something is true to the degree that it is testably so. And otherwise, you're really just talking about, you know, preferences or, well, untestable beliefs or that kind of thing. So ends up being somewhat of a semantic question where we were conflating a lot of things with the word intelligence."
+        },
+        "runtime": {
+          "loadMs": 10672,
+          "inferenceMs": 1647.3,
+          "totalMs": 12319.3,
+          "grade": "excellent",
+          "realTimeFactor": 0.0559,
+          "loadGrade": "moderate"
+        },
+        "quality": {
+          "grade": "acceptable",
+          "passed": true,
+          "wordErrorRate": 0.1515,
+          "gibberish": false,
+          "longestRepeatedWordRun": 1,
+          "uniqueWordRatio": 0.8,
+          "referenceWordCount": 66,
+          "outputWordCount": 65
+        },
+        "runtimePassed": true
+      },
+      {
+        "precision": "bnb4",
+        "device": "webgpu",
+        "dtype": {
+          "encoder_model": "bnb4",
+          "decoder_model_merged": "bnb4"
+        },
+        "status": "pass",
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 8
+        },
+        "loadMs": 9546.6,
+        "inferenceMs": 2912.4,
+        "output": {
+          "result": "You know, this is the scientific method which I've very much believed in, where something is true to the degree that it is testably so. And otherwise, you're really just talking about, you know, preferences or, well, untestable beliefs or that kind of thing. So ends up being somewhat of a semantic question where we were conflating a lot of things with the word intelligence."
+        },
+        "runtime": {
+          "loadMs": 9546.6,
+          "inferenceMs": 2912.4,
+          "totalMs": 12459,
+          "grade": "excellent",
+          "realTimeFactor": 0.0988,
+          "loadGrade": "fast"
+        },
+        "quality": {
+          "grade": "acceptable",
+          "passed": true,
+          "wordErrorRate": 0.1515,
+          "gibberish": false,
+          "longestRepeatedWordRun": 1,
+          "uniqueWordRatio": 0.8,
+          "referenceWordCount": 66,
+          "outputWordCount": 65
+        },
+        "runtimePassed": true
+      }
+    ],
+    "schemaVersion": "1.2",
+    "startedAt": "2026-09-10T11:53:57.885Z",
+    "finishedAt": "2026-09-10T11:54:15.987Z",
+    "runtimeScale": {
+      "metric": "real-time factor (inference seconds / audio seconds)",
+      "excellent": "<= 0.25",
+      "good": "<= 0.5",
+      "slow": "<= 1.0",
+      "verySlow": "> 1.0"
+    },
+    "environment": {
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+      "webgpuAvailable": true,
+      "audio": {
+        "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/whisper-standard.mp3",
+        "localPath": "/test-audio/whisper-standard.mp3",
+        "size": 471925,
+        "sha1": "5faad1507b5d6bc61a39ca3184db5a7b554a7479",
+        "durationSeconds": 29.49225,
+        "sampleRate": 16000
+      }
+    },
+    "matrix": {
+      "fp32": {
+        "encoder_model": "fp32",
+        "decoder_model_merged": "fp32"
+      },
+      "fp16": {
+        "encoder_model": "fp16",
+        "decoder_model_merged": "fp16"
+      },
+      "int8": {
+        "encoder_model": "int8",
+        "decoder_model_merged": "int8"
+      },
+      "uint8": {
+        "encoder_model": "uint8",
+        "decoder_model_merged": "uint8"
+      },
+      "q8": {
+        "encoder_model": "q8",
+        "decoder_model_merged": "q8"
+      },
+      "q4": {
+        "encoder_model": "q4",
+        "decoder_model_merged": "q4"
+      },
+      "q4f16": {
+        "encoder_model": "fp16",
+        "decoder_model_merged": "q4f16"
+      },
+      "bnb4": {
+        "encoder_model": "bnb4",
+        "decoder_model_merged": "bnb4"
+      }
+    }
+  }
+}

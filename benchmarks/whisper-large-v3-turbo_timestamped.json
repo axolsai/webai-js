@@ -1,0 +1,4897 @@
+{
+  "contractVersion": "1.0",
+  "model": {
+    "id": "whisper-large-v3-turbo",
+    "displayName": "Whisper Large V3 Turbo — Timestamped",
+    "provider": "OpenAI",
+    "license": "MIT",
+    "lastUpdated": "2024-10-04T14:51:11.000Z",
+    "sourceRepository": "openai/whisper-large-v3-turbo",
+    "repository": "onnx-community/whisper-large-v3-turbo_timestamped",
+    "artifactRevision": "b3f77bf9a8c4d5ea3415827033d1ffea7955fd9a",
+    "artifactLastUpdated": "2025-03-06T17:18:38.000Z",
+    "task": "automatic-speech-recognition",
+    "description": "A multilingual, pruned Whisper Large V3 speech-recognition model that runs locally in the browser and provides transcription, translation to English, and optional word- or segment-level timestamps with four decoder layers for faster decoding than the full Large V3 model.",
+    "intendedUses": [
+      "Private, client-side transcription of short and medium-length speech recordings.",
+      "Generating word- or segment-timestamped transcripts for captions and search.",
+      "Translating supported spoken languages into English text.",
+      "Prototyping browser speech-recognition features without a hosted inference API."
+    ],
+    "limitations": [
+      "Large V3 Turbo requires very large downloads, substantial memory, and capable hardware despite its reduced decoder depth.",
+      "The reduced decoder depth can slightly lower transcription quality compared with the full Whisper Large V3 model.",
+      "Word timestamps are approximate DTW alignments and may drift around silence, noise, or overlapping speech.",
+      "Accuracy varies by language, accent, recording quality, background noise, and domain vocabulary.",
+      "Long recordings are chunked and may contain boundary repetition or omissions.",
+      "Generated transcripts must not be treated as authoritative for safety-critical decisions."
+    ]
+  },
+  "runtime": {
+    "precisions": {
+      "bnb4": {
+        "size": 717727713,
+        "weightsSize": 713338831,
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "modelKeys": [
+          "encoder_model_bnb4.onnx",
+          "decoder_model_merged_bnb4.onnx"
+        ],
+        "dtype": {
+          "encoder_model": "bnb4",
+          "decoder_model_merged": "bnb4"
+        }
+      },
+      "q4": {
+        "size": 763600733,
+        "weightsSize": 759211851,
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "modelKeys": [
+          "encoder_model_q4.onnx",
+          "decoder_model_merged_q4.onnx"
+        ],
+        "dtype": {
+          "encoder_model": "q4",
+          "decoder_model_merged": "q4"
+        }
+      },
+      "q8": {
+        "size": 1089269675,
+        "weightsSize": 1084880793,
+        "supportedDevices": [
+          "webgpu"
+        ],
+        "modelKeys": [
+          "encoder_model_quantized.onnx",
+          "decoder_model_merged_quantized.onnx"
+        ],
+        "dtype": {
+          "encoder_model": "q8",
+          "decoder_model_merged": "q8"
+        }
+      },
+      "int8": {
+        "size": 1089269574,
+        "weightsSize": 1084880692,
+        "supportedDevices": [
+          "webgpu"
+        ],
+        "modelKeys": [
+          "encoder_model_int8.onnx",
+          "decoder_model_merged_int8.onnx"
+        ],
+        "dtype": {
+          "encoder_model": "int8",
+          "decoder_model_merged": "int8"
+        }
+      },
+      "uint8": {
+        "size": 1089269669,
+        "weightsSize": 1084880787,
+        "supportedDevices": [
+          "webgpu"
+        ],
+        "modelKeys": [
+          "encoder_model_uint8.onnx",
+          "decoder_model_merged_uint8.onnx"
+        ],
+        "dtype": {
+          "encoder_model": "uint8",
+          "decoder_model_merged": "uint8"
+        }
+      },
+      "fp16": {
+        "size": 1623081106,
+        "weightsSize": 1618692224,
+        "supportedDevices": [
+          "webgpu"
+        ],
+        "modelKeys": [
+          "encoder_model_fp16.onnx",
+          "decoder_model_merged_fp16.onnx"
+        ],
+        "dtype": {
+          "encoder_model": "fp16",
+          "decoder_model_merged": "fp16"
+        }
+      },
+      "q4f16": {
+        "size": 567990259,
+        "weightsSize": 563601377,
+        "supportedDevices": [
+          "webgpu"
+        ],
+        "modelKeys": [
+          "encoder_model_q4f16.onnx",
+          "decoder_model_merged_q4f16.onnx"
+        ],
+        "dtype": {
+          "encoder_model": "fp16",
+          "decoder_model_merged": "q4f16"
+        }
+      }
+    }
+  },
+  "input": {
+    "description": "Provide exactly one 16 kHz mono Float32Array or a browser blob URL containing WAV/MP3 audio.",
+    "alternatives": [
+      {
+        "name": "decoded audio",
+        "description": "Fastest path; audio is already decoded and resampled by the application.",
+        "fields": [
+          {
+            "name": "audio",
+            "type": "Float32Array",
+            "required": true,
+            "description": "Mono PCM samples at 16 kHz in the range -1 to 1."
+          }
+        ]
+      },
+      {
+        "name": "audio blob",
+        "description": "Worker fetches and decodes a WAV or MP3 browser object URL.",
+        "fields": [
+          {
+            "name": "audio_blob_url",
+            "type": "string(blob URL)",
+            "required": true,
+            "description": "A blob: URL accessible from this worker."
+          }
+        ]
+      }
+    ]
+  },
+  "config": {
+    "model": [
+      {
+        "name": "language",
+        "type": "string",
+        "default": "en",
+        "description": "Spoken-language name or code; omit for automatic detection."
+      },
+      {
+        "name": "task",
+        "type": "string",
+        "default": "transcribe",
+        "enum": [
+          "transcribe",
+          "translate"
+        ],
+        "description": "Preserve the source language or translate speech to English."
+      },
+      {
+        "name": "return_timestamps",
+        "type": "'word' | boolean",
+        "default": "word",
+        "enum": [
+          "word",
+          true,
+          false
+        ],
+        "description": "Word timestamps, segment timestamps, or text only."
+      },
+      {
+        "name": "condition_on_prev_tokens",
+        "type": "boolean",
+        "default": true,
+        "description": "Use prior decoded tokens as context across chunks."
+      },
+      {
+        "name": "no_speech_threshold",
+        "type": "number",
+        "default": 0.6,
+        "minimum": 0,
+        "maximum": 1,
+        "description": "Probability threshold used to classify a segment as silence."
+      },
+      {
+        "name": "num_beams",
+        "type": "integer",
+        "default": 1,
+        "minimum": 1,
+        "description": "Beam-search width; larger values trade speed for search quality."
+      }
+    ],
+    "generation": [
+      {
+        "name": "chunk_length_s",
+        "type": "number",
+        "default": 29,
+        "minimum": 1,
+        "maximum": 29,
+        "description": "Long-audio chunk duration in seconds."
+      },
+      {
+        "name": "stride_length_s",
+        "type": "number",
+        "default": 5,
+        "minimum": 0,
+        "description": "Overlap on each side; cannot exceed half the chunk duration."
+      }
+    ]
+  },
+  "output": {
+    "description": "The worker returns model-specific transcription data. WebAI wraps it as { result, runtime: { durationMs } }.",
+    "fields": [
+      {
+        "name": "result",
+        "type": "string",
+        "required": true,
+        "description": "Complete transcription text."
+      },
+      {
+        "name": "chunks",
+        "type": "Array<{ text: string, timestamp: [number, number | null] }>",
+        "description": "Timestamped words or segments when requested."
+      }
+    ],
+    "example": {
+      "result": " Hello world.",
+      "chunks": [
+        {
+          "text": " Hello",
+          "timestamp": [
+            0.42,
+            0.88
+          ]
+        }
+      ]
+    }
+  },
+  "operations": [
+    "checkModelSupports",
+    "init",
+    "download",
+    "generate",
+    "clearMemory"
+  ],
+  "benchmark": {
+    "report": "benchmarks/whisper-large-v3-turbo_timestamped.json",
+    "testedAt": "2026-09-07T19:18:13.382Z",
+    "fixture": {
+      "file": "whisper-standard.mp3",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/whisper-standard.mp3",
+      "size": 471925,
+      "sha1": "5faad1507b5d6bc61a39ca3184db5a7b554a7479",
+      "durationSeconds": 29.49225
+    },
+    "note": "Measured values are machine/browser-specific; regenerate the report on target hardware.",
+    "environment": {
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+      "webgpuAvailable": true,
+      "audio": {
+        "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/whisper-standard.mp3",
+        "localPath": "/test-audio/whisper-standard.mp3",
+        "size": 471925,
+        "sha1": "5faad1507b5d6bc61a39ca3184db5a7b554a7479",
+        "durationSeconds": 29.49225,
+        "sampleRate": 16000
+      }
+    },
+    "invalidatedBy": [
+      "model artifact revision change",
+      "Transformers.js or ONNX Runtime version change",
+      "benchmark fixture or quality-gate change",
+      "target browser/backend behavior change"
+    ],
+    "results": [
+      {
+        "precision": "q4",
+        "device": "wasm",
+        "dtype": {
+          "encoder_model": "q4",
+          "decoder_model_merged": "q4"
+        },
+        "status": "pass",
+        "loadMs": 78979.7,
+        "inferenceMs": 131504.2,
+        "output": {
+          "result": " You know, there's this scientific method, which I very much believe in, where something is true to the degree that it is testably so. And otherwise, you're really just talking about, you know, preferences or untestable beliefs or that kind of thing. So it ends up being somewhat of a semantic question where we were conflating a lot of things with the word intelligence.",
+          "chunks": [
+            {
+              "text": " You",
+              "timestamp": [
+                0.2,
+                0.28
+              ]
+            },
+            {
+              "text": " know,",
+              "timestamp": [
+                0.28,
+                0.34
+              ]
+            },
+            {
+              "text": " there's",
+              "timestamp": [
+                0.4,
+                0.62
+              ]
+            },
+            {
+              "text": " this",
+              "timestamp": [
+                0.62,
+                1.48
+              ]
+            },
+            {
+              "text": " scientific",
+              "timestamp": [
+                1.48,
+                1.8
+              ]
+            },
+            {
+              "text": " method,",
+              "timestamp": [
+                1.8,
+                1.94
+              ]
+            },
+            {
+              "text": " which",
+              "timestamp": [
+                1.98,
+                2.1
+              ]
+            },
+            {
+              "text": " I",
+              "timestamp": [
+                2.1,
+                2.28
+              ]
+            },
+            {
+              "text": " very",
+              "timestamp": [
+                2.28,
+                2.4
+              ]
+            },
+            {
+              "text": " much",
+              "timestamp": [
+                2.4,
+                2.6
+              ]
+            },
+            {
+              "text": " believe",
+              "timestamp": [
+                2.6,
+                2.9
+              ]
+            },
+            {
+              "text": " in,",
+              "timestamp": [
+                2.9,
+                3.12
+              ]
+            },
+            {
+              "text": " where",
+              "timestamp": [
+                3.56,
+                4.02
+              ]
+            },
+            {
+              "text": " something",
+              "timestamp": [
+                4.02,
+                4.06
+              ]
+            },
+            {
+              "text": " is",
+              "timestamp": [
+                4.32,
+                4.98
+              ]
+            },
+            {
+              "text": " true",
+              "timestamp": [
+                4.98,
+                5.22
+              ]
+            },
+            {
+              "text": " to",
+              "timestamp": [
+                5.22,
+                5.34
+              ]
+            },
+            {
+              "text": " the",
+              "timestamp": [
+                5.34,
+                5.52
+              ]
+            },
+            {
+              "text": " degree",
+              "timestamp": [
+                5.52,
+                5.76
+              ]
+            },
+            {
+              "text": " that",
+              "timestamp": [
+                5.76,
+                5.92
+              ]
+            },
+            {
+              "text": " it",
+              "timestamp": [
+                5.92,
+                6.24
+              ]
+            },
+            {
+              "text": " is",
+              "timestamp": [
+                6.24,
+                6.92
+              ]
+            },
+            {
+              "text": " testably",
+              "timestamp": [
+                6.92,
+                7.54
+              ]
+            },
+            {
+              "text": " so.",
+              "timestamp": [
+                7.54,
+                7.58
+              ]
+            },
+            {
+              "text": " And",
+              "timestamp": [
+                10.1,
+                10.62
+              ]
+            },
+            {
+              "text": " otherwise,",
+              "timestamp": [
+                10.62,
+                10.9
+              ]
+            },
+            {
+              "text": " you're",
+              "timestamp": [
+                11.24,
+                11.56
+              ]
+            },
+            {
+              "text": " really",
+              "timestamp": [
+                11.56,
+                11.76
+              ]
+            },
+            {
+              "text": " just",
+              "timestamp": [
+                11.76,
+                12.04
+              ]
+            },
+            {
+              "text": " talking",
+              "timestamp": [
+                12.04,
+                12.42
+              ]
+            },
+            {
+              "text": " about,",
+              "timestamp": [
+                12.42,
+                12.44
+              ]
+            },
+            {
+              "text": " you",
+              "timestamp": [
+                13.88,
+                14.02
+              ]
+            },
+            {
+              "text": " know,",
+              "timestamp": [
+                14.02,
+                14.58
+              ]
+            },
+            {
+              "text": " preferences",
+              "timestamp": [
+                15.08,
+                15.8
+              ]
+            },
+            {
+              "text": " or",
+              "timestamp": [
+                15.8,
+                17.78
+              ]
+            },
+            {
+              "text": " untestable",
+              "timestamp": [
+                17.78,
+                18.18
+              ]
+            },
+            {
+              "text": " beliefs",
+              "timestamp": [
+                18.6,
+                18.88
+              ]
+            },
+            {
+              "text": " or",
+              "timestamp": [
+                18.88,
+                19.1
+              ]
+            },
+            {
+              "text": " that",
+              "timestamp": [
+                19.1,
+                19.66
+              ]
+            },
+            {
+              "text": " kind",
+              "timestamp": [
+                19.66,
+                19.78
+              ]
+            },
+            {
+              "text": " of",
+              "timestamp": [
+                19.78,
+                20.04
+              ]
+            },
+            {
+              "text": " thing.",
+              "timestamp": [
+                20.04,
+                20.06
+              ]
+            },
+            {
+              "text": " So",
+              "timestamp": [
+                21,
+                22.02
+              ]
+            },
+            {
+              "text": " it",
+              "timestamp": [
+                22.02,
+                22.14
+              ]
+            },
+            {
+              "text": " ends",
+              "timestamp": [
+                22.14,
+                22.26
+              ]
+            },
+            {
+              "text": " up",
+              "timestamp": [
+                22.26,
+                22.48
+              ]
+            },
+            {
+              "text": " being",
+              "timestamp": [
+                22.48,
+                23.7
+              ]
+            },
+            {
+              "text": " somewhat",
+              "timestamp": [
+                23.7,
+                23.82
+              ]
+            },
+            {
+              "text": " of",
+              "timestamp": [
+                23.82,
+                23.88
+              ]
+            },
+            {
+              "text": " a",
+              "timestamp": [
+                23.88,
+                24.2
+              ]
+            },
+            {
+              "text": " semantic",
+              "timestamp": [
+                24.2,
+                24.78
+              ]
+            },
+            {
+              "text": " question",
+              "timestamp": [
+                24.78,
+                25.58
+              ]
+            },
+            {
+              "text": " where",
+              "timestamp": [
+                25.9,
+                26.9
+              ]
+            },
+            {
+              "text": " we",
+              "timestamp": [
+                26.9,
+                26.98
+              ]
+            },
+            {
+              "text": " were",
+              "timestamp": [
+                26.98,
+                27.26
+              ]
+            },
+            {
+              "text": " conflating",
+              "timestamp": [
+                27.26,
+                27.58
+              ]
+            },
+            {
+              "text": " a",
+              "timestamp": [
+                27.58,
+                27.68
+              ]
+            },
+            {
+              "text": " lot",
+              "timestamp": [
+                27.68,
+                27.8
+              ]
+            },
+            {
+              "text": " of",
+              "timestamp": [
+                27.8,
+                28.04
+              ]
+            },
+            {
+              "text": " things",
+              "timestamp": [
+                28.04,
+                28.18
+              ]
+            },
+            {
+              "text": " with",
+              "timestamp": [
+                28.3,
+                28.42
+              ]
+            },
+            {
+              "text": " the",
+              "timestamp": [
+                28.42,
+                28.56
+              ]
+            },
+            {
+              "text": " word",
+              "timestamp": [
+                28.56,
+                28.98
+              ]
+            },
+            {
+              "text": " intelligence.",
+              "timestamp": [
+                28.98,
+                29.46
+              ]
+            }
+          ]
+        },
+        "runtime": {
+          "loadMs": 78979.7,
+          "inferenceMs": 131504.2,
+          "totalMs": 210483.9,
+          "grade": "very-slow",
+          "realTimeFactor": 4.4589,
+          "loadGrade": "slow"
+        },
+        "quality": {
+          "grade": "excellent",
+          "passed": true,
+          "wordErrorRate": 0.1364,
+          "gibberish": false,
+          "longestRepeatedWordRun": 1,
+          "uniqueWordRatio": 0.8125,
+          "referenceWordCount": 66,
+          "outputWordCount": 64
+        },
+        "runtimePassed": true,
+        "cacheCleanup": {
+          "supported": true,
+          "deleted": 6
+        }
+      },
+      {
+        "precision": "q4",
+        "device": "webgpu",
+        "dtype": {
+          "encoder_model": "q4",
+          "decoder_model_merged": "q4"
+        },
+        "status": "pass",
+        "loadMs": 78862.2,
+        "inferenceMs": 4600.6,
+        "output": {
+          "result": " You know, there's this scientific method, which I very much believe in, where something is true to the degree that it is testably so. And otherwise, you're really just talking about, you know, preferences or untestable beliefs or that kind of thing. So it ends up being somewhat of a semantic question where we were conflating a lot of things with the word intelligence.",
+          "chunks": [
+            {
+              "text": " You",
+              "timestamp": [
+                0.2,
+                0.28
+              ]
+            },
+            {
+              "text": " know,",
+              "timestamp": [
+                0.28,
+                0.34
+              ]
+            },
+            {
+              "text": " there's",
+              "timestamp": [
+                0.4,
+                0.62
+              ]
+            },
+            {
+              "text": " this",
+              "timestamp": [
+                0.62,
+                1.48
+              ]
+            },
+            {
+              "text": " scientific",
+              "timestamp": [
+                1.48,
+                1.8
+              ]
+            },
+            {
+              "text": " method,",
+              "timestamp": [
+                1.8,
+                1.94
+              ]
+            },
+            {
+              "text": " which",
+              "timestamp": [
+                1.98,
+                2.1
+              ]
+            },
+            {
+              "text": " I",
+              "timestamp": [
+                2.1,
+                2.28
+              ]
+            },
+            {
+              "text": " very",
+              "timestamp": [
+                2.28,
+                2.4
+              ]
+            },
+            {
+              "text": " much",
+              "timestamp": [
+                2.4,
+                2.6
+              ]
+            },
+            {
+              "text": " believe",
+              "timestamp": [
+                2.6,
+                2.9
+              ]
+            },
+            {
+              "text": " in,",
+              "timestamp": [
+                2.9,
+                3.12
+              ]
+            },
+            {
+              "text": " where",
+              "timestamp": [
+                3.56,
+                4.02
+              ]
+            },
+            {
+              "text": " something",
+              "timestamp": [
+                4.02,
+                4.06
+              ]
+            },
+            {
+              "text": " is",
+              "timestamp": [
+                4.32,
+                4.98
+              ]
+            },
+            {
+              "text": " true",
+              "timestamp": [
+                4.98,
+                5.22
+              ]
+            },
+            {
+              "text": " to",
+              "timestamp": [
+                5.22,
+                5.34
+              ]
+            },
+            {
+              "text": " the",
+              "timestamp": [
+                5.34,
+                5.52
+              ]
+            },
+            {
+              "text": " degree",
+              "timestamp": [
+                5.52,
+                5.76
+              ]
+            },
+            {
+              "text": " that",
+              "timestamp": [
+                5.76,
+                5.92
+              ]
+            },
+            {
+              "text": " it",
+              "timestamp": [
+                5.92,
+                6.24
+              ]
+            },
+            {
+              "text": " is",
+              "timestamp": [
+                6.24,
+                6.92
+              ]
+            },
+            {
+              "text": " testably",
+              "timestamp": [
+                6.92,
+                7.54
+              ]
+            },
+            {
+              "text": " so.",
+              "timestamp": [
+                7.54,
+                7.58
+              ]
+            },
+            {
+              "text": " And",
+              "timestamp": [
+                10.1,
+                10.62
+              ]
+            },
+            {
+              "text": " otherwise,",
+              "timestamp": [
+                10.62,
+                10.9
+              ]
+            },
+            {
+              "text": " you're",
+              "timestamp": [
+                11.24,
+                11.56
+              ]
+            },
+            {
+              "text": " really",
+              "timestamp": [
+                11.56,
+                11.76
+              ]
+            },
+            {
+              "text": " just",
+              "timestamp": [
+                11.76,
+                12.04
+              ]
+            },
+            {
+              "text": " talking",
+              "timestamp": [
+                12.04,
+                12.42
+              ]
+            },
+            {
+              "text": " about,",
+              "timestamp": [
+                12.42,
+                12.44
+              ]
+            },
+            {
+              "text": " you",
+              "timestamp": [
+                13.88,
+                14.02
+              ]
+            },
+            {
+              "text": " know,",
+              "timestamp": [
+                14.02,
+                14.58
+              ]
+            },
+            {
+              "text": " preferences",
+              "timestamp": [
+                15.08,
+                15.8
+              ]
+            },
+            {
+              "text": " or",
+              "timestamp": [
+                15.8,
+                17.78
+              ]
+            },
+            {
+              "text": " untestable",
+              "timestamp": [
+                17.78,
+                18.18
+              ]
+            },
+            {
+              "text": " beliefs",
+              "timestamp": [
+                18.6,
+                18.88
+              ]
+            },
+            {
+              "text": " or",
+              "timestamp": [
+                18.88,
+                19.1
+              ]
+            },
+            {
+              "text": " that",
+              "timestamp": [
+                19.1,
+                19.66
+              ]
+            },
+            {
+              "text": " kind",
+              "timestamp": [
+                19.66,
+                19.78
+              ]
+            },
+            {
+              "text": " of",
+              "timestamp": [
+                19.78,
+                20.04
+              ]
+            },
+            {
+              "text": " thing.",
+              "timestamp": [
+                20.04,
+                20.06
+              ]
+            },
+            {
+              "text": " So",
+              "timestamp": [
+                21,
+                22.02
+              ]
+            },
+            {
+              "text": " it",
+              "timestamp": [
+                22.02,
+                22.14
+              ]
+            },
+            {
+              "text": " ends",
+              "timestamp": [
+                22.14,
+                22.26
+              ]
+            },
+            {
+              "text": " up",
+              "timestamp": [
+                22.26,
+                22.48
+              ]
+            },
+            {
+              "text": " being",
+              "timestamp": [
+                22.48,
+                23.7
+              ]
+            },
+            {
+              "text": " somewhat",
+              "timestamp": [
+                23.7,
+                23.82
+              ]
+            },
+            {
+              "text": " of",
+              "timestamp": [
+                23.82,
+                23.88
+              ]
+            },
+            {
+              "text": " a",
+              "timestamp": [
+                23.88,
+                24.2
+              ]
+            },
+            {
+              "text": " semantic",
+              "timestamp": [
+                24.2,
+                24.78
+              ]
+            },
+            {
+              "text": " question",
+              "timestamp": [
+                24.78,
+                25.58
+              ]
+            },
+            {
+              "text": " where",
+              "timestamp": [
+                25.9,
+                26.9
+              ]
+            },
+            {
+              "text": " we",
+              "timestamp": [
+                26.9,
+                26.98
+              ]
+            },
+            {
+              "text": " were",
+              "timestamp": [
+                26.98,
+                27.26
+              ]
+            },
+            {
+              "text": " conflating",
+              "timestamp": [
+                27.26,
+                27.58
+              ]
+            },
+            {
+              "text": " a",
+              "timestamp": [
+                27.58,
+                27.68
+              ]
+            },
+            {
+              "text": " lot",
+              "timestamp": [
+                27.68,
+                27.8
+              ]
+            },
+            {
+              "text": " of",
+              "timestamp": [
+                27.8,
+                28.04
+              ]
+            },
+            {
+              "text": " things",
+              "timestamp": [
+                28.04,
+                28.18
+              ]
+            },
+            {
+              "text": " with",
+              "timestamp": [
+                28.3,
+                28.42
+              ]
+            },
+            {
+              "text": " the",
+              "timestamp": [
+                28.42,
+                28.56
+              ]
+            },
+            {
+              "text": " word",
+              "timestamp": [
+                28.56,
+                28.98
+              ]
+            },
+            {
+              "text": " intelligence.",
+              "timestamp": [
+                28.98,
+                29.46
+              ]
+            }
+          ]
+        },
+        "runtime": {
+          "loadMs": 78862.2,
+          "inferenceMs": 4600.6,
+          "totalMs": 83462.9,
+          "grade": "excellent",
+          "realTimeFactor": 0.156,
+          "loadGrade": "slow"
+        },
+        "quality": {
+          "grade": "excellent",
+          "passed": true,
+          "wordErrorRate": 0.1364,
+          "gibberish": false,
+          "longestRepeatedWordRun": 1,
+          "uniqueWordRatio": 0.8125,
+          "referenceWordCount": 66,
+          "outputWordCount": 64
+        },
+        "runtimePassed": true,
+        "cacheCleanup": {
+          "supported": true,
+          "deleted": 6
+        }
+      },
+      {
+        "precision": "bnb4",
+        "device": "wasm",
+        "dtype": {
+          "encoder_model": "bnb4",
+          "decoder_model_merged": "bnb4"
+        },
+        "status": "pass",
+        "loadMs": 75953.2,
+        "inferenceMs": 117840.2,
+        "output": {
+          "result": " You know, there's this scientific method, which I very much believe in, where something is true to the degree that it is testably so. And otherwise, you're really just talking about, you know, preferences or untestable beliefs or that kind of thing. So it ends up being somewhat of a semantic question where we were conflating a lot of things with the word intelligence.",
+          "chunks": [
+            {
+              "text": " You",
+              "timestamp": [
+                0.2,
+                0.28
+              ]
+            },
+            {
+              "text": " know,",
+              "timestamp": [
+                0.28,
+                0.38
+              ]
+            },
+            {
+              "text": " there's",
+              "timestamp": [
+                0.4,
+                0.62
+              ]
+            },
+            {
+              "text": " this",
+              "timestamp": [
+                0.62,
+                1.5
+              ]
+            },
+            {
+              "text": " scientific",
+              "timestamp": [
+                1.5,
+                1.8
+              ]
+            },
+            {
+              "text": " method,",
+              "timestamp": [
+                1.8,
+                1.94
+              ]
+            },
+            {
+              "text": " which",
+              "timestamp": [
+                1.98,
+                2.1
+              ]
+            },
+            {
+              "text": " I",
+              "timestamp": [
+                2.1,
+                2.28
+              ]
+            },
+            {
+              "text": " very",
+              "timestamp": [
+                2.28,
+                2.4
+              ]
+            },
+            {
+              "text": " much",
+              "timestamp": [
+                2.4,
+                2.6
+              ]
+            },
+            {
+              "text": " believe",
+              "timestamp": [
+                2.6,
+                2.9
+              ]
+            },
+            {
+              "text": " in,",
+              "timestamp": [
+                2.9,
+                3.14
+              ]
+            },
+            {
+              "text": " where",
+              "timestamp": [
+                3.56,
+                4.02
+              ]
+            },
+            {
+              "text": " something",
+              "timestamp": [
+                4.02,
+                4.02
+              ]
+            },
+            {
+              "text": " is",
+              "timestamp": [
+                4.32,
+                4.98
+              ]
+            },
+            {
+              "text": " true",
+              "timestamp": [
+                4.98,
+                5.22
+              ]
+            },
+            {
+              "text": " to",
+              "timestamp": [
+                5.22,
+                5.34
+              ]
+            },
+            {
+              "text": " the",
+              "timestamp": [
+                5.34,
+                5.52
+              ]
+            },
+            {
+              "text": " degree",
+              "timestamp": [
+                5.52,
+                5.76
+              ]
+            },
+            {
+              "text": " that",
+              "timestamp": [
+                5.76,
+                5.92
+              ]
+            },
+            {
+              "text": " it",
+              "timestamp": [
+                5.92,
+                6.24
+              ]
+            },
+            {
+              "text": " is",
+              "timestamp": [
+                6.24,
+                6.94
+              ]
+            },
+            {
+              "text": " testably",
+              "timestamp": [
+                6.94,
+                7.54
+              ]
+            },
+            {
+              "text": " so.",
+              "timestamp": [
+                7.54,
+                7.58
+              ]
+            },
+            {
+              "text": " And",
+              "timestamp": [
+                10.1,
+                10.62
+              ]
+            },
+            {
+              "text": " otherwise,",
+              "timestamp": [
+                10.62,
+                10.94
+              ]
+            },
+            {
+              "text": " you're",
+              "timestamp": [
+                11.24,
+                11.56
+              ]
+            },
+            {
+              "text": " really",
+              "timestamp": [
+                11.56,
+                11.76
+              ]
+            },
+            {
+              "text": " just",
+              "timestamp": [
+                11.76,
+                12.04
+              ]
+            },
+            {
+              "text": " talking",
+              "timestamp": [
+                12.04,
+                12.4
+              ]
+            },
+            {
+              "text": " about,",
+              "timestamp": [
+                12.4,
+                12.42
+              ]
+            },
+            {
+              "text": " you",
+              "timestamp": [
+                13.88,
+                14.02
+              ]
+            },
+            {
+              "text": " know,",
+              "timestamp": [
+                14.02,
+                14.62
+              ]
+            },
+            {
+              "text": " preferences",
+              "timestamp": [
+                15.08,
+                15.8
+              ]
+            },
+            {
+              "text": " or",
+              "timestamp": [
+                15.8,
+                17.78
+              ]
+            },
+            {
+              "text": " untestable",
+              "timestamp": [
+                17.78,
+                18.18
+              ]
+            },
+            {
+              "text": " beliefs",
+              "timestamp": [
+                18.6,
+                18.86
+              ]
+            },
+            {
+              "text": " or",
+              "timestamp": [
+                18.86,
+                19.1
+              ]
+            },
+            {
+              "text": " that",
+              "timestamp": [
+                19.1,
+                19.66
+              ]
+            },
+            {
+              "text": " kind",
+              "timestamp": [
+                19.66,
+                19.78
+              ]
+            },
+            {
+              "text": " of",
+              "timestamp": [
+                19.78,
+                20.04
+              ]
+            },
+            {
+              "text": " thing.",
+              "timestamp": [
+                20.04,
+                20.06
+              ]
+            },
+            {
+              "text": " So",
+              "timestamp": [
+                21.02,
+                22.02
+              ]
+            },
+            {
+              "text": " it",
+              "timestamp": [
+                22.02,
+                22.16
+              ]
+            },
+            {
+              "text": " ends",
+              "timestamp": [
+                22.16,
+                22.26
+              ]
+            },
+            {
+              "text": " up",
+              "timestamp": [
+                22.26,
+                22.48
+              ]
+            },
+            {
+              "text": " being",
+              "timestamp": [
+                22.48,
+                23.7
+              ]
+            },
+            {
+              "text": " somewhat",
+              "timestamp": [
+                23.7,
+                23.82
+              ]
+            },
+            {
+              "text": " of",
+              "timestamp": [
+                23.82,
+                23.88
+              ]
+            },
+            {
+              "text": " a",
+              "timestamp": [
+                23.88,
+                24.22
+              ]
+            },
+            {
+              "text": " semantic",
+              "timestamp": [
+                24.22,
+                24.78
+              ]
+            },
+            {
+              "text": " question",
+              "timestamp": [
+                24.78,
+                25.6
+              ]
+            },
+            {
+              "text": " where",
+              "timestamp": [
+                25.9,
+                26.9
+              ]
+            },
+            {
+              "text": " we",
+              "timestamp": [
+                26.9,
+                26.98
+              ]
+            },
+            {
+              "text": " were",
+              "timestamp": [
+                26.98,
+                27.26
+              ]
+            },
+            {
+              "text": " conflating",
+              "timestamp": [
+                27.26,
+                27.58
+              ]
+            },
+            {
+              "text": " a",
+              "timestamp": [
+                27.58,
+                27.68
+              ]
+            },
+            {
+              "text": " lot",
+              "timestamp": [
+                27.68,
+                27.8
+              ]
+            },
+            {
+              "text": " of",
+              "timestamp": [
+                27.8,
+                28.04
+              ]
+            },
+            {
+              "text": " things",
+              "timestamp": [
+                28.04,
+                28.22
+              ]
+            },
+            {
+              "text": " with",
+              "timestamp": [
+                28.32,
+                28.42
+              ]
+            },
+            {
+              "text": " the",
+              "timestamp": [
+                28.42,
+                28.56
+              ]
+            },
+            {
+              "text": " word",
+              "timestamp": [
+                28.56,
+                28.96
+              ]
+            },
+            {
+              "text": " intelligence.",
+              "timestamp": [
+                28.96,
+                29.46
+              ]
+            }
+          ]
+        },
+        "runtime": {
+          "loadMs": 75953.2,
+          "inferenceMs": 117840.2,
+          "totalMs": 193793.5,
+          "grade": "very-slow",
+          "realTimeFactor": 3.9956,
+          "loadGrade": "slow"
+        },
+        "quality": {
+          "grade": "excellent",
+          "passed": true,
+          "wordErrorRate": 0.1364,
+          "gibberish": false,
+          "longestRepeatedWordRun": 1,
+          "uniqueWordRatio": 0.8125,
+          "referenceWordCount": 66,
+          "outputWordCount": 64
+        },
+        "runtimePassed": true,
+        "cacheCleanup": {
+          "supported": true,
+          "deleted": 6
+        }
+      },
+      {
+        "precision": "bnb4",
+        "device": "webgpu",
+        "dtype": {
+          "encoder_model": "bnb4",
+          "decoder_model_merged": "bnb4"
+        },
+        "status": "pass",
+        "loadMs": 77303.5,
+        "inferenceMs": 107462.5,
+        "output": {
+          "result": " You know, there's this scientific method, which I very much believe in, where something is true to the degree that it is testably so. And otherwise, you're really just talking about, you know, preferences or untestable beliefs or that kind of thing. So it ends up being somewhat of a semantic question where we were conflating a lot of things with the word intelligence.",
+          "chunks": [
+            {
+              "text": " You",
+              "timestamp": [
+                0.2,
+                0.28
+              ]
+            },
+            {
+              "text": " know,",
+              "timestamp": [
+                0.28,
+                0.38
+              ]
+            },
+            {
+              "text": " there's",
+              "timestamp": [
+                0.4,
+                0.62
+              ]
+            },
+            {
+              "text": " this",
+              "timestamp": [
+                0.62,
+                1.5
+              ]
+            },
+            {
+              "text": " scientific",
+              "timestamp": [
+                1.5,
+                1.8
+              ]
+            },
+            {
+              "text": " method,",
+              "timestamp": [
+                1.8,
+                1.94
+              ]
+            },
+            {
+              "text": " which",
+              "timestamp": [
+                1.98,
+                2.1
+              ]
+            },
+            {
+              "text": " I",
+              "timestamp": [
+                2.1,
+                2.28
+              ]
+            },
+            {
+              "text": " very",
+              "timestamp": [
+                2.28,
+                2.4
+              ]
+            },
+            {
+              "text": " much",
+              "timestamp": [
+                2.4,
+                2.6
+              ]
+            },
+            {
+              "text": " believe",
+              "timestamp": [
+                2.6,
+                2.9
+              ]
+            },
+            {
+              "text": " in,",
+              "timestamp": [
+                2.9,
+                3.14
+              ]
+            },
+            {
+              "text": " where",
+              "timestamp": [
+                3.56,
+                4.02
+              ]
+            },
+            {
+              "text": " something",
+              "timestamp": [
+                4.02,
+                4.02
+              ]
+            },
+            {
+              "text": " is",
+              "timestamp": [
+                4.32,
+                4.98
+              ]
+            },
+            {
+              "text": " true",
+              "timestamp": [
+                4.98,
+                5.22
+              ]
+            },
+            {
+              "text": " to",
+              "timestamp": [
+                5.22,
+                5.34
+              ]
+            },
+            {
+              "text": " the",
+              "timestamp": [
+                5.34,
+                5.52
+              ]
+            },
+            {
+              "text": " degree",
+              "timestamp": [
+                5.52,
+                5.76
+              ]
+            },
+            {
+              "text": " that",
+              "timestamp": [
+                5.76,
+                5.92
+              ]
+            },
+            {
+              "text": " it",
+              "timestamp": [
+                5.92,
+                6.24
+              ]
+            },
+            {
+              "text": " is",
+              "timestamp": [
+                6.24,
+                6.94
+              ]
+            },
+            {
+              "text": " testably",
+              "timestamp": [
+                6.94,
+                7.54
+              ]
+            },
+            {
+              "text": " so.",
+              "timestamp": [
+                7.54,
+                7.58
+              ]
+            },
+            {
+              "text": " And",
+              "timestamp": [
+                10.1,
+                10.62
+              ]
+            },
+            {
+              "text": " otherwise,",
+              "timestamp": [
+                10.62,
+                10.94
+              ]
+            },
+            {
+              "text": " you're",
+              "timestamp": [
+                11.24,
+                11.56
+              ]
+            },
+            {
+              "text": " really",
+              "timestamp": [
+                11.56,
+                11.76
+              ]
+            },
+            {
+              "text": " just",
+              "timestamp": [
+                11.76,
+                12.04
+              ]
+            },
+            {
+              "text": " talking",
+              "timestamp": [
+                12.04,
+                12.4
+              ]
+            },
+            {
+              "text": " about,",
+              "timestamp": [
+                12.4,
+                12.42
+              ]
+            },
+            {
+              "text": " you",
+              "timestamp": [
+                13.88,
+                14.02
+              ]
+            },
+            {
+              "text": " know,",
+              "timestamp": [
+                14.02,
+                14.62
+              ]
+            },
+            {
+              "text": " preferences",
+              "timestamp": [
+                15.08,
+                15.8
+              ]
+            },
+            {
+              "text": " or",
+              "timestamp": [
+                15.8,
+                17.78
+              ]
+            },
+            {
+              "text": " untestable",
+              "timestamp": [
+                17.78,
+                18.18
+              ]
+            },
+            {
+              "text": " beliefs",
+              "timestamp": [
+                18.6,
+                18.86
+              ]
+            },
+            {
+              "text": " or",
+              "timestamp": [
+                18.86,
+                19.1
+              ]
+            },
+            {
+              "text": " that",
+              "timestamp": [
+                19.1,
+                19.66
+              ]
+            },
+            {
+              "text": " kind",
+              "timestamp": [
+                19.66,
+                19.78
+              ]
+            },
+            {
+              "text": " of",
+              "timestamp": [
+                19.78,
+                20.04
+              ]
+            },
+            {
+              "text": " thing.",
+              "timestamp": [
+                20.04,
+                20.06
+              ]
+            },
+            {
+              "text": " So",
+              "timestamp": [
+                21.02,
+                22.02
+              ]
+            },
+            {
+              "text": " it",
+              "timestamp": [
+                22.02,
+                22.16
+              ]
+            },
+            {
+              "text": " ends",
+              "timestamp": [
+                22.16,
+                22.26
+              ]
+            },
+            {
+              "text": " up",
+              "timestamp": [
+                22.26,
+                22.48
+              ]
+            },
+            {
+              "text": " being",
+              "timestamp": [
+                22.48,
+                23.7
+              ]
+            },
+            {
+              "text": " somewhat",
+              "timestamp": [
+                23.7,
+                23.82
+              ]
+            },
+            {
+              "text": " of",
+              "timestamp": [
+                23.82,
+                23.88
+              ]
+            },
+            {
+              "text": " a",
+              "timestamp": [
+                23.88,
+                24.22
+              ]
+            },
+            {
+              "text": " semantic",
+              "timestamp": [
+                24.22,
+                24.78
+              ]
+            },
+            {
+              "text": " question",
+              "timestamp": [
+                24.78,
+                25.6
+              ]
+            },
+            {
+              "text": " where",
+              "timestamp": [
+                25.9,
+                26.9
+              ]
+            },
+            {
+              "text": " we",
+              "timestamp": [
+                26.9,
+                26.98
+              ]
+            },
+            {
+              "text": " were",
+              "timestamp": [
+                26.98,
+                27.26
+              ]
+            },
+            {
+              "text": " conflating",
+              "timestamp": [
+                27.26,
+                27.58
+              ]
+            },
+            {
+              "text": " a",
+              "timestamp": [
+                27.58,
+                27.68
+              ]
+            },
+            {
+              "text": " lot",
+              "timestamp": [
+                27.68,
+                27.8
+              ]
+            },
+            {
+              "text": " of",
+              "timestamp": [
+                27.8,
+                28.04
+              ]
+            },
+            {
+              "text": " things",
+              "timestamp": [
+                28.04,
+                28.22
+              ]
+            },
+            {
+              "text": " with",
+              "timestamp": [
+                28.32,
+                28.42
+              ]
+            },
+            {
+              "text": " the",
+              "timestamp": [
+                28.42,
+                28.56
+              ]
+            },
+            {
+              "text": " word",
+              "timestamp": [
+                28.56,
+                28.96
+              ]
+            },
+            {
+              "text": " intelligence.",
+              "timestamp": [
+                28.96,
+                29.46
+              ]
+            }
+          ]
+        },
+        "runtime": {
+          "loadMs": 77303.5,
+          "inferenceMs": 107462.5,
+          "totalMs": 184766,
+          "grade": "very-slow",
+          "realTimeFactor": 3.6438,
+          "loadGrade": "slow"
+        },
+        "quality": {
+          "grade": "excellent",
+          "passed": true,
+          "wordErrorRate": 0.1364,
+          "gibberish": false,
+          "longestRepeatedWordRun": 1,
+          "uniqueWordRatio": 0.8125,
+          "referenceWordCount": 66,
+          "outputWordCount": 64
+        },
+        "runtimePassed": true,
+        "cacheCleanup": {
+          "supported": true,
+          "deleted": 6
+        }
+      },
+      {
+        "precision": "q4f16",
+        "device": "wasm",
+        "dtype": {
+          "encoder_model": "fp16",
+          "decoder_model_merged": "q4f16"
+        },
+        "status": "fail",
+        "error": "Can't create a session. ERROR_CODE: 6, ERROR_MESSAGE: std::bad_alloc",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 156162.1,
+          "grade": "failed"
+        },
+        "cacheCleanup": {
+          "supported": true,
+          "deleted": 7
+        }
+      },
+      {
+        "precision": "q4f16",
+        "device": "webgpu",
+        "dtype": {
+          "encoder_model": "fp16",
+          "decoder_model_merged": "q4f16"
+        },
+        "status": "pass",
+        "loadMs": 153483.4,
+        "inferenceMs": 3570.7,
+        "output": {
+          "result": " You know, there's this scientific method, which I very much believe in, where something is true to the degree that it is testably so. And otherwise, you're really just talking about, you know, preferences or untestable beliefs or that kind of thing. So it ends up being somewhat of a semantic question where we were conflating a lot of things with the word intelligence.",
+          "chunks": [
+            {
+              "text": " You",
+              "timestamp": [
+                0.2,
+                0.28
+              ]
+            },
+            {
+              "text": " know,",
+              "timestamp": [
+                0.28,
+                0.36
+              ]
+            },
+            {
+              "text": " there's",
+              "timestamp": [
+                0.4,
+                0.62
+              ]
+            },
+            {
+              "text": " this",
+              "timestamp": [
+                0.62,
+                1.46
+              ]
+            },
+            {
+              "text": " scientific",
+              "timestamp": [
+                1.46,
+                1.8
+              ]
+            },
+            {
+              "text": " method,",
+              "timestamp": [
+                1.8,
+                1.94
+              ]
+            },
+            {
+              "text": " which",
+              "timestamp": [
+                1.98,
+                2.1
+              ]
+            },
+            {
+              "text": " I",
+              "timestamp": [
+                2.1,
+                2.28
+              ]
+            },
+            {
+              "text": " very",
+              "timestamp": [
+                2.28,
+                2.4
+              ]
+            },
+            {
+              "text": " much",
+              "timestamp": [
+                2.4,
+                2.6
+              ]
+            },
+            {
+              "text": " believe",
+              "timestamp": [
+                2.6,
+                2.9
+              ]
+            },
+            {
+              "text": " in,",
+              "timestamp": [
+                2.9,
+                3.12
+              ]
+            },
+            {
+              "text": " where",
+              "timestamp": [
+                3.56,
+                4.02
+              ]
+            },
+            {
+              "text": " something",
+              "timestamp": [
+                4.02,
+                4.04
+              ]
+            },
+            {
+              "text": " is",
+              "timestamp": [
+                4.32,
+                4.98
+              ]
+            },
+            {
+              "text": " true",
+              "timestamp": [
+                4.98,
+                5.22
+              ]
+            },
+            {
+              "text": " to",
+              "timestamp": [
+                5.22,
+                5.32
+              ]
+            },
+            {
+              "text": " the",
+              "timestamp": [
+                5.32,
+                5.52
+              ]
+            },
+            {
+              "text": " degree",
+              "timestamp": [
+                5.52,
+                5.74
+              ]
+            },
+            {
+              "text": " that",
+              "timestamp": [
+                5.74,
+                5.9
+              ]
+            },
+            {
+              "text": " it",
+              "timestamp": [
+                5.9,
+                6.24
+              ]
+            },
+            {
+              "text": " is",
+              "timestamp": [
+                6.24,
+                6.94
+              ]
+            },
+            {
+              "text": " testably",
+              "timestamp": [
+                6.94,
+                7.54
+              ]
+            },
+            {
+              "text": " so.",
+              "timestamp": [
+                7.54,
+                7.56
+              ]
+            },
+            {
+              "text": " And",
+              "timestamp": [
+                10.12,
+                10.62
+              ]
+            },
+            {
+              "text": " otherwise,",
+              "timestamp": [
+                10.62,
+                10.66
+              ]
+            },
+            {
+              "text": " you're",
+              "timestamp": [
+                11.24,
+                11.56
+              ]
+            },
+            {
+              "text": " really",
+              "timestamp": [
+                11.56,
+                11.76
+              ]
+            },
+            {
+              "text": " just",
+              "timestamp": [
+                11.76,
+                12.04
+              ]
+            },
+            {
+              "text": " talking",
+              "timestamp": [
+                12.04,
+                12.4
+              ]
+            },
+            {
+              "text": " about,",
+              "timestamp": [
+                12.4,
+                12.44
+              ]
+            },
+            {
+              "text": " you",
+              "timestamp": [
+                13.88,
+                14
+              ]
+            },
+            {
+              "text": " know,",
+              "timestamp": [
+                14,
+                14.58
+              ]
+            },
+            {
+              "text": " preferences",
+              "timestamp": [
+                15.04,
+                15.8
+              ]
+            },
+            {
+              "text": " or",
+              "timestamp": [
+                15.8,
+                17.74
+              ]
+            },
+            {
+              "text": " untestable",
+              "timestamp": [
+                17.74,
+                18.58
+              ]
+            },
+            {
+              "text": " beliefs",
+              "timestamp": [
+                18.58,
+                18.64
+              ]
+            },
+            {
+              "text": " or",
+              "timestamp": [
+                18.88,
+                19.1
+              ]
+            },
+            {
+              "text": " that",
+              "timestamp": [
+                19.1,
+                19.66
+              ]
+            },
+            {
+              "text": " kind",
+              "timestamp": [
+                19.66,
+                19.78
+              ]
+            },
+            {
+              "text": " of",
+              "timestamp": [
+                19.78,
+                20.02
+              ]
+            },
+            {
+              "text": " thing.",
+              "timestamp": [
+                20.02,
+                20.06
+              ]
+            },
+            {
+              "text": " So",
+              "timestamp": [
+                21.02,
+                22.02
+              ]
+            },
+            {
+              "text": " it",
+              "timestamp": [
+                22.02,
+                22.14
+              ]
+            },
+            {
+              "text": " ends",
+              "timestamp": [
+                22.14,
+                22.24
+              ]
+            },
+            {
+              "text": " up",
+              "timestamp": [
+                22.24,
+                22.48
+              ]
+            },
+            {
+              "text": " being",
+              "timestamp": [
+                22.48,
+                23.7
+              ]
+            },
+            {
+              "text": " somewhat",
+              "timestamp": [
+                23.7,
+                23.82
+              ]
+            },
+            {
+              "text": " of",
+              "timestamp": [
+                23.82,
+                23.86
+              ]
+            },
+            {
+              "text": " a",
+              "timestamp": [
+                23.86,
+                24.2
+              ]
+            },
+            {
+              "text": " semantic",
+              "timestamp": [
+                24.2,
+                24.78
+              ]
+            },
+            {
+              "text": " question",
+              "timestamp": [
+                24.78,
+                25.58
+              ]
+            },
+            {
+              "text": " where",
+              "timestamp": [
+                25.9,
+                26.9
+              ]
+            },
+            {
+              "text": " we",
+              "timestamp": [
+                26.9,
+                26.98
+              ]
+            },
+            {
+              "text": " were",
+              "timestamp": [
+                26.98,
+                27.24
+              ]
+            },
+            {
+              "text": " conflating",
+              "timestamp": [
+                27.24,
+                27.58
+              ]
+            },
+            {
+              "text": " a",
+              "timestamp": [
+                27.58,
+                27.66
+              ]
+            },
+            {
+              "text": " lot",
+              "timestamp": [
+                27.66,
+                27.8
+              ]
+            },
+            {
+              "text": " of",
+              "timestamp": [
+                27.8,
+                28.02
+              ]
+            },
+            {
+              "text": " things",
+              "timestamp": [
+                28.02,
+                28.18
+              ]
+            },
+            {
+              "text": " with",
+              "timestamp": [
+                28.32,
+                28.42
+              ]
+            },
+            {
+              "text": " the",
+              "timestamp": [
+                28.42,
+                28.56
+              ]
+            },
+            {
+              "text": " word",
+              "timestamp": [
+                28.56,
+                28.96
+              ]
+            },
+            {
+              "text": " intelligence.",
+              "timestamp": [
+                28.96,
+                29.46
+              ]
+            }
+          ]
+        },
+        "runtime": {
+          "loadMs": 153483.4,
+          "inferenceMs": 3570.7,
+          "totalMs": 157054.1,
+          "grade": "excellent",
+          "realTimeFactor": 0.1211,
+          "loadGrade": "slow"
+        },
+        "quality": {
+          "grade": "excellent",
+          "passed": true,
+          "wordErrorRate": 0.1364,
+          "gibberish": false,
+          "longestRepeatedWordRun": 1,
+          "uniqueWordRatio": 0.8125,
+          "referenceWordCount": 66,
+          "outputWordCount": 64
+        },
+        "runtimePassed": true,
+        "cacheCleanup": {
+          "supported": true,
+          "deleted": 7
+        }
+      },
+      {
+        "precision": "q8",
+        "device": "wasm",
+        "dtype": {
+          "encoder_model": "q8",
+          "decoder_model_merged": "q8"
+        },
+        "status": "fail",
+        "error": "Can't create a session. ERROR_CODE: 1, ERROR_MESSAGE: qdq_actions.cc:137 TransposeDQWeightsForMatMulNBits Missing required scale: model.decoder.embed_tokens.weight_merged_0_scale for node: model.decoder.embed_tokens.weight_transposed_DequantizeLinear",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 91643.1,
+          "grade": "failed"
+        },
+        "cacheCleanup": {
+          "supported": true,
+          "deleted": 6
+        }
+      },
+      {
+        "precision": "q8",
+        "device": "webgpu",
+        "dtype": {
+          "encoder_model": "q8",
+          "decoder_model_merged": "q8"
+        },
+        "status": "pass",
+        "loadMs": 112050.8,
+        "inferenceMs": 92618.4,
+        "output": {
+          "result": " You know, there's this scientific method, which I very much believe in, where something is true to the degree that it is testably so. And otherwise, you're really just talking about, you know, preferences or untestable beliefs or that kind of thing. So it ends up being somewhat of a semantic question where we were conflating a lot of things with the word intelligence.",
+          "chunks": [
+            {
+              "text": " You",
+              "timestamp": [
+                0.2,
+                0.28
+              ]
+            },
+            {
+              "text": " know,",
+              "timestamp": [
+                0.28,
+                0.34
+              ]
+            },
+            {
+              "text": " there's",
+              "timestamp": [
+                0.4,
+                0.62
+              ]
+            },
+            {
+              "text": " this",
+              "timestamp": [
+                0.62,
+                1.46
+              ]
+            },
+            {
+              "text": " scientific",
+              "timestamp": [
+                1.46,
+                1.8
+              ]
+            },
+            {
+              "text": " method,",
+              "timestamp": [
+                1.8,
+                1.92
+              ]
+            },
+            {
+              "text": " which",
+              "timestamp": [
+                1.98,
+                2.1
+              ]
+            },
+            {
+              "text": " I",
+              "timestamp": [
+                2.1,
+                2.28
+              ]
+            },
+            {
+              "text": " very",
+              "timestamp": [
+                2.28,
+                2.4
+              ]
+            },
+            {
+              "text": " much",
+              "timestamp": [
+                2.4,
+                2.6
+              ]
+            },
+            {
+              "text": " believe",
+              "timestamp": [
+                2.6,
+                2.9
+              ]
+            },
+            {
+              "text": " in,",
+              "timestamp": [
+                2.9,
+                3.12
+              ]
+            },
+            {
+              "text": " where",
+              "timestamp": [
+                3.56,
+                4.02
+              ]
+            },
+            {
+              "text": " something",
+              "timestamp": [
+                4.02,
+                4.04
+              ]
+            },
+            {
+              "text": " is",
+              "timestamp": [
+                4.32,
+                4.98
+              ]
+            },
+            {
+              "text": " true",
+              "timestamp": [
+                4.98,
+                5.22
+              ]
+            },
+            {
+              "text": " to",
+              "timestamp": [
+                5.22,
+                5.32
+              ]
+            },
+            {
+              "text": " the",
+              "timestamp": [
+                5.32,
+                5.52
+              ]
+            },
+            {
+              "text": " degree",
+              "timestamp": [
+                5.52,
+                5.78
+              ]
+            },
+            {
+              "text": " that",
+              "timestamp": [
+                5.78,
+                5.92
+              ]
+            },
+            {
+              "text": " it",
+              "timestamp": [
+                5.92,
+                6.24
+              ]
+            },
+            {
+              "text": " is",
+              "timestamp": [
+                6.24,
+                6.94
+              ]
+            },
+            {
+              "text": " testably",
+              "timestamp": [
+                6.94,
+                7.54
+              ]
+            },
+            {
+              "text": " so.",
+              "timestamp": [
+                7.54,
+                7.58
+              ]
+            },
+            {
+              "text": " And",
+              "timestamp": [
+                10.1,
+                10.62
+              ]
+            },
+            {
+              "text": " otherwise,",
+              "timestamp": [
+                10.62,
+                10.68
+              ]
+            },
+            {
+              "text": " you're",
+              "timestamp": [
+                11.24,
+                11.56
+              ]
+            },
+            {
+              "text": " really",
+              "timestamp": [
+                11.56,
+                11.76
+              ]
+            },
+            {
+              "text": " just",
+              "timestamp": [
+                11.76,
+                12.04
+              ]
+            },
+            {
+              "text": " talking",
+              "timestamp": [
+                12.04,
+                12.42
+              ]
+            },
+            {
+              "text": " about,",
+              "timestamp": [
+                12.42,
+                12.44
+              ]
+            },
+            {
+              "text": " you",
+              "timestamp": [
+                13.88,
+                14.02
+              ]
+            },
+            {
+              "text": " know,",
+              "timestamp": [
+                14.02,
+                14.56
+              ]
+            },
+            {
+              "text": " preferences",
+              "timestamp": [
+                15.08,
+                15.8
+              ]
+            },
+            {
+              "text": " or",
+              "timestamp": [
+                15.8,
+                17.76
+              ]
+            },
+            {
+              "text": " untestable",
+              "timestamp": [
+                17.76,
+                18.18
+              ]
+            },
+            {
+              "text": " beliefs",
+              "timestamp": [
+                18.6,
+                18.88
+              ]
+            },
+            {
+              "text": " or",
+              "timestamp": [
+                18.88,
+                19.1
+              ]
+            },
+            {
+              "text": " that",
+              "timestamp": [
+                19.1,
+                19.66
+              ]
+            },
+            {
+              "text": " kind",
+              "timestamp": [
+                19.66,
+                19.78
+              ]
+            },
+            {
+              "text": " of",
+              "timestamp": [
+                19.78,
+                20.04
+              ]
+            },
+            {
+              "text": " thing.",
+              "timestamp": [
+                20.04,
+                20.06
+              ]
+            },
+            {
+              "text": " So",
+              "timestamp": [
+                21.02,
+                21.98
+              ]
+            },
+            {
+              "text": " it",
+              "timestamp": [
+                21.98,
+                22.14
+              ]
+            },
+            {
+              "text": " ends",
+              "timestamp": [
+                22.14,
+                22.24
+              ]
+            },
+            {
+              "text": " up",
+              "timestamp": [
+                22.24,
+                22.48
+              ]
+            },
+            {
+              "text": " being",
+              "timestamp": [
+                22.48,
+                23.7
+              ]
+            },
+            {
+              "text": " somewhat",
+              "timestamp": [
+                23.7,
+                23.84
+              ]
+            },
+            {
+              "text": " of",
+              "timestamp": [
+                23.84,
+                23.88
+              ]
+            },
+            {
+              "text": " a",
+              "timestamp": [
+                23.88,
+                24.2
+              ]
+            },
+            {
+              "text": " semantic",
+              "timestamp": [
+                24.2,
+                24.8
+              ]
+            },
+            {
+              "text": " question",
+              "timestamp": [
+                24.8,
+                25.58
+              ]
+            },
+            {
+              "text": " where",
+              "timestamp": [
+                25.88,
+                26.9
+              ]
+            },
+            {
+              "text": " we",
+              "timestamp": [
+                26.9,
+                26.98
+              ]
+            },
+            {
+              "text": " were",
+              "timestamp": [
+                26.98,
+                27.26
+              ]
+            },
+            {
+              "text": " conflating",
+              "timestamp": [
+                27.26,
+                27.58
+              ]
+            },
+            {
+              "text": " a",
+              "timestamp": [
+                27.58,
+                27.66
+              ]
+            },
+            {
+              "text": " lot",
+              "timestamp": [
+                27.66,
+                27.8
+              ]
+            },
+            {
+              "text": " of",
+              "timestamp": [
+                27.8,
+                28.02
+              ]
+            },
+            {
+              "text": " things",
+              "timestamp": [
+                28.02,
+                28.18
+              ]
+            },
+            {
+              "text": " with",
+              "timestamp": [
+                28.32,
+                28.42
+              ]
+            },
+            {
+              "text": " the",
+              "timestamp": [
+                28.42,
+                28.58
+              ]
+            },
+            {
+              "text": " word",
+              "timestamp": [
+                28.58,
+                28.96
+              ]
+            },
+            {
+              "text": " intelligence.",
+              "timestamp": [
+                28.96,
+                29.3
+              ]
+            }
+          ]
+        },
+        "runtime": {
+          "loadMs": 112050.8,
+          "inferenceMs": 92618.4,
+          "totalMs": 204669.2,
+          "grade": "very-slow",
+          "realTimeFactor": 3.1404,
+          "loadGrade": "slow"
+        },
+        "quality": {
+          "grade": "excellent",
+          "passed": true,
+          "wordErrorRate": 0.1364,
+          "gibberish": false,
+          "longestRepeatedWordRun": 1,
+          "uniqueWordRatio": 0.8125,
+          "referenceWordCount": 66,
+          "outputWordCount": 64
+        },
+        "runtimePassed": true,
+        "cacheCleanup": {
+          "supported": true,
+          "deleted": 6
+        }
+      },
+      {
+        "precision": "int8",
+        "device": "wasm",
+        "dtype": {
+          "encoder_model": "int8",
+          "decoder_model_merged": "int8"
+        },
+        "status": "fail",
+        "error": "Can't create a session. ERROR_CODE: 1, ERROR_MESSAGE: qdq_actions.cc:137 TransposeDQWeightsForMatMulNBits Missing required scale: model.decoder.embed_tokens.weight_merged_0_scale for node: model.decoder.embed_tokens.weight_transposed_DequantizeLinear",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 95212.9,
+          "grade": "failed"
+        },
+        "cacheCleanup": {
+          "supported": true,
+          "deleted": 6
+        }
+      },
+      {
+        "precision": "int8",
+        "device": "webgpu",
+        "dtype": {
+          "encoder_model": "int8",
+          "decoder_model_merged": "int8"
+        },
+        "status": "pass",
+        "loadMs": 110754.5,
+        "inferenceMs": 94937.9,
+        "output": {
+          "result": " You know, there's this scientific method, which I very much believe in, where something is true to the degree that it is testably so. And otherwise, you're really just talking about, you know, preferences or untestable beliefs or that kind of thing. So it ends up being somewhat of a semantic question where we were conflating a lot of things with the word intelligence.",
+          "chunks": [
+            {
+              "text": " You",
+              "timestamp": [
+                0.2,
+                0.28
+              ]
+            },
+            {
+              "text": " know,",
+              "timestamp": [
+                0.28,
+                0.34
+              ]
+            },
+            {
+              "text": " there's",
+              "timestamp": [
+                0.4,
+                0.62
+              ]
+            },
+            {
+              "text": " this",
+              "timestamp": [
+                0.62,
+                1.46
+              ]
+            },
+            {
+              "text": " scientific",
+              "timestamp": [
+                1.46,
+                1.8
+              ]
+            },
+            {
+              "text": " method,",
+              "timestamp": [
+                1.8,
+                1.94
+              ]
+            },
+            {
+              "text": " which",
+              "timestamp": [
+                1.98,
+                2.1
+              ]
+            },
+            {
+              "text": " I",
+              "timestamp": [
+                2.1,
+                2.28
+              ]
+            },
+            {
+              "text": " very",
+              "timestamp": [
+                2.28,
+                2.4
+              ]
+            },
+            {
+              "text": " much",
+              "timestamp": [
+                2.4,
+                2.6
+              ]
+            },
+            {
+              "text": " believe",
+              "timestamp": [
+                2.6,
+                2.9
+              ]
+            },
+            {
+              "text": " in,",
+              "timestamp": [
+                2.9,
+                3.12
+              ]
+            },
+            {
+              "text": " where",
+              "timestamp": [
+                3.56,
+                4.02
+              ]
+            },
+            {
+              "text": " something",
+              "timestamp": [
+                4.02,
+                4.04
+              ]
+            },
+            {
+              "text": " is",
+              "timestamp": [
+                4.32,
+                4.98
+              ]
+            },
+            {
+              "text": " true",
+              "timestamp": [
+                4.98,
+                5.22
+              ]
+            },
+            {
+              "text": " to",
+              "timestamp": [
+                5.22,
+                5.34
+              ]
+            },
+            {
+              "text": " the",
+              "timestamp": [
+                5.34,
+                5.52
+              ]
+            },
+            {
+              "text": " degree",
+              "timestamp": [
+                5.52,
+                5.76
+              ]
+            },
+            {
+              "text": " that",
+              "timestamp": [
+                5.76,
+                5.92
+              ]
+            },
+            {
+              "text": " it",
+              "timestamp": [
+                5.92,
+                6.24
+              ]
+            },
+            {
+              "text": " is",
+              "timestamp": [
+                6.24,
+                6.94
+              ]
+            },
+            {
+              "text": " testably",
+              "timestamp": [
+                6.94,
+                7.54
+              ]
+            },
+            {
+              "text": " so.",
+              "timestamp": [
+                7.54,
+                7.58
+              ]
+            },
+            {
+              "text": " And",
+              "timestamp": [
+                10.1,
+                10.62
+              ]
+            },
+            {
+              "text": " otherwise,",
+              "timestamp": [
+                10.62,
+                10.68
+              ]
+            },
+            {
+              "text": " you're",
+              "timestamp": [
+                11.24,
+                11.56
+              ]
+            },
+            {
+              "text": " really",
+              "timestamp": [
+                11.56,
+                11.76
+              ]
+            },
+            {
+              "text": " just",
+              "timestamp": [
+                11.76,
+                12.04
+              ]
+            },
+            {
+              "text": " talking",
+              "timestamp": [
+                12.04,
+                12.4
+              ]
+            },
+            {
+              "text": " about,",
+              "timestamp": [
+                12.4,
+                12.42
+              ]
+            },
+            {
+              "text": " you",
+              "timestamp": [
+                13.88,
+                14
+              ]
+            },
+            {
+              "text": " know,",
+              "timestamp": [
+                14,
+                14.62
+              ]
+            },
+            {
+              "text": " preferences",
+              "timestamp": [
+                15.08,
+                15.8
+              ]
+            },
+            {
+              "text": " or",
+              "timestamp": [
+                15.8,
+                17.74
+              ]
+            },
+            {
+              "text": " untestable",
+              "timestamp": [
+                17.74,
+                18.18
+              ]
+            },
+            {
+              "text": " beliefs",
+              "timestamp": [
+                18.6,
+                18.88
+              ]
+            },
+            {
+              "text": " or",
+              "timestamp": [
+                18.88,
+                19.1
+              ]
+            },
+            {
+              "text": " that",
+              "timestamp": [
+                19.1,
+                19.64
+              ]
+            },
+            {
+              "text": " kind",
+              "timestamp": [
+                19.64,
+                19.78
+              ]
+            },
+            {
+              "text": " of",
+              "timestamp": [
+                19.78,
+                20.02
+              ]
+            },
+            {
+              "text": " thing.",
+              "timestamp": [
+                20.02,
+                20.06
+              ]
+            },
+            {
+              "text": " So",
+              "timestamp": [
+                21.02,
+                21.98
+              ]
+            },
+            {
+              "text": " it",
+              "timestamp": [
+                21.98,
+                22.14
+              ]
+            },
+            {
+              "text": " ends",
+              "timestamp": [
+                22.14,
+                22.26
+              ]
+            },
+            {
+              "text": " up",
+              "timestamp": [
+                22.26,
+                22.48
+              ]
+            },
+            {
+              "text": " being",
+              "timestamp": [
+                22.48,
+                23.7
+              ]
+            },
+            {
+              "text": " somewhat",
+              "timestamp": [
+                23.7,
+                23.84
+              ]
+            },
+            {
+              "text": " of",
+              "timestamp": [
+                23.84,
+                23.86
+              ]
+            },
+            {
+              "text": " a",
+              "timestamp": [
+                23.86,
+                24.2
+              ]
+            },
+            {
+              "text": " semantic",
+              "timestamp": [
+                24.2,
+                24.78
+              ]
+            },
+            {
+              "text": " question",
+              "timestamp": [
+                24.78,
+                25.6
+              ]
+            },
+            {
+              "text": " where",
+              "timestamp": [
+                25.88,
+                26.9
+              ]
+            },
+            {
+              "text": " we",
+              "timestamp": [
+                26.9,
+                26.98
+              ]
+            },
+            {
+              "text": " were",
+              "timestamp": [
+                26.98,
+                27.26
+              ]
+            },
+            {
+              "text": " conflating",
+              "timestamp": [
+                27.26,
+                27.58
+              ]
+            },
+            {
+              "text": " a",
+              "timestamp": [
+                27.58,
+                27.66
+              ]
+            },
+            {
+              "text": " lot",
+              "timestamp": [
+                27.66,
+                27.8
+              ]
+            },
+            {
+              "text": " of",
+              "timestamp": [
+                27.8,
+                28.02
+              ]
+            },
+            {
+              "text": " things",
+              "timestamp": [
+                28.02,
+                28.18
+              ]
+            },
+            {
+              "text": " with",
+              "timestamp": [
+                28.32,
+                28.42
+              ]
+            },
+            {
+              "text": " the",
+              "timestamp": [
+                28.42,
+                28.58
+              ]
+            },
+            {
+              "text": " word",
+              "timestamp": [
+                28.58,
+                28.96
+              ]
+            },
+            {
+              "text": " intelligence.",
+              "timestamp": [
+                28.96,
+                29.46
+              ]
+            }
+          ]
+        },
+        "runtime": {
+          "loadMs": 110754.5,
+          "inferenceMs": 94937.9,
+          "totalMs": 205692.4,
+          "grade": "very-slow",
+          "realTimeFactor": 3.2191,
+          "loadGrade": "slow"
+        },
+        "quality": {
+          "grade": "excellent",
+          "passed": true,
+          "wordErrorRate": 0.1364,
+          "gibberish": false,
+          "longestRepeatedWordRun": 1,
+          "uniqueWordRatio": 0.8125,
+          "referenceWordCount": 66,
+          "outputWordCount": 64
+        },
+        "runtimePassed": true,
+        "cacheCleanup": {
+          "supported": true,
+          "deleted": 6
+        }
+      },
+      {
+        "precision": "uint8",
+        "device": "wasm",
+        "dtype": {
+          "encoder_model": "uint8",
+          "decoder_model_merged": "uint8"
+        },
+        "status": "fail",
+        "error": "Can't create a session. ERROR_CODE: 1, ERROR_MESSAGE: qdq_actions.cc:137 TransposeDQWeightsForMatMulNBits Missing required scale: model.decoder.embed_tokens.weight_merged_0_scale for node: model.decoder.embed_tokens.weight_transposed_DequantizeLinear",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 96533,
+          "grade": "failed"
+        },
+        "cacheCleanup": {
+          "supported": true,
+          "deleted": 6
+        }
+      },
+      {
+        "precision": "uint8",
+        "device": "webgpu",
+        "dtype": {
+          "encoder_model": "uint8",
+          "decoder_model_merged": "uint8"
+        },
+        "status": "pass",
+        "loadMs": 111100.9,
+        "inferenceMs": 93238.7,
+        "output": {
+          "result": " You know, there's this scientific method, which I very much believe in, where something is true to the degree that it is testably so. And otherwise, you're really just talking about, you know, preferences or untestable beliefs or that kind of thing. So it ends up being somewhat of a semantic question where we were conflating a lot of things with the word intelligence.",
+          "chunks": [
+            {
+              "text": " You",
+              "timestamp": [
+                0.2,
+                0.28
+              ]
+            },
+            {
+              "text": " know,",
+              "timestamp": [
+                0.28,
+                0.34
+              ]
+            },
+            {
+              "text": " there's",
+              "timestamp": [
+                0.4,
+                0.62
+              ]
+            },
+            {
+              "text": " this",
+              "timestamp": [
+                0.62,
+                1.48
+              ]
+            },
+            {
+              "text": " scientific",
+              "timestamp": [
+                1.48,
+                1.8
+              ]
+            },
+            {
+              "text": " method,",
+              "timestamp": [
+                1.8,
+                1.92
+              ]
+            },
+            {
+              "text": " which",
+              "timestamp": [
+                1.98,
+                2.1
+              ]
+            },
+            {
+              "text": " I",
+              "timestamp": [
+                2.1,
+                2.28
+              ]
+            },
+            {
+              "text": " very",
+              "timestamp": [
+                2.28,
+                2.4
+              ]
+            },
+            {
+              "text": " much",
+              "timestamp": [
+                2.4,
+                2.6
+              ]
+            },
+            {
+              "text": " believe",
+              "timestamp": [
+                2.6,
+                2.9
+              ]
+            },
+            {
+              "text": " in,",
+              "timestamp": [
+                2.9,
+                3.12
+              ]
+            },
+            {
+              "text": " where",
+              "timestamp": [
+                3.56,
+                4.02
+              ]
+            },
+            {
+              "text": " something",
+              "timestamp": [
+                4.02,
+                4.04
+              ]
+            },
+            {
+              "text": " is",
+              "timestamp": [
+                4.32,
+                4.98
+              ]
+            },
+            {
+              "text": " true",
+              "timestamp": [
+                4.98,
+                5.22
+              ]
+            },
+            {
+              "text": " to",
+              "timestamp": [
+                5.22,
+                5.32
+              ]
+            },
+            {
+              "text": " the",
+              "timestamp": [
+                5.32,
+                5.52
+              ]
+            },
+            {
+              "text": " degree",
+              "timestamp": [
+                5.52,
+                5.78
+              ]
+            },
+            {
+              "text": " that",
+              "timestamp": [
+                5.78,
+                5.92
+              ]
+            },
+            {
+              "text": " it",
+              "timestamp": [
+                5.92,
+                6.24
+              ]
+            },
+            {
+              "text": " is",
+              "timestamp": [
+                6.24,
+                6.94
+              ]
+            },
+            {
+              "text": " testably",
+              "timestamp": [
+                6.94,
+                7.54
+              ]
+            },
+            {
+              "text": " so.",
+              "timestamp": [
+                7.54,
+                7.58
+              ]
+            },
+            {
+              "text": " And",
+              "timestamp": [
+                10.1,
+                10.62
+              ]
+            },
+            {
+              "text": " otherwise,",
+              "timestamp": [
+                10.62,
+                10.68
+              ]
+            },
+            {
+              "text": " you're",
+              "timestamp": [
+                11.24,
+                11.56
+              ]
+            },
+            {
+              "text": " really",
+              "timestamp": [
+                11.56,
+                11.76
+              ]
+            },
+            {
+              "text": " just",
+              "timestamp": [
+                11.76,
+                12.04
+              ]
+            },
+            {
+              "text": " talking",
+              "timestamp": [
+                12.04,
+                12.42
+              ]
+            },
+            {
+              "text": " about,",
+              "timestamp": [
+                12.42,
+                12.44
+              ]
+            },
+            {
+              "text": " you",
+              "timestamp": [
+                13.88,
+                14
+              ]
+            },
+            {
+              "text": " know,",
+              "timestamp": [
+                14,
+                14.56
+              ]
+            },
+            {
+              "text": " preferences",
+              "timestamp": [
+                15.08,
+                15.8
+              ]
+            },
+            {
+              "text": " or",
+              "timestamp": [
+                15.8,
+                17.76
+              ]
+            },
+            {
+              "text": " untestable",
+              "timestamp": [
+                17.76,
+                18.18
+              ]
+            },
+            {
+              "text": " beliefs",
+              "timestamp": [
+                18.6,
+                18.88
+              ]
+            },
+            {
+              "text": " or",
+              "timestamp": [
+                18.88,
+                19.1
+              ]
+            },
+            {
+              "text": " that",
+              "timestamp": [
+                19.1,
+                19.66
+              ]
+            },
+            {
+              "text": " kind",
+              "timestamp": [
+                19.66,
+                19.78
+              ]
+            },
+            {
+              "text": " of",
+              "timestamp": [
+                19.78,
+                20.04
+              ]
+            },
+            {
+              "text": " thing.",
+              "timestamp": [
+                20.04,
+                20.06
+              ]
+            },
+            {
+              "text": " So",
+              "timestamp": [
+                21.02,
+                21.98
+              ]
+            },
+            {
+              "text": " it",
+              "timestamp": [
+                21.98,
+                22.14
+              ]
+            },
+            {
+              "text": " ends",
+              "timestamp": [
+                22.14,
+                22.24
+              ]
+            },
+            {
+              "text": " up",
+              "timestamp": [
+                22.24,
+                22.48
+              ]
+            },
+            {
+              "text": " being",
+              "timestamp": [
+                22.48,
+                23.7
+              ]
+            },
+            {
+              "text": " somewhat",
+              "timestamp": [
+                23.7,
+                23.82
+              ]
+            },
+            {
+              "text": " of",
+              "timestamp": [
+                23.82,
+                23.88
+              ]
+            },
+            {
+              "text": " a",
+              "timestamp": [
+                23.88,
+                24.2
+              ]
+            },
+            {
+              "text": " semantic",
+              "timestamp": [
+                24.2,
+                24.8
+              ]
+            },
+            {
+              "text": " question",
+              "timestamp": [
+                24.8,
+                25.58
+              ]
+            },
+            {
+              "text": " where",
+              "timestamp": [
+                25.88,
+                26.9
+              ]
+            },
+            {
+              "text": " we",
+              "timestamp": [
+                26.9,
+                26.98
+              ]
+            },
+            {
+              "text": " were",
+              "timestamp": [
+                26.98,
+                27.26
+              ]
+            },
+            {
+              "text": " conflating",
+              "timestamp": [
+                27.26,
+                27.58
+              ]
+            },
+            {
+              "text": " a",
+              "timestamp": [
+                27.58,
+                27.66
+              ]
+            },
+            {
+              "text": " lot",
+              "timestamp": [
+                27.66,
+                27.8
+              ]
+            },
+            {
+              "text": " of",
+              "timestamp": [
+                27.8,
+                28.02
+              ]
+            },
+            {
+              "text": " things",
+              "timestamp": [
+                28.02,
+                28.18
+              ]
+            },
+            {
+              "text": " with",
+              "timestamp": [
+                28.32,
+                28.42
+              ]
+            },
+            {
+              "text": " the",
+              "timestamp": [
+                28.42,
+                28.58
+              ]
+            },
+            {
+              "text": " word",
+              "timestamp": [
+                28.58,
+                28.96
+              ]
+            },
+            {
+              "text": " intelligence.",
+              "timestamp": [
+                28.96,
+                29.3
+              ]
+            }
+          ]
+        },
+        "runtime": {
+          "loadMs": 111100.9,
+          "inferenceMs": 93238.7,
+          "totalMs": 204339.6,
+          "grade": "very-slow",
+          "realTimeFactor": 3.1615,
+          "loadGrade": "slow"
+        },
+        "quality": {
+          "grade": "excellent",
+          "passed": true,
+          "wordErrorRate": 0.1364,
+          "gibberish": false,
+          "longestRepeatedWordRun": 1,
+          "uniqueWordRatio": 0.8125,
+          "referenceWordCount": 66,
+          "outputWordCount": 64
+        },
+        "runtimePassed": true,
+        "cacheCleanup": {
+          "supported": true,
+          "deleted": 6
+        }
+      },
+      {
+        "precision": "fp16",
+        "device": "wasm",
+        "dtype": {
+          "encoder_model": "fp16",
+          "decoder_model_merged": "fp16"
+        },
+        "status": "fail",
+        "error": "Can't create a session. ERROR_CODE: 6, ERROR_MESSAGE: std::bad_alloc",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 176594.5,
+          "grade": "failed"
+        },
+        "cacheCleanup": {
+          "supported": true,
+          "deleted": 6
+        }
+      },
+      {
+        "precision": "fp16",
+        "device": "webgpu",
+        "dtype": {
+          "encoder_model": "fp16",
+          "decoder_model_merged": "fp16"
+        },
+        "status": "pass",
+        "loadMs": 174688,
+        "inferenceMs": 4018.3,
+        "output": {
+          "result": " You know, there's this scientific method, which I very much believe in, where something is true to the degree that it is testably so. And otherwise, you're really just talking about, you know, preferences or untestable beliefs or that, you know, that kind of thing. So it ends up being somewhat of a semantic question where we were conflating a lot of things with the word intelligence.",
+          "chunks": [
+            {
+              "text": " You",
+              "timestamp": [
+                0.2,
+                0.28
+              ]
+            },
+            {
+              "text": " know,",
+              "timestamp": [
+                0.28,
+                0.38
+              ]
+            },
+            {
+              "text": " there's",
+              "timestamp": [
+                0.4,
+                0.62
+              ]
+            },
+            {
+              "text": " this",
+              "timestamp": [
+                0.62,
+                1.46
+              ]
+            },
+            {
+              "text": " scientific",
+              "timestamp": [
+                1.46,
+                1.8
+              ]
+            },
+            {
+              "text": " method,",
+              "timestamp": [
+                1.8,
+                1.94
+              ]
+            },
+            {
+              "text": " which",
+              "timestamp": [
+                1.98,
+                2.1
+              ]
+            },
+            {
+              "text": " I",
+              "timestamp": [
+                2.1,
+                2.28
+              ]
+            },
+            {
+              "text": " very",
+              "timestamp": [
+                2.28,
+                2.4
+              ]
+            },
+            {
+              "text": " much",
+              "timestamp": [
+                2.4,
+                2.6
+              ]
+            },
+            {
+              "text": " believe",
+              "timestamp": [
+                2.6,
+                2.9
+              ]
+            },
+            {
+              "text": " in,",
+              "timestamp": [
+                2.9,
+                3.14
+              ]
+            },
+            {
+              "text": " where",
+              "timestamp": [
+                3.56,
+                4.02
+              ]
+            },
+            {
+              "text": " something",
+              "timestamp": [
+                4.02,
+                4.04
+              ]
+            },
+            {
+              "text": " is",
+              "timestamp": [
+                4.32,
+                4.98
+              ]
+            },
+            {
+              "text": " true",
+              "timestamp": [
+                4.98,
+                5.22
+              ]
+            },
+            {
+              "text": " to",
+              "timestamp": [
+                5.22,
+                5.34
+              ]
+            },
+            {
+              "text": " the",
+              "timestamp": [
+                5.34,
+                5.52
+              ]
+            },
+            {
+              "text": " degree",
+              "timestamp": [
+                5.52,
+                5.76
+              ]
+            },
+            {
+              "text": " that",
+              "timestamp": [
+                5.76,
+                5.92
+              ]
+            },
+            {
+              "text": " it",
+              "timestamp": [
+                5.92,
+                6.24
+              ]
+            },
+            {
+              "text": " is",
+              "timestamp": [
+                6.24,
+                6.94
+              ]
+            },
+            {
+              "text": " testably",
+              "timestamp": [
+                6.94,
+                7.54
+              ]
+            },
+            {
+              "text": " so.",
+              "timestamp": [
+                7.54,
+                7.56
+              ]
+            },
+            {
+              "text": " And",
+              "timestamp": [
+                10.1,
+                10.62
+              ]
+            },
+            {
+              "text": " otherwise,",
+              "timestamp": [
+                10.62,
+                10.66
+              ]
+            },
+            {
+              "text": " you're",
+              "timestamp": [
+                11.24,
+                11.56
+              ]
+            },
+            {
+              "text": " really",
+              "timestamp": [
+                11.56,
+                11.76
+              ]
+            },
+            {
+              "text": " just",
+              "timestamp": [
+                11.76,
+                12.04
+              ]
+            },
+            {
+              "text": " talking",
+              "timestamp": [
+                12.04,
+                12.4
+              ]
+            },
+            {
+              "text": " about,",
+              "timestamp": [
+                12.4,
+                12.44
+              ]
+            },
+            {
+              "text": " you",
+              "timestamp": [
+                13.88,
+                14
+              ]
+            },
+            {
+              "text": " know,",
+              "timestamp": [
+                14,
+                14.58
+              ]
+            },
+            {
+              "text": " preferences",
+              "timestamp": [
+                15.06,
+                15.8
+              ]
+            },
+            {
+              "text": " or",
+              "timestamp": [
+                15.8,
+                17.72
+              ]
+            },
+            {
+              "text": " untestable",
+              "timestamp": [
+                17.72,
+                18.18
+              ]
+            },
+            {
+              "text": " beliefs",
+              "timestamp": [
+                18.6,
+                18.86
+              ]
+            },
+            {
+              "text": " or",
+              "timestamp": [
+                18.86,
+                19.1
+              ]
+            },
+            {
+              "text": " that,",
+              "timestamp": [
+                19.1,
+                19.2
+              ]
+            },
+            {
+              "text": " you",
+              "timestamp": [
+                19.34,
+                19.34
+              ]
+            },
+            {
+              "text": " know,",
+              "timestamp": [
+                19.34,
+                19.46
+              ]
+            },
+            {
+              "text": " that",
+              "timestamp": [
+                19.56,
+                19.68
+              ]
+            },
+            {
+              "text": " kind",
+              "timestamp": [
+                19.68,
+                19.78
+              ]
+            },
+            {
+              "text": " of",
+              "timestamp": [
+                19.78,
+                20.02
+              ]
+            },
+            {
+              "text": " thing.",
+              "timestamp": [
+                20.02,
+                20.06
+              ]
+            },
+            {
+              "text": " So",
+              "timestamp": [
+                21.02,
+                22.02
+              ]
+            },
+            {
+              "text": " it",
+              "timestamp": [
+                22.02,
+                22.14
+              ]
+            },
+            {
+              "text": " ends",
+              "timestamp": [
+                22.14,
+                22.24
+              ]
+            },
+            {
+              "text": " up",
+              "timestamp": [
+                22.24,
+                22.48
+              ]
+            },
+            {
+              "text": " being",
+              "timestamp": [
+                22.48,
+                23.7
+              ]
+            },
+            {
+              "text": " somewhat",
+              "timestamp": [
+                23.7,
+                23.84
+              ]
+            },
+            {
+              "text": " of",
+              "timestamp": [
+                23.84,
+                23.86
+              ]
+            },
+            {
+              "text": " a",
+              "timestamp": [
+                23.86,
+                24.2
+              ]
+            },
+            {
+              "text": " semantic",
+              "timestamp": [
+                24.2,
+                24.8
+              ]
+            },
+            {
+              "text": " question",
+              "timestamp": [
+                24.8,
+                25.58
+              ]
+            },
+            {
+              "text": " where",
+              "timestamp": [
+                25.9,
+                26.9
+              ]
+            },
+            {
+              "text": " we",
+              "timestamp": [
+                26.9,
+                26.98
+              ]
+            },
+            {
+              "text": " were",
+              "timestamp": [
+                26.98,
+                27.24
+              ]
+            },
+            {
+              "text": " conflating",
+              "timestamp": [
+                27.24,
+                27.58
+              ]
+            },
+            {
+              "text": " a",
+              "timestamp": [
+                27.58,
+                27.66
+              ]
+            },
+            {
+              "text": " lot",
+              "timestamp": [
+                27.66,
+                27.8
+              ]
+            },
+            {
+              "text": " of",
+              "timestamp": [
+                27.8,
+                28.02
+              ]
+            },
+            {
+              "text": " things",
+              "timestamp": [
+                28.02,
+                28.18
+              ]
+            },
+            {
+              "text": " with",
+              "timestamp": [
+                28.32,
+                28.42
+              ]
+            },
+            {
+              "text": " the",
+              "timestamp": [
+                28.42,
+                28.58
+              ]
+            },
+            {
+              "text": " word",
+              "timestamp": [
+                28.58,
+                28.96
+              ]
+            },
+            {
+              "text": " intelligence.",
+              "timestamp": [
+                28.96,
+                29.46
+              ]
+            }
+          ]
+        },
+        "runtime": {
+          "loadMs": 174688,
+          "inferenceMs": 4018.3,
+          "totalMs": 178706.4,
+          "grade": "excellent",
+          "realTimeFactor": 0.1362,
+          "loadGrade": "slow"
+        },
+        "quality": {
+          "grade": "acceptable",
+          "passed": true,
+          "wordErrorRate": 0.1515,
+          "gibberish": false,
+          "longestRepeatedWordRun": 1,
+          "uniqueWordRatio": 0.7761,
+          "referenceWordCount": 66,
+          "outputWordCount": 67
+        },
+        "runtimePassed": true,
+        "cacheCleanup": {
+          "supported": true,
+          "deleted": 6
+        }
+      },
+      {
+        "precision": "fp32",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": null,
+          "grade": "failed"
+        },
+        "error": "page.waitForFunction: Timeout 600000ms exceeded.",
+        "cacheCleanup": {
+          "supported": true,
+          "deleted": 0,
+          "note": "Browser process closed after harness-level failure."
+        }
+      },
+      {
+        "precision": "fp32",
+        "device": "webgpu",
+        "dtype": {
+          "encoder_model": "fp32",
+          "decoder_model_merged": "fp32"
+        },
+        "status": "fail",
+        "error": "Failed to fetch",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 119554.8,
+          "grade": "failed"
+        },
+        "cacheCleanup": {
+          "supported": true,
+          "deleted": 7
+        }
+      }
+    ],
+    "schemaVersion": "1.2",
+    "startedAt": "2026-09-07T18:28:17.200Z",
+    "finishedAt": "2026-09-07T19:18:13.382Z",
+    "qualityGate": {
+      "referenceTranscriptPath": "/test-audio/whisper-standard.txt",
+      "maximumWordErrorRate": 0.35,
+      "repeatedWordRunLimit": 5,
+      "minimumUniqueWordRatio": 0.2
+    },
+    "runtimeScale": {
+      "metric": "real-time factor (inference seconds / audio seconds)",
+      "excellent": "<= 0.25",
+      "good": "<= 0.5",
+      "slow": "<= 1.0",
+      "verySlow": "> 1.0"
+    },
+    "matrix": {
+      "fp32": {
+        "encoder_model": "fp32",
+        "decoder_model_merged": "fp32"
+      },
+      "fp16": {
+        "encoder_model": "fp16",
+        "decoder_model_merged": "fp16"
+      },
+      "int8": {
+        "encoder_model": "int8",
+        "decoder_model_merged": "int8"
+      },
+      "uint8": {
+        "encoder_model": "uint8",
+        "decoder_model_merged": "uint8"
+      },
+      "q8": {
+        "encoder_model": "q8",
+        "decoder_model_merged": "q8"
+      },
+      "q4": {
+        "encoder_model": "q4",
+        "decoder_model_merged": "q4"
+      },
+      "q4f16": {
+        "encoder_model": "fp16",
+        "decoder_model_merged": "q4f16"
+      },
+      "bnb4": {
+        "encoder_model": "bnb4",
+        "decoder_model_merged": "bnb4"
+      }
+    }
+  }
+}

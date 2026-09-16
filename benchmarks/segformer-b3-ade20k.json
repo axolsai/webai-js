@@ -1,0 +1,1235 @@
+{
+  "contractVersion": "1.0",
+  "model": {
+    "id": "segformer-b3-ade20k",
+    "displayName": "SegFormer B3 ADE20K — 150-Class Scene Segmentation",
+    "provider": "NVIDIA Research",
+    "providerUrl": "https://github.com/NVlabs/SegFormer",
+    "license": "LicenseRef-NVIDIA-SegFormer-NonCommercial",
+    "licenseUrl": "https://github.com/NVlabs/SegFormer/blob/master/LICENSE",
+    "lastUpdated": "2022-08-06T10:29:16.000Z",
+    "sourceRepository": "nvidia/segformer-b3-finetuned-ade-512-512",
+    "sourceRevision": "a820c29fc1e53723079d94ca0e09a14d2657fae6",
+    "repository": "onnx-community/segformer-b3-finetuned-ade-512-512-ONNX",
+    "artifactRevision": "748163478112c6185cd52530d7b133d96c8236be",
+    "artifactLastUpdated": "2026-08-02T11:36:45.000Z",
+    "task": "image-segmentation",
+    "description": "NVIDIA's B3-sized SegFormer fine-tuned at 512×512 on ADE20K and converted by ONNX Community for Transformers.js. It returns original-size binary masks for up to 150 indoor and outdoor scene classes.",
+    "intendedUses": [
+      "Non-commercial research and evaluation of semantic scene segmentation.",
+      "Educational visualization of ADE20K scene classes.",
+      "Prototype browser tools that need coarse per-pixel scene labels."
+    ],
+    "limitations": [
+      "The NVIDIA SegFormer license restricts use to non-commercial research or evaluation and requires preserving its license and notices.",
+      "The fixed ADE20K taxonomy is incomplete and merges visually or functionally distinct objects.",
+      "Predictions can fail on small objects, fine boundaries, unusual viewpoints, low light, occlusion, or domains unlike ADE20K.",
+      "Masks are resized to the source image and can lose boundary detail after the model's 512×512 preprocessing.",
+      "Output must not be used for surveillance, safety-critical navigation, medical analysis, or other high-impact automated decisions."
+    ]
+  },
+  "runtime": {
+    "engine": {
+      "name": "Transformers.js",
+      "version": "4.2.0"
+    },
+    "precisions": {
+      "fp32": {
+        "weightsSize": 190133539,
+        "size": 190140823,
+        "dtype": "fp32",
+        "modelKeys": [
+          "model.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "fp16": {
+        "weightsSize": 95757970,
+        "size": 95765254,
+        "dtype": "fp16",
+        "modelKeys": [
+          "model_fp16.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "int8": {
+        "weightsSize": 49297337,
+        "size": 49304621,
+        "dtype": "int8",
+        "modelKeys": [
+          "model_int8.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "uint8": {
+        "weightsSize": 49297441,
+        "size": 49304725,
+        "dtype": "uint8",
+        "modelKeys": [
+          "model_uint8.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q8": {
+        "weightsSize": 49297337,
+        "size": 49304621,
+        "dtype": "q8",
+        "modelKeys": [
+          "model_quantized.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4": {
+        "weightsSize": 77853012,
+        "size": 77860296,
+        "dtype": "q4",
+        "modelKeys": [
+          "model_q4.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4f16": {
+        "weightsSize": 47922181,
+        "size": 47929465,
+        "dtype": "q4f16",
+        "modelKeys": [
+          "model_q4f16.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "bnb4": {
+        "weightsSize": 77853012,
+        "size": 77860296,
+        "dtype": "bnb4",
+        "modelKeys": [
+          "model_bnb4.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      }
+    }
+  },
+  "benchmark": {
+    "report": "benchmarks/segformer-b3-ade20k.json",
+    "testedAt": "2026-09-15T14:19:59.145Z",
+    "fixture": {
+      "file": "modnet-portrait-pexels-5965592.jpg",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+      "size": 78124,
+      "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818",
+      "width": 1024,
+      "height": 683,
+      "source": "https://www.pexels.com/photo/woman-wearing-pink-turtleneck-sweater-5965592/",
+      "license": "Pexels License",
+      "licenseUrl": "https://www.pexels.com/license/",
+      "preprocessing": "RGB decode through the pinned artifact's SegFormer image processor."
+    },
+    "candidates": {
+      "fp32": {
+        "weightsSize": 190133539,
+        "size": 190140823,
+        "dtype": "fp32",
+        "modelKeys": [
+          "model.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "fp16": {
+        "weightsSize": 95757970,
+        "size": 95765254,
+        "dtype": "fp16",
+        "modelKeys": [
+          "model_fp16.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "int8": {
+        "weightsSize": 49297337,
+        "size": 49304621,
+        "dtype": "int8",
+        "modelKeys": [
+          "model_int8.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "uint8": {
+        "weightsSize": 49297441,
+        "size": 49304725,
+        "dtype": "uint8",
+        "modelKeys": [
+          "model_uint8.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q8": {
+        "weightsSize": 49297337,
+        "size": 49304621,
+        "dtype": "q8",
+        "modelKeys": [
+          "model_quantized.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4": {
+        "weightsSize": 77853012,
+        "size": 77860296,
+        "dtype": "q4",
+        "modelKeys": [
+          "model_q4.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4f16": {
+        "weightsSize": 47922181,
+        "size": 47929465,
+        "dtype": "q4f16",
+        "modelKeys": [
+          "model_q4f16.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "bnb4": {
+        "weightsSize": 77853012,
+        "size": 77860296,
+        "dtype": "bnb4",
+        "modelKeys": [
+          "model_bnb4.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      }
+    },
+    "qualityGate": "Finite original-size binary masks with unique known labels; checked-in expected portrait scene labels and area ranges must match the pinned FP32 reference signature.",
+    "environment": "Isolated headless Chrome on macOS; Transformers.js 4.2.0",
+    "invalidatedBy": [
+      "artifact revision change",
+      "runtime version change",
+      "fixture or quality-gate change",
+      "browser/backend behavior change"
+    ],
+    "results": [
+      {
+        "precision": "fp32",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 30140.899999976158,
+          "inferenceMs": 4752.300000011921,
+          "totalMs": 36212,
+          "grade": "very-slow",
+          "megapixelsPerSecond": 0.1471691601957464
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "dimensions": true,
+          "finite": true,
+          "uniqueLabels": true,
+          "requiredLabelsPresent": true,
+          "rangesPass": true,
+          "areas": {
+            "building": 0.7105657485358712,
+            "sky": 0.027718361090775988,
+            "person": 0.26171589037335286
+          },
+          "classifiedRatio": 1,
+          "grade": "scene-segmentation-pass"
+        },
+        "nativeOutput": {
+          "width": 1024,
+          "height": 683,
+          "segments": [
+            {
+              "label": "building",
+              "score": null,
+              "width": 1024,
+              "height": 683,
+              "foregroundPixels": 496964
+            },
+            {
+              "label": "sky",
+              "score": null,
+              "width": 1024,
+              "height": 683,
+              "foregroundPixels": 19386
+            },
+            {
+              "label": "person",
+              "score": null,
+              "width": 1024,
+              "height": 683,
+              "foregroundPixels": 183042
+            }
+          ]
+        }
+      },
+      {
+        "precision": "fp32",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 28649.600000023842,
+          "inferenceMs": 973.0999999940395,
+          "totalMs": 30868,
+          "grade": "slow",
+          "megapixelsPerSecond": 0.7187257219240406
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "dimensions": true,
+          "finite": true,
+          "uniqueLabels": true,
+          "requiredLabelsPresent": true,
+          "rangesPass": true,
+          "areas": {
+            "building": 0.7105657485358712,
+            "sky": 0.027718361090775988,
+            "person": 0.26171589037335286
+          },
+          "classifiedRatio": 1,
+          "grade": "scene-segmentation-pass"
+        },
+        "nativeOutput": {
+          "width": 1024,
+          "height": 683,
+          "segments": [
+            {
+              "label": "building",
+              "score": null,
+              "width": 1024,
+              "height": 683,
+              "foregroundPixels": 496964
+            },
+            {
+              "label": "sky",
+              "score": null,
+              "width": 1024,
+              "height": 683,
+              "foregroundPixels": 19386
+            },
+            {
+              "label": "person",
+              "score": null,
+              "width": 1024,
+              "height": 683,
+              "foregroundPixels": 183042
+            }
+          ]
+        }
+      },
+      {
+        "precision": "fp16",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 15895.59999999404,
+          "inferenceMs": 5107.5,
+          "totalMs": 22349.899999976158,
+          "grade": "very-slow",
+          "megapixelsPerSecond": 0.13693431228585412
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "dimensions": true,
+          "finite": true,
+          "uniqueLabels": true,
+          "requiredLabelsPresent": true,
+          "rangesPass": true,
+          "areas": {
+            "building": 0.710455652909956,
+            "sky": 0.027827026903367497,
+            "person": 0.2617173201866764
+          },
+          "classifiedRatio": 1,
+          "grade": "scene-segmentation-pass"
+        },
+        "nativeOutput": {
+          "width": 1024,
+          "height": 683,
+          "segments": [
+            {
+              "label": "building",
+              "score": null,
+              "width": 1024,
+              "height": 683,
+              "foregroundPixels": 496887
+            },
+            {
+              "label": "sky",
+              "score": null,
+              "width": 1024,
+              "height": 683,
+              "foregroundPixels": 19462
+            },
+            {
+              "label": "person",
+              "score": null,
+              "width": 1024,
+              "height": 683,
+              "foregroundPixels": 183043
+            }
+          ]
+        }
+      },
+      {
+        "precision": "fp16",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 14317.5,
+          "inferenceMs": 1124.9000000059605,
+          "totalMs": 16820.69999998808,
+          "grade": "slow",
+          "megapixelsPerSecond": 0.6217370432894428
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "dimensions": true,
+          "finite": true,
+          "uniqueLabels": true,
+          "requiredLabelsPresent": true,
+          "rangesPass": true,
+          "areas": {
+            "building": 0.7111662701317716,
+            "sky": 0.027156444454612006,
+            "person": 0.2616772854136164
+          },
+          "classifiedRatio": 1,
+          "grade": "scene-segmentation-pass"
+        },
+        "nativeOutput": {
+          "width": 1024,
+          "height": 683,
+          "segments": [
+            {
+              "label": "building",
+              "score": null,
+              "width": 1024,
+              "height": 683,
+              "foregroundPixels": 497384
+            },
+            {
+              "label": "sky",
+              "score": null,
+              "width": 1024,
+              "height": 683,
+              "foregroundPixels": 18993
+            },
+            {
+              "label": "person",
+              "score": null,
+              "width": 1024,
+              "height": 683,
+              "foregroundPixels": 183015
+            }
+          ]
+        }
+      },
+      {
+        "precision": "int8",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 10898.799999982119,
+          "inferenceMs": 9320.800000011921,
+          "totalMs": 21521.59999999404,
+          "grade": "very-slow",
+          "megapixelsPerSecond": 0.07503561926005338
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "dimensions": true,
+          "finite": true,
+          "uniqueLabels": true,
+          "requiredLabelsPresent": true,
+          "rangesPass": true,
+          "areas": {
+            "building": 0.7150167574121523,
+            "sky": 0.023601928532210836,
+            "person": 0.2613813140556369
+          },
+          "classifiedRatio": 1,
+          "grade": "scene-segmentation-pass"
+        },
+        "nativeOutput": {
+          "width": 1024,
+          "height": 683,
+          "segments": [
+            {
+              "label": "building",
+              "score": null,
+              "width": 1024,
+              "height": 683,
+              "foregroundPixels": 500077
+            },
+            {
+              "label": "sky",
+              "score": null,
+              "width": 1024,
+              "height": 683,
+              "foregroundPixels": 16507
+            },
+            {
+              "label": "person",
+              "score": null,
+              "width": 1024,
+              "height": 683,
+              "foregroundPixels": 182808
+            }
+          ]
+        }
+      },
+      {
+        "precision": "int8",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 12340.799999982119,
+          "inferenceMs": 9439.800000011921,
+          "totalMs": 23167.29999998212,
+          "grade": "very-slow",
+          "megapixelsPerSecond": 0.07408970529027276
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "dimensions": true,
+          "finite": true,
+          "uniqueLabels": true,
+          "requiredLabelsPresent": true,
+          "rangesPass": true,
+          "areas": {
+            "building": 0.7147379438140556,
+            "sky": 0.02361050741215227,
+            "person": 0.2616515487737921
+          },
+          "classifiedRatio": 1,
+          "grade": "scene-segmentation-pass"
+        },
+        "nativeOutput": {
+          "width": 1024,
+          "height": 683,
+          "segments": [
+            {
+              "label": "building",
+              "score": null,
+              "width": 1024,
+              "height": 683,
+              "foregroundPixels": 499882
+            },
+            {
+              "label": "sky",
+              "score": null,
+              "width": 1024,
+              "height": 683,
+              "foregroundPixels": 16513
+            },
+            {
+              "label": "person",
+              "score": null,
+              "width": 1024,
+              "height": 683,
+              "foregroundPixels": 182997
+            }
+          ]
+        }
+      },
+      {
+        "precision": "uint8",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 11711.199999988079,
+          "inferenceMs": 4868.9000000059605,
+          "totalMs": 17868,
+          "grade": "very-slow",
+          "megapixelsPerSecond": 0.1436447657580036
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "dimensions": true,
+          "finite": true,
+          "uniqueLabels": true,
+          "requiredLabelsPresent": true,
+          "rangesPass": true,
+          "areas": {
+            "building": 0.7183710994692533,
+            "sky": 0.020273323114934114,
+            "person": 0.2613555774158126
+          },
+          "classifiedRatio": 1,
+          "grade": "scene-segmentation-pass"
+        },
+        "nativeOutput": {
+          "width": 1024,
+          "height": 683,
+          "segments": [
+            {
+              "label": "building",
+              "score": null,
+              "width": 1024,
+              "height": 683,
+              "foregroundPixels": 502423
+            },
+            {
+              "label": "sky",
+              "score": null,
+              "width": 1024,
+              "height": 683,
+              "foregroundPixels": 14179
+            },
+            {
+              "label": "person",
+              "score": null,
+              "width": 1024,
+              "height": 683,
+              "foregroundPixels": 182790
+            }
+          ]
+        }
+      },
+      {
+        "precision": "uint8",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 10605.799999982119,
+          "inferenceMs": 4926.4000000059605,
+          "totalMs": 16861.29999998212,
+          "grade": "very-slow",
+          "megapixelsPerSecond": 0.14196817148407637
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "dimensions": true,
+          "finite": true,
+          "uniqueLabels": true,
+          "requiredLabelsPresent": true,
+          "rangesPass": true,
+          "areas": {
+            "building": 0.7167196650805271,
+            "sky": 0.021820381131039533,
+            "person": 0.2614599537884334
+          },
+          "classifiedRatio": 1,
+          "grade": "scene-segmentation-pass"
+        },
+        "nativeOutput": {
+          "width": 1024,
+          "height": 683,
+          "segments": [
+            {
+              "label": "building",
+              "score": null,
+              "width": 1024,
+              "height": 683,
+              "foregroundPixels": 501268
+            },
+            {
+              "label": "sky",
+              "score": null,
+              "width": 1024,
+              "height": 683,
+              "foregroundPixels": 15261
+            },
+            {
+              "label": "person",
+              "score": null,
+              "width": 1024,
+              "height": 683,
+              "foregroundPixels": 182863
+            }
+          ]
+        }
+      },
+      {
+        "precision": "q8",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 11630.699999988079,
+          "inferenceMs": 9322.09999999404,
+          "totalMs": 22232.79999998212,
+          "grade": "very-slow",
+          "megapixelsPerSecond": 0.07502515527621965
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "dimensions": true,
+          "finite": true,
+          "uniqueLabels": true,
+          "requiredLabelsPresent": true,
+          "rangesPass": true,
+          "areas": {
+            "building": 0.7150167574121523,
+            "sky": 0.023601928532210836,
+            "person": 0.2613813140556369
+          },
+          "classifiedRatio": 1,
+          "grade": "scene-segmentation-pass"
+        },
+        "nativeOutput": {
+          "width": 1024,
+          "height": 683,
+          "segments": [
+            {
+              "label": "building",
+              "score": null,
+              "width": 1024,
+              "height": 683,
+              "foregroundPixels": 500077
+            },
+            {
+              "label": "sky",
+              "score": null,
+              "width": 1024,
+              "height": 683,
+              "foregroundPixels": 16507
+            },
+            {
+              "label": "person",
+              "score": null,
+              "width": 1024,
+              "height": 683,
+              "foregroundPixels": 182808
+            }
+          ]
+        }
+      },
+      {
+        "precision": "q8",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 11040.40000000596,
+          "inferenceMs": 9365.59999999404,
+          "totalMs": 21809.100000023842,
+          "grade": "very-slow",
+          "megapixelsPerSecond": 0.07467668916037895
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "dimensions": true,
+          "finite": true,
+          "uniqueLabels": true,
+          "requiredLabelsPresent": true,
+          "rangesPass": true,
+          "areas": {
+            "building": 0.7147379438140556,
+            "sky": 0.02361050741215227,
+            "person": 0.2616515487737921
+          },
+          "classifiedRatio": 1,
+          "grade": "scene-segmentation-pass"
+        },
+        "nativeOutput": {
+          "width": 1024,
+          "height": 683,
+          "segments": [
+            {
+              "label": "building",
+              "score": null,
+              "width": 1024,
+              "height": 683,
+              "foregroundPixels": 499882
+            },
+            {
+              "label": "sky",
+              "score": null,
+              "width": 1024,
+              "height": 683,
+              "foregroundPixels": 16513
+            },
+            {
+              "label": "person",
+              "score": null,
+              "width": 1024,
+              "height": 683,
+              "foregroundPixels": 182997
+            }
+          ]
+        }
+      },
+      {
+        "precision": "q4",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 15844.09999999404,
+          "inferenceMs": 4798.4000000059605,
+          "totalMs": 21937.90000000596,
+          "grade": "very-slow",
+          "megapixelsPerSecond": 0.14575525175040246
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "dimensions": true,
+          "finite": true,
+          "uniqueLabels": true,
+          "requiredLabelsPresent": true,
+          "rangesPass": true,
+          "areas": {
+            "building": 0.7035825402635432,
+            "sky": 0.034577175603953146,
+            "person": 0.26184028413250365
+          },
+          "classifiedRatio": 1,
+          "grade": "scene-segmentation-pass"
+        },
+        "nativeOutput": {
+          "width": 1024,
+          "height": 683,
+          "segments": [
+            {
+              "label": "building",
+              "score": null,
+              "width": 1024,
+              "height": 683,
+              "foregroundPixels": 492080
+            },
+            {
+              "label": "sky",
+              "score": null,
+              "width": 1024,
+              "height": 683,
+              "foregroundPixels": 24183
+            },
+            {
+              "label": "person",
+              "score": null,
+              "width": 1024,
+              "height": 683,
+              "foregroundPixels": 183129
+            }
+          ]
+        }
+      },
+      {
+        "precision": "q4",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 19026.30000001192,
+          "inferenceMs": 961.0999999940395,
+          "totalMs": 21425.59999999404,
+          "grade": "slow",
+          "megapixelsPerSecond": 0.7276995109815185
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "dimensions": true,
+          "finite": true,
+          "uniqueLabels": true,
+          "requiredLabelsPresent": true,
+          "rangesPass": true,
+          "areas": {
+            "building": 0.7035825402635432,
+            "sky": 0.034577175603953146,
+            "person": 0.26184028413250365
+          },
+          "classifiedRatio": 1,
+          "grade": "scene-segmentation-pass"
+        },
+        "nativeOutput": {
+          "width": 1024,
+          "height": 683,
+          "segments": [
+            {
+              "label": "building",
+              "score": null,
+              "width": 1024,
+              "height": 683,
+              "foregroundPixels": 492080
+            },
+            {
+              "label": "sky",
+              "score": null,
+              "width": 1024,
+              "height": 683,
+              "foregroundPixels": 24183
+            },
+            {
+              "label": "person",
+              "score": null,
+              "width": 1024,
+              "height": 683,
+              "foregroundPixels": 183129
+            }
+          ]
+        }
+      },
+      {
+        "precision": "q4f16",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 11557.5,
+          "inferenceMs": 5203.800000011921,
+          "totalMs": 18118.59999999404,
+          "grade": "very-slow",
+          "megapixelsPerSecond": 0.13440024597378797
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "dimensions": true,
+          "finite": true,
+          "uniqueLabels": true,
+          "requiredLabelsPresent": true,
+          "rangesPass": true,
+          "areas": {
+            "building": 0.703559663250366,
+            "sky": 0.03460434205710102,
+            "person": 0.26183599469253294
+          },
+          "classifiedRatio": 1,
+          "grade": "scene-segmentation-pass"
+        },
+        "nativeOutput": {
+          "width": 1024,
+          "height": 683,
+          "segments": [
+            {
+              "label": "building",
+              "score": null,
+              "width": 1024,
+              "height": 683,
+              "foregroundPixels": 492064
+            },
+            {
+              "label": "sky",
+              "score": null,
+              "width": 1024,
+              "height": 683,
+              "foregroundPixels": 24202
+            },
+            {
+              "label": "person",
+              "score": null,
+              "width": 1024,
+              "height": 683,
+              "foregroundPixels": 183126
+            }
+          ]
+        }
+      },
+      {
+        "precision": "q4f16",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 10842.600000023842,
+          "inferenceMs": 947.1999999880791,
+          "totalMs": 13098.800000011921,
+          "grade": "slow",
+          "megapixelsPerSecond": 0.7383783783876712
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "dimensions": true,
+          "finite": true,
+          "uniqueLabels": true,
+          "requiredLabelsPresent": true,
+          "rangesPass": true,
+          "areas": {
+            "building": 0.7048350567349927,
+            "sky": 0.03334038707906296,
+            "person": 0.26182455618594436
+          },
+          "classifiedRatio": 1,
+          "grade": "scene-segmentation-pass"
+        },
+        "nativeOutput": {
+          "width": 1024,
+          "height": 683,
+          "segments": [
+            {
+              "label": "building",
+              "score": null,
+              "width": 1024,
+              "height": 683,
+              "foregroundPixels": 492956
+            },
+            {
+              "label": "sky",
+              "score": null,
+              "width": 1024,
+              "height": 683,
+              "foregroundPixels": 23318
+            },
+            {
+              "label": "person",
+              "score": null,
+              "width": 1024,
+              "height": 683,
+              "foregroundPixels": 183118
+            }
+          ]
+        }
+      },
+      {
+        "precision": "bnb4",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 18473.80000001192,
+          "inferenceMs": 4866.199999988079,
+          "totalMs": 24743,
+          "grade": "very-slow",
+          "megapixelsPerSecond": 0.1437244667300385
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "dimensions": true,
+          "finite": true,
+          "uniqueLabels": true,
+          "requiredLabelsPresent": true,
+          "rangesPass": true,
+          "areas": {
+            "building": 0.7035825402635432,
+            "sky": 0.034577175603953146,
+            "person": 0.26184028413250365
+          },
+          "classifiedRatio": 1,
+          "grade": "scene-segmentation-pass"
+        },
+        "nativeOutput": {
+          "width": 1024,
+          "height": 683,
+          "segments": [
+            {
+              "label": "building",
+              "score": null,
+              "width": 1024,
+              "height": 683,
+              "foregroundPixels": 492080
+            },
+            {
+              "label": "sky",
+              "score": null,
+              "width": 1024,
+              "height": 683,
+              "foregroundPixels": 24183
+            },
+            {
+              "label": "person",
+              "score": null,
+              "width": 1024,
+              "height": 683,
+              "foregroundPixels": 183129
+            }
+          ]
+        }
+      },
+      {
+        "precision": "bnb4",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 15142.799999982119,
+          "inferenceMs": 970.2000000178814,
+          "totalMs": 17421.70000001788,
+          "grade": "slow",
+          "megapixelsPerSecond": 0.7208740465750462
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "dimensions": true,
+          "finite": true,
+          "uniqueLabels": true,
+          "requiredLabelsPresent": true,
+          "rangesPass": true,
+          "areas": {
+            "building": 0.7035825402635432,
+            "sky": 0.034577175603953146,
+            "person": 0.26184028413250365
+          },
+          "classifiedRatio": 1,
+          "grade": "scene-segmentation-pass"
+        },
+        "nativeOutput": {
+          "width": 1024,
+          "height": 683,
+          "segments": [
+            {
+              "label": "building",
+              "score": null,
+              "width": 1024,
+              "height": 683,
+              "foregroundPixels": 492080
+            },
+            {
+              "label": "sky",
+              "score": null,
+              "width": 1024,
+              "height": 683,
+              "foregroundPixels": 24183
+            },
+            {
+              "label": "person",
+              "score": null,
+              "width": 1024,
+              "height": 683,
+              "foregroundPixels": 183129
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

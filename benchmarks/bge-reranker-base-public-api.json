@@ -1,0 +1,40 @@
+{
+  "configuration": {
+    "precision": "q8",
+    "device": "wasm"
+  },
+  "passed": true,
+  "manifestDiscovered": true,
+  "downloadProgressEvents": 8764,
+  "cache": {
+    "cold": false,
+    "expectedPersistent": false,
+    "downloadDetected": false,
+    "reinitialization": true,
+    "deleted": true,
+    "otherModelPreserved": true,
+    "note": "The smallest BGE artifact is larger than this isolated Chrome profile retained in Cache API; inference succeeds but subsequent sessions redownload weights."
+  },
+  "invalidInputRejected": true,
+  "unsupportedStreamingRejected": true,
+  "clearMemoryVerified": true,
+  "runtime": {
+    "durationMs": 229.5
+  },
+  "nativeOutput": {
+    "results": [
+      {
+        "document": "Paris is the capital and largest city of France.",
+        "score": 0.9996695377265243,
+        "logit": 8.014687538146973,
+        "originalIndex": 0
+      },
+      {
+        "document": "Whales are large marine mammals that live in the ocean.",
+        "score": 0.00003792048263693832,
+        "logit": -10.179981231689453,
+        "originalIndex": 1
+      }
+    ]
+  }
+}

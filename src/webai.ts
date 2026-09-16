@@ -1,66 +1,46 @@
-// src/WebAI.ts
-import { ModelManager } from "./managers/webai-model-manager";
 import { QueueManager } from "./managers/webai-queue-manager";
+import { ModelManager } from "./managers/webai-model-manager";
 import { WorkerManager } from "./managers/webai-worker-manager";
-import { REMOTE_WORKER_ENDPOINT, VERSION } from "./utils/constants";
-import { WebAIMode, WebAIDevice, WebAIPrecision, WebAIPriorities, ProgressType, AuthRetryOptions, OnAuthCallback } from "./utils/types";
-import { checkIsModelDownloaded, checkIsWebGPUAvailable, checkStorageQuota } from "./utils/utils";
+import { checkIsWebGPUAvailable, checkStorageQuota } from "./utils/utils";
+import { DEFAULT_WORKER_BASE_PATH, DEFAULT_WORKER_INIT_TIMEOUT_MS } from "./utils/constants";
+import {
+  WebAIDevice,
+  WebAIPrecision,
+  WebAIPriorities,
+  ProgressType,
+  WebAIOptions,
+  WebAIResult,
+} from "./utils/types";
 
 export class WebAI {
-  public version = VERSION;
   private _modelId: string;
-  private _dev: boolean;
   private _workerPath?: string;
-  private _onAuth?: OnAuthCallback;
-  private _authRetryOptions?: AuthRetryOptions;
+  private _workerManager: WorkerManager;
+  private _modelManager: ModelManager;
+  private _queueManager: QueueManager;
   private _isWebGPUAvailable: boolean | null = null;
   private _storageQuota: StorageEstimate | null = null;
   private _isInitialized: boolean = false;
+  private _isInitializing: boolean = false;
 
-  // Managers
-  private _workerManager: WorkerManager;
-  private _queueManager: QueueManager;
-  private _modelManager: ModelManager;
- 
   private constructor({
     modelId,
-    dev = false,
     workerPath,
-    onAuth,
-    authRetryOptions,
-  }: {
-    modelId: string;
-    dev?: boolean;
-    workerPath?: string;
-    onAuth?: OnAuthCallback;
-    authRetryOptions?: AuthRetryOptions;
-  }) {
+    workerConfig,
+    workerInitTimeoutMs = DEFAULT_WORKER_INIT_TIMEOUT_MS,
+  }: WebAIOptions) {
     this._modelId = modelId;
-    this._dev = dev;
     this._workerPath = workerPath;
-    this._onAuth = onAuth;
-    this._authRetryOptions = authRetryOptions;
 
-    // Initialize managers - pass isDev, onAuth, and authRetryOptions to ModelManager
-    this._workerManager = new WorkerManager(this.#getWorkerPath(), modelId);
-    this._queueManager = new QueueManager();
-    this._modelManager = new ModelManager(modelId, this._workerManager, dev, onAuth, authRetryOptions);
+    const workerUrl = this.#getWorkerPath();
+
+    this._workerManager = new WorkerManager(workerUrl, workerInitTimeoutMs);
+    this._modelManager = new ModelManager(this._modelId, this._workerManager, workerConfig);
+    this._queueManager = new QueueManager(this._workerManager);
   }
 
-  static async create({
-    modelId,
-    dev = false,
-    workerPath,
-    onAuth,
-    authRetryOptions,
-  }: {
-    modelId: string;
-    dev?: boolean;
-    workerPath?: string;
-    onAuth?: OnAuthCallback;
-    authRetryOptions?: AuthRetryOptions;
-  }): Promise<WebAI> {
-    const instance = new WebAI({ modelId, dev, workerPath, onAuth, authRetryOptions });
+  static async create(options: WebAIOptions): Promise<WebAI> {
+    const instance = new WebAI(options);
     await instance.#createInstance();
     return instance;
   }
@@ -70,54 +50,57 @@ export class WebAI {
       await this._workerManager.initWorker();
       this._isWebGPUAvailable = await checkIsWebGPUAvailable();
       this._storageQuota = await checkStorageQuota();
-      await this._modelManager.checkModelSupports(this._workerManager.worker);
+      await this._modelManager.checkModelSupports();
     } catch (error) {
+      this._workerManager.terminateWorker();
       throw error;
     }
   }
 
   async init({
-    mode = "auto",
     precision,
     device,
     priorities,
     onDownloadProgress,
     callbackThrottle = 1000
   }: {
-    mode: WebAIMode;
     precision?: WebAIPrecision;
     device?: WebAIDevice;
     priorities?: WebAIPriorities;
     onDownloadProgress?: (progress: ProgressType) => void;
     callbackThrottle?: number;
-  }): Promise<boolean> {
-    
-    const result = await this._modelManager.initModel({
-      mode,
-      precision,
-      device,
-      priorities,
-      onDownloadProgress,
-      callbackThrottle,
-      worker: this._workerManager.worker,
-      isWebGPUAvailable: this._isWebGPUAvailable,
-      storageQuota: this._storageQuota,
-    });
-
-    this._isInitialized = result;
-    return result;
+  } = {}): Promise<boolean> {
+    if (this._isInitializing) throw new Error("WebAI initialization is already in progress.");
+    if (this._queueManager.isGenerating) throw new Error("Cannot initialize while generating.");
+    this._isInitializing = true;
+    this._isInitialized = false;
+    try {
+      const result = await this._modelManager.initModel({
+        precision,
+        device,
+        priorities,
+        onDownloadProgress,
+        callbackThrottle,
+        isWebGPUAvailable: this._isWebGPUAvailable,
+        storageQuota: this._storageQuota,
+      });
+      this._isInitialized = result;
+      return result;
+    } finally {
+      this._isInitializing = false;
+    }
   }
 
-  async generate(data: { userInput: any, modelConfig?: object, generateConfig?: object }): Promise<any> {
+  async generate<T = unknown>(
+    data: { userInput?: any; modelConfig?: object; generateConfig?: object } | any,
+  ): Promise<WebAIResult<T>> {
     if (!this._isInitialized) {
       throw new Error("WebAI instance must be initialized before generating. Call init() first.");
     }
 
-    return this._queueManager.enqueueGenerate(
-      data,
-      this._workerManager.worker,
-      this._modelManager.mode
-    );
+    const payload = data?.userInput ? data : { userInput: data };
+
+    return this._queueManager.enqueueGenerate<T>(payload);
   }
 
   async generateStream(data: {
@@ -126,94 +109,77 @@ export class WebAI {
     generateConfig?: object,
     onStream: (chunk: any) => void
   }): Promise<void> {
+    if (!this._modelManager.doesSupportStreamGeneration) {
+      throw new Error(`Stream generation is not supported by model '${this._modelId}'.`);
+    }
     if (!this._isInitialized) {
       throw new Error("WebAI instance must be initialized before generating. Call init() first.");
     }
 
-    return this._queueManager.enqueueGenerateStream(
-      data,
-      this._workerManager.worker,
-      this._modelManager.mode
-    );
+    const { onStream, ...payload } = data;
+    return this._queueManager.enqueueGenerateStream(payload, onStream);
   }
 
-  clearQueue({ interrupt = true }: { interrupt?: boolean } = {}): void {
+  async clearQueue({ interrupt = true }: { interrupt?: boolean } = {}): Promise<void> {
     this._queueManager.clearQueue();
     if (interrupt) {
-      this.interrupt({clearQueue: false});
+      await this.interrupt({ clearQueue: false });
     }
   }
 
   async deleteDownloadedModel({ precision }: { precision?: WebAIPrecision } = {}): Promise<void> {
+    if (this._isInitialized) await this.clearMemory();
     if (precision) {
-      // Delete specific precision
       await this._modelManager.deletePrecisionSpecificModel(precision);
     } else {
-      // Delete everything (original behavior)
       await this._modelManager.clearCache();
     }
+    this._isInitialized = false;
   }
 
-  terminate() {
-    this.clearQueue();
+  async terminate(): Promise<void> {
+    this._queueManager.cancelAll();
     this._workerManager.terminateWorker();
     this._isInitialized = false;
   }
 
   async interrupt({ clearQueue = true }: { clearQueue?: boolean } = {}): Promise<void> {
-    // Clear queue first if requested
     if (clearQueue) {
       this._queueManager.clearQueue();
     }
 
-    // Handle interruption based on device type
-    if (this._modelManager.device === 'wasm' || this._modelManager.externalInterrupt) {
-      await this._handleWasmInterrupt();
-    } else {
-      this._workerManager.interruptWorker();
-    }
+    await this._handleWorkerInterrupt();
   }
 
-  private async _handleWasmInterrupt(): Promise<void> {
+  private async _handleWorkerInterrupt(): Promise<void> {
     try {
-      // Notify queue manager that we're doing a forced interruption
-      this._queueManager.handleForcedInterruption();
-      
-      // Terminate and reload worker
-      await this._workerManager.terminateAndReload();
-      
-      // Re-initialize the model to restore the same state
-      if (this._isInitialized && this._modelManager.mode) {
-        await this._modelManager.reinitializeAfterInterrupt(
-          this._workerManager.worker,
-        );
+      // Termination is the reliable cancellation primitive because a busy inference worker may
+      // not service an interrupt message. Recreate it and restore the cached model configuration.
+      this._queueManager.cancelCurrent();
+      await this._workerManager.restart();
+      await this._modelManager.checkModelSupports();
+
+      if (this._isInitialized) {
+        await this._modelManager.reinitializeAfterInterrupt();
       }
     } catch (error) {
-      console.error('Error during interrupt:', error);
-      // Even if reinitialization fails, we've successfully interrupted
-      // The user can call init() again if needed
+      this._isInitialized = false;
+      throw error;
     }
   }
 
-  clearMemory() {
-    this._workerManager.clearMemory();
+  async clearMemory(): Promise<void> {
+    if (this._queueManager.isGenerating) {
+      throw new Error("Cannot clear model memory while generation is active. Interrupt first.");
+    }
+    await this._workerManager.clearMemory();
     this._isInitialized = false;
   }
 
   async checkIsModelDownloaded({ precision }: {
     precision: WebAIPrecision;
   }) {
-    const modelKeys = this._modelManager.modelSupportedPrecisionsDevicesMap?.[precision]?.modelKeys;
-    if (!modelKeys) {
-      console.warn("Model does not support this precision", precision);
-      return false;
-    }
-    const isDownloaded = await checkIsModelDownloaded(
-      precision,
-      modelKeys,
-      this._modelId
-    );
-    return isDownloaded;
+    return this._modelManager.isModelDownloaded(precision);
   }
 
   async downloadModel({
@@ -226,37 +192,23 @@ export class WebAI {
     callbackThrottle?: number;
   }) {
     return this._modelManager.downloadModel(
-      this._workerManager.worker, 
-      precision, 
-      onDownloadProgress, 
+      precision,
+      onDownloadProgress,
       callbackThrottle
     );
   }
 
   #getWorkerPath(): string {
-    // If custom workerPath is provided, use it directly
     if (this._workerPath) {
       return this._workerPath;
     }
 
-    // Otherwise, use the default remote worker endpoint
-    const basePath = `${REMOTE_WORKER_ENDPOINT}/models/${this._modelId}/js-worker`;
     const workerFile = `${this._modelId}.worker.js`;
-    
-    return `${basePath}/${workerFile}`;
- 
+    return `${DEFAULT_WORKER_BASE_PATH}/${workerFile}`;
   }
 
   get modelId(): string {
     return this._modelId;
-  }
-
-  get dev(): boolean {
-    return this._dev;
-  }
-
-  get mode(): WebAIMode | null {
-    return this._modelManager.mode;
   }
 
   get precision(): WebAIPrecision | null {
@@ -276,30 +228,37 @@ export class WebAI {
   }
 
   get modelSupportedPrecisionsDevicesMap() {
-    return this._modelManager.modelSupportedPrecisionsDevicesMap
+    return this._modelManager.modelSupportedPrecisionsDevicesMap;
   }
 
-  get modelSupportedPrecisions() {
+  get modelSupportedPrecisions(): WebAIPrecision[] | null {
     return this._modelManager.modelSupportedPrecisions;
   }
 
-  get modelSupportedModes() {
-    return this._modelManager.modelSupportedModes;
+  get doesSupportStreamGeneration(): boolean | null {
+    return this._modelManager.doesSupportStreamGeneration;
+  }
+
+  get externalInterrupt(): boolean | null {
+    return this._modelManager.externalInterrupt;
+  }
+
+  /** Self-described input, configuration, output, and operation contract. */
+  get modelManifest() {
+    return this._modelManager.manifest;
   }
 
   get isGenerating(): boolean {
     return this._queueManager.isGenerating;
   }
 
-  get queueSize(): number {
-    return this._queueManager.queueSize;
-  }
-
-  get doesSupportStreamGeneration(): boolean | null{
-    return this._modelManager.doesSupportStreamGeneration;
+  get queueLength(): number {
+    return this._queueManager.queueLength;
   }
 
   get isInitialized(): boolean {
     return this._isInitialized;
   }
 }
+
+export default WebAI;

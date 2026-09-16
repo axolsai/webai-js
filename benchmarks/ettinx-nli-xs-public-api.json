@@ -1,0 +1,40 @@
+{
+  "passed": true,
+  "configuration": {
+    "precision": "q8",
+    "device": "wasm"
+  },
+  "manifestDiscovered": true,
+  "downloadProgressEvents": 1348,
+  "cache": {
+    "cold": false,
+    "downloaded": true,
+    "reinitialized": true,
+    "deleted": true,
+    "otherModelPreserved": true
+  },
+  "invalidInputRejected": true,
+  "unsupportedStreamingRejected": true,
+  "clearMemoryVerified": true,
+  "runtime": {
+    "durationMs": 33.19999998807907
+  },
+  "nativeOutput": {
+    "label": "entailment",
+    "score": 0.9709872487431904,
+    "scores": [
+      {
+        "label": "entailment",
+        "score": 0.9709872487431904
+      },
+      {
+        "label": "neutral",
+        "score": 0.02879729619341853
+      },
+      {
+        "label": "contradiction",
+        "score": 0.00021545506339101968
+      }
+    ]
+  }
+}

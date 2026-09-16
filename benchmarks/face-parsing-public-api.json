@@ -1,0 +1,63 @@
+{
+  "passed": true,
+  "configuration": {
+    "precision": "fp16",
+    "device": "webgpu"
+  },
+  "manifestDiscovered": true,
+  "downloadProgressEvents": 5162,
+  "cache": {
+    "cold": false,
+    "downloaded": true,
+    "reinitialized": true,
+    "deleted": true,
+    "otherModelPreserved": true
+  },
+  "invalidInputRejected": true,
+  "unsupportedStreamingRejected": true,
+  "clearMemoryVerified": true,
+  "runtime": {
+    "durationMs": 792.2999999821186
+  },
+  "nativeOutput": {
+    "width": 1024,
+    "height": 683,
+    "segments": [
+      {
+        "label": "background",
+        "score": null,
+        "maskBytes": 699392
+      },
+      {
+        "label": "skin",
+        "score": null,
+        "maskBytes": 699392
+      },
+      {
+        "label": "eye_g",
+        "score": null,
+        "maskBytes": 699392
+      },
+      {
+        "label": "hair",
+        "score": null,
+        "maskBytes": 699392
+      },
+      {
+        "label": "hat",
+        "score": null,
+        "maskBytes": 699392
+      },
+      {
+        "label": "neck",
+        "score": null,
+        "maskBytes": 699392
+      },
+      {
+        "label": "cloth",
+        "score": null,
+        "maskBytes": 699392
+      }
+    ]
+  }
+}

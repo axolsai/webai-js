@@ -1,0 +1,764 @@
+{
+  "contractVersion": "1.0",
+  "model": {
+    "id": "paraphrase-multilingual-minilm-l12-v2",
+    "displayName": "Paraphrase Multilingual MiniLM L12 v2",
+    "provider": "Sentence Transformers",
+    "providerUrl": "https://www.sbert.net/",
+    "license": "Apache-2.0",
+    "licenseUrl": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+    "lastUpdated": "2026-01-28T10:02:26.000Z",
+    "sourceRepository": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+    "repository": "Xenova/paraphrase-multilingual-MiniLM-L12-v2",
+    "artifactRevision": "2c4055b12046f11709e9df2c122e59ffbdc2f900",
+    "artifactLastUpdated": "2025-07-22T00:07:45.000Z",
+    "task": "feature-extraction",
+    "description": "A multilingual sentence-transformer that produces normalized 384-dimensional embeddings for paraphrase detection, semantic similarity, clustering, and retrieval in the browser.",
+    "intendedUses": [
+      "Multilingual and cross-lingual semantic search and retrieval.",
+      "Clustering, similarity, and classification prototypes."
+    ],
+    "limitations": [
+      "Similarity quality varies by language, domain, sentence length, and input quality across the model's 50-language training coverage.",
+      "Semantic similarity is not factual verification and can encode training-data bias.",
+      "Long inputs are truncated and should be chunked.",
+      "Quantization can change ranking margins."
+    ]
+  },
+  "runtime": {
+    "engine": {
+      "name": "Transformers.js",
+      "version": "4.2.0"
+    },
+    "precisions": {
+      "q4f16": {
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "weightsSize": 204777707,
+        "size": 236625303,
+        "modelKeys": [
+          "model_q4f16.onnx"
+        ],
+        "dtype": "q4f16",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4": {
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "weightsSize": 398649249,
+        "size": 430496845,
+        "modelKeys": [
+          "model_q4.onnx"
+        ],
+        "dtype": "q4",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q8": {
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "weightsSize": 118308126,
+        "size": 150155722,
+        "modelKeys": [
+          "model_quantized.onnx"
+        ],
+        "dtype": "q8",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "fp16": {
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "weightsSize": 235336673,
+        "size": 267184269,
+        "modelKeys": [
+          "model_fp16.onnx"
+        ],
+        "dtype": "fp16",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "fp32": {
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "weightsSize": 470268510,
+        "size": 502116106,
+        "modelKeys": [
+          "model.onnx"
+        ],
+        "dtype": "fp32",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "int8": {
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "weightsSize": 118054609,
+        "size": 149902205,
+        "modelKeys": [
+          "model_int8.onnx"
+        ],
+        "dtype": "int8",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "uint8": {
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "weightsSize": 118054642,
+        "size": 149902238,
+        "modelKeys": [
+          "model_uint8.onnx"
+        ],
+        "dtype": "uint8",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "bnb4": {
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "weightsSize": 397322601,
+        "size": 429170197,
+        "modelKeys": [
+          "model_bnb4.onnx"
+        ],
+        "dtype": "bnb4",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      }
+    }
+  },
+  "benchmark": {
+    "report": "benchmarks/paraphrase-multilingual-minilm-l12-v2.json",
+    "testedAt": "2026-09-10T17:01:39.383Z",
+    "fixture": {
+      "file": "paraphrase-multilingual-minilm-l12-v2.json",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/paraphrase-multilingual-minilm-l12-v2.json",
+      "size": 523,
+      "sha1": "0294528b8c4ca8006eadb7a4872cad2a5ce29416"
+    },
+    "candidates": {
+      "q4f16": {
+        "weightsSize": 204777707,
+        "size": 236625303,
+        "modelKeys": [
+          "model_q4f16.onnx"
+        ],
+        "dtype": "q4f16",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4": {
+        "weightsSize": 398649249,
+        "size": 430496845,
+        "modelKeys": [
+          "model_q4.onnx"
+        ],
+        "dtype": "q4",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q8": {
+        "weightsSize": 118308126,
+        "size": 150155722,
+        "modelKeys": [
+          "model_quantized.onnx"
+        ],
+        "dtype": "q8",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "fp16": {
+        "weightsSize": 235336673,
+        "size": 267184269,
+        "modelKeys": [
+          "model_fp16.onnx"
+        ],
+        "dtype": "fp16",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "fp32": {
+        "weightsSize": 470268510,
+        "size": 502116106,
+        "modelKeys": [
+          "model.onnx"
+        ],
+        "dtype": "fp32",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "int8": {
+        "weightsSize": 118054609,
+        "size": 149902205,
+        "modelKeys": [
+          "model_int8.onnx"
+        ],
+        "dtype": "int8",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "uint8": {
+        "weightsSize": 118054642,
+        "size": 149902238,
+        "modelKeys": [
+          "model_uint8.onnx"
+        ],
+        "dtype": "uint8",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "bnb4": {
+        "weightsSize": 397322601,
+        "size": 429170197,
+        "modelKeys": [
+          "model_bnb4.onnx"
+        ],
+        "dtype": "bnb4",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      }
+    },
+    "qualityGate": "Finite normalized 384d vectors, distinct rows, and cross-lingual paraphrase cosine exceeds an unrelated sentence by at least 0.1.",
+    "invalidatedBy": [
+      "artifact revision change",
+      "runtime version change",
+      "fixture or quality gate change",
+      "browser/backend change"
+    ],
+    "results": [
+      {
+        "precision": "q4f16",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 31442.200000047684,
+          "grade": "failed"
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 1, ERROR_MESSAGE: /mnt/vss/_work/1/s/onnxruntime/core/graph/graph_utils.cc:30 int onnxruntime::graph_utils::GetIndexFromName(const Node &, const std::string &, bool) itr != node_args.end() was false. Attempting to get index by a name which does not exist:InsertedPrecisionFreeCast_/embeddings/LayerNorm/Constant_output_0for node: /embeddings/LayerNorm/Mul/SimplifiedLayerNormFusion/\n"
+      },
+      {
+        "precision": "q4f16",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 27484.400000095367,
+          "inferenceMs": 216,
+          "totalMs": 29123.600000023842,
+          "grade": "good",
+          "embeddingsPerSecond": 13.88888888888889
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "quality": {
+          "shape": true,
+          "finite": true,
+          "normalized": true,
+          "distinct": true,
+          "positive": 0.9634434633752343,
+          "negative": 0.016400515664729432,
+          "margin": 0.9470429477105049,
+          "minimumMargin": 0.1,
+          "grade": "semantic-retrieval-pass"
+        },
+        "nativeOutput": {
+          "rows": 3,
+          "dimensions": 384
+        }
+      },
+      {
+        "precision": "q4",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 59198.199999928474,
+          "inferenceMs": 93.10000002384186,
+          "totalMs": 60594.10000002384,
+          "grade": "excellent",
+          "embeddingsPerSecond": 32.223415673810244
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "quality": {
+          "shape": true,
+          "finite": true,
+          "normalized": true,
+          "distinct": true,
+          "positive": 0.9633238890429541,
+          "negative": 0.016378795891804777,
+          "margin": 0.9469450931511493,
+          "minimumMargin": 0.1,
+          "grade": "semantic-retrieval-pass"
+        },
+        "nativeOutput": {
+          "rows": 3,
+          "dimensions": 384
+        }
+      },
+      {
+        "precision": "q4",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 104547.10000002384,
+          "inferenceMs": 265.39999997615814,
+          "totalMs": 105967.29999995232,
+          "grade": "good",
+          "embeddingsPerSecond": 11.303692540578377
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "quality": {
+          "shape": true,
+          "finite": true,
+          "normalized": true,
+          "distinct": true,
+          "positive": 0.9633241034293016,
+          "negative": 0.016378732683020834,
+          "margin": 0.9469453707462808,
+          "minimumMargin": 0.1,
+          "grade": "semantic-retrieval-pass"
+        },
+        "nativeOutput": {
+          "rows": 3,
+          "dimensions": 384
+        }
+      },
+      {
+        "precision": "q8",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 19012.800000071526,
+          "inferenceMs": 79,
+          "totalMs": 20356.700000047684,
+          "grade": "excellent",
+          "embeddingsPerSecond": 37.974683544303794
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "quality": {
+          "shape": true,
+          "finite": true,
+          "normalized": true,
+          "distinct": true,
+          "positive": 0.9600488226006761,
+          "negative": 0.019562819127059206,
+          "margin": 0.9404860034736169,
+          "minimumMargin": 0.1,
+          "grade": "semantic-retrieval-pass"
+        },
+        "nativeOutput": {
+          "rows": 3,
+          "dimensions": 384
+        }
+      },
+      {
+        "precision": "q8",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 20864.5,
+          "inferenceMs": 132.5,
+          "totalMs": 22297.699999928474,
+          "grade": "excellent",
+          "embeddingsPerSecond": 22.641509433962263
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "quality": {
+          "shape": true,
+          "finite": true,
+          "normalized": true,
+          "distinct": true,
+          "positive": 0.9597591200892055,
+          "negative": 0.019554869530899063,
+          "margin": 0.9402042505583065,
+          "minimumMargin": 0.1,
+          "grade": "semantic-retrieval-pass"
+        },
+        "nativeOutput": {
+          "rows": 3,
+          "dimensions": 384
+        }
+      },
+      {
+        "precision": "fp16",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 31637.399999976158,
+          "grade": "failed"
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 1, ERROR_MESSAGE: /mnt/vss/_work/1/s/onnxruntime/core/graph/graph_utils.cc:30 int onnxruntime::graph_utils::GetIndexFromName(const Node &, const std::string &, bool) itr != node_args.end() was false. Attempting to get index by a name which does not exist:InsertedPrecisionFreeCast_/encoder/layer.11/output/LayerNorm/Constant_output_0for node: /embeddings/LayerNorm/Mul/SimplifiedLayerNormFusion/\n"
+      },
+      {
+        "precision": "fp16",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 32166.100000023842,
+          "inferenceMs": 82.60000002384186,
+          "totalMs": 33593.39999997616,
+          "grade": "excellent",
+          "embeddingsPerSecond": 36.319612580315656
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "quality": {
+          "shape": true,
+          "finite": true,
+          "normalized": true,
+          "distinct": true,
+          "positive": 0.9614530147869136,
+          "negative": 0.010634397365533989,
+          "margin": 0.9508186174213796,
+          "minimumMargin": 0.1,
+          "grade": "semantic-retrieval-pass"
+        },
+        "nativeOutput": {
+          "rows": 3,
+          "dimensions": 384
+        }
+      },
+      {
+        "precision": "fp32",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 54524.200000047684,
+          "inferenceMs": 88.39999997615814,
+          "totalMs": 55772.10000002384,
+          "grade": "excellent",
+          "embeddingsPerSecond": 33.936651592863264
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "quality": {
+          "shape": true,
+          "finite": true,
+          "normalized": true,
+          "distinct": true,
+          "positive": 0.9615690552802658,
+          "negative": 0.010496432821365476,
+          "margin": 0.9510726224589003,
+          "minimumMargin": 0.1,
+          "grade": "semantic-retrieval-pass"
+        },
+        "nativeOutput": {
+          "rows": 3,
+          "dimensions": 384
+        }
+      },
+      {
+        "precision": "fp32",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 59002.199999928474,
+          "inferenceMs": 135.40000009536743,
+          "totalMs": 60304,
+          "grade": "excellent",
+          "embeddingsPerSecond": 22.15657310108556
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "quality": {
+          "shape": true,
+          "finite": true,
+          "normalized": true,
+          "distinct": true,
+          "positive": 0.9615689143010782,
+          "negative": 0.010496399676341445,
+          "margin": 0.9510725146247367,
+          "minimumMargin": 0.1,
+          "grade": "semantic-retrieval-pass"
+        },
+        "nativeOutput": {
+          "rows": 3,
+          "dimensions": 384
+        }
+      },
+      {
+        "precision": "int8",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 21194.399999976158,
+          "inferenceMs": 79.19999992847443,
+          "totalMs": 22536.100000023842,
+          "grade": "excellent",
+          "embeddingsPerSecond": 37.87878791299624
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "quality": {
+          "shape": true,
+          "finite": true,
+          "normalized": true,
+          "distinct": true,
+          "positive": 0.9671473708784826,
+          "negative": 0.01563588563693314,
+          "margin": 0.9515114852415494,
+          "minimumMargin": 0.1,
+          "grade": "semantic-retrieval-pass"
+        },
+        "nativeOutput": {
+          "rows": 3,
+          "dimensions": 384
+        }
+      },
+      {
+        "precision": "int8",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 19456.100000023842,
+          "inferenceMs": 143,
+          "totalMs": 20852.5,
+          "grade": "excellent",
+          "embeddingsPerSecond": 20.97902097902098
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "quality": {
+          "shape": true,
+          "finite": true,
+          "normalized": true,
+          "distinct": true,
+          "positive": 0.9673156267541712,
+          "negative": 0.014866507112901387,
+          "margin": 0.9524491196412698,
+          "minimumMargin": 0.1,
+          "grade": "semantic-retrieval-pass"
+        },
+        "nativeOutput": {
+          "rows": 3,
+          "dimensions": 384
+        }
+      },
+      {
+        "precision": "uint8",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 20047,
+          "inferenceMs": 76.19999992847443,
+          "totalMs": 21320,
+          "grade": "excellent",
+          "embeddingsPerSecond": 39.37007877711243
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "quality": {
+          "shape": true,
+          "finite": true,
+          "normalized": true,
+          "distinct": true,
+          "positive": 0.96247490412721,
+          "negative": -0.0002607875357497017,
+          "margin": 0.9627356916629597,
+          "minimumMargin": 0.1,
+          "grade": "semantic-retrieval-pass"
+        },
+        "nativeOutput": {
+          "rows": 3,
+          "dimensions": 384
+        }
+      },
+      {
+        "precision": "uint8",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 20321.099999904633,
+          "inferenceMs": 148.70000004768372,
+          "totalMs": 21787.400000095367,
+          "grade": "excellent",
+          "embeddingsPerSecond": 20.174848682165354
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "quality": {
+          "shape": true,
+          "finite": true,
+          "normalized": true,
+          "distinct": true,
+          "positive": 0.9614893528663216,
+          "negative": -0.0023173713295110577,
+          "margin": 0.9638067241958327,
+          "minimumMargin": 0.1,
+          "grade": "semantic-retrieval-pass"
+        },
+        "nativeOutput": {
+          "rows": 3,
+          "dimensions": 384
+        }
+      },
+      {
+        "precision": "bnb4",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 53410.89999997616,
+          "inferenceMs": 79.20000004768372,
+          "totalMs": 54663.60000002384,
+          "grade": "excellent",
+          "embeddingsPerSecond": 37.87878785598231
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "quality": {
+          "shape": true,
+          "finite": true,
+          "normalized": true,
+          "distinct": true,
+          "positive": 0.9632869658872978,
+          "negative": 0.02356272016744846,
+          "margin": 0.9397242457198494,
+          "minimumMargin": 0.1,
+          "grade": "semantic-retrieval-pass"
+        },
+        "nativeOutput": {
+          "rows": 3,
+          "dimensions": 384
+        }
+      },
+      {
+        "precision": "bnb4",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 51658.10000002384,
+          "inferenceMs": 224.29999995231628,
+          "totalMs": 53029.5,
+          "grade": "good",
+          "embeddingsPerSecond": 13.374944273908904
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "quality": {
+          "shape": true,
+          "finite": true,
+          "normalized": true,
+          "distinct": true,
+          "positive": 0.9632869214774838,
+          "negative": 0.02356271629532229,
+          "margin": 0.9397242051821616,
+          "minimumMargin": 0.1,
+          "grade": "semantic-retrieval-pass"
+        },
+        "nativeOutput": {
+          "rows": 3,
+          "dimensions": 384
+        }
+      }
+    ],
+    "environment": "Headless Chrome on macOS; Transformers.js 4.2.0"
+  }
+}

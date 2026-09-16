@@ -1,0 +1,788 @@
+{
+  "model": {
+    "id": "kokoro-82m-v1",
+    "displayName": "Kokoro 82M v1.0 — Text to Speech",
+    "provider": "Hexgrad",
+    "providerUrl": "https://github.com/hexgrad/kokoro",
+    "license": "Apache-2.0",
+    "licenseUrl": "https://www.apache.org/licenses/LICENSE-2.0",
+    "lastUpdated": "2025-04-10T18:12:48.000Z",
+    "sourceRepository": "hexgrad/Kokoro-82M",
+    "repository": "onnx-community/Kokoro-82M-v1.0-ONNX",
+    "artifactRevision": "1939ad2a8e416c0acfeecc08a694d14ef25f2231",
+    "artifactLastUpdated": "2025-02-08T12:15:27.000Z",
+    "task": "text-to-speech",
+    "description": "An 82-million-parameter text-to-speech model that converts short English text into 24 kHz mono speech in a browser worker.",
+    "intendedUses": [
+      "Local narration and accessibility prototypes.",
+      "Generating short English voice prompts without sending text to an inference server."
+    ],
+    "limitations": [
+      "The bundled phonemizer and advertised voices support English only.",
+      "Names, acronyms, numbers, and unusual punctuation may be pronounced incorrectly.",
+      "Long text is truncated to the model context; split long passages into sentences.",
+      "Synthetic speech can sound unnatural and must not be used to impersonate a person or mislead listeners."
+    ]
+  },
+  "runtime": {
+    "name": "kokoro-js (Transformers.js adapter)",
+    "version": "1.2.1 / 3.5.1"
+  },
+  "benchmark": {
+    "report": "benchmarks/kokoro-82m-v1.json",
+    "testedAt": "2026-09-10T16:36:45.442Z",
+    "fixture": {
+      "file": "kokoro-82m-v1.json",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/kokoro-82m-v1.json",
+      "size": 338,
+      "sha1": "9b670566697f3b67757bbbb2f15a20512540258a",
+      "license": "CC0-1.0",
+      "reference": {
+        "file": "kokoro-82m-v1-reference.wav",
+        "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/kokoro-82m-v1-reference.wav",
+        "size": 158444,
+        "sha1": "fd763f81add8aa7fe892dea39117072a35a31fe0",
+        "samplingRate": 24000
+      }
+    },
+    "candidates": {
+      "fp32": {
+        "weightsSize": 325532232,
+        "size": 326058126,
+        "modelKeys": [
+          "model.onnx",
+          "voices/af_heart.bin"
+        ],
+        "dtype": "fp32",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "fp16": {
+        "weightsSize": 163234740,
+        "size": 163760634,
+        "modelKeys": [
+          "model_fp16.onnx",
+          "voices/af_heart.bin"
+        ],
+        "dtype": "fp16",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4": {
+        "weightsSize": 305215966,
+        "size": 305741860,
+        "modelKeys": [
+          "model_q4.onnx",
+          "voices/af_heart.bin"
+        ],
+        "dtype": "q4",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4f16": {
+        "weightsSize": 154586422,
+        "size": 155112316,
+        "modelKeys": [
+          "model_q4f16.onnx",
+          "voices/af_heart.bin"
+        ],
+        "dtype": "q4f16",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q8f16": {
+        "weightsSize": 86033585,
+        "size": 86559479,
+        "modelKeys": [
+          "model_q8f16.onnx",
+          "voices/af_heart.bin"
+        ],
+        "dtype": "q8f16",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q8": {
+        "weightsSize": 92361116,
+        "size": 92887010,
+        "modelKeys": [
+          "model_quantized.onnx",
+          "voices/af_heart.bin"
+        ],
+        "dtype": "q8",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "uint8": {
+        "weightsSize": 177464632,
+        "size": 177990526,
+        "modelKeys": [
+          "model_uint8.onnx",
+          "voices/af_heart.bin"
+        ],
+        "dtype": "uint8",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      }
+    },
+    "qualityGate": "Finite, non-silent 24 kHz audio of plausible duration, with waveform similarity to the checked-in fp32/WASM reference.",
+    "invalidatedBy": [
+      "artifact revision change",
+      "runtime version change",
+      "fixture or reference waveform change",
+      "quality-gate change",
+      "browser/backend behavior change"
+    ],
+    "results": [
+      {
+        "precision": "fp32",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 41754.40000009537,
+          "inferenceMs": 4349.5,
+          "totalMs": 47807.299999952316,
+          "secondsPerAudioSecond": 1.318030303030303,
+          "grade": "slow"
+        },
+        "quality": {
+          "passed": true,
+          "durationSeconds": 3.3,
+          "rms": 0.06860629096763833,
+          "peak": 0.5079130530357361,
+          "clippedFraction": 0,
+          "sampleCorrelation": 0.9999999927910427,
+          "envelopeCorrelation": 0.9999999999521426,
+          "normalizedRmse": 0.00012007552121325832,
+          "durationRatio": 1
+        },
+        "nativeOutput": {
+          "samplingRate": 24000,
+          "sampleCount": 79200,
+          "firstSamples": [
+            -9.692669209471205E-7,
+            4.6684485255354957E-7,
+            -8.935364093076714E-8,
+            0.0000015403933275592863,
+            -8.863023595040431E-7,
+            -1.9513146298777428E-7,
+            -0.0000018854865402317955,
+            9.209330187331943E-7,
+            0.000002313204959136783,
+            -0.000012010353202640545,
+            2.8386415440451174E-9,
+            -3.762182121391788E-9,
+            -1.5519947549336166E-9,
+            6.844343980461076E-10,
+            -8.203804302553408E-11,
+            7.502477111787087E-11
+          ]
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        }
+      },
+      {
+        "precision": "fp32",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 40312.90000009537,
+          "inferenceMs": 464.89999997615814,
+          "totalMs": 42450.299999952316,
+          "secondsPerAudioSecond": 0.14087878787156308,
+          "grade": "excellent"
+        },
+        "quality": {
+          "passed": true,
+          "durationSeconds": 3.3,
+          "rms": 0.06860775945769183,
+          "peak": 0.4999183118343353,
+          "clippedFraction": 0,
+          "sampleCorrelation": 0.9980067121265526,
+          "envelopeCorrelation": 0.9999628312005803,
+          "normalizedRmse": 0.06313999916367567,
+          "durationRatio": 1
+        },
+        "nativeOutput": {
+          "samplingRate": 24000,
+          "sampleCount": 79200,
+          "firstSamples": [
+            -9.612887197363307E-7,
+            4.6979235435173905E-7,
+            -8.795651496029677E-8,
+            0.0000015331712575061829,
+            -8.931995125749381E-7,
+            -1.9872763346029387E-7,
+            -0.0000018749813079921296,
+            9.42721101182542E-7,
+            0.0000023178922674560454,
+            -0.00001185815654025646,
+            2.8627094028621514E-9,
+            -3.749788923812503E-9,
+            -1.5687690035903756E-9,
+            6.82139456031905E-10,
+            -8.432049503070971E-11,
+            7.489901754365036E-11
+          ]
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        }
+      },
+      {
+        "precision": "fp16",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 23716.799999952316,
+          "inferenceMs": 4484.700000047684,
+          "totalMs": 30141.700000047684,
+          "secondsPerAudioSecond": 1.3590000000144498,
+          "grade": "slow"
+        },
+        "quality": {
+          "passed": true,
+          "durationSeconds": 3.3,
+          "rms": 0.06899933390282695,
+          "peak": 0.49755859375,
+          "clippedFraction": 0,
+          "sampleCorrelation": 0.7927188010006019,
+          "envelopeCorrelation": 0.9994370328249794,
+          "normalizedRmse": 0.6457321540162972,
+          "durationRatio": 1
+        },
+        "nativeOutput": {
+          "samplingRate": 24000,
+          "sampleCount": 79200,
+          "firstSamples": [
+            -9.5367431640625E-7,
+            4.76837158203125E-7,
+            0,
+            0.000001430511474609375,
+            -0.0000011920928955078125,
+            0,
+            -0.0000019073486328125,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 5
+        }
+      },
+      {
+        "precision": "fp16",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 22822.5,
+          "inferenceMs": 473.2000000476837,
+          "totalMs": 25218.600000023842,
+          "secondsPerAudioSecond": 0.14339393940838902,
+          "grade": "excellent"
+        },
+        "quality": {
+          "passed": true,
+          "durationSeconds": 3.3,
+          "rms": 0.06060165635233297,
+          "peak": 0.438232421875,
+          "clippedFraction": 0,
+          "sampleCorrelation": 0.3712962970118603,
+          "envelopeCorrelation": 0.9702705710514188,
+          "normalizedRmse": 1.0603358239411302,
+          "durationRatio": 1
+        },
+        "nativeOutput": {
+          "samplingRate": 24000,
+          "sampleCount": 79200,
+          "firstSamples": [
+            -7.152557373046875E-7,
+            4.76837158203125E-7,
+            -2.384185791015625E-7,
+            0.000001430511474609375,
+            -4.76837158203125E-7,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 5
+        }
+      },
+      {
+        "precision": "q4",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 37887.5,
+          "inferenceMs": 4511.300000071526,
+          "totalMs": 44154.299999952316,
+          "secondsPerAudioSecond": 1.3670606060822805,
+          "grade": "slow"
+        },
+        "quality": {
+          "passed": true,
+          "durationSeconds": 3.3,
+          "rms": 0.06894443024685742,
+          "peak": 0.5076503157615662,
+          "clippedFraction": 0,
+          "sampleCorrelation": 0.03702768976861299,
+          "envelopeCorrelation": 0.9069435788308251,
+          "normalizedRmse": 1.391208221128393,
+          "durationRatio": 1
+        },
+        "nativeOutput": {
+          "samplingRate": 24000,
+          "sampleCount": 79200,
+          "firstSamples": [
+            -9.581688118487364E-7,
+            4.7389593760271964E-7,
+            -9.329112771183645E-8,
+            0.0000015290580677174148,
+            -8.895035534806084E-7,
+            -1.9745652934943791E-7,
+            -0.000001866443085418723,
+            9.244627108273562E-7,
+            0.000002363190105825197,
+            -0.000011865843589475844,
+            2.8642284100044435E-9,
+            -3.7206266956246736E-9,
+            -1.5791843388512916E-9,
+            6.829707910327443E-10,
+            -8.63633192738078E-11,
+            7.675920316030371E-11
+          ]
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        }
+      },
+      {
+        "precision": "q4",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 37563.200000047684,
+          "inferenceMs": 470.6999999284744,
+          "totalMs": 39691.799999952316,
+          "secondsPerAudioSecond": 0.14263636361468923,
+          "grade": "excellent"
+        },
+        "quality": {
+          "passed": true,
+          "durationSeconds": 3.3,
+          "rms": 0.06439163267620523,
+          "peak": 0.4338442385196686,
+          "clippedFraction": 0,
+          "sampleCorrelation": -0.06215747489613346,
+          "envelopeCorrelation": 0.8950351786859115,
+          "normalizedRmse": 1.4133597928405466,
+          "durationRatio": 1
+        },
+        "nativeOutput": {
+          "samplingRate": 24000,
+          "sampleCount": 79200,
+          "firstSamples": [
+            -6.950755846446555E-7,
+            5.445535293802095E-7,
+            -1.0920442150563758E-7,
+            0.0000012475795756472507,
+            -8.957186992120114E-7,
+            -1.4843766393823898E-7,
+            -0.0000016097662864922313,
+            9.400444014318055E-7,
+            0.0000025972879029723117,
+            -0.000004701571469922783,
+            3.74502828748291E-9,
+            -2.122779951818643E-9,
+            -1.501497148836961E-9,
+            1.9843190979251801E-10,
+            -1.432175350535303E-10,
+            8.722042532660623E-11
+          ]
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        }
+      },
+      {
+        "precision": "q4f16",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 25810.299999952316,
+          "inferenceMs": 4515.299999952316,
+          "totalMs": 31990.400000095367,
+          "secondsPerAudioSecond": 1.3682727272582778,
+          "grade": "slow"
+        },
+        "quality": {
+          "passed": true,
+          "durationSeconds": 3.3,
+          "rms": 0.06942429598662073,
+          "peak": 0.494140625,
+          "clippedFraction": 0,
+          "sampleCorrelation": 0.11321534425722134,
+          "envelopeCorrelation": 0.9088864873722777,
+          "normalizedRmse": 1.3397227827163845,
+          "durationRatio": 1
+        },
+        "nativeOutput": {
+          "samplingRate": 24000,
+          "sampleCount": 79200,
+          "firstSamples": [
+            -9.5367431640625E-7,
+            4.76837158203125E-7,
+            0,
+            0.000001430511474609375,
+            -0.0000011920928955078125,
+            0,
+            -0.0000019073486328125,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 5
+        }
+      },
+      {
+        "precision": "q4f16",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 22052.700000047684,
+          "inferenceMs": 472.89999997615814,
+          "totalMs": 24406.899999976158,
+          "secondsPerAudioSecond": 0.14330303029580552,
+          "grade": "excellent"
+        },
+        "quality": {
+          "passed": true,
+          "durationSeconds": 3.3,
+          "rms": 0.059527670032833845,
+          "peak": 0.5048828125,
+          "clippedFraction": 0,
+          "sampleCorrelation": -0.0932173061118639,
+          "envelopeCorrelation": 0.8906495384631088,
+          "normalizedRmse": 1.3836963148850936,
+          "durationRatio": 1
+        },
+        "nativeOutput": {
+          "samplingRate": 24000,
+          "sampleCount": 79200,
+          "firstSamples": [
+            -7.152557373046875E-7,
+            4.76837158203125E-7,
+            -2.384185791015625E-7,
+            0.0000011920928955078125,
+            -4.76837158203125E-7,
+            9.5367431640625E-7,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 5
+        }
+      },
+      {
+        "precision": "q8f16",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 4360.199999928474,
+          "grade": "failed"
+        },
+        "error": "Invalid dtype: q8f16. Should be one of: auto, fp32, fp16, q8, int8, uint8, q4, bnb4, q4f16",
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        }
+      },
+      {
+        "precision": "q8f16",
+        "device": "webgpu",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 4491.100000023842,
+          "grade": "failed"
+        },
+        "error": "Invalid dtype: q8f16. Should be one of: auto, fp32, fp16, q8, int8, uint8, q4, bnb4, q4f16",
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 3
+        }
+      },
+      {
+        "precision": "q8",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 14929.600000023842,
+          "inferenceMs": 5986,
+          "totalMs": 22718,
+          "secondsPerAudioSecond": 1.7605882352941176,
+          "grade": "slow"
+        },
+        "quality": {
+          "passed": true,
+          "durationSeconds": 3.4,
+          "rms": 0.06765864513939171,
+          "peak": 0.4900903105735779,
+          "clippedFraction": 0,
+          "sampleCorrelation": 0.011055044103315695,
+          "envelopeCorrelation": 0.687987937117635,
+          "normalizedRmse": 1.4070903461527702,
+          "durationRatio": 1.0303030303030303
+        },
+        "nativeOutput": {
+          "samplingRate": 24000,
+          "sampleCount": 81600,
+          "firstSamples": [
+            -7.296810053958325E-7,
+            2.826477896178403E-7,
+            -5.724906415593978E-8,
+            0.0000012156577895439113,
+            -6.950476745259948E-7,
+            -9.925658872589338E-8,
+            -0.0000015764887848490616,
+            8.116664389490325E-7,
+            0.0000013307484323377139,
+            -0.000007543328592873877,
+            1.6882978348675692E-9,
+            -2.381747021829028E-9,
+            -1.0759982904673393E-9,
+            5.112264500617414E-10,
+            -4.106527964897744E-11,
+            4.115983248675903E-11
+          ]
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 5
+        }
+      },
+      {
+        "precision": "q8",
+        "device": "webgpu",
+        "status": "fail",
+        "runtime": {
+          "loadMs": 16228.799999952316,
+          "inferenceMs": 5741.200000047684,
+          "totalMs": 23716.5,
+          "secondsPerAudioSecond": 1.640342857156481,
+          "grade": "slow"
+        },
+        "quality": {
+          "passed": false,
+          "durationSeconds": 3.5,
+          "rms": 0.05473572135069462,
+          "peak": 0.32746556401252747,
+          "clippedFraction": 0,
+          "sampleCorrelation": 0.007970962973331618,
+          "envelopeCorrelation": 0.4172561668313359,
+          "normalizedRmse": 1.2891859540055977,
+          "durationRatio": 1.0606060606060606
+        },
+        "nativeOutput": {
+          "samplingRate": 24000,
+          "sampleCount": 84000,
+          "firstSamples": [
+            -0.0000013484791452356149,
+            9.798521887205425E-7,
+            -4.898998895441764E-7,
+            0.00000208126766665373,
+            -0.0000015180906984824105,
+            1.5427227140207833E-7,
+            -0.0000024021883291425183,
+            8.991994491225341E-7,
+            0.000007831022230675444,
+            -0.000047797650040593,
+            9.461761152351755E-9,
+            -7.126861767403625E-9,
+            -1.2633496471181616E-9,
+            1.4081888988215496E-9,
+            -9.052668614728532E-10,
+            4.2193551430536047E-10
+          ]
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 5
+        }
+      },
+      {
+        "precision": "uint8",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 26865.799999952316,
+          "inferenceMs": 4562,
+          "totalMs": 33196.200000047684,
+          "secondsPerAudioSecond": 1.3617910447761195,
+          "grade": "slow"
+        },
+        "quality": {
+          "passed": true,
+          "durationSeconds": 3.35,
+          "rms": 0.06758985897036245,
+          "peak": 0.521487832069397,
+          "clippedFraction": 0,
+          "sampleCorrelation": 0.025898285841203537,
+          "envelopeCorrelation": 0.8494190794039327,
+          "normalizedRmse": 1.390639863467057,
+          "durationRatio": 1.0151515151515151
+        },
+        "nativeOutput": {
+          "samplingRate": 24000,
+          "sampleCount": 80400,
+          "firstSamples": [
+            -8.843982186590438E-7,
+            4.7406479097844567E-7,
+            -9.047366944514579E-8,
+            0.0000014703737178933807,
+            -8.789775165496394E-7,
+            -1.8305189541933942E-7,
+            -0.0000018731805084826192,
+            8.98063376553182E-7,
+            0.0000025608753730921308,
+            -0.000010293448212905787,
+            3.5640077555854077E-9,
+            -3.853585450741548E-9,
+            -1.5110530604545147E-9,
+            4.880834070242202E-10,
+            -7.551038266884191E-11,
+            9.593853489420212E-11
+          ]
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 5
+        }
+      },
+      {
+        "precision": "uint8",
+        "device": "webgpu",
+        "status": "fail",
+        "runtime": {
+          "loadMs": 24371.699999928474,
+          "inferenceMs": null,
+          "totalMs": 42267.5,
+          "grade": "failed"
+        },
+        "error": "Model returned invalid audio samples",
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 5
+        }
+      },
+      {
+        "precision": "uint8f16",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 4269.600000023842,
+          "grade": "failed"
+        },
+        "error": "Invalid dtype: uint8f16. Should be one of: auto, fp32, fp16, q8, int8, uint8, q4, bnb4, q4f16",
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        }
+      },
+      {
+        "precision": "uint8f16",
+        "device": "webgpu",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 4249.399999976158,
+          "grade": "failed"
+        },
+        "error": "Invalid dtype: uint8f16. Should be one of: auto, fp32, fp16, q8, int8, uint8, q4, bnb4, q4f16",
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        }
+      }
+    ],
+    "environment": "Google Chrome on darwin/arm64; kokoro-js 1.2.1 / Transformers.js 3.5.1"
+  }
+}

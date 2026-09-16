@@ -1,0 +1,315 @@
+{
+  "contractVersion": "1.0",
+  "model": {
+    "id": "bge-reranker-large",
+    "displayName": "BGE Reranker Large — Cross-Encoder Ranking",
+    "provider": "Beijing Academy of Artificial Intelligence (BAAI)",
+    "providerUrl": "https://huggingface.co/BAAI",
+    "license": "MIT",
+    "licenseUrl": "https://github.com/FlagOpen/FlagEmbedding/blob/master/LICENSE",
+    "lastUpdated": "2024-05-11T13:39:02.000Z",
+    "sourceRepository": "BAAI/bge-reranker-large",
+    "sourceRevision": "55611d7bca2a7133960a6d3b71e083071bbfc312",
+    "repository": "Xenova/bge-reranker-large",
+    "artifactRevision": "3c4ff3c9420fb24ea62acd31e3884e09c8827f2a",
+    "artifactLastUpdated": "2025-06-30T19:08:06.000Z",
+    "task": "text-ranking",
+    "description": "A large Chinese-and-English cross-encoder running locally with Transformers.js. It scores paired queries and candidate passages and returns ranked documents with original indices, raw logits and optional sigmoid scores.",
+    "intendedUses": [
+      "Rerank a bounded candidate set from lexical or embedding retrieval.",
+      "Chinese/English search and RAG ranking prototypes.",
+      "Browser cross-encoder performance comparison."
+    ],
+    "limitations": [
+      "Every query-document pair requires inference; this is not a whole-corpus embedding index.",
+      "Even INT8 weights exceed 561 MB; FP32 uses external weights exceeding 2.2 GB and may hit browser memory or cache limits.",
+      "Scores are relative relevance signals, not calibrated probabilities, factuality checks or safety judgments.",
+      "Long paired inputs are truncated at max_length and can lose important evidence.",
+      "Accuracy can degrade for unsupported languages, specialized domains, adversarial input and missing context.",
+      "Training biases and incorrect rankings require review before consequential decisions."
+    ]
+  },
+  "runtime": {
+    "engine": {
+      "name": "Transformers.js",
+      "version": "4.2.0"
+    },
+    "precisions": {
+      "q4f16": {
+        "weightsSize": 686315292,
+        "size": 708484027,
+        "dtype": "q4f16",
+        "modelKeys": [
+          "model_q4f16.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "webgpu"
+        ]
+      },
+      "bnb4": {
+        "weightsSize": 1202119453,
+        "size": 1224288188,
+        "dtype": "bnb4",
+        "modelKeys": [
+          "model_bnb4.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm"
+        ]
+      }
+    },
+    "recommended": {
+      "precision": "int8",
+      "device": "wasm"
+    }
+  },
+  "benchmark": {
+    "report": "benchmarks/bge-reranker-large.json",
+    "testedAt": "2026-09-15T21:02:05.402Z",
+    "fixture": {
+      "file": "bge-m3.json",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/bge-m3.json",
+      "size": 500,
+      "sha1": "75a7770d06fc312ddeb39987712a8b4bbe6f1e08",
+      "source": "Original WebAI semantic retrieval fixture, reused unchanged.",
+      "license": "MIT",
+      "licenseUrl": "https://opensource.org/license/mit/",
+      "preprocessing": "First text is the query; remaining texts are candidate documents; paired tokenizer truncates at max_length."
+    },
+    "candidates": {
+      "fp32": {
+        "weightsSize": 2240184300,
+        "size": 2262353035,
+        "dtype": "fp32",
+        "modelKeys": [
+          "model.onnx",
+          "model.onnx_data"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "fp16": {
+        "weightsSize": 1120404593,
+        "size": 1142573328,
+        "dtype": "fp16",
+        "modelKeys": [
+          "model_fp16.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "int8": {
+        "weightsSize": 561674733,
+        "size": 583843468,
+        "dtype": "int8",
+        "modelKeys": [
+          "model_int8.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "uint8": {
+        "weightsSize": 561674801,
+        "size": 583843536,
+        "dtype": "uint8",
+        "modelKeys": [
+          "model_uint8.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q8": {
+        "weightsSize": 562938749,
+        "size": 585107484,
+        "dtype": "q8",
+        "modelKeys": [
+          "model_quantized.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4": {
+        "weightsSize": 1220992645,
+        "size": 1243161380,
+        "dtype": "q4",
+        "modelKeys": [
+          "model_q4.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4f16": {
+        "weightsSize": 686315292,
+        "size": 708484027,
+        "dtype": "q4f16",
+        "modelKeys": [
+          "model_q4f16.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "bnb4": {
+        "weightsSize": 1202119453,
+        "size": 1224288188,
+        "dtype": "bnb4",
+        "modelKeys": [
+          "model_bnb4.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      }
+    },
+    "qualityGate": "Finite nondegenerate scores, valid unique document indices and descending order; France passage ranks first and exceeds unrelated whale passage by >=0.25 sigmoid score.",
+    "environment": "Isolated headless Chrome 151 on macOS; Transformers.js 4.2.0",
+    "invalidatedBy": [
+      "artifact revision change",
+      "runtime version change",
+      "fixture or quality-gate change",
+      "browser/backend behavior change"
+    ],
+    "results": [
+      {
+        "precision": "q4f16",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 61940.89999997616,
+          "grade": "failed"
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 89
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 1, ERROR_MESSAGE: /mnt/vss/_work/1/s/onnxruntime/core/graph/graph_utils.cc:30 int onnxruntime::graph_utils::GetIndexFromName(const Node &, const std::string &, bool) itr != node_args.end() was false. Attempting to get index by a name which does not exist:InsertedPrecisionFreeCast_/roberta/embeddings/LayerNorm/Constant_output_0for node: /roberta/embeddings/LayerNorm/Mul/SimplifiedLayerNormFusion/\n"
+      },
+      {
+        "precision": "q4f16",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 57640.39999997616,
+          "inferenceMs": 456.2999999821186,
+          "totalMs": 59271.30000001192,
+          "grade": "slow",
+          "pairsPerSecond": 4.383081306329992
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 89
+        },
+        "quality": {
+          "finite": true,
+          "descending": true,
+          "correctTop": true,
+          "margin": 0.46908440642910454,
+          "grade": "ranking-pass"
+        },
+        "nativeOutput": {
+          "results": [
+            {
+              "document": "Paris is the capital and largest city of France.",
+              "score": 0.999655356825362,
+              "logit": 7.97265625,
+              "originalIndex": 0
+            },
+            {
+              "document": "Whales are large marine mammals that live in the ocean.",
+              "score": 0.5305709503962575,
+              "logit": 0.1224365234375,
+              "originalIndex": 1
+            }
+          ]
+        }
+      },
+      {
+        "precision": "bnb4",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 85690.40000000596,
+          "inferenceMs": 868.5,
+          "totalMs": 87704.79999998212,
+          "grade": "slow",
+          "pairsPerSecond": 2.3028209556706964
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 151
+        },
+        "quality": {
+          "finite": true,
+          "descending": true,
+          "correctTop": true,
+          "margin": 0.9990787634865452,
+          "grade": "ranking-pass"
+        },
+        "nativeOutput": {
+          "results": [
+            {
+              "document": "Paris is the capital and largest city of France.",
+              "score": 0.999167195164268,
+              "logit": 7.089878082275391,
+              "originalIndex": 0
+            },
+            {
+              "document": "Whales are large marine mammals that live in the ocean.",
+              "score": 0.00008843167772274416,
+              "logit": -9.333191871643066,
+              "originalIndex": 1
+            }
+          ]
+        }
+      },
+      {
+        "precision": "bnb4",
+        "device": "webgpu",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 88240.30000001192,
+          "grade": "failed"
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 151
+        },
+        "error": "Error: operation does not support unaligned accesses"
+      }
+    ]
+  }
+}

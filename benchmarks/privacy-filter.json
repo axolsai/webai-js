@@ -1,0 +1,480 @@
+{
+  "contractVersion": "1.0",
+  "model": {
+    "id": "privacy-filter",
+    "displayName": "OpenAI Privacy Filter — PII Span Detection",
+    "provider": "OpenAI",
+    "providerUrl": "https://openai.com/",
+    "license": "Apache-2.0",
+    "licenseUrl": "https://github.com/openai/privacy-filter/blob/f7f00ca7fb869683eb732c010299d901457f19c3/LICENSE",
+    "lastUpdated": "2026-04-22T19:55:02.000Z",
+    "sourceRepository": "openai/privacy-filter",
+    "sourceRevision": "f7f00ca7fb869683eb732c010299d901457f19c3",
+    "repository": "openai/privacy-filter",
+    "artifactRevision": "7ffa9a043d54d1be65afb281eddf0ffbe629385b",
+    "artifactLastUpdated": "2026-04-22T16:50:17.000Z",
+    "task": "token-classification",
+    "description": "OpenAI's bidirectional token-classification model for detecting coherent personally identifiable information spans in text. The browser worker returns normalized spans across eight privacy categories.",
+    "intendedUses": [
+      "Assist local or on-premises data-minimization and redaction workflows.",
+      "Find candidate PII spans for review before text is shared or indexed.",
+      "Evaluate privacy-filtering behavior against an organization's in-domain policy and data."
+    ],
+    "limitations": [
+      "This is a detection aid, not an anonymization, compliance, or safety guarantee; false negatives may expose sensitive data and false positives may remove necessary context.",
+      "It detects only its fixed taxonomy: account number, address, email, person, phone, URL, date, and secret.",
+      "Performance can drop on non-English text, non-Latin scripts, uncommon names, regional formats, domain-specific identifiers, long documents, and heavy layout or punctuation.",
+      "Secret detection may miss novel credentials or flag benign high-entropy text.",
+      "The browser artifacts are very large: approximately 809 MB to 5.63 GB of weights before shared tokenizer files, and some browsers may not persist them in Cache API.",
+      "High-sensitivity medical, legal, financial, employment, education, and government uses require in-domain evaluation and human review."
+    ]
+  },
+  "runtime": {
+    "engine": {
+      "name": "Transformers.js",
+      "version": "4.2.0"
+    },
+    "precisions": {
+      "q4": {
+        "weightsSize": 917280363,
+        "size": 945152182,
+        "dtype": "q4",
+        "modelKeys": [
+          "model_q4.onnx",
+          "model_q4.onnx_data"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "webgpu"
+        ]
+      },
+      "q4f16": {
+        "weightsSize": 809227736,
+        "size": 837099555,
+        "dtype": "q4f16",
+        "modelKeys": [
+          "model_q4f16.onnx",
+          "model_q4f16.onnx_data"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "webgpu"
+        ]
+      }
+    }
+  },
+  "benchmark": {
+    "report": "benchmarks/privacy-filter.json",
+    "testedAt": "2026-09-15T12:41:45.169Z",
+    "fixture": {
+      "file": "privacy-filter.json",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/privacy-filter.json",
+      "size": 899,
+      "sha1": "39b9188d3224c759479738aa156538e01a283414",
+      "source": "Official OpenAI Privacy Filter model-card Transformers.js example.",
+      "sourceUrl": "https://huggingface.co/openai/privacy-filter/blob/7ffa9a043d54d1be65afb281eddf0ffbe629385b/README.md#transformersjs",
+      "license": "Apache-2.0",
+      "licenseUrl": "https://github.com/openai/privacy-filter/blob/f7f00ca7fb869683eb732c010299d901457f19c3/LICENSE",
+      "preprocessing": "Pinned tokenizer followed by constrained model-specific sequence decoding and simple span aggregation."
+    },
+    "candidates": {
+      "fp32": {
+        "weightsSize": 5631626698,
+        "size": 5659498517,
+        "dtype": "fp32",
+        "modelKeys": [
+          "model.onnx",
+          "model.onnx_data",
+          "model.onnx_data_1",
+          "model.onnx_data_2"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "fp16": {
+        "weightsSize": 2817198092,
+        "size": 2845069911,
+        "dtype": "fp16",
+        "modelKeys": [
+          "model_fp16.onnx",
+          "model_fp16.onnx_data",
+          "model_fp16.onnx_data_1"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q8": {
+        "weightsSize": 1618204303,
+        "size": 1646076122,
+        "dtype": "q8",
+        "modelKeys": [
+          "model_quantized.onnx",
+          "model_quantized.onnx_data"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4": {
+        "weightsSize": 917280363,
+        "size": 945152182,
+        "dtype": "q4",
+        "modelKeys": [
+          "model_q4.onnx",
+          "model_q4.onnx_data"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4f16": {
+        "weightsSize": 809227736,
+        "size": 837099555,
+        "dtype": "q4f16",
+        "modelKeys": [
+          "model_q4f16.onnx",
+          "model_q4f16.onnx_data"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      }
+    },
+    "qualityGate": "Finite spans must detect the fictional name Harry Potter as private_person and harry.potter@hogwarts.edu as private_email at score >= 0.9, with no more than one unexpected span and valid offsets when present.",
+    "environment": "Isolated headless Chrome on macOS; Transformers.js 4.2.0",
+    "invalidatedBy": [
+      "artifact revision change",
+      "runtime version change",
+      "fixture or quality-gate change",
+      "browser/backend behavior change"
+    ],
+    "results": [
+      {
+        "precision": "q4",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 31244.40000000596,
+          "grade": "failed"
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 5
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 9, ERROR_MESSAGE: Could not find an implementation for GatherBlockQuantized(1) node with name '/model/embed_tokens/Gather_Quant'"
+      },
+      {
+        "precision": "q4",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 31144.5,
+          "inferenceMs": 166.2000000178814,
+          "totalMs": 31406.5,
+          "grade": "good",
+          "charactersPerSecond": 397.1119133146756
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 5
+        },
+        "quality": {
+          "finite": true,
+          "validOffsets": true,
+          "expectedMatches": [
+            true,
+            true
+          ],
+          "unexpectedEntities": 0,
+          "grade": "privacy-span-pass"
+        },
+        "nativeOutput": {
+          "entities": [
+            {
+              "entityGroup": "private_person",
+              "score": 0.9999957978725433,
+              "word": " Harry Potter",
+              "start": null,
+              "end": null
+            },
+            {
+              "entityGroup": "private_email",
+              "score": 0.9999990728166368,
+              "word": " harry.potter@hogwarts.edu",
+              "start": null,
+              "end": null
+            }
+          ]
+        }
+      },
+      {
+        "precision": "q4f16",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 29940.5,
+          "grade": "failed"
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 5
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 9, ERROR_MESSAGE: Failed to find kernel for com.microsoft.GatherBlockQuantized(1) (node:'/model/embed_tokens/Gather_Quant' ep:'CPUExecutionProvider'). Kernel not found"
+      },
+      {
+        "precision": "q4f16",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 30789.5,
+          "inferenceMs": 638.5,
+          "totalMs": 31589.899999976158,
+          "grade": "slow",
+          "charactersPerSecond": 103.3672670321065
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 5
+        },
+        "quality": {
+          "finite": true,
+          "validOffsets": true,
+          "expectedMatches": [
+            true,
+            true
+          ],
+          "unexpectedEntities": 0,
+          "grade": "privacy-span-pass"
+        },
+        "nativeOutput": {
+          "entities": [
+            {
+              "entityGroup": "private_person",
+              "score": 0.9999956786632538,
+              "word": " Harry Potter",
+              "start": null,
+              "end": null
+            },
+            {
+              "entityGroup": "private_email",
+              "score": 0.9999990860621134,
+              "word": " harry.potter@hogwarts.edu",
+              "start": null,
+              "end": null
+            }
+          ]
+        }
+      },
+      {
+        "precision": "q8",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 52944.90000000596,
+          "grade": "failed"
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 5
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 9, ERROR_MESSAGE: Could not find an implementation for GatherBlockQuantized(1) node with name '/model/embed_tokens/Gather_Quant'"
+      },
+      {
+        "precision": "q8",
+        "device": "webgpu",
+        "status": "fail",
+        "runtime": {
+          "loadMs": 54158.70000001788,
+          "inferenceMs": 635.5,
+          "totalMs": 54955.90000000596,
+          "grade": "slow",
+          "charactersPerSecond": 103.8552321007081
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 5
+        },
+        "quality": {
+          "finite": true,
+          "validOffsets": true,
+          "expectedMatches": [
+            false,
+            false
+          ],
+          "unexpectedEntities": 9,
+          "grade": "failed"
+        },
+        "nativeOutput": {
+          "entities": [
+            {
+              "entityGroup": "private_email",
+              "score": 0.46921858191490173,
+              "word": "My name",
+              "start": null,
+              "end": null
+            },
+            {
+              "entityGroup": "private_email",
+              "score": 0.5396749973297119,
+              "word": " is Harry",
+              "start": null,
+              "end": null
+            },
+            {
+              "entityGroup": "private_email",
+              "score": 0.5413287281990051,
+              "word": " Potter my",
+              "start": null,
+              "end": null
+            },
+            {
+              "entityGroup": "private_email",
+              "score": 0.5380483269691467,
+              "word": " email is",
+              "start": null,
+              "end": null
+            },
+            {
+              "entityGroup": "private_email",
+              "score": 0.5193168222904205,
+              "word": " harry",
+              "start": null,
+              "end": null
+            },
+            {
+              "entityGroup": "private_email",
+              "score": 0.524335652589798,
+              "word": ".pot",
+              "start": null,
+              "end": null
+            },
+            {
+              "entityGroup": "private_email",
+              "score": 0.5430809259414673,
+              "word": "ter@",
+              "start": null,
+              "end": null
+            },
+            {
+              "entityGroup": "private_email",
+              "score": 0.5486656725406647,
+              "word": "hogwarts",
+              "start": null,
+              "end": null
+            },
+            {
+              "entityGroup": "private_email",
+              "score": 0.47316835820674896,
+              "word": ".edu.",
+              "start": null,
+              "end": null
+            }
+          ]
+        }
+      },
+      {
+        "precision": "fp16",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 88576.5,
+          "grade": "failed"
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 5
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 6, ERROR_MESSAGE: std::bad_alloc"
+      },
+      {
+        "precision": "fp16",
+        "device": "webgpu",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 85955.40000000596,
+          "grade": "failed"
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 5
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 6, ERROR_MESSAGE: std::bad_alloc"
+      },
+      {
+        "precision": "fp32",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 144554.5,
+          "grade": "failed"
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 5
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 6, ERROR_MESSAGE: std::bad_alloc"
+      },
+      {
+        "precision": "fp32",
+        "device": "webgpu",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 143015,
+          "grade": "failed"
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 5
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 6, ERROR_MESSAGE: std::bad_alloc"
+      }
+    ]
+  }
+}

@@ -1,0 +1,254 @@
+{
+  "contractVersion": "1.0",
+  "model": {
+    "id": "vitmatte-small-composition-1k",
+    "displayName": "VitMatte Small Composition-1K — Trimap Matting",
+    "provider": "HUST Vision Lab",
+    "providerUrl": "https://github.com/hustvl/ViTMatte",
+    "license": "Apache-2.0",
+    "licenseUrl": "https://github.com/hustvl/ViTMatte/blob/main/LICENSE",
+    "lastUpdated": "2024-03-29T08:01:59.000Z",
+    "sourceRevision": "6a58ad7646403c1df626fbd746900aec7361ea1d",
+    "sourceRepository": "hustvl/vitmatte-small-composition-1k",
+    "repository": "Xenova/vitmatte-small-composition-1k",
+    "artifactRevision": "6bc1297f6140f055a227b6d2cfe8c093281f35d2",
+    "artifactLastUpdated": "2026-04-24T15:56:34.000Z",
+    "task": "image-matting",
+    "description": "A small HUST Vision Lab transformer trained on Composition-1K, converted by Xenova for browser inference, that refines a supplied foreground/background/unknown trimap into a soft image alpha matte.",
+    "intendedUses": [
+      "Refine user-provided trimaps for image editing and foreground compositing.",
+      "Prototype trimap-guided extraction of fine object boundaries."
+    ],
+    "limitations": [
+      "Requires a same-size trimap; it does not independently discover the foreground.",
+      "Incorrect foreground/background markings can force wrong alpha values and lose image content.",
+      "Hair, transparent objects, blur, poor contrast, and out-of-domain scenes can produce halos or missing detail.",
+      "Alpha values are editing estimates, not semantic or factual classifications; do not use for high-impact decisions."
+    ]
+  },
+  "runtime": {
+    "engine": {
+      "name": "Transformers.js",
+      "version": "4.2.0"
+    },
+    "precisions": {
+      "fp32": {
+        "weightsSize": 103885865,
+        "size": 103888098,
+        "dtype": "fp32",
+        "modelKeys": [
+          "model.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q8": {
+        "weightsSize": 27499369,
+        "size": 27501602,
+        "dtype": "q8",
+        "modelKeys": [
+          "model_quantized.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      }
+    }
+  },
+  "benchmark": {
+    "report": "benchmarks/vitmatte-small-composition-1k.json",
+    "testedAt": "2026-09-15T11:30:48.843Z",
+    "fixture": {
+      "file": "modnet-portrait-pexels-5965592.jpg",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+      "size": 78124,
+      "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818",
+      "width": 1024,
+      "height": 683,
+      "source": "https://www.pexels.com/photo/woman-wearing-pink-turtleneck-sweater-5965592/",
+      "license": "Pexels License",
+      "licenseUrl": "https://www.pexels.com/license/",
+      "preprocessing": "RGB image through pinned processor; the checked-in 0/128/255 trimap is derived from the MODNet reference with an 8-pixel sampled boundary.",
+      "reference": {
+        "file": "modnet-portrait-pexels-5965592-mask.png",
+        "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592-mask.png",
+        "size": 67541,
+        "sha1": "01ace4f95454ce44cc53c2c797a87a583c86cee8",
+        "width": 1024,
+        "height": 683
+      },
+      "trimap": {
+        "file": "vitmatte-portrait-5965592-trimap.png",
+        "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/vitmatte-portrait-5965592-trimap.png",
+        "size": 22459,
+        "sha1": "64b06a53a2b0f33507093d2696911ec236a00396",
+        "width": 1024,
+        "height": 683
+      }
+    },
+    "candidates": {
+      "fp32": {
+        "weightsSize": 103885865,
+        "size": 103888098,
+        "dtype": "fp32",
+        "modelKeys": [
+          "model.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q8": {
+        "weightsSize": 27499369,
+        "size": 27501602,
+        "dtype": "q8",
+        "modelKeys": [
+          "model_quantized.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      }
+    },
+    "qualityGate": "Finite original-size alpha in [0,1], non-degenerate foreground, mean absolute error <= 0.2 versus the local MODNet regression reference; trimap preserves certain foreground/background and marks the boundary unknown.",
+    "note": "The MODNet reference is a regression proxy, not annotated ground truth.",
+    "environment": "Isolated headless Chrome on macOS; Transformers.js 4.2.0",
+    "invalidatedBy": [
+      "artifact revision change",
+      "runtime version change",
+      "fixture or quality-gate change",
+      "browser/backend behavior change"
+    ],
+    "results": [
+      {
+        "precision": "fp32",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 6372.700000017881,
+          "inferenceMs": 9082,
+          "totalMs": 15585.600000023842,
+          "grade": "very-slow",
+          "imagesPerSecond": 0.11010790574763268
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 3
+        },
+        "quality": {
+          "valid": true,
+          "meanAbsoluteError": 0.0033597094516932442,
+          "foregroundRatio": 0.25441955298316254,
+          "grade": "matting-pass"
+        },
+        "nativeOutput": {
+          "width": 1024,
+          "height": 683,
+          "alphaLength": 699392
+        }
+      },
+      {
+        "precision": "fp32",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 7088.199999988079,
+          "inferenceMs": 661.8000000119209,
+          "totalMs": 7969.0999999940395,
+          "grade": "good",
+          "imagesPerSecond": 1.5110305227893428
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 3
+        },
+        "quality": {
+          "valid": true,
+          "meanAbsoluteError": 0.003359716394162342,
+          "foregroundRatio": 0.25441955298316254,
+          "grade": "matting-pass"
+        },
+        "nativeOutput": {
+          "width": 1024,
+          "height": 683,
+          "alphaLength": 699392
+        }
+      },
+      {
+        "precision": "q8",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 3443.300000011921,
+          "inferenceMs": 9065.299999982119,
+          "totalMs": 12636.899999976158,
+          "grade": "very-slow",
+          "imagesPerSecond": 0.11031074536992405
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 3
+        },
+        "quality": {
+          "valid": true,
+          "meanAbsoluteError": 0.003484805486398143,
+          "foregroundRatio": 0.25471409452781846,
+          "grade": "matting-pass"
+        },
+        "nativeOutput": {
+          "width": 1024,
+          "height": 683,
+          "alphaLength": 699392
+        }
+      },
+      {
+        "precision": "q8",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 3362.5,
+          "inferenceMs": 7796,
+          "totalMs": 11286.90000000596,
+          "grade": "very-slow",
+          "imagesPerSecond": 0.12827090815802974
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 3
+        },
+        "quality": {
+          "valid": true,
+          "meanAbsoluteError": 0.003507440455528697,
+          "foregroundRatio": 0.2546383144216691,
+          "grade": "matting-pass"
+        },
+        "nativeOutput": {
+          "width": 1024,
+          "height": 683,
+          "alphaLength": 699392
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "configuration": {
+    "precision": "fp32",
+    "device": "webgpu"
+  },
+  "passed": true,
+  "manifestDiscovered": true,
+  "downloadProgressEvents": 2995,
+  "cache": {
+    "cold": false,
+    "expectedPersistent": true,
+    "downloadDetected": true,
+    "reinitialization": true,
+    "deleted": true,
+    "otherModelPreserved": true,
+    "note": null
+  },
+  "invalidInputRejected": true,
+  "unsupportedStreamingRejected": true,
+  "clearMemoryVerified": true,
+  "runtime": {
+    "durationMs": 512.4000000059605
+  },
+  "nativeOutput": {
+    "width": 1024,
+    "height": 683,
+    "alphaLength": 699392
+  }
+}

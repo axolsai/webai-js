@@ -1,0 +1,54 @@
+{
+  "passed": true,
+  "configuration": {
+    "precision": "q4f16",
+    "device": "webgpu"
+  },
+  "manifestDiscovered": true,
+  "downloadProgressEvents": 1608,
+  "cache": {
+    "cold": false,
+    "downloaded": true,
+    "reinitialized": true,
+    "deleted": true,
+    "otherModelPreserved": true
+  },
+  "invalidInputRejected": true,
+  "unsupportedStreamingRejected": true,
+  "clearMemoryVerified": true,
+  "runtime": {
+    "durationMs": 96.59999999403954
+  },
+  "nativeOutput": {
+    "predictions": [
+      {
+        "label": "sad",
+        "score": 0.3024536967277527
+      },
+      {
+        "label": "happy",
+        "score": 0.2157321572303772
+      },
+      {
+        "label": "neutral",
+        "score": 0.20767030119895935
+      },
+      {
+        "label": "surprise",
+        "score": 0.1535007655620575
+      },
+      {
+        "label": "angry",
+        "score": 0.05574379861354828
+      },
+      {
+        "label": "fear",
+        "score": 0.03883002698421478
+      },
+      {
+        "label": "disgust",
+        "score": 0.026069246232509613
+      }
+    ]
+  }
+}

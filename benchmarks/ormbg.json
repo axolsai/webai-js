@@ -1,0 +1,858 @@
+{
+  "contractVersion": "1.0",
+  "model": {
+    "id": "ormbg",
+    "displayName": "ORMBG — Human Background Removal",
+    "provider": "Stefan Schirrmacher",
+    "license": "Apache-2.0",
+    "lastUpdated": "2024-09-29T14:37:18.000Z",
+    "sourceRepository": "schirrmacher/ormbg",
+    "repository": "onnx-community/ormbg-ONNX",
+    "artifactRevision": "034e2d884afbab897e10e78fc5bb566b29533fd6",
+    "artifactLastUpdated": "2026-04-14T13:06:54.000Z",
+    "task": "background-removal",
+    "description": "An open human-focused foreground segmentation model converted for Transformers.js that runs locally in the browser and returns a per-pixel foreground matte.",
+    "intendedUses": [
+      "Removing or replacing the background of a single-person portrait.",
+      "Creating a soft alpha matte for compositing portraits in browser applications.",
+      "Prototyping client-side portrait segmentation without a hosted inference API."
+    ],
+    "limitations": [
+      "ORMBG is specialized for images containing humans and is not a general object-segmentation model.",
+      "The upstream author reports that the model can struggle on real images because synthetic training data does not fully represent real lighting, occlusion, scale, and backgrounds.",
+      "Hair, transparent materials, motion blur, occlusion, multiple people, unusual poses, and low foreground/background contrast can produce incomplete or haloed masks.",
+      "The output is an estimated matte rather than verified ground truth and must not be used for identity, biometric, medical, or safety-critical decisions.",
+      "Higher processing resolutions require more memory and computation and can fail on constrained devices."
+    ]
+  },
+  "runtime": {
+    "precisions": {
+      "fp32": {
+        "size": 176116329,
+        "weightsSize": 176116019,
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "modelKeys": [
+          "model.onnx"
+        ],
+        "dtype": "fp32"
+      },
+      "fp16": {
+        "size": 88118240,
+        "weightsSize": 88117930,
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "modelKeys": [
+          "model_fp16.onnx"
+        ],
+        "dtype": "fp16"
+      },
+      "int8": {
+        "size": 44315446,
+        "weightsSize": 44315136,
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "modelKeys": [
+          "model_int8.onnx"
+        ],
+        "dtype": "int8"
+      },
+      "q8": {
+        "size": 44315515,
+        "weightsSize": 44315205,
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "modelKeys": [
+          "model_quantized.onnx"
+        ],
+        "dtype": "q8"
+      },
+      "uint8": {
+        "size": 44315515,
+        "weightsSize": 44315205,
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "modelKeys": [
+          "model_uint8.onnx"
+        ],
+        "dtype": "uint8"
+      },
+      "q4": {
+        "size": 176116348,
+        "weightsSize": 176116038,
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "modelKeys": [
+          "model_q4.onnx"
+        ],
+        "dtype": "q4"
+      },
+      "q4f16": {
+        "size": 88118259,
+        "weightsSize": 88117949,
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "modelKeys": [
+          "model_q4f16.onnx"
+        ],
+        "dtype": "q4f16"
+      },
+      "bnb4": {
+        "size": 176116348,
+        "weightsSize": 176116038,
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "modelKeys": [
+          "model_bnb4.onnx"
+        ],
+        "dtype": "bnb4"
+      }
+    }
+  },
+  "input": {
+    "description": "Provide exactly one browser blob URL containing a decodable image.",
+    "alternatives": [
+      {
+        "name": "image blob",
+        "description": "The worker fetches and decodes the image while preserving its original dimensions for the returned PNGs.",
+        "fields": [
+          {
+            "name": "image_blob_url",
+            "type": "string(blob URL)",
+            "required": true,
+            "description": "A blob: URL accessible from this worker."
+          }
+        ]
+      }
+    ]
+  },
+  "config": {
+    "model": [
+      {
+        "name": "processingResolution",
+        "type": "{ width: integer, height: integer }",
+        "default": {
+          "width": 512,
+          "height": 512
+        },
+        "description": "Model input dimensions; each value must be from 32 through 2048 and divisible by 32."
+      }
+    ],
+    "generation": [
+      {
+        "name": "threshold",
+        "type": "number | null",
+        "default": null,
+        "minimum": 0,
+        "maximum": 1,
+        "description": "Keep null for a soft alpha matte, or set 0–1 to return a binary foreground mask."
+      }
+    ]
+  },
+  "output": {
+    "description": "WebAI wraps the native result below as { result, runtime: { durationMs } }. Blob URLs remain valid until the next generation or clearMemory call.",
+    "fields": [
+      {
+        "name": "result",
+        "type": "string(blob URL)",
+        "required": true,
+        "description": "Transparent PNG containing the original RGB image with the predicted matte as alpha."
+      },
+      {
+        "name": "result_mask",
+        "type": "string(blob URL)",
+        "required": true,
+        "description": "Grayscale PNG alpha mask; black is background and white is foreground."
+      },
+      {
+        "name": "mimeType",
+        "type": "'image/png'",
+        "required": true,
+        "description": "MIME type of both output blobs."
+      },
+      {
+        "name": "size",
+        "type": "integer",
+        "required": true,
+        "description": "Transparent PNG size in bytes."
+      },
+      {
+        "name": "maskSize",
+        "type": "integer",
+        "required": true,
+        "description": "Mask PNG size in bytes."
+      },
+      {
+        "name": "width",
+        "type": "integer",
+        "required": true,
+        "description": "Original image width in pixels."
+      },
+      {
+        "name": "height",
+        "type": "integer",
+        "required": true,
+        "description": "Original image height in pixels."
+      }
+    ],
+    "example": {
+      "result": "blob:https://app.example/…",
+      "result_mask": "blob:https://app.example/…",
+      "mimeType": "image/png",
+      "size": 120000,
+      "maskSize": 24000,
+      "width": 1024,
+      "height": 683
+    }
+  },
+  "operations": [
+    "checkModelSupports",
+    "init",
+    "download",
+    "generate",
+    "clearMemory"
+  ],
+  "benchmark": {
+    "report": "benchmarks/ormbg.json",
+    "testedAt": "2026-09-08T16:48:55.483Z",
+    "fixture": {
+      "file": "modnet-portrait-pexels-5965592.jpg",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+      "source": "https://www.pexels.com/photo/woman-wearing-pink-turtleneck-sweater-5965592/",
+      "license": "Pexels License",
+      "size": 78124,
+      "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818",
+      "width": 1024,
+      "height": 683
+    },
+    "reference": {
+      "localPath": "/test-images/ormbg-portrait-pexels-5965592-mask.png",
+      "sha1": "83c88c66fbf4b8c32fdc0a9e17631aa30a08c6d5",
+      "width": 1024,
+      "height": 683,
+      "size": 59133,
+      "generator": {
+        "precision": "fp32",
+        "device": "wasm",
+        "processingResolution": {
+          "width": 512,
+          "height": 512
+        }
+      }
+    },
+    "note": "Measured values are machine/browser-specific; regenerate the report on target hardware.",
+    "environment": {
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+      "webgpuAvailable": true,
+      "fixture": {
+        "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+        "localPath": "/test-images/modnet-portrait-pexels-5965592.jpg",
+        "size": 78124,
+        "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818",
+        "width": 1024,
+        "height": 683
+      },
+      "processingResolution": {
+        "width": 512,
+        "height": 512
+      }
+    },
+    "invalidatedBy": [
+      "model artifact revision change",
+      "Transformers.js or ONNX Runtime version change",
+      "benchmark fixture, reference matte, or quality-gate change",
+      "target browser/backend behavior change"
+    ],
+    "results": [
+      {
+        "precision": "fp32",
+        "device": "wasm",
+        "dtype": "fp32",
+        "status": "pass",
+        "loadMs": 38114.8,
+        "inferenceMs": 7085.2,
+        "output": {
+          "maskSize": 59133,
+          "width": 1024,
+          "height": 683
+        },
+        "quality": {
+          "passed": true,
+          "grade": "excellent",
+          "meanAbsoluteError": 0,
+          "intersectionOverUnion": 1,
+          "foregroundRatio": 0.256265,
+          "dynamicRange": 1
+        },
+        "runtime": {
+          "loadMs": 38114.8,
+          "inferenceMs": 7085.2,
+          "totalMs": 45230.9,
+          "grade": "very-slow",
+          "megapixelsPerSecond": 0.0987,
+          "loadGrade": "slow"
+        },
+        "runtimePassed": true,
+        "cacheCleanup": {
+          "supported": true,
+          "deleted": 4
+        }
+      },
+      {
+        "precision": "fp32",
+        "device": "webgpu",
+        "dtype": "fp32",
+        "status": "pass",
+        "loadMs": 24680.2,
+        "inferenceMs": 264.1,
+        "output": {
+          "maskSize": 58820,
+          "width": 1024,
+          "height": 683
+        },
+        "quality": {
+          "passed": true,
+          "grade": "excellent",
+          "meanAbsoluteError": 0,
+          "intersectionOverUnion": 1,
+          "foregroundRatio": 0.256265,
+          "dynamicRange": 0.996078
+        },
+        "runtime": {
+          "loadMs": 24680.2,
+          "inferenceMs": 264.1,
+          "totalMs": 24975.5,
+          "grade": "slow",
+          "megapixelsPerSecond": 2.6482,
+          "loadGrade": "slow"
+        },
+        "runtimePassed": true,
+        "cacheCleanup": {
+          "supported": true,
+          "deleted": 4
+        }
+      },
+      {
+        "precision": "fp16",
+        "device": "wasm",
+        "dtype": "fp16",
+        "status": "pass",
+        "loadMs": 19426.7,
+        "inferenceMs": 7291.1,
+        "output": {
+          "maskSize": 59460,
+          "width": 1024,
+          "height": 683
+        },
+        "quality": {
+          "passed": true,
+          "grade": "excellent",
+          "meanAbsoluteError": 0.000002,
+          "intersectionOverUnion": 1,
+          "foregroundRatio": 0.256265,
+          "dynamicRange": 1
+        },
+        "runtime": {
+          "loadMs": 19426.7,
+          "inferenceMs": 7291.1,
+          "totalMs": 26744.6,
+          "grade": "very-slow",
+          "megapixelsPerSecond": 0.0959,
+          "loadGrade": "slow"
+        },
+        "runtimePassed": true,
+        "cacheCleanup": {
+          "supported": true,
+          "deleted": 4
+        }
+      },
+      {
+        "precision": "fp16",
+        "device": "webgpu",
+        "dtype": "fp16",
+        "status": "pass",
+        "loadMs": 18024,
+        "inferenceMs": 224.2,
+        "output": {
+          "maskSize": 64316,
+          "width": 1024,
+          "height": 683
+        },
+        "quality": {
+          "passed": true,
+          "grade": "excellent",
+          "meanAbsoluteError": 0.000887,
+          "intersectionOverUnion": 0.999939,
+          "foregroundRatio": 0.256267,
+          "dynamicRange": 1
+        },
+        "runtime": {
+          "loadMs": 18024,
+          "inferenceMs": 224.2,
+          "totalMs": 18278.2,
+          "grade": "good",
+          "megapixelsPerSecond": 3.1195,
+          "loadGrade": "slow"
+        },
+        "runtimePassed": true,
+        "cacheCleanup": {
+          "supported": true,
+          "deleted": 4
+        }
+      },
+      {
+        "precision": "int8",
+        "device": "wasm",
+        "dtype": "int8",
+        "status": "pass",
+        "loadMs": 21876.1,
+        "inferenceMs": 23701.3,
+        "output": {
+          "maskSize": 60512,
+          "width": 1024,
+          "height": 683
+        },
+        "quality": {
+          "passed": true,
+          "grade": "excellent",
+          "meanAbsoluteError": 0.000274,
+          "intersectionOverUnion": 0.999286,
+          "foregroundRatio": 0.256191,
+          "dynamicRange": 1
+        },
+        "runtime": {
+          "loadMs": 21876.1,
+          "inferenceMs": 23701.3,
+          "totalMs": 45606.6,
+          "grade": "very-slow",
+          "megapixelsPerSecond": 0.0295,
+          "loadGrade": "slow"
+        },
+        "runtimePassed": true,
+        "cacheCleanup": {
+          "supported": true,
+          "deleted": 4
+        }
+      },
+      {
+        "precision": "int8",
+        "device": "webgpu",
+        "dtype": "int8",
+        "status": "pass",
+        "loadMs": 10103.7,
+        "inferenceMs": 24517.2,
+        "output": {
+          "maskSize": 59103,
+          "width": 1024,
+          "height": 683
+        },
+        "quality": {
+          "passed": true,
+          "grade": "excellent",
+          "meanAbsoluteError": 0.00028,
+          "intersectionOverUnion": 0.999297,
+          "foregroundRatio": 0.256191,
+          "dynamicRange": 1
+        },
+        "runtime": {
+          "loadMs": 10103.7,
+          "inferenceMs": 24517.2,
+          "totalMs": 34648.2,
+          "grade": "very-slow",
+          "megapixelsPerSecond": 0.0285,
+          "loadGrade": "slow"
+        },
+        "runtimePassed": true,
+        "cacheCleanup": {
+          "supported": true,
+          "deleted": 4
+        }
+      },
+      {
+        "precision": "q8",
+        "device": "wasm",
+        "dtype": "q8",
+        "status": "pass",
+        "loadMs": 8124.6,
+        "inferenceMs": 7564.2,
+        "output": {
+          "maskSize": 59808,
+          "width": 1024,
+          "height": 683
+        },
+        "quality": {
+          "passed": true,
+          "grade": "excellent",
+          "meanAbsoluteError": 0.000208,
+          "intersectionOverUnion": 0.999459,
+          "foregroundRatio": 0.256336,
+          "dynamicRange": 1
+        },
+        "runtime": {
+          "loadMs": 8124.6,
+          "inferenceMs": 7564.2,
+          "totalMs": 15716.3,
+          "grade": "very-slow",
+          "megapixelsPerSecond": 0.0925,
+          "loadGrade": "slow"
+        },
+        "runtimePassed": true,
+        "cacheCleanup": {
+          "supported": true,
+          "deleted": 4
+        }
+      },
+      {
+        "precision": "q8",
+        "device": "webgpu",
+        "dtype": "q8",
+        "status": "pass",
+        "loadMs": 9839.2,
+        "inferenceMs": 7838.9,
+        "output": {
+          "maskSize": 59069,
+          "width": 1024,
+          "height": 683
+        },
+        "quality": {
+          "passed": true,
+          "grade": "excellent",
+          "meanAbsoluteError": 0.000212,
+          "intersectionOverUnion": 0.999442,
+          "foregroundRatio": 0.256337,
+          "dynamicRange": 1
+        },
+        "runtime": {
+          "loadMs": 9839.2,
+          "inferenceMs": 7838.9,
+          "totalMs": 17704.8,
+          "grade": "very-slow",
+          "megapixelsPerSecond": 0.0892,
+          "loadGrade": "slow"
+        },
+        "runtimePassed": true,
+        "cacheCleanup": {
+          "supported": true,
+          "deleted": 4
+        }
+      },
+      {
+        "precision": "uint8",
+        "device": "wasm",
+        "dtype": "uint8",
+        "status": "pass",
+        "loadMs": 8970.6,
+        "inferenceMs": 7483.1,
+        "output": {
+          "maskSize": 59808,
+          "width": 1024,
+          "height": 683
+        },
+        "quality": {
+          "passed": true,
+          "grade": "excellent",
+          "meanAbsoluteError": 0.000208,
+          "intersectionOverUnion": 0.999459,
+          "foregroundRatio": 0.256336,
+          "dynamicRange": 1
+        },
+        "runtime": {
+          "loadMs": 8970.6,
+          "inferenceMs": 7483.1,
+          "totalMs": 16482.2,
+          "grade": "very-slow",
+          "megapixelsPerSecond": 0.0935,
+          "loadGrade": "slow"
+        },
+        "runtimePassed": true,
+        "cacheCleanup": {
+          "supported": true,
+          "deleted": 4
+        }
+      },
+      {
+        "precision": "uint8",
+        "device": "webgpu",
+        "dtype": "uint8",
+        "status": "pass",
+        "loadMs": 9247.6,
+        "inferenceMs": 7817.3,
+        "output": {
+          "maskSize": 59069,
+          "width": 1024,
+          "height": 683
+        },
+        "quality": {
+          "passed": true,
+          "grade": "excellent",
+          "meanAbsoluteError": 0.000212,
+          "intersectionOverUnion": 0.999442,
+          "foregroundRatio": 0.256337,
+          "dynamicRange": 1
+        },
+        "runtime": {
+          "loadMs": 9247.6,
+          "inferenceMs": 7817.3,
+          "totalMs": 17091.5,
+          "grade": "very-slow",
+          "megapixelsPerSecond": 0.0895,
+          "loadGrade": "slow"
+        },
+        "runtimePassed": true,
+        "cacheCleanup": {
+          "supported": true,
+          "deleted": 4
+        }
+      },
+      {
+        "precision": "q4",
+        "device": "wasm",
+        "dtype": "q4",
+        "status": "pass",
+        "loadMs": 24528.2,
+        "inferenceMs": 7138.1,
+        "output": {
+          "maskSize": 59133,
+          "width": 1024,
+          "height": 683
+        },
+        "quality": {
+          "passed": true,
+          "grade": "excellent",
+          "meanAbsoluteError": 0,
+          "intersectionOverUnion": 1,
+          "foregroundRatio": 0.256265,
+          "dynamicRange": 1
+        },
+        "runtime": {
+          "loadMs": 24528.2,
+          "inferenceMs": 7138.1,
+          "totalMs": 31696.1,
+          "grade": "very-slow",
+          "megapixelsPerSecond": 0.098,
+          "loadGrade": "slow"
+        },
+        "runtimePassed": true,
+        "cacheCleanup": {
+          "supported": true,
+          "deleted": 4
+        }
+      },
+      {
+        "precision": "q4",
+        "device": "webgpu",
+        "dtype": "q4",
+        "status": "pass",
+        "loadMs": 23564.2,
+        "inferenceMs": 255.4,
+        "output": {
+          "maskSize": 58820,
+          "width": 1024,
+          "height": 683
+        },
+        "quality": {
+          "passed": true,
+          "grade": "excellent",
+          "meanAbsoluteError": 0,
+          "intersectionOverUnion": 1,
+          "foregroundRatio": 0.256265,
+          "dynamicRange": 0.996078
+        },
+        "runtime": {
+          "loadMs": 23564.2,
+          "inferenceMs": 255.4,
+          "totalMs": 23852.2,
+          "grade": "slow",
+          "megapixelsPerSecond": 2.7384,
+          "loadGrade": "slow"
+        },
+        "runtimePassed": true,
+        "cacheCleanup": {
+          "supported": true,
+          "deleted": 4
+        }
+      },
+      {
+        "precision": "q4f16",
+        "device": "wasm",
+        "dtype": "q4f16",
+        "status": "pass",
+        "loadMs": 15641.7,
+        "inferenceMs": 7235,
+        "output": {
+          "maskSize": 59460,
+          "width": 1024,
+          "height": 683
+        },
+        "quality": {
+          "passed": true,
+          "grade": "excellent",
+          "meanAbsoluteError": 0.000002,
+          "intersectionOverUnion": 1,
+          "foregroundRatio": 0.256265,
+          "dynamicRange": 1
+        },
+        "runtime": {
+          "loadMs": 15641.7,
+          "inferenceMs": 7235,
+          "totalMs": 22907.6,
+          "grade": "very-slow",
+          "megapixelsPerSecond": 0.0967,
+          "loadGrade": "slow"
+        },
+        "runtimePassed": true,
+        "cacheCleanup": {
+          "supported": true,
+          "deleted": 4
+        }
+      },
+      {
+        "precision": "q4f16",
+        "device": "webgpu",
+        "dtype": "q4f16",
+        "status": "pass",
+        "loadMs": 22414.4,
+        "inferenceMs": 229.4,
+        "output": {
+          "maskSize": 64316,
+          "width": 1024,
+          "height": 683
+        },
+        "quality": {
+          "passed": true,
+          "grade": "excellent",
+          "meanAbsoluteError": 0.000887,
+          "intersectionOverUnion": 0.999939,
+          "foregroundRatio": 0.256267,
+          "dynamicRange": 1
+        },
+        "runtime": {
+          "loadMs": 22414.4,
+          "inferenceMs": 229.4,
+          "totalMs": 22673.8,
+          "grade": "good",
+          "megapixelsPerSecond": 3.0488,
+          "loadGrade": "slow"
+        },
+        "runtimePassed": true,
+        "cacheCleanup": {
+          "supported": true,
+          "deleted": 4
+        }
+      },
+      {
+        "precision": "bnb4",
+        "device": "wasm",
+        "dtype": "bnb4",
+        "status": "pass",
+        "loadMs": 24034.9,
+        "inferenceMs": 7169.3,
+        "output": {
+          "maskSize": 59133,
+          "width": 1024,
+          "height": 683
+        },
+        "quality": {
+          "passed": true,
+          "grade": "excellent",
+          "meanAbsoluteError": 0,
+          "intersectionOverUnion": 1,
+          "foregroundRatio": 0.256265,
+          "dynamicRange": 1
+        },
+        "runtime": {
+          "loadMs": 24034.9,
+          "inferenceMs": 7169.3,
+          "totalMs": 31233.2,
+          "grade": "very-slow",
+          "megapixelsPerSecond": 0.0976,
+          "loadGrade": "slow"
+        },
+        "runtimePassed": true,
+        "cacheCleanup": {
+          "supported": true,
+          "deleted": 4
+        }
+      },
+      {
+        "precision": "bnb4",
+        "device": "webgpu",
+        "dtype": "bnb4",
+        "status": "pass",
+        "loadMs": 24596.2,
+        "inferenceMs": 257.3,
+        "output": {
+          "maskSize": 58820,
+          "width": 1024,
+          "height": 683
+        },
+        "quality": {
+          "passed": true,
+          "grade": "excellent",
+          "meanAbsoluteError": 0,
+          "intersectionOverUnion": 1,
+          "foregroundRatio": 0.256265,
+          "dynamicRange": 0.996078
+        },
+        "runtime": {
+          "loadMs": 24596.2,
+          "inferenceMs": 257.3,
+          "totalMs": 24883.6,
+          "grade": "slow",
+          "megapixelsPerSecond": 2.7182,
+          "loadGrade": "slow"
+        },
+        "runtimePassed": true,
+        "cacheCleanup": {
+          "supported": true,
+          "deleted": 4
+        }
+      }
+    ],
+    "schemaVersion": "1.0",
+    "startedAt": "2026-09-08T16:58:21.282Z",
+    "finishedAt": "2026-09-08T17:07:37.483Z",
+    "qualityGate": {
+      "maximumMeanAbsoluteError": 0.08,
+      "minimumBinaryIntersectionOverUnion": 0.85,
+      "foregroundRatio": [
+        0.05,
+        0.95
+      ],
+      "minimumDynamicRange": 0.5
+    },
+    "runtimeScale": {
+      "metric": "megapixels per second",
+      "excellent": "inference <= 100 ms",
+      "good": "<= 250 ms",
+      "slow": "<= 1000 ms",
+      "verySlow": "> 1000 ms"
+    },
+    "matrix": {
+      "fp32": "fp32",
+      "fp16": "fp16",
+      "int8": "int8",
+      "q8": "q8",
+      "uint8": "uint8",
+      "q4": "q4",
+      "q4f16": "q4f16",
+      "bnb4": "bnb4"
+    }
+  }
+}

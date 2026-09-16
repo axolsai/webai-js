@@ -1,0 +1,349 @@
+{
+  "contractVersion": "1.0",
+  "model": {
+    "id": "sam-vit-large",
+    "displayName": "SAM ViT Large — Point-Prompt Segmentation",
+    "provider": "Meta AI",
+    "providerUrl": "https://ai.meta.com/research/publications/segment-anything/",
+    "license": "Apache-2.0",
+    "licenseUrl": "https://huggingface.co/facebook/sam-vit-large/blob/main/LICENSE",
+    "lastUpdated": "2024-01-11T19:23:46.000Z",
+    "sourceRepository": "nielsr/sam-vit-large",
+    "repository": "Xenova/sam-vit-large",
+    "artifactRevision": "bad3c600df2df287ffbd1592849efbad608399e6",
+    "artifactLastUpdated": "2026-03-18T23:09:28.000Z",
+    "task": "mask-generation",
+    "description": "Meta AI’s large Segment Anything vision transformer, exported by Xenova for browser inference, generates candidate object masks from positive or negative point prompts.",
+    "intendedUses": [
+      "Interactive foreground selection and image editing prototypes.",
+      "Generating candidate masks around user-selected image points."
+    ],
+    "limitations": [
+      "Mask quality depends on image quality, prompt placement, object boundaries, and scene complexity.",
+      "Small, transparent, occluded, or visually ambiguous objects may be missed or merged.",
+      "Predicted IoU scores are confidence estimates, not guarantees of accurate segmentation.",
+      "Masks may reflect dataset biases and must not be used as the sole basis for safety-critical, medical, identity, or access decisions."
+    ]
+  },
+  "runtime": {
+    "engine": {
+      "name": "Transformers.js",
+      "version": "4.2.0"
+    },
+    "precisions": {
+      "q8": {
+        "weightsSize": 330163356,
+        "size": 330166460,
+        "modelKeys": [
+          "vision_encoder_quantized.onnx",
+          "prompt_encoder_mask_decoder_quantized.onnx"
+        ],
+        "dtype": {
+          "vision_encoder": "q8",
+          "prompt_encoder_mask_decoder": "q8"
+        },
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "fp16": {
+        "weightsSize": 626913014,
+        "size": 626916118,
+        "modelKeys": [
+          "vision_encoder_fp16.onnx",
+          "prompt_encoder_mask_decoder_fp16.onnx"
+        ],
+        "dtype": {
+          "vision_encoder": "fp16",
+          "prompt_encoder_mask_decoder": "fp16"
+        },
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "webgpu"
+        ]
+      },
+      "fp32": {
+        "weightsSize": 1251004231,
+        "size": 1251007335,
+        "modelKeys": [
+          "vision_encoder.onnx",
+          "prompt_encoder_mask_decoder.onnx"
+        ],
+        "dtype": {
+          "vision_encoder": "fp32",
+          "prompt_encoder_mask_decoder": "fp32"
+        },
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "webgpu"
+        ]
+      }
+    }
+  },
+  "benchmark": {
+    "report": "benchmarks/sam-vit-large.json",
+    "testedAt": "2026-09-12T18:46:29.240Z",
+    "fixture": {
+      "file": "slimsam-77-uniform.json",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/slimsam-77-uniform.json",
+      "size": 404,
+      "sha1": "f03c558b1d0dfd0dcb2db0dcaffbd9038aac6cf8"
+    },
+    "note": "Measurements are specific to the tested browser and hardware.",
+    "environment": "Headless Chrome on macOS; Transformers.js 4.2.0",
+    "candidates": {
+      "q8": {
+        "weightsSize": 330163356,
+        "size": 330166460,
+        "modelKeys": [
+          "vision_encoder_quantized.onnx",
+          "prompt_encoder_mask_decoder_quantized.onnx"
+        ],
+        "dtype": {
+          "vision_encoder": "q8",
+          "prompt_encoder_mask_decoder": "q8"
+        },
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "fp16": {
+        "weightsSize": 626913014,
+        "size": 626916118,
+        "modelKeys": [
+          "vision_encoder_fp16.onnx",
+          "prompt_encoder_mask_decoder_fp16.onnx"
+        ],
+        "dtype": {
+          "vision_encoder": "fp16",
+          "prompt_encoder_mask_decoder": "fp16"
+        },
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "fp32": {
+        "weightsSize": 1251004231,
+        "size": 1251007335,
+        "modelKeys": [
+          "vision_encoder.onnx",
+          "prompt_encoder_mask_decoder.onnx"
+        ],
+        "dtype": {
+          "vision_encoder": "fp32",
+          "prompt_encoder_mask_decoder": "fp32"
+        },
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      }
+    },
+    "qualityGate": "Finite candidate scores, expected output dimensions, selected point inside the best mask, and a non-degenerate foreground ratio.",
+    "invalidatedBy": [
+      "artifact revision change",
+      "runtime version change",
+      "fixture or quality gate change",
+      "browser/backend change"
+    ],
+    "results": [
+      {
+        "precision": "q8",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 35894.39999999851,
+          "inferenceMs": 67654.79999999702,
+          "totalMs": 104807.20000000298,
+          "grade": "very-slow",
+          "megapixelsPerSecond": 0.01033765527353611
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 3
+        },
+        "quality": {
+          "shape": true,
+          "finite": true,
+          "pointInside": true,
+          "foregroundRatio": 0.2459178829612006,
+          "nonDegenerate": true,
+          "grade": "segmentation-pass"
+        },
+        "nativeOutput": {
+          "width": 1024,
+          "height": 683,
+          "candidates": 3,
+          "scores": [
+            0.9702185392379761,
+            0.9832396507263184,
+            0.9882184863090515
+          ],
+          "bestIndex": 2
+        }
+      },
+      {
+        "precision": "q8",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 36903.70000000298,
+          "inferenceMs": 59227.79999999702,
+          "totalMs": 97427.29999999702,
+          "grade": "very-slow",
+          "megapixelsPerSecond": 0.011808508842132161
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 3
+        },
+        "quality": {
+          "shape": true,
+          "finite": true,
+          "pointInside": true,
+          "foregroundRatio": 0.2445567006771596,
+          "nonDegenerate": true,
+          "grade": "segmentation-pass"
+        },
+        "nativeOutput": {
+          "width": 1024,
+          "height": 683,
+          "candidates": 3,
+          "scores": [
+            0.9681172370910645,
+            0.9836913347244263,
+            0.9898185729980469
+          ],
+          "bestIndex": 2
+        }
+      },
+      {
+        "precision": "fp16",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 7932.5,
+          "grade": "failed"
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 2
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 1, ERROR_MESSAGE: /mnt/vss/_work/1/s/onnxruntime/core/graph/graph_utils.cc:30 int onnxruntime::graph_utils::GetIndexFromName(const Node &, const std::string &, bool) itr != node_args.end() was false. Attempting to get index by a name which does not exist:InsertedPrecisionFreeCast_/mask_decoder/upscale_layer_norm/Constant_output_0for node: /mask_decoder/transformer/layers.0/layer_norm1/Mul/SimplifiedLayerNormFusion/\n"
+      },
+      {
+        "precision": "fp16",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 75602.90000000596,
+          "inferenceMs": 2328.39999999851,
+          "totalMs": 79396.60000000149,
+          "grade": "slow",
+          "megapixelsPerSecond": 0.30037450609880073
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 3
+        },
+        "quality": {
+          "shape": true,
+          "finite": true,
+          "pointInside": true,
+          "foregroundRatio": 0.0643859237737921,
+          "nonDegenerate": true,
+          "grade": "segmentation-pass"
+        },
+        "nativeOutput": {
+          "width": 1024,
+          "height": 683,
+          "candidates": 3,
+          "scores": [
+            0.943359375,
+            0.361328125,
+            0.93310546875
+          ],
+          "bestIndex": 0
+        }
+      },
+      {
+        "precision": "fp32",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": 156339.59999999404,
+          "inferenceMs": null,
+          "totalMs": 171166.80000000447,
+          "grade": "failed"
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 3
+        },
+        "error": "Error: failed to call OrtRun(). ERROR_CODE: 6, ERROR_MESSAGE: std::bad_alloc"
+      },
+      {
+        "precision": "fp32",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 122515.80000000447,
+          "inferenceMs": 2623.5,
+          "totalMs": 126382.40000000596,
+          "grade": "slow",
+          "megapixelsPerSecond": 0.26658738326662856
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 3
+        },
+        "quality": {
+          "shape": true,
+          "finite": true,
+          "pointInside": true,
+          "foregroundRatio": 0.24653842194363104,
+          "nonDegenerate": true,
+          "grade": "segmentation-pass"
+        },
+        "nativeOutput": {
+          "width": 1024,
+          "height": 683,
+          "candidates": 3,
+          "scores": [
+            0.9702647924423218,
+            0.9801905155181885,
+            0.9868295192718506
+          ],
+          "bestIndex": 2
+        }
+      }
+    ]
+  }
+}

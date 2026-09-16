@@ -1,0 +1,867 @@
+{
+  "contractVersion": "1.0",
+  "model": {
+    "id": "bge-reranker-base",
+    "displayName": "BGE Reranker Base — Cross-Encoder Ranking",
+    "provider": "BAAI",
+    "providerUrl": "https://www.baai.ac.cn/",
+    "license": "MIT",
+    "licenseUrl": "https://opensource.org/license/mit/",
+    "lastUpdated": "2024-06-24T14:10:03.000Z",
+    "sourceRepository": "BAAI/bge-reranker-base",
+    "repository": "Xenova/bge-reranker-base",
+    "artifactRevision": "280bcc27a84e0b898c251e06fddb25171bd9b101",
+    "artifactLastUpdated": "2025-06-30T19:07:27.000Z",
+    "task": "text-ranking",
+    "description": "A Chinese-and-English BAAI cross-encoder, converted by Xenova for Transformers.js, that scores each query-passage pair and returns passages ordered by estimated relevance.",
+    "intendedUses": [
+      "Rerank a small candidate set produced by semantic or lexical retrieval.",
+      "Improve the ordering of Chinese or English search and RAG passages."
+    ],
+    "limitations": [
+      "Every query-passage pair requires model inference, making this slower than embedding retrieval for large corpora.",
+      "Scores are relative ranking signals, not calibrated probabilities or factuality judgments.",
+      "Long passages are truncated and relevant content beyond the token limit can be missed.",
+      "Ranking can reflect training-data bias and degrade on unsupported languages, specialized domains, malformed text, or adversarial content.",
+      "Do not use rankings as the sole basis for high-impact decisions."
+    ],
+    "sourceRevision": "2cfc18c9415c912f9d8155881c133215df768a70"
+  },
+  "runtime": {
+    "engine": {
+      "name": "Transformers.js",
+      "version": "4.2.0"
+    },
+    "precisions": {
+      "fp32": {
+        "weightsSize": 1112459588,
+        "size": 1134629104,
+        "dtype": "fp32",
+        "modelKeys": [
+          "model.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "int8": {
+        "weightsSize": 278825308,
+        "size": 300994824,
+        "dtype": "int8",
+        "modelKeys": [
+          "model_int8.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "uint8": {
+        "weightsSize": 278825337,
+        "size": 300994853,
+        "dtype": "uint8",
+        "modelKeys": [
+          "model_uint8.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q8": {
+        "weightsSize": 279301077,
+        "size": 301470593,
+        "dtype": "q8",
+        "modelKeys": [
+          "model_quantized.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4": {
+        "weightsSize": 825849673,
+        "size": 848019189,
+        "dtype": "q4",
+        "modelKeys": [
+          "model_q4.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "bnb4": {
+        "weightsSize": 820541785,
+        "size": 842711301,
+        "dtype": "bnb4",
+        "modelKeys": [
+          "model_bnb4.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      }
+    }
+  },
+  "benchmark": {
+    "report": "benchmarks/bge-reranker-base.json",
+    "testedAt": "2026-09-14T20:55:17.075Z",
+    "fixture": {
+      "file": "bge-m3.json",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/bge-m3.json",
+      "size": 500,
+      "sha1": "75a7770d06fc312ddeb39987712a8b4bbe6f1e08",
+      "source": "Original WebAI semantic retrieval fixture.",
+      "license": "MIT",
+      "licenseUrl": "https://opensource.org/license/mit/",
+      "preprocessing": "First text is the query; remaining texts are candidate documents."
+    },
+    "candidates": {
+      "fp32": {
+        "weightsSize": 1112459588,
+        "size": 1134629104,
+        "dtype": "fp32",
+        "modelKeys": [
+          "model.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "fp16": {
+        "weightsSize": 556462150,
+        "size": 578631666,
+        "dtype": "fp16",
+        "modelKeys": [
+          "model_fp16.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "int8": {
+        "weightsSize": 278825308,
+        "size": 300994824,
+        "dtype": "int8",
+        "modelKeys": [
+          "model_int8.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "uint8": {
+        "weightsSize": 278825337,
+        "size": 300994853,
+        "dtype": "uint8",
+        "modelKeys": [
+          "model_uint8.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q8": {
+        "weightsSize": 279301077,
+        "size": 301470593,
+        "dtype": "q8",
+        "modelKeys": [
+          "model_quantized.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4": {
+        "weightsSize": 825849673,
+        "size": 848019189,
+        "dtype": "q4",
+        "modelKeys": [
+          "model_q4.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4f16": {
+        "weightsSize": 434321936,
+        "size": 456491452,
+        "dtype": "q4f16",
+        "modelKeys": [
+          "model_q4f16.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "bnb4": {
+        "weightsSize": 820541785,
+        "size": 842711301,
+        "dtype": "bnb4",
+        "modelKeys": [
+          "model_bnb4.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      }
+    },
+    "qualityGate": "Finite scores, deterministic descending order, and the France passage must outrank the unrelated whale passage by at least 0.25 sigmoid probability.",
+    "note": "Measurements are specific to the tested browser and hardware.",
+    "environment": "Isolated headless Chrome on macOS; Transformers.js 4.2.0",
+    "invalidatedBy": [
+      "artifact revision change",
+      "runtime version change",
+      "fixture or quality-gate change",
+      "browser/backend behavior change"
+    ],
+    "results": [
+      {
+        "precision": "fp32",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 38416.5,
+          "inferenceMs": 207.90000000596046,
+          "totalMs": 38783.59999999404,
+          "grade": "good",
+          "pairsPerSecond": 9.620009619733816
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 3
+        },
+        "quality": {
+          "finite": true,
+          "descending": true,
+          "correctTop": true,
+          "margin": 0.9997474726357056,
+          "grade": "ranking-pass"
+        },
+        "nativeOutput": {
+          "results": [
+            {
+              "document": "Paris is the capital and largest city of France.",
+              "score": 0.9997848783641459,
+              "logit": 8.444091796875,
+              "originalIndex": 0
+            },
+            {
+              "document": "Whales are large marine mammals that live in the ocean.",
+              "score": 0.0000374057284402795,
+              "logit": -10.193649291992188,
+              "originalIndex": 1
+            }
+          ]
+        }
+      },
+      {
+        "precision": "fp32",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 37458.90000000596,
+          "inferenceMs": 437.2000000178814,
+          "totalMs": 38002.09999999404,
+          "grade": "slow",
+          "pairsPerSecond": 4.574565416098354
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 3
+        },
+        "quality": {
+          "finite": true,
+          "descending": true,
+          "correctTop": true,
+          "margin": 0.9997474705578208,
+          "grade": "ranking-pass"
+        },
+        "nativeOutput": {
+          "results": [
+            {
+              "document": "Paris is the capital and largest city of France.",
+              "score": 0.9997848761079037,
+              "logit": 8.44408130645752,
+              "originalIndex": 0
+            },
+            {
+              "document": "Whales are large marine mammals that live in the ocean.",
+              "score": 0.00003740555008296406,
+              "logit": -10.19365406036377,
+              "originalIndex": 1
+            }
+          ]
+        }
+      },
+      {
+        "precision": "fp16",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 31145.19999998808,
+          "grade": "failed"
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 3
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 1, ERROR_MESSAGE: /mnt/vss/_work/1/s/onnxruntime/core/graph/graph_utils.cc:30 int onnxruntime::graph_utils::GetIndexFromName(const Node &, const std::string &, bool) itr != node_args.end() was false. Attempting to get index by a name which does not exist:InsertedPrecisionFreeCast_/roberta/encoder/layer.11/output/LayerNorm/Constant_output_0for node: /roberta/embeddings/LayerNorm/Mul/SimplifiedLayerNormFusion/\n"
+      },
+      {
+        "precision": "fp16",
+        "device": "webgpu",
+        "status": "fail",
+        "runtime": {
+          "loadMs": 24736.100000023842,
+          "inferenceMs": 303.69999998807907,
+          "totalMs": 25144.90000000596,
+          "grade": "slow",
+          "pairsPerSecond": 6.585446164236104
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 3
+        },
+        "quality": {
+          "finite": true,
+          "descending": true,
+          "correctTop": false,
+          "margin": -0.24457595644260421,
+          "grade": "failed"
+        },
+        "nativeOutput": {
+          "results": [
+            {
+              "document": "Whales are large marine mammals that live in the ocean.",
+              "score": 0.5117928564820655,
+              "logit": 0.04718017578125,
+              "originalIndex": 1
+            },
+            {
+              "document": "Paris is the capital and largest city of France.",
+              "score": 0.2672169000394613,
+              "logit": -1.0087890625,
+              "originalIndex": 0
+            }
+          ]
+        }
+      },
+      {
+        "precision": "int8",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 24754.59999999404,
+          "inferenceMs": 222.7000000178814,
+          "totalMs": 25157.90000000596,
+          "grade": "good",
+          "pairsPerSecond": 8.980691512525427
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 3
+        },
+        "quality": {
+          "finite": true,
+          "descending": true,
+          "correctTop": true,
+          "margin": 0.9998556438664644,
+          "grade": "ranking-pass"
+        },
+        "nativeOutput": {
+          "results": [
+            {
+              "document": "Paris is the capital and largest city of France.",
+              "score": 0.9998933385748051,
+              "logit": 9.145744323730469,
+              "originalIndex": 0
+            },
+            {
+              "document": "Whales are large marine mammals that live in the ocean.",
+              "score": 0.00003769470834070292,
+              "logit": -10.185953140258789,
+              "originalIndex": 1
+            }
+          ]
+        }
+      },
+      {
+        "precision": "int8",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 27378.40000000596,
+          "inferenceMs": 306.40000000596046,
+          "totalMs": 27784.69999998808,
+          "grade": "slow",
+          "pairsPerSecond": 6.527415143476154
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 3
+        },
+        "quality": {
+          "finite": true,
+          "descending": true,
+          "correctTop": true,
+          "margin": 0.9998366376374507,
+          "grade": "ranking-pass"
+        },
+        "nativeOutput": {
+          "results": [
+            {
+              "document": "Paris is the capital and largest city of France.",
+              "score": 0.999874299468522,
+              "logit": 8.98148250579834,
+              "originalIndex": 0
+            },
+            {
+              "document": "Whales are large marine mammals that live in the ocean.",
+              "score": 0.00003766183107132796,
+              "logit": -10.1868257522583,
+              "originalIndex": 1
+            }
+          ]
+        }
+      },
+      {
+        "precision": "uint8",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 17714.59999999404,
+          "inferenceMs": 220.19999998807907,
+          "totalMs": 18042,
+          "grade": "good",
+          "pairsPerSecond": 9.082652134914957
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 3
+        },
+        "quality": {
+          "finite": true,
+          "descending": true,
+          "correctTop": true,
+          "margin": 0.9998282146220142,
+          "grade": "ranking-pass"
+        },
+        "nativeOutput": {
+          "results": [
+            {
+              "document": "Paris is the capital and largest city of France.",
+              "score": 0.9998658291817089,
+              "logit": 8.91626262664795,
+              "originalIndex": 0
+            },
+            {
+              "document": "Whales are large marine mammals that live in the ocean.",
+              "score": 0.00003761455969462531,
+              "logit": -10.188081741333008,
+              "originalIndex": 1
+            }
+          ]
+        }
+      },
+      {
+        "precision": "uint8",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 14620.90000000596,
+          "inferenceMs": 308.2999999821186,
+          "totalMs": 15067.699999988079,
+          "grade": "slow",
+          "pairsPerSecond": 6.487187804463185
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 3
+        },
+        "quality": {
+          "finite": true,
+          "descending": true,
+          "correctTop": true,
+          "margin": 0.9998094869765197,
+          "grade": "ranking-pass"
+        },
+        "nativeOutput": {
+          "results": [
+            {
+              "document": "Paris is the capital and largest city of France.",
+              "score": 0.999847007457625,
+              "logit": 8.784968376159668,
+              "originalIndex": 0
+            },
+            {
+              "document": "Whales are large marine mammals that live in the ocean.",
+              "score": 0.00003752048110528594,
+              "logit": -10.19058609008789,
+              "originalIndex": 1
+            }
+          ]
+        }
+      },
+      {
+        "precision": "q8",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 11681.600000023842,
+          "inferenceMs": 221.69999998807907,
+          "totalMs": 12031.300000011921,
+          "grade": "good",
+          "pairsPerSecond": 9.021199820061078
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 3
+        },
+        "quality": {
+          "finite": true,
+          "descending": true,
+          "correctTop": true,
+          "margin": 0.9996316172438874,
+          "grade": "ranking-pass"
+        },
+        "nativeOutput": {
+          "results": [
+            {
+              "document": "Paris is the capital and largest city of France.",
+              "score": 0.9996695377265243,
+              "logit": 8.014687538146973,
+              "originalIndex": 0
+            },
+            {
+              "document": "Whales are large marine mammals that live in the ocean.",
+              "score": 0.00003792048263693832,
+              "logit": -10.179981231689453,
+              "originalIndex": 1
+            }
+          ]
+        }
+      },
+      {
+        "precision": "q8",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 11473.300000011921,
+          "inferenceMs": 370.19999998807907,
+          "totalMs": 11951.59999999404,
+          "grade": "slow",
+          "pairsPerSecond": 5.402485143339823
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 3
+        },
+        "quality": {
+          "finite": true,
+          "descending": true,
+          "correctTop": true,
+          "margin": 0.9996316172438874,
+          "grade": "ranking-pass"
+        },
+        "nativeOutput": {
+          "results": [
+            {
+              "document": "Paris is the capital and largest city of France.",
+              "score": 0.9996695377265243,
+              "logit": 8.014687538146973,
+              "originalIndex": 0
+            },
+            {
+              "document": "Whales are large marine mammals that live in the ocean.",
+              "score": 0.00003792048263693832,
+              "logit": -10.179981231689453,
+              "originalIndex": 1
+            }
+          ]
+        }
+      },
+      {
+        "precision": "q4",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 35621,
+          "inferenceMs": 322.59999999403954,
+          "totalMs": 36118.39999997616,
+          "grade": "slow",
+          "pairsPerSecond": 6.199628022433207
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 3
+        },
+        "quality": {
+          "finite": true,
+          "descending": true,
+          "correctTop": true,
+          "margin": 0.9998082862222815,
+          "grade": "ranking-pass"
+        },
+        "nativeOutput": {
+          "results": [
+            {
+              "document": "Paris is the capital and largest city of France.",
+              "score": 0.999845644715768,
+              "logit": 8.77609920501709,
+              "originalIndex": 0
+            },
+            {
+              "document": "Whales are large marine mammals that live in the ocean.",
+              "score": 0.00003735849348653997,
+              "logit": -10.194912910461426,
+              "originalIndex": 1
+            }
+          ]
+        }
+      },
+      {
+        "precision": "q4",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 30102.5,
+          "inferenceMs": 239.19999998807907,
+          "totalMs": 30552.90000000596,
+          "grade": "good",
+          "pairsPerSecond": 8.361204013794621
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 3
+        },
+        "quality": {
+          "finite": true,
+          "descending": true,
+          "correctTop": true,
+          "margin": 0.999808285156378,
+          "grade": "ranking-pass"
+        },
+        "nativeOutput": {
+          "results": [
+            {
+              "document": "Paris is the capital and largest city of France.",
+              "score": 0.999845643685491,
+              "logit": 8.776092529296875,
+              "originalIndex": 0
+            },
+            {
+              "document": "Whales are large marine mammals that live in the ocean.",
+              "score": 0.00003735852911306169,
+              "logit": -10.19491195678711,
+              "originalIndex": 1
+            }
+          ]
+        }
+      },
+      {
+        "precision": "q4f16",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 33525.5,
+          "grade": "failed"
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 3
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 1, ERROR_MESSAGE: /mnt/vss/_work/1/s/onnxruntime/core/graph/graph_utils.cc:30 int onnxruntime::graph_utils::GetIndexFromName(const Node &, const std::string &, bool) itr != node_args.end() was false. Attempting to get index by a name which does not exist:InsertedPrecisionFreeCast_/roberta/embeddings/LayerNorm/Constant_output_0for node: /roberta/embeddings/LayerNorm/Mul/SimplifiedLayerNormFusion/\n"
+      },
+      {
+        "precision": "q4f16",
+        "device": "webgpu",
+        "status": "fail",
+        "runtime": {
+          "loadMs": 18690.40000000596,
+          "inferenceMs": 149.89999997615814,
+          "totalMs": 18938.30000001192,
+          "grade": "good",
+          "pairsPerSecond": 13.342228154223507
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 3
+        },
+        "quality": {
+          "finite": true,
+          "descending": true,
+          "correctTop": false,
+          "margin": -0.24198654101080747,
+          "grade": "failed"
+        },
+        "nativeOutput": {
+          "results": [
+            {
+              "document": "Whales are large marine mammals that live in the ocean.",
+              "score": 0.5117928564820655,
+              "logit": 0.04718017578125,
+              "originalIndex": 1
+            },
+            {
+              "document": "Paris is the capital and largest city of France.",
+              "score": 0.26980631547125805,
+              "logit": -0.99560546875,
+              "originalIndex": 0
+            }
+          ]
+        }
+      },
+      {
+        "precision": "bnb4",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 30218.5,
+          "inferenceMs": 261.09999999403954,
+          "totalMs": 30566.80000001192,
+          "grade": "slow",
+          "pairsPerSecond": 7.659900421469385
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 3
+        },
+        "quality": {
+          "finite": true,
+          "descending": true,
+          "correctTop": true,
+          "margin": 0.9996238480108596,
+          "grade": "ranking-pass"
+        },
+        "nativeOutput": {
+          "results": [
+            {
+              "document": "Paris is the capital and largest city of France.",
+              "score": 0.999661196316555,
+              "logit": 7.989750862121582,
+              "originalIndex": 0
+            },
+            {
+              "document": "Whales are large marine mammals that live in the ocean.",
+              "score": 0.000037348305695509334,
+              "logit": -10.195185661315918,
+              "originalIndex": 1
+            }
+          ]
+        }
+      },
+      {
+        "precision": "bnb4",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 27562.19999998808,
+          "inferenceMs": 516,
+          "totalMs": 28174.29999998212,
+          "grade": "slow",
+          "pairsPerSecond": 3.875968992248062
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 3
+        },
+        "quality": {
+          "finite": true,
+          "descending": true,
+          "correctTop": true,
+          "margin": 0.9996238459660102,
+          "grade": "ranking-pass"
+        },
+        "nativeOutput": {
+          "results": [
+            {
+              "document": "Paris is the capital and largest city of France.",
+              "score": 0.9996611943785562,
+              "logit": 7.989745140075684,
+              "originalIndex": 0
+            },
+            {
+              "document": "Whales are large marine mammals that live in the ocean.",
+              "score": 0.00003734841254603105,
+              "logit": -10.195182800292969,
+              "originalIndex": 1
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

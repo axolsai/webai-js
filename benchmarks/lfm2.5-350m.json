@@ -1,0 +1,625 @@
+{
+  "contractVersion": "1.0",
+  "model": {
+    "id": "lfm2.5-350m",
+    "displayName": "LFM2.5 350M — Edge Chat",
+    "provider": "Liquid AI",
+    "license": "LicenseRef-LFM-1.0",
+    "lastUpdated": "2026-08-05T17:01:13.000Z",
+    "sourceRepository": "LiquidAI/LFM2.5-350M",
+    "repository": "onnx-community/LFM2.5-350M-ONNX",
+    "artifactRevision": "2c07371c2e84776cad597f3d813b7d306d292aea",
+    "artifactLastUpdated": "2026-03-31T16:15:31.000Z",
+    "task": "text-generation",
+    "description": "A compact multilingual LFM2.5 conversational model designed for local edge inference through Transformers.js and ONNX Runtime Web.",
+    "intendedUses": [
+      "Local multilingual chat, drafting, rewriting, and summarization.",
+      "Benchmarking browser LLM inference on resource-constrained devices."
+    ],
+    "limitations": [
+      "Generated text may be incorrect, unsafe, biased, or fabricated and requires review.",
+      "The 350M parameter size limits reasoning depth, factual recall, and instruction following.",
+      "Accuracy varies by prompt language and input quality; specialized domains may perform poorly.",
+      "Use is governed by the custom LFM 1.0 license, and quantized artifacts may reduce output quality."
+    ]
+  },
+  "runtime": {
+    "engine": {
+      "name": "Transformers.js",
+      "version": "4.2.0"
+    },
+    "precisions": {
+      "q4f16": {
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "weightsSize": 255148587,
+        "size": 258453781,
+        "modelKeys": [
+          "model_q4f16.onnx",
+          "model_q4f16.onnx_data"
+        ],
+        "dtype": "q4f16",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4": {
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "weightsSize": 293813394,
+        "size": 297118588,
+        "modelKeys": [
+          "model_q4.onnx",
+          "model_q4.onnx_data"
+        ],
+        "dtype": "q4",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q8": {
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "weightsSize": 510117461,
+        "size": 513422655,
+        "modelKeys": [
+          "model_quantized.onnx",
+          "model_quantized.onnx_data"
+        ],
+        "dtype": "q8",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "fp16": {
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "weightsSize": 725490555,
+        "size": 728795749,
+        "modelKeys": [
+          "model_fp16.onnx",
+          "model_fp16.onnx_data"
+        ],
+        "dtype": "fp16",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "fp32": {
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "weightsSize": 1450841916,
+        "size": 1454147110,
+        "modelKeys": [
+          "model.onnx",
+          "model.onnx_data"
+        ],
+        "dtype": "fp32",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      }
+    }
+  },
+  "benchmark": {
+    "report": "benchmarks/lfm2.5-350m.json",
+    "testedAt": "2026-09-09T17:38:51.354Z",
+    "fixture": {
+      "file": "lfm2.5-350m.json",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/lfm2.5-350m.json",
+      "size": 435,
+      "sha1": "86006415fb2c4eb6d65678c2ce856f83268c2e98"
+    },
+    "candidates": {
+      "q4f16": {
+        "weightsSize": 255148587,
+        "size": 258453781,
+        "modelKeys": [
+          "model_q4f16.onnx",
+          "model_q4f16.onnx_data"
+        ],
+        "dtype": "q4f16",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4": {
+        "weightsSize": 293813394,
+        "size": 297118588,
+        "modelKeys": [
+          "model_q4.onnx",
+          "model_q4.onnx_data"
+        ],
+        "dtype": "q4",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q8": {
+        "weightsSize": 510117461,
+        "size": 513422655,
+        "modelKeys": [
+          "model_quantized.onnx",
+          "model_quantized.onnx_data"
+        ],
+        "dtype": "q8",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "fp16": {
+        "weightsSize": 725490555,
+        "size": 728795749,
+        "modelKeys": [
+          "model_fp16.onnx",
+          "model_fp16.onnx_data"
+        ],
+        "dtype": "fp16",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "fp32": {
+        "weightsSize": 1450841916,
+        "size": 1454147110,
+        "modelKeys": [
+          "model.onnx",
+          "model.onnx_data"
+        ],
+        "dtype": "fp32",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      }
+    },
+    "qualityGate": "Exact-match accepted answer, non-empty/non-repetitive output, and streamed text equal to final text.",
+    "invalidatedBy": [
+      "artifact revision change",
+      "runtime version change",
+      "fixture or quality gate change",
+      "browser/backend change"
+    ],
+    "results": [
+      {
+        "precision": "fp32",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 101712.60000002384,
+          "inferenceMs": 319.60000002384186,
+          "totalMs": 103738.89999997616,
+          "grade": "slow",
+          "firstChunkMs": 319.5,
+          "outputTokens": 1,
+          "tokensPerSecond": 3.1289111386902406
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedBefore": 0,
+          "deletedAfter": 5
+        },
+        "nativeOutput": {
+          "result": "Paris",
+          "messages": [
+            {
+              "role": "user",
+              "content": "What is the capital of France? Answer in one concise sentence."
+            },
+            {
+              "role": "assistant",
+              "content": "Paris"
+            }
+          ],
+          "structured_output": false
+        },
+        "streamedText": "Paris",
+        "quality": {
+          "grade": "exact-match",
+          "passed": true,
+          "nonEmpty": true,
+          "exactMatch": true,
+          "nonRepetitive": true,
+          "longestRepeatedWordRun": 1,
+          "expected": [
+            "Paris",
+            "The capital of France is Paris"
+          ]
+        },
+        "streamMatchesFinal": true,
+        "finishedAt": "2026-09-09T17:30:13.496Z"
+      },
+      {
+        "precision": "fp32",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 109248.90000009537,
+          "inferenceMs": 210.89999997615814,
+          "totalMs": 111227,
+          "grade": "slow",
+          "firstChunkMs": 210.69999992847443,
+          "outputTokens": 1,
+          "tokensPerSecond": 4.741583689488138
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedBefore": 0,
+          "deletedAfter": 5
+        },
+        "nativeOutput": {
+          "result": "Paris",
+          "messages": [
+            {
+              "role": "user",
+              "content": "What is the capital of France? Answer in one concise sentence."
+            },
+            {
+              "role": "assistant",
+              "content": "Paris"
+            }
+          ],
+          "structured_output": false
+        },
+        "streamedText": "Paris",
+        "quality": {
+          "grade": "exact-match",
+          "passed": true,
+          "nonEmpty": true,
+          "exactMatch": true,
+          "nonRepetitive": true,
+          "longestRepeatedWordRun": 1,
+          "expected": [
+            "Paris",
+            "The capital of France is Paris"
+          ]
+        },
+        "streamMatchesFinal": true,
+        "finishedAt": "2026-09-09T17:32:05.352Z"
+      },
+      {
+        "precision": "fp16",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 62394.200000047684,
+          "inferenceMs": 323,
+          "totalMs": 64422.5,
+          "grade": "slow",
+          "firstChunkMs": 322.89999997615814,
+          "outputTokens": 1,
+          "tokensPerSecond": 3.095975232198142
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedBefore": 0,
+          "deletedAfter": 5
+        },
+        "nativeOutput": {
+          "result": "Paris",
+          "messages": [
+            {
+              "role": "user",
+              "content": "What is the capital of France? Answer in one concise sentence."
+            },
+            {
+              "role": "assistant",
+              "content": "Paris"
+            }
+          ],
+          "structured_output": false
+        },
+        "streamedText": "Paris",
+        "quality": {
+          "grade": "exact-match",
+          "passed": true,
+          "nonEmpty": true,
+          "exactMatch": true,
+          "nonRepetitive": true,
+          "longestRepeatedWordRun": 1,
+          "expected": [
+            "Paris",
+            "The capital of France is Paris"
+          ]
+        },
+        "streamMatchesFinal": true,
+        "finishedAt": "2026-09-09T17:33:10.533Z"
+      },
+      {
+        "precision": "fp16",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 55272.699999928474,
+          "inferenceMs": 140,
+          "totalMs": 57027.10000002384,
+          "grade": "slow",
+          "firstChunkMs": 139.80000007152557,
+          "outputTokens": 1,
+          "tokensPerSecond": 7.142857142857142
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedBefore": 0,
+          "deletedAfter": 5
+        },
+        "nativeOutput": {
+          "result": "Paris",
+          "messages": [
+            {
+              "role": "user",
+              "content": "What is the capital of France? Answer in one concise sentence."
+            },
+            {
+              "role": "assistant",
+              "content": "Paris"
+            }
+          ],
+          "structured_output": false
+        },
+        "streamedText": "Paris",
+        "quality": {
+          "grade": "exact-match",
+          "passed": true,
+          "nonEmpty": true,
+          "exactMatch": true,
+          "nonRepetitive": true,
+          "longestRepeatedWordRun": 1,
+          "expected": [
+            "Paris",
+            "The capital of France is Paris"
+          ]
+        },
+        "streamMatchesFinal": true,
+        "finishedAt": "2026-09-09T17:34:08.256Z"
+      },
+      {
+        "precision": "q8",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 46038.799999952316,
+          "grade": "failed",
+          "firstChunkMs": null,
+          "outputTokens": null,
+          "tokensPerSecond": null
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedBefore": 0,
+          "deletedAfter": 5
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 9, ERROR_MESSAGE: Could not find an implementation for GatherBlockQuantized(1) node with name '/model/embed_tokens/Gather_Quant'",
+        "finishedAt": "2026-09-09T17:34:54.937Z"
+      },
+      {
+        "precision": "q8",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 42833.89999997616,
+          "inferenceMs": 108.60000002384186,
+          "totalMs": 45386.89999997616,
+          "grade": "slow",
+          "firstChunkMs": 108.5,
+          "outputTokens": 1,
+          "tokensPerSecond": 9.208103128733534
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedBefore": 0,
+          "deletedAfter": 5
+        },
+        "nativeOutput": {
+          "result": "Paris",
+          "messages": [
+            {
+              "role": "user",
+              "content": "What is the capital of France? Answer in one concise sentence."
+            },
+            {
+              "role": "assistant",
+              "content": "Paris"
+            }
+          ],
+          "structured_output": false
+        },
+        "streamedText": "Paris",
+        "quality": {
+          "grade": "exact-match",
+          "passed": true,
+          "nonEmpty": true,
+          "exactMatch": true,
+          "nonRepetitive": true,
+          "longestRepeatedWordRun": 1,
+          "expected": [
+            "Paris",
+            "The capital of France is Paris"
+          ]
+        },
+        "streamMatchesFinal": true,
+        "finishedAt": "2026-09-09T17:35:41.336Z"
+      },
+      {
+        "precision": "q4",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 33884.299999952316,
+          "grade": "failed",
+          "firstChunkMs": null,
+          "outputTokens": null,
+          "tokensPerSecond": null
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedBefore": 0,
+          "deletedAfter": 5
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 9, ERROR_MESSAGE: Could not find an implementation for GatherBlockQuantized(1) node with name '/model/embed_tokens/Gather_Quant'",
+        "finishedAt": "2026-09-09T17:36:16.955Z"
+      },
+      {
+        "precision": "q4",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 48884.799999952316,
+          "inferenceMs": 130,
+          "totalMs": 50822.60000002384,
+          "grade": "excellent",
+          "firstChunkMs": 94.30000007152557,
+          "outputTokens": 7,
+          "tokensPerSecond": 53.84615384615385
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedBefore": 0,
+          "deletedAfter": 5
+        },
+        "nativeOutput": {
+          "result": "The capital of France is Paris.",
+          "messages": [
+            {
+              "role": "user",
+              "content": "What is the capital of France? Answer in one concise sentence."
+            },
+            {
+              "role": "assistant",
+              "content": "The capital of France is Paris."
+            }
+          ],
+          "structured_output": false
+        },
+        "streamedText": "The capital of France is Paris.",
+        "quality": {
+          "grade": "exact-match",
+          "passed": true,
+          "nonEmpty": true,
+          "exactMatch": true,
+          "nonRepetitive": true,
+          "longestRepeatedWordRun": 1,
+          "expected": [
+            "Paris",
+            "The capital of France is Paris"
+          ]
+        },
+        "streamMatchesFinal": true,
+        "finishedAt": "2026-09-09T17:37:20.053Z"
+      },
+      {
+        "precision": "q4f16",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 25498.899999976158,
+          "grade": "failed",
+          "firstChunkMs": null,
+          "outputTokens": null,
+          "tokensPerSecond": null
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedBefore": 0,
+          "deletedAfter": 6
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 9, ERROR_MESSAGE: Failed to find kernel for com.microsoft.GatherBlockQuantized(1) (node:'/model/embed_tokens/Gather_Quant' ep:'CPUExecutionProvider'). Kernel not found",
+        "finishedAt": "2026-09-09T17:37:46.205Z"
+      },
+      {
+        "precision": "q4f16",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 33901.699999928474,
+          "inferenceMs": 128.80000007152557,
+          "totalMs": 35687.5,
+          "grade": "excellent",
+          "firstChunkMs": 92.80000007152557,
+          "outputTokens": 7,
+          "tokensPerSecond": 54.34782605677594
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedBefore": 0,
+          "deletedAfter": 6
+        },
+        "nativeOutput": {
+          "result": "The capital of France is Paris.",
+          "messages": [
+            {
+              "role": "user",
+              "content": "What is the capital of France? Answer in one concise sentence."
+            },
+            {
+              "role": "assistant",
+              "content": "The capital of France is Paris."
+            }
+          ],
+          "structured_output": false
+        },
+        "streamedText": "The capital of France is Paris.",
+        "quality": {
+          "grade": "exact-match",
+          "passed": true,
+          "nonEmpty": true,
+          "exactMatch": true,
+          "nonRepetitive": true,
+          "longestRepeatedWordRun": 1,
+          "expected": [
+            "Paris",
+            "The capital of France is Paris"
+          ]
+        },
+        "streamMatchesFinal": true,
+        "finishedAt": "2026-09-09T17:38:41.676Z"
+      }
+    ],
+    "environment": "Chrome 151.0.7922.176; darwin/arm64; Transformers.js 4.2.0"
+  }
+}

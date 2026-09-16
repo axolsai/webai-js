@@ -1,3 +1,3 @@
-export const VERSION = '1.0.0'
-export const REMOTE_WORKER_ENDPOINT = 'https://assets.axolsai.com';
-export const API_ENDPOINT = 'https://api.webai-js.com';
+export const VERSION = "1.0.0";
+export const DEFAULT_WORKER_BASE_PATH = "/workers";
+export const DEFAULT_WORKER_INIT_TIMEOUT_MS = 15_000;

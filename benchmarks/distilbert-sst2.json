@@ -1,0 +1,1307 @@
+{
+  "contractVersion": "1.0",
+  "model": {
+    "id": "distilbert-base-uncased-finetuned-sst-2-english",
+    "displayName": "DistilBERT SST-2 English Sentiment",
+    "provider": "Hugging Face",
+    "providerUrl": "https://huggingface.co/",
+    "license": "Apache-2.0",
+    "licenseUrl": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+    "sourceRepository": "distilbert/distilbert-base-uncased-finetuned-sst-2-english",
+    "sourceRevision": "714eb0fa89d2f80546fda750413ed43d93601a13",
+    "lastUpdated": "2023-12-19T16:29:37.000Z",
+    "repository": "Xenova/distilbert-base-uncased-finetuned-sst-2-english",
+    "artifactRevision": "0b6928efcb76139cae2c6881d49cda67fe119f42",
+    "artifactLastUpdated": "2025-06-30T05:13:56.000Z",
+    "task": "text-classification",
+    "description": "A distilled English classifier fine-tuned on SST-2 movie reviews. It runs locally with Transformers.js and returns ranked positive and negative sentiment probabilities.",
+    "intendedUses": [
+      "Explore sentiment in short English reviews.",
+      "Prototype local sentiment classification.",
+      "Benchmark browser text classification."
+    ],
+    "limitations": [
+      "Only positive and negative labels; neutral and mixed opinions are forced into one class.",
+      "Trained on English movie reviews; other languages and domains are not validated.",
+      "Sarcasm, negation, missing context and ambiguous text can be misclassified.",
+      "Inputs beyond max_length are truncated, potentially dropping relevant sentiment.",
+      "Upstream reports demographic/geographic biases; scores are not a reliable measure of a person's emotions or intent.",
+      "Require human review before consequential decisions."
+    ]
+  },
+  "runtime": {
+    "engine": {
+      "name": "Transformers.js",
+      "version": "4.2.0"
+    },
+    "precisions": {
+      "fp32": {
+        "weightsSize": 267955711,
+        "size": 268899847,
+        "dtype": "fp32",
+        "modelKeys": [
+          "model.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "fp16": {
+        "weightsSize": 134088280,
+        "size": 135032416,
+        "dtype": "fp16",
+        "modelKeys": [
+          "model_fp16.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "webgpu"
+        ]
+      },
+      "int8": {
+        "weightsSize": 67370466,
+        "size": 68314602,
+        "dtype": "int8",
+        "modelKeys": [
+          "model_int8.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "uint8": {
+        "weightsSize": 67370488,
+        "size": 68314624,
+        "dtype": "uint8",
+        "modelKeys": [
+          "model_uint8.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q8": {
+        "weightsSize": 67581197,
+        "size": 68525333,
+        "dtype": "q8",
+        "modelKeys": [
+          "model_quantized.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4": {
+        "weightsSize": 124633754,
+        "size": 125577890,
+        "dtype": "q4",
+        "modelKeys": [
+          "model_q4.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4f16": {
+        "weightsSize": 73044407,
+        "size": 73988543,
+        "dtype": "q4f16",
+        "modelKeys": [
+          "model_q4f16.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "webgpu"
+        ]
+      },
+      "bnb4": {
+        "weightsSize": 121979810,
+        "size": 122923946,
+        "dtype": "bnb4",
+        "modelKeys": [
+          "model_bnb4.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      }
+    }
+  },
+  "benchmark": {
+    "report": "benchmarks/distilbert-sst2.json",
+    "testedAt": "2026-09-15T18:11:44.541Z",
+    "fixture": {
+      "file": "distilbert-sst2.json",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/distilbert-sst2.json",
+      "size": 486,
+      "sha1": "226199feb31ba0ad6ffa6629585a76930b240a3a",
+      "source": "Xenova model-card positive example and WebAI-authored negative review",
+      "license": "Apache-2.0",
+      "preprocessing": "Pinned tokenizer truncates English input at max_length."
+    },
+    "candidates": {
+      "fp32": {
+        "weightsSize": 267955711,
+        "size": 268899847,
+        "dtype": "fp32",
+        "modelKeys": [
+          "model.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "fp16": {
+        "weightsSize": 134088280,
+        "size": 135032416,
+        "dtype": "fp16",
+        "modelKeys": [
+          "model_fp16.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "int8": {
+        "weightsSize": 67370466,
+        "size": 68314602,
+        "dtype": "int8",
+        "modelKeys": [
+          "model_int8.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "uint8": {
+        "weightsSize": 67370488,
+        "size": 68314624,
+        "dtype": "uint8",
+        "modelKeys": [
+          "model_uint8.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q8": {
+        "weightsSize": 67581197,
+        "size": 68525333,
+        "dtype": "q8",
+        "modelKeys": [
+          "model_quantized.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4": {
+        "weightsSize": 124633754,
+        "size": 125577890,
+        "dtype": "q4",
+        "modelKeys": [
+          "model_q4.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4f16": {
+        "weightsSize": 73044407,
+        "size": 73988543,
+        "dtype": "q4f16",
+        "modelKeys": [
+          "model_q4f16.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "bnb4": {
+        "weightsSize": 121979810,
+        "size": 122923946,
+        "dtype": "bnb4",
+        "modelKeys": [
+          "model_bnb4.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      }
+    },
+    "qualityGate": "Both expected sentiment labels correct with confidence >=0.8; finite probabilities in [0,1] summing to one and distinct predictions.",
+    "environment": "Isolated headless Chrome 151 on macOS; Transformers.js 4.2.0",
+    "invalidatedBy": [
+      "artifact revision change",
+      "runtime version change",
+      "fixture or quality-gate change",
+      "browser/backend behavior change"
+    ],
+    "results": [
+      {
+        "precision": "fp32",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 37308.40000000596,
+          "inferenceMs": 58.80000001192093,
+          "totalMs": 38643.30000001192,
+          "grade": "excellent",
+          "textsPerSecond": 34.01360543528106
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "cases": [
+            {
+              "expected": "POSITIVE",
+              "actual": "POSITIVE",
+              "score": 0.9998068605929036,
+              "finite": true,
+              "pass": true
+            },
+            {
+              "expected": "NEGATIVE",
+              "actual": "NEGATIVE",
+              "score": 0.9995625767894342,
+              "finite": true,
+              "pass": true
+            }
+          ],
+          "accuracy": 1,
+          "grade": "sentiment-regression-pass"
+        },
+        "nativeOutput": [
+          {
+            "label": "POSITIVE",
+            "score": 0.9998068605929036,
+            "labels": [
+              {
+                "label": "POSITIVE",
+                "score": 0.9998068605929036
+              },
+              {
+                "label": "NEGATIVE",
+                "score": 0.0001931394070963975
+              }
+            ]
+          },
+          {
+            "label": "NEGATIVE",
+            "score": 0.9995625767894342,
+            "labels": [
+              {
+                "label": "NEGATIVE",
+                "score": 0.9995625767894342
+              },
+              {
+                "label": "POSITIVE",
+                "score": 0.00043742321056577677
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "precision": "fp32",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 34159.10000002384,
+          "inferenceMs": 239.09999999403954,
+          "totalMs": 35713.30000001192,
+          "grade": "good",
+          "textsPerSecond": 8.364700962149133
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "cases": [
+            {
+              "expected": "POSITIVE",
+              "actual": "POSITIVE",
+              "score": 0.9998068606849819,
+              "finite": true,
+              "pass": true
+            },
+            {
+              "expected": "NEGATIVE",
+              "actual": "NEGATIVE",
+              "score": 0.9995625754342574,
+              "finite": true,
+              "pass": true
+            }
+          ],
+          "accuracy": 1,
+          "grade": "sentiment-regression-pass"
+        },
+        "nativeOutput": [
+          {
+            "label": "POSITIVE",
+            "score": 0.9998068606849819,
+            "labels": [
+              {
+                "label": "POSITIVE",
+                "score": 0.9998068606849819
+              },
+              {
+                "label": "NEGATIVE",
+                "score": 0.0001931393150181608
+              }
+            ]
+          },
+          {
+            "label": "NEGATIVE",
+            "score": 0.9995625754342574,
+            "labels": [
+              {
+                "label": "NEGATIVE",
+                "score": 0.9995625754342574
+              },
+              {
+                "label": "POSITIVE",
+                "score": 0.0004374245657424951
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "precision": "fp16",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 23291,
+          "grade": "failed"
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 1, ERROR_MESSAGE: /mnt/vss/_work/1/s/onnxruntime/core/graph/graph_utils.cc:30 int onnxruntime::graph_utils::GetIndexFromName(const Node &, const std::string &, bool) itr != node_args.end() was false. Attempting to get index by a name which does not exist:InsertedPrecisionFreeCast_/distilbert/transformer/layer.5/output_layer_norm/Constant_output_0for node: /distilbert/embeddings/LayerNorm/Mul/SimplifiedLayerNormFusion/\n"
+      },
+      {
+        "precision": "fp16",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 21414,
+          "inferenceMs": 248.59999999403954,
+          "totalMs": 22897,
+          "grade": "good",
+          "textsPerSecond": 8.045052293032793
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "cases": [
+            {
+              "expected": "POSITIVE",
+              "actual": "POSITIVE",
+              "score": 0.9997507674754179,
+              "finite": true,
+              "pass": true
+            },
+            {
+              "expected": "NEGATIVE",
+              "actual": "NEGATIVE",
+              "score": 0.9990359080961361,
+              "finite": true,
+              "pass": true
+            }
+          ],
+          "accuracy": 1,
+          "grade": "sentiment-regression-pass"
+        },
+        "nativeOutput": [
+          {
+            "label": "POSITIVE",
+            "score": 0.9997507674754179,
+            "labels": [
+              {
+                "label": "POSITIVE",
+                "score": 0.9997507674754179
+              },
+              {
+                "label": "NEGATIVE",
+                "score": 0.00024923252458203564
+              }
+            ]
+          },
+          {
+            "label": "NEGATIVE",
+            "score": 0.9990359080961361,
+            "labels": [
+              {
+                "label": "NEGATIVE",
+                "score": 0.9990359080961361
+              },
+              {
+                "label": "POSITIVE",
+                "score": 0.0009640919038640261
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "precision": "int8",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 14183.59999999404,
+          "inferenceMs": 74.2000000178814,
+          "totalMs": 15508.90000000596,
+          "grade": "excellent",
+          "textsPerSecond": 26.95417789107846
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "cases": [
+            {
+              "expected": "POSITIVE",
+              "actual": "POSITIVE",
+              "score": 0.9997704615574663,
+              "finite": true,
+              "pass": true
+            },
+            {
+              "expected": "NEGATIVE",
+              "actual": "NEGATIVE",
+              "score": 0.9995241222127412,
+              "finite": true,
+              "pass": true
+            }
+          ],
+          "accuracy": 1,
+          "grade": "sentiment-regression-pass"
+        },
+        "nativeOutput": [
+          {
+            "label": "POSITIVE",
+            "score": 0.9997704615574663,
+            "labels": [
+              {
+                "label": "POSITIVE",
+                "score": 0.9997704615574663
+              },
+              {
+                "label": "NEGATIVE",
+                "score": 0.00022953844253375925
+              }
+            ]
+          },
+          {
+            "label": "NEGATIVE",
+            "score": 0.9995241222127412,
+            "labels": [
+              {
+                "label": "NEGATIVE",
+                "score": 0.9995241222127412
+              },
+              {
+                "label": "POSITIVE",
+                "score": 0.00047587778725879243
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "precision": "int8",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 14261.799999982119,
+          "inferenceMs": 198.40000000596046,
+          "totalMs": 15788.200000017881,
+          "grade": "good",
+          "textsPerSecond": 10.080645160987473
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "cases": [
+            {
+              "expected": "POSITIVE",
+              "actual": "POSITIVE",
+              "score": 0.9997704615574663,
+              "finite": true,
+              "pass": true
+            },
+            {
+              "expected": "NEGATIVE",
+              "actual": "NEGATIVE",
+              "score": 0.9995241225529534,
+              "finite": true,
+              "pass": true
+            }
+          ],
+          "accuracy": 1,
+          "grade": "sentiment-regression-pass"
+        },
+        "nativeOutput": [
+          {
+            "label": "POSITIVE",
+            "score": 0.9997704615574663,
+            "labels": [
+              {
+                "label": "POSITIVE",
+                "score": 0.9997704615574663
+              },
+              {
+                "label": "NEGATIVE",
+                "score": 0.00022953844253375925
+              }
+            ]
+          },
+          {
+            "label": "NEGATIVE",
+            "score": 0.9995241225529534,
+            "labels": [
+              {
+                "label": "NEGATIVE",
+                "score": 0.9995241225529534
+              },
+              {
+                "label": "POSITIVE",
+                "score": 0.000475877447046573
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "precision": "uint8",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 12392.899999976158,
+          "inferenceMs": 74.5,
+          "totalMs": 13833.5,
+          "grade": "excellent",
+          "textsPerSecond": 26.845637583892618
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "cases": [
+            {
+              "expected": "POSITIVE",
+              "actual": "POSITIVE",
+              "score": 0.999823115266032,
+              "finite": true,
+              "pass": true
+            },
+            {
+              "expected": "NEGATIVE",
+              "actual": "NEGATIVE",
+              "score": 0.9996465835611709,
+              "finite": true,
+              "pass": true
+            }
+          ],
+          "accuracy": 1,
+          "grade": "sentiment-regression-pass"
+        },
+        "nativeOutput": [
+          {
+            "label": "POSITIVE",
+            "score": 0.999823115266032,
+            "labels": [
+              {
+                "label": "POSITIVE",
+                "score": 0.999823115266032
+              },
+              {
+                "label": "NEGATIVE",
+                "score": 0.00017688473396808345
+              }
+            ]
+          },
+          {
+            "label": "NEGATIVE",
+            "score": 0.9996465835611709,
+            "labels": [
+              {
+                "label": "NEGATIVE",
+                "score": 0.9996465835611709
+              },
+              {
+                "label": "POSITIVE",
+                "score": 0.0003534164388292528
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "precision": "uint8",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 11884.90000000596,
+          "inferenceMs": 205.90000000596046,
+          "totalMs": 13292.40000000596,
+          "grade": "good",
+          "textsPerSecond": 9.713453132307446
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "cases": [
+            {
+              "expected": "POSITIVE",
+              "actual": "POSITIVE",
+              "score": 0.999823115266032,
+              "finite": true,
+              "pass": true
+            },
+            {
+              "expected": "NEGATIVE",
+              "actual": "NEGATIVE",
+              "score": 0.999646582718857,
+              "finite": true,
+              "pass": true
+            }
+          ],
+          "accuracy": 1,
+          "grade": "sentiment-regression-pass"
+        },
+        "nativeOutput": [
+          {
+            "label": "POSITIVE",
+            "score": 0.999823115266032,
+            "labels": [
+              {
+                "label": "POSITIVE",
+                "score": 0.999823115266032
+              },
+              {
+                "label": "NEGATIVE",
+                "score": 0.00017688473396808345
+              }
+            ]
+          },
+          {
+            "label": "NEGATIVE",
+            "score": 0.999646582718857,
+            "labels": [
+              {
+                "label": "NEGATIVE",
+                "score": 0.999646582718857
+              },
+              {
+                "label": "POSITIVE",
+                "score": 0.00035341728114291545
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "precision": "q8",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 12910.800000011921,
+          "inferenceMs": 73.5,
+          "totalMs": 14227,
+          "grade": "excellent",
+          "textsPerSecond": 27.210884353741495
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "cases": [
+            {
+              "expected": "POSITIVE",
+              "actual": "POSITIVE",
+              "score": 0.9997887322507517,
+              "finite": true,
+              "pass": true
+            },
+            {
+              "expected": "NEGATIVE",
+              "actual": "NEGATIVE",
+              "score": 0.9995639365188616,
+              "finite": true,
+              "pass": true
+            }
+          ],
+          "accuracy": 1,
+          "grade": "sentiment-regression-pass"
+        },
+        "nativeOutput": [
+          {
+            "label": "POSITIVE",
+            "score": 0.9997887322507517,
+            "labels": [
+              {
+                "label": "POSITIVE",
+                "score": 0.9997887322507517
+              },
+              {
+                "label": "NEGATIVE",
+                "score": 0.00021126774924827031
+              }
+            ]
+          },
+          {
+            "label": "NEGATIVE",
+            "score": 0.9995639365188616,
+            "labels": [
+              {
+                "label": "NEGATIVE",
+                "score": 0.9995639365188616
+              },
+              {
+                "label": "POSITIVE",
+                "score": 0.0004360634811383989
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "precision": "q8",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 13694.300000011921,
+          "inferenceMs": 384.90000000596046,
+          "totalMs": 15297.59999999404,
+          "grade": "slow",
+          "textsPerSecond": 5.196154845333926
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "cases": [
+            {
+              "expected": "POSITIVE",
+              "actual": "POSITIVE",
+              "score": 0.9997887157321852,
+              "finite": true,
+              "pass": true
+            },
+            {
+              "expected": "NEGATIVE",
+              "actual": "NEGATIVE",
+              "score": 0.9995639338169253,
+              "finite": true,
+              "pass": true
+            }
+          ],
+          "accuracy": 1,
+          "grade": "sentiment-regression-pass"
+        },
+        "nativeOutput": [
+          {
+            "label": "POSITIVE",
+            "score": 0.9997887157321852,
+            "labels": [
+              {
+                "label": "POSITIVE",
+                "score": 0.9997887157321852
+              },
+              {
+                "label": "NEGATIVE",
+                "score": 0.00021128426781479438
+              }
+            ]
+          },
+          {
+            "label": "NEGATIVE",
+            "score": 0.9995639338169253,
+            "labels": [
+              {
+                "label": "NEGATIVE",
+                "score": 0.9995639338169253
+              },
+              {
+                "label": "POSITIVE",
+                "score": 0.00043606618307456493
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "precision": "q4",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 19400.5,
+          "inferenceMs": 185.5,
+          "totalMs": 20935.80000001192,
+          "grade": "good",
+          "textsPerSecond": 10.781671159029651
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "cases": [
+            {
+              "expected": "POSITIVE",
+              "actual": "POSITIVE",
+              "score": 0.9998047775897084,
+              "finite": true,
+              "pass": true
+            },
+            {
+              "expected": "NEGATIVE",
+              "actual": "NEGATIVE",
+              "score": 0.9995598592883355,
+              "finite": true,
+              "pass": true
+            }
+          ],
+          "accuracy": 1,
+          "grade": "sentiment-regression-pass"
+        },
+        "nativeOutput": [
+          {
+            "label": "POSITIVE",
+            "score": 0.9998047775897084,
+            "labels": [
+              {
+                "label": "POSITIVE",
+                "score": 0.9998047775897084
+              },
+              {
+                "label": "NEGATIVE",
+                "score": 0.0001952224102915095
+              }
+            ]
+          },
+          {
+            "label": "NEGATIVE",
+            "score": 0.9995598592883355,
+            "labels": [
+              {
+                "label": "NEGATIVE",
+                "score": 0.9995598592883355
+              },
+              {
+                "label": "POSITIVE",
+                "score": 0.0004401407116646809
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "precision": "q4",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 21880.59999999404,
+          "inferenceMs": 143,
+          "totalMs": 23247.29999998212,
+          "grade": "good",
+          "textsPerSecond": 13.986013986013987
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "cases": [
+            {
+              "expected": "POSITIVE",
+              "actual": "POSITIVE",
+              "score": 0.9998047778689217,
+              "finite": true,
+              "pass": true
+            },
+            {
+              "expected": "NEGATIVE",
+              "actual": "NEGATIVE",
+              "score": 0.9995598596030099,
+              "finite": true,
+              "pass": true
+            }
+          ],
+          "accuracy": 1,
+          "grade": "sentiment-regression-pass"
+        },
+        "nativeOutput": [
+          {
+            "label": "POSITIVE",
+            "score": 0.9998047778689217,
+            "labels": [
+              {
+                "label": "POSITIVE",
+                "score": 0.9998047778689217
+              },
+              {
+                "label": "NEGATIVE",
+                "score": 0.00019522213107833048
+              }
+            ]
+          },
+          {
+            "label": "NEGATIVE",
+            "score": 0.9995598596030099,
+            "labels": [
+              {
+                "label": "NEGATIVE",
+                "score": 0.9995598596030099
+              },
+              {
+                "label": "POSITIVE",
+                "score": 0.0004401403969901861
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "precision": "q4f16",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 15357.800000011921,
+          "grade": "failed"
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 1, ERROR_MESSAGE: /mnt/vss/_work/1/s/onnxruntime/core/graph/graph_utils.cc:30 int onnxruntime::graph_utils::GetIndexFromName(const Node &, const std::string &, bool) itr != node_args.end() was false. Attempting to get index by a name which does not exist:InsertedPrecisionFreeCast_/distilbert/transformer/layer.5/output_layer_norm/Constant_output_0for node: /distilbert/embeddings/LayerNorm/Mul/SimplifiedLayerNormFusion/\n"
+      },
+      {
+        "precision": "q4f16",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 11828.199999988079,
+          "inferenceMs": 186.10000002384186,
+          "totalMs": 13364.5,
+          "grade": "good",
+          "textsPerSecond": 10.74691026192248
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "cases": [
+            {
+              "expected": "POSITIVE",
+              "actual": "POSITIVE",
+              "score": 0.999731571162093,
+              "finite": true,
+              "pass": true
+            },
+            {
+              "expected": "NEGATIVE",
+              "actual": "NEGATIVE",
+              "score": 0.9990302480322174,
+              "finite": true,
+              "pass": true
+            }
+          ],
+          "accuracy": 1,
+          "grade": "sentiment-regression-pass"
+        },
+        "nativeOutput": [
+          {
+            "label": "POSITIVE",
+            "score": 0.999731571162093,
+            "labels": [
+              {
+                "label": "POSITIVE",
+                "score": 0.999731571162093
+              },
+              {
+                "label": "NEGATIVE",
+                "score": 0.0002684288379070734
+              }
+            ]
+          },
+          {
+            "label": "NEGATIVE",
+            "score": 0.9990302480322174,
+            "labels": [
+              {
+                "label": "NEGATIVE",
+                "score": 0.9990302480322174
+              },
+              {
+                "label": "POSITIVE",
+                "score": 0.0009697519677825861
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "precision": "bnb4",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 13846.699999988079,
+          "inferenceMs": 116.30000001192093,
+          "totalMs": 15101,
+          "grade": "good",
+          "textsPerSecond": 17.196904555417
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "cases": [
+            {
+              "expected": "POSITIVE",
+              "actual": "POSITIVE",
+              "score": 0.9997535227530785,
+              "finite": true,
+              "pass": true
+            },
+            {
+              "expected": "NEGATIVE",
+              "actual": "NEGATIVE",
+              "score": 0.9996075217275017,
+              "finite": true,
+              "pass": true
+            }
+          ],
+          "accuracy": 1,
+          "grade": "sentiment-regression-pass"
+        },
+        "nativeOutput": [
+          {
+            "label": "POSITIVE",
+            "score": 0.9997535227530785,
+            "labels": [
+              {
+                "label": "POSITIVE",
+                "score": 0.9997535227530785
+              },
+              {
+                "label": "NEGATIVE",
+                "score": 0.0002464772469215945
+              }
+            ]
+          },
+          {
+            "label": "NEGATIVE",
+            "score": 0.9996075217275017,
+            "labels": [
+              {
+                "label": "NEGATIVE",
+                "score": 0.9996075217275017
+              },
+              {
+                "label": "POSITIVE",
+                "score": 0.00039247827249824107
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "precision": "bnb4",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 13052.5,
+          "inferenceMs": 193.19999998807907,
+          "totalMs": 14387.90000000596,
+          "grade": "good",
+          "textsPerSecond": 10.351966874344747
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "cases": [
+            {
+              "expected": "POSITIVE",
+              "actual": "POSITIVE",
+              "score": 0.9997535227530785,
+              "finite": true,
+              "pass": true
+            },
+            {
+              "expected": "NEGATIVE",
+              "actual": "NEGATIVE",
+              "score": 0.9996075218210392,
+              "finite": true,
+              "pass": true
+            }
+          ],
+          "accuracy": 1,
+          "grade": "sentiment-regression-pass"
+        },
+        "nativeOutput": [
+          {
+            "label": "POSITIVE",
+            "score": 0.9997535227530785,
+            "labels": [
+              {
+                "label": "POSITIVE",
+                "score": 0.9997535227530785
+              },
+              {
+                "label": "NEGATIVE",
+                "score": 0.0002464772469215945
+              }
+            ]
+          },
+          {
+            "label": "NEGATIVE",
+            "score": 0.9996075218210392,
+            "labels": [
+              {
+                "label": "NEGATIVE",
+                "score": 0.9996075218210392
+              },
+              {
+                "label": "POSITIVE",
+                "score": 0.00039247817896086596
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

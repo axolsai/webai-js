@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "configuration": {
+    "precision": "int8",
+    "device": "wasm"
+  },
+  "downloadProgressEvents": 4105,
+  "invalidInputRejected": true,
+  "unsupportedStreamingRejected": true,
+  "clearMemoryVerified": true,
+  "runtime": {
+    "durationMs": 97.2999999821186
+  },
+  "nativeOutput": {
+    "rows": 3,
+    "dimensions": 384,
+    "margin": 0.282369617850864
+  }
+}

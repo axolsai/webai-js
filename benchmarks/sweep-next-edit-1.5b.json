@@ -1,0 +1,291 @@
+{
+  "contractVersion": "1.0",
+  "model": {
+    "id": "sweep-next-edit-1.5b",
+    "displayName": "Sweep Next-Edit 1.5B — ONNX",
+    "provider": "Sweep AI",
+    "license": "Apache-2.0",
+    "lastUpdated": "2026-01-22T20:40:28.000Z",
+    "sourceRepository": "sweepai/sweep-next-edit-1.5B",
+    "repository": "Xenova/sweep-next-edit-1.5B",
+    "artifactRevision": "402c437f67cee450c00d3add669b43ae79e55e50",
+    "artifactLastUpdated": "2026-01-24T02:26:04.000Z",
+    "task": "text-generation",
+    "description": "A 1.5-billion-parameter Qwen2.5-Coder-based model from Sweep AI that predicts the complete next state of a code file from repository context, recent diffs, and the file's original and current contents, running locally in a browser through Transformers.js and ONNX Runtime Web.",
+    "intendedUses": [
+      "Predicting a likely next code edit from a developer's recent changes.",
+      "Prototyping local code-edit autocomplete in browser developer tools and editors.",
+      "Benchmarking causal language-model ONNX artifacts with the reusable Transformers.js LLM harness."
+    ],
+    "limitations": [
+      "This is a specialized next-edit predictor, not a general conversational assistant.",
+      "Predictions may be incorrect, incomplete, insecure, or destructive and require developer review before application.",
+      "Quality depends on exact prompt formatting and useful repository and edit context; unrelated or truncated context can substantially reduce accuracy.",
+      "The model can reproduce sensitive or licensed material supplied in its context; callers are responsible for reviewing inputs and outputs.",
+      "The smallest ONNX candidate is approximately 844 MB before browser runtime assets and may exceed memory limits on mobile or constrained devices."
+    ]
+  },
+  "runtime": {
+    "engine": {
+      "name": "Transformers.js",
+      "version": "4.2.0"
+    },
+    "precisions": {}
+  },
+  "benchmark": {
+    "testedAt": "2026-09-09T07:47:49.698Z",
+    "environment": "Chrome 151.0.7922.176; darwin/arm64; Transformers.js 4.2.0",
+    "fixture": {
+      "file": "sweep-next-edit-1.5b.json",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/sweep-next-edit-1.5b.json",
+      "size": 1291,
+      "sha1": "98a29ff43b6bdcd2faba07f9ba47bb9d9ed36192"
+    },
+    "qualityGate": "Retain all required current-file constructs, introduce at least one expected edit construct, meet minimum line count, reject empty output and excessive repeated lines, and require stream/final equality.",
+    "invalidatedBy": [
+      "model artifact revision change",
+      "Transformers.js or ONNX Runtime version change",
+      "fixture or quality-gate change",
+      "browser/backend behavior change"
+    ],
+    "candidates": {
+      "fp32": { "weightsSize": 5797054210, "size": 5800122008, "modelKeys": ["model.onnx", "model.onnx_data", "model.onnx_data_1", "model.onnx_data_2"], "dtype": "fp32", "candidateDevices": ["wasm", "webgpu"] },
+      "fp16": { "weightsSize": 2898635284, "size": 2901703082, "modelKeys": ["model_fp16.onnx", "model_fp16.onnx_data", "model_fp16.onnx_data_1"], "dtype": "fp16", "candidateDevices": ["wasm", "webgpu"] },
+      "q8": { "weightsSize": 1688302819, "size": 1691370617, "modelKeys": ["model_quantized.onnx", "model_quantized.onnx_data"], "dtype": "q8", "candidateDevices": ["wasm", "webgpu"] },
+      "q4": { "weightsSize": 943286437, "size": 946354235, "modelKeys": ["model_q4.onnx", "model_q4.onnx_data"], "dtype": "q4", "candidateDevices": ["wasm", "webgpu"] },
+      "q4f16": { "weightsSize": 844302125, "size": 847369923, "modelKeys": ["model_q4f16.onnx", "model_q4f16.onnx_data"], "dtype": "q4f16", "candidateDevices": ["wasm", "webgpu"] }
+    },
+    "results": [
+      {
+        "precision": "fp32",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 7676,
+          "grade": "failed",
+          "firstChunkMs": null,
+          "outputTokens": null,
+          "tokensPerSecond": null
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedBefore": 0,
+          "deletedAfter": 5
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 1, ERROR_MESSAGE: Deserialize tensor model.layers.7.input_layernorm.weight failed.Failed to load external data file \"\"model.onnx_data\"\", error: Module.MountedFiles is not available.",
+        "finishedAt": "2026-09-09T07:46:35.637Z"
+      },
+      {
+        "precision": "fp32",
+        "device": "webgpu",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 7366.100000023842,
+          "grade": "failed",
+          "firstChunkMs": null,
+          "outputTokens": null,
+          "tokensPerSecond": null
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedBefore": 0,
+          "deletedAfter": 5
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 1, ERROR_MESSAGE: Deserialize tensor model.layers.11.mlp.up_proj.MatMul.weight failed.Failed to load external data file \"\"model.onnx_data_1\"\", error: Module.MountedFiles is not available.",
+        "finishedAt": "2026-09-09T07:46:43.521Z"
+      },
+      {
+        "precision": "fp16",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 7499.699999928474,
+          "grade": "failed",
+          "firstChunkMs": null,
+          "outputTokens": null,
+          "tokensPerSecond": null
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedBefore": 0,
+          "deletedAfter": 5
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 1, ERROR_MESSAGE: /mnt/vss/_work/1/s/onnxruntime/core/optimizer/initializer.cc:51 onnxruntime::Initializer::Initializer(const onnx::TensorProto &, const std::filesystem::path &) [ONNXRuntimeError] : 1 : FAIL : Failed to load external data file \"\"model_fp16.onnx_data\"\", error: Module.MountedFiles is not available.\n",
+        "finishedAt": "2026-09-09T07:46:51.556Z"
+      },
+      {
+        "precision": "fp16",
+        "device": "webgpu",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 7566.5,
+          "grade": "failed",
+          "firstChunkMs": null,
+          "outputTokens": null,
+          "tokensPerSecond": null
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedBefore": 0,
+          "deletedAfter": 5
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 1, ERROR_MESSAGE: Deserialize tensor model.layers.14.mlp.up_proj.MatMul.weight failed.Failed to load external data file \"\"model_fp16.onnx_data\"\", error: Module.MountedFiles is not available.",
+        "finishedAt": "2026-09-09T07:46:59.664Z"
+      },
+      {
+        "precision": "q8",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 7987.799999952316,
+          "grade": "failed",
+          "firstChunkMs": null,
+          "outputTokens": null,
+          "tokensPerSecond": null
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedBefore": 0,
+          "deletedAfter": 5
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 9, ERROR_MESSAGE: Could not find an implementation for GatherBlockQuantized(1) node with name '/model/embed_tokens/Gather_Quant'",
+        "finishedAt": "2026-09-09T07:47:08.182Z"
+      },
+      {
+        "precision": "q8",
+        "device": "webgpu",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 7678.300000071526,
+          "grade": "failed",
+          "firstChunkMs": null,
+          "outputTokens": null,
+          "tokensPerSecond": null
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedBefore": 0,
+          "deletedAfter": 5
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 1, ERROR_MESSAGE: Deserialize tensor model_layers_14_attn_q_proj_MatMul_weight_zp failed.Failed to load external data file \"\"model_quantized.onnx_data\"\", error: Module.MountedFiles is not available.",
+        "finishedAt": "2026-09-09T07:47:16.436Z"
+      },
+      {
+        "precision": "q4",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 7535,
+          "grade": "failed",
+          "firstChunkMs": null,
+          "outputTokens": null,
+          "tokensPerSecond": null
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedBefore": 0,
+          "deletedAfter": 5
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 9, ERROR_MESSAGE: Could not find an implementation for GatherBlockQuantized(1) node with name '/model/embed_tokens/Gather_Quant'",
+        "finishedAt": "2026-09-09T07:47:24.509Z"
+      },
+      {
+        "precision": "q4",
+        "device": "webgpu",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 8119.799999952316,
+          "grade": "failed",
+          "firstChunkMs": null,
+          "outputTokens": null,
+          "tokensPerSecond": null
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedBefore": 0,
+          "deletedAfter": 5
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 1, ERROR_MESSAGE: Deserialize tensor model_layers_14_attn_q_proj_MatMul_weight_zp failed.Failed to load external data file \"\"model_q4.onnx_data\"\", error: Module.MountedFiles is not available.",
+        "finishedAt": "2026-09-09T07:47:33.180Z"
+      },
+      {
+        "precision": "q4f16",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 7555.699999928474,
+          "grade": "failed",
+          "firstChunkMs": null,
+          "outputTokens": null,
+          "tokensPerSecond": null
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedBefore": 0,
+          "deletedAfter": 5
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 1, ERROR_MESSAGE: /mnt/vss/_work/1/s/onnxruntime/core/optimizer/initializer.cc:51 onnxruntime::Initializer::Initializer(const onnx::TensorProto &, const std::filesystem::path &) [ONNXRuntimeError] : 1 : FAIL : Failed to load external data file \"\"model_q4f16.onnx_data\"\", error: Module.MountedFiles is not available.\n",
+        "finishedAt": "2026-09-09T07:47:41.267Z"
+      },
+      {
+        "precision": "q4f16",
+        "device": "webgpu",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 7826.200000047684,
+          "grade": "failed",
+          "firstChunkMs": null,
+          "outputTokens": null,
+          "tokensPerSecond": null
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedBefore": 0,
+          "deletedAfter": 5
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 1, ERROR_MESSAGE: Deserialize tensor model_layers_27_mlp_down_proj_MatMul_weight_zp failed.Failed to load external data file \"\"model_q4f16.onnx_data\"\", error: Module.MountedFiles is not available.",
+        "finishedAt": "2026-09-09T07:47:49.620Z"
+      }
+    ]
+  }
+}

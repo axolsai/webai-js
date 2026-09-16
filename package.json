@@ -8,6 +8,24 @@
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./workers/*": "./model-workers-v4/*.worker.js"
+  },
+  "files": [
+    "dist",
+    "model-workers-v4/*.worker.js",
+    "docs/WORKER_CONTRACT.md",
+    "docs/ADDING_MODELS.md",
+    "docs/worker-template.js",
+    "benchmarks/*.json",
+    "README.md",
+    "LICENSE"
+  ],
   "homepage": "https://www.webai-js.com",
   "keywords": [
     "Web AI",
@@ -18,7 +36,9 @@
   ],
   "scripts": {
     "build": "tsup",
-    "dev": "tsup --watch"
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run typecheck && npm run build"
   },
   "author": "Axols WebAI",
   "license": "Apache-2.0",

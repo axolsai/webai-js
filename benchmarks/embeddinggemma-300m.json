@@ -1,0 +1,527 @@
+{
+  "contractVersion": "1.0",
+  "model": {
+    "id": "embeddinggemma-300m",
+    "displayName": "EmbeddingGemma 300M",
+    "provider": "Google DeepMind",
+    "providerUrl": "https://ai.google.dev/gemma/docs/embeddinggemma",
+    "license": "LicenseRef-Gemma",
+    "licenseUrl": "https://ai.google.dev/gemma/terms",
+    "lastUpdated": "2025-09-25T15:11:17.000Z",
+    "sourceRepository": "google/embeddinggemma-300m",
+    "repository": "onnx-community/embeddinggemma-300m-ONNX",
+    "artifactRevision": "5090578d9565bb06545b4552f76e6bc2c93e4a66",
+    "artifactLastUpdated": "2025-09-04T15:43:56.000Z",
+    "task": "feature-extraction",
+    "description": "A 300-million-parameter multilingual Google embedding model that creates normalized 768-dimensional text vectors locally in the browser, with optional Matryoshka truncation to 512, 256, or 128 dimensions.",
+    "intendedUses": [
+      "Semantic search and retrieval across more than 100 trained languages.",
+      "Text similarity, clustering, classification, question answering, fact-verification retrieval, and code retrieval."
+    ],
+    "limitations": [
+      "Retrieval quality depends on using the documented query/document prefixes and varies by language, domain, ambiguity, and input quality.",
+      "Inputs longer than 2,048 tokens are truncated by the model.",
+      "Embedding similarity is not factual verification and can reproduce training-data gaps or bias.",
+      "FP16 activations and derivatives are explicitly unsupported upstream; quantization and Matryoshka truncation can alter ranking margins."
+    ]
+  },
+  "runtime": {
+    "engine": {
+      "name": "Transformers.js",
+      "version": "4.2.0"
+    },
+    "precisions": {
+      "fp32": {
+        "weightsSize": 1235001020,
+        "size": 1261172831,
+        "modelKeys": [
+          "model.onnx",
+          "model.onnx_data"
+        ],
+        "dtype": "fp32",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "fp16": {
+        "weightsSize": 618089375,
+        "size": 644261186,
+        "modelKeys": [
+          "model_fp16.onnx",
+          "model_fp16.onnx_data"
+        ],
+        "dtype": "fp16",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm"
+        ]
+      },
+      "q8": {
+        "weightsSize": 309458498,
+        "size": 335630309,
+        "modelKeys": [
+          "model_quantized.onnx",
+          "model_quantized.onnx_data"
+        ],
+        "dtype": "q8",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4": {
+        "weightsSize": 197245082,
+        "size": 223416893,
+        "modelKeys": [
+          "model_q4.onnx",
+          "model_q4.onnx_data"
+        ],
+        "dtype": "q4",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "webgpu"
+        ]
+      }
+    }
+  },
+  "benchmark": {
+    "report": "benchmarks/embeddinggemma-300m.json",
+    "testedAt": "2026-09-12T14:42:07.406Z",
+    "fixture": {
+      "file": "embeddinggemma-300m.json",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/embeddinggemma-300m.json",
+      "size": 634,
+      "sha1": "9a1d261338de718b559f5544e81e488477672779"
+    },
+    "candidates": {
+      "fp32": {
+        "weightsSize": 1235001020,
+        "size": 1261172831,
+        "modelKeys": [
+          "model.onnx",
+          "model.onnx_data"
+        ],
+        "dtype": "fp32",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "fp16": {
+        "weightsSize": 618089375,
+        "size": 644261186,
+        "modelKeys": [
+          "model_fp16.onnx",
+          "model_fp16.onnx_data"
+        ],
+        "dtype": "fp16",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q8": {
+        "weightsSize": 309458498,
+        "size": 335630309,
+        "modelKeys": [
+          "model_quantized.onnx",
+          "model_quantized.onnx_data"
+        ],
+        "dtype": "q8",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4": {
+        "weightsSize": 197245082,
+        "size": 223416893,
+        "modelKeys": [
+          "model_q4.onnx",
+          "model_q4.onnx_data"
+        ],
+        "dtype": "q4",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4f16": {
+        "weightsSize": 176115397,
+        "size": 202287208,
+        "modelKeys": [
+          "model_q4f16.onnx",
+          "model_q4f16.onnx_data"
+        ],
+        "dtype": "q4f16",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "no_gather_q4": {
+        "weightsSize": 195158084,
+        "size": 221329895,
+        "modelKeys": [
+          "model_no_gather_q4.onnx",
+          "model_no_gather_q4.onnx_data"
+        ],
+        "dtype": "q4",
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "modelFileName": "model_no_gather_q4"
+      }
+    },
+    "qualityGate": "Finite normalized vectors with the correct dimensions, distinct rows, and the relevant-document cosine exceeding the unrelated-document cosine by at least 0.1.",
+    "invalidatedBy": [
+      "artifact revision change",
+      "runtime version change",
+      "fixture or quality-gate change",
+      "browser/backend behavior change"
+    ],
+    "results": [
+      {
+        "precision": "fp32",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 140152.69999999553,
+          "inferenceMs": 320.6000000014901,
+          "totalMs": 141775.79999999702,
+          "grade": "slow",
+          "embeddingsPerSecond": 9.357454772258441
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "quality": {
+          "shape": true,
+          "finite": true,
+          "normalized": true,
+          "distinct": true,
+          "positive": 0.6314324608140958,
+          "negative": 0.017299219431729285,
+          "margin": 0.6141332413823665,
+          "minimumMargin": 0.1,
+          "grade": "semantic-retrieval-pass"
+        },
+        "nativeOutput": {
+          "rows": 3,
+          "dimensions": 768
+        }
+      },
+      {
+        "precision": "fp32",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 159880.8999999985,
+          "inferenceMs": 251.30000000447035,
+          "totalMs": 161532.29999999702,
+          "grade": "good",
+          "embeddingsPerSecond": 11.93792280122019
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "quality": {
+          "shape": true,
+          "finite": true,
+          "normalized": true,
+          "distinct": true,
+          "positive": 0.631432477813035,
+          "negative": 0.01729927630304013,
+          "margin": 0.6141332015099948,
+          "minimumMargin": 0.1,
+          "grade": "semantic-retrieval-pass"
+        },
+        "nativeOutput": {
+          "rows": 3,
+          "dimensions": 768
+        }
+      },
+      {
+        "precision": "fp16",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 85957.60000000149,
+          "inferenceMs": 337.70000000298023,
+          "totalMs": 87670.39999999851,
+          "grade": "slow",
+          "embeddingsPerSecond": 8.883624518725274
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "quality": {
+          "shape": true,
+          "finite": true,
+          "normalized": true,
+          "distinct": true,
+          "positive": 0.6313529628254113,
+          "negative": 0.01728818294244791,
+          "margin": 0.6140647798829634,
+          "minimumMargin": 0.1,
+          "grade": "semantic-retrieval-pass"
+        },
+        "nativeOutput": {
+          "rows": 3,
+          "dimensions": 768
+        }
+      },
+      {
+        "precision": "fp16",
+        "device": "webgpu",
+        "status": "fail",
+        "runtime": {
+          "loadMs": 73680.5,
+          "inferenceMs": null,
+          "totalMs": 75183.20000000298,
+          "grade": "failed"
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "error": "Error: failed to call OrtRun(). ERROR_CODE: 1, ERROR_MESSAGE: Non-zero status code returned while running SimplifiedLayerNormalization node. Name:'/model/layers.24/final_norm_layernorm/LayerNorm' Status Message: Failed to create a WebGPU compute pipeline: [Invalid ShaderModule \"LayerNorm\"] is invalid due to a previous error.\n - While validating compute stage ([Invalid ShaderModule \"LayerNorm\"], entryPoint: \"main\").\n"
+      },
+      {
+        "precision": "q8",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 49854.39999999851,
+          "inferenceMs": 445.6000000014901,
+          "totalMs": 51707.5,
+          "grade": "slow",
+          "embeddingsPerSecond": 6.732495511647144
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "quality": {
+          "shape": true,
+          "finite": true,
+          "normalized": true,
+          "distinct": true,
+          "positive": 0.6331131798777992,
+          "negative": 0.024570434236971028,
+          "margin": 0.6085427456408282,
+          "minimumMargin": 0.1,
+          "grade": "semantic-retrieval-pass"
+        },
+        "nativeOutput": {
+          "rows": 3,
+          "dimensions": 768
+        }
+      },
+      {
+        "precision": "q8",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 46093.30000000447,
+          "inferenceMs": 174.89999999850988,
+          "totalMs": 47672.39999999851,
+          "grade": "good",
+          "embeddingsPerSecond": 17.15265866223876
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "quality": {
+          "shape": true,
+          "finite": true,
+          "normalized": true,
+          "distinct": true,
+          "positive": 0.6331131922096566,
+          "negative": 0.024570210377576965,
+          "margin": 0.6085429818320796,
+          "minimumMargin": 0.1,
+          "grade": "semantic-retrieval-pass"
+        },
+        "nativeOutput": {
+          "rows": 3,
+          "dimensions": 768
+        }
+      },
+      {
+        "precision": "q4",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 32147.29999999702,
+          "grade": "failed"
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 9, ERROR_MESSAGE: Could not find an implementation for GatherBlockQuantized(1) node with name '/model/embed_tokens/Gather_Q4'"
+      },
+      {
+        "precision": "q4",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 36447.19999999553,
+          "inferenceMs": 80.60000000149012,
+          "totalMs": 37903.39999999851,
+          "grade": "excellent",
+          "embeddingsPerSecond": 37.22084367176844
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "quality": {
+          "shape": true,
+          "finite": true,
+          "normalized": true,
+          "distinct": true,
+          "positive": 0.6353094375510581,
+          "negative": 0.037027659906624634,
+          "margin": 0.5982817776444335,
+          "minimumMargin": 0.1,
+          "grade": "semantic-retrieval-pass"
+        },
+        "nativeOutput": {
+          "rows": 3,
+          "dimensions": 768
+        }
+      },
+      {
+        "precision": "q4f16",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 23075.39999999851,
+          "grade": "failed"
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 9, ERROR_MESSAGE: Failed to find kernel for com.microsoft.GatherBlockQuantized(1) (node:'/model/embed_tokens/Gather_Q4' ep:'CPUExecutionProvider'). Kernel not found"
+      },
+      {
+        "precision": "q4f16",
+        "device": "webgpu",
+        "status": "fail",
+        "runtime": {
+          "loadMs": 19818.10000000149,
+          "inferenceMs": null,
+          "totalMs": 21246.20000000298,
+          "grade": "failed"
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "error": "Error: failed to call OrtRun(). ERROR_CODE: 1, ERROR_MESSAGE: Non-zero status code returned while running SimplifiedLayerNormalization node. Name:'/model/layers.24/final_norm_layernorm/LayerNorm' Status Message: Failed to create a WebGPU compute pipeline: [Invalid ShaderModule \"LayerNorm\"] is invalid due to a previous error.\n - While validating compute stage ([Invalid ShaderModule \"LayerNorm\"], entryPoint: \"main\").\n"
+      },
+      {
+        "precision": "no_gather_q4",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 28191.29999999702,
+          "inferenceMs": 1558.5,
+          "totalMs": 30994,
+          "grade": "very-slow",
+          "embeddingsPerSecond": 1.9249278152069298
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "quality": {
+          "shape": true,
+          "finite": true,
+          "normalized": true,
+          "distinct": true,
+          "positive": 0.633588631714976,
+          "negative": 0.036676229985434475,
+          "margin": 0.5969124017295415,
+          "minimumMargin": 0.1,
+          "grade": "semantic-retrieval-pass"
+        },
+        "nativeOutput": {
+          "rows": 3,
+          "dimensions": 768
+        }
+      },
+      {
+        "precision": "no_gather_q4",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 26292,
+          "inferenceMs": 188,
+          "totalMs": 27748.89999999851,
+          "grade": "good",
+          "embeddingsPerSecond": 15.957446808510639
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true
+        },
+        "quality": {
+          "shape": true,
+          "finite": true,
+          "normalized": true,
+          "distinct": true,
+          "positive": 0.6335887926186216,
+          "negative": 0.036676273100928004,
+          "margin": 0.5969125195176935,
+          "minimumMargin": 0.1,
+          "grade": "semantic-retrieval-pass"
+        },
+        "nativeOutput": {
+          "rows": 3,
+          "dimensions": 768
+        }
+      }
+    ],
+    "environment": "Headless Chrome on macOS; Transformers.js 4.2.0"
+  }
+}

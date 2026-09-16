@@ -1,6 +1,7 @@
 /src
 /node_modules
 /model-workers
+/test-app
 
 .env
 .DS_Store

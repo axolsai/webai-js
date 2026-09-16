@@ -1,0 +1,32 @@
+[
+  {
+    "precision": "q4",
+    "device": "webgpu",
+    "passed": true,
+    "streamMatches": true,
+    "headerTokenRecall": 0.9090909090909091,
+    "progressEvents": 43,
+    "runtime": {
+      "durationMs": 6686.800000011921
+    },
+    "invalidOptionRejected": true,
+    "clearMemoryVerified": true,
+    "cacheDeleted": true,
+    "otherCachePreserved": true
+  },
+  {
+    "precision": "q4",
+    "device": "wasm",
+    "passed": true,
+    "streamMatches": true,
+    "headerTokenRecall": 0.9090909090909091,
+    "progressEvents": 41,
+    "runtime": {
+      "durationMs": 173312.90000000596
+    },
+    "invalidOptionRejected": true,
+    "clearMemoryVerified": true,
+    "cacheDeleted": true,
+    "otherCachePreserved": true
+  }
+]

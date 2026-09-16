@@ -1,0 +1,28 @@
+{
+  "passed": true,
+  "modelId": "bge-small-zh-v1.5",
+  "configuration": {
+    "precision": "int8",
+    "device": "wasm"
+  },
+  "manifestDiscovered": true,
+  "downloadProgressEvents": 939,
+  "invalidInputRejected": true,
+  "invalidConfigRejected": true,
+  "unsupportedStreamingRejected": true,
+  "clearMemoryVerified": true,
+  "cache": {
+    "downloaded": true,
+    "reinitialized": true,
+    "deleted": true,
+    "otherModelPreserved": true
+  },
+  "runtime": {
+    "durationMs": 78.7999999821186
+  },
+  "nativeOutput": {
+    "rows": 3,
+    "dimensions": 512,
+    "margin": 0.38857913494327934
+  }
+}

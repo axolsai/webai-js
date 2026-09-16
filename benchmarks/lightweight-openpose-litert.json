@@ -1,0 +1,19 @@
+{
+  "contractVersion": "1.0",
+  "model": { "id": "lightweight-openpose-litert", "repository": "litert-community/lightweight-openpose", "artifactRevision": "7a1d619e67f829fc84c4b7a7e271384b5508762e", "license": "Apache-2.0" },
+  "runtime": { "engine": { "name": "LiteRT.js", "version": "2.5.3", "workerBridge": "classic-worker-inside-module-worker" } },
+  "benchmark": {
+    "schemaVersion": "1.0",
+    "startedAt": "2026-09-08T17:47:30.000Z",
+    "finishedAt": "2026-09-08T17:48:00.000Z",
+    "fixture": { "file": "modnet-portrait-pexels-5965592.jpg", "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg", "size": 78124, "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818", "width": 1024, "height": 683, "license": "Pexels License" },
+    "qualityGate": { "reference": "fp32/wasm decoded keypoints", "minimumMatchingGridLocations": 16, "maximumNormalizedGridDistance": 0.0625, "rejectNonFiniteCoordinates": true },
+    "environment": { "browser": "Headless Chrome 151", "os": "macOS", "runtime": "LiteRT.js 2.5.3" },
+    "results": [
+      { "precision": "fp32", "device": "wasm", "status": "pass", "runtime": { "loadMs": 7723.7, "inferenceMs": 166.2, "totalMs": 7889.9, "grade": "good" }, "quality": { "grade": "reference", "visibleKeypoints": 4 }, "fullyAccelerated": false, "cleanup": { "modelDisposed": true, "tensorsDisposed": true, "modelCacheClearedBeforeCase": true } },
+      { "precision": "fp32", "device": "webgpu", "status": "pass", "runtime": { "loadMs": 9065.5, "inferenceMs": 536, "totalMs": 9601.5, "grade": "slow" }, "quality": { "grade": "excellent", "matchingGridLocations": 18, "maximumConfidenceDifference": 0.000008 }, "fullyAccelerated": true, "cleanup": { "modelDisposed": true, "tensorsDisposed": true, "modelCacheClearedBeforeCase": true } },
+      { "precision": "fp16", "device": "wasm", "status": "pass", "runtime": { "loadMs": 6411.7, "inferenceMs": 714.8, "totalMs": 7126.5, "grade": "slow" }, "quality": { "grade": "acceptable", "matchingGridLocations": 16, "maximumGridDistance": 0.0625 }, "fullyAccelerated": false, "cleanup": { "modelDisposed": true, "tensorsDisposed": true, "modelCacheClearedBeforeCase": true } },
+      { "precision": "fp16", "device": "webgpu", "status": "pass", "runtime": { "loadMs": 6405.9, "inferenceMs": 50.9, "totalMs": 6456.8, "grade": "good" }, "quality": { "grade": "acceptable", "matchingGridLocations": 16, "maximumGridDistance": 0.0625 }, "fullyAccelerated": true, "cleanup": { "modelDisposed": true, "tensorsDisposed": true, "modelCacheClearedBeforeCase": true } }
+    ]
+  }
+}

@@ -1,271 +1,93 @@
-// src/queue/QueueManager.ts
-import { WebAIMode } from "../utils/types";
 import { createWorkerError } from "../utils/errors";
+import type { WebAIResult } from "../utils/types";
+import { WorkerManager } from "./webai-worker-manager";
 
-// Define types for the queue items
-interface QueueItem {
-  type: 'generate' | 'generateStream';
-  data: any;
-  resolve: (value: any) => void;
-  reject: (reason: any) => void;
-}
-
-interface ExecutionContext {
-  data: any;
-  resolve: (value: any) => void;
-  reject: (reason: any) => void;
-  worker: Worker | null;
-  mode: WebAIMode | null;
-  isStream: boolean;
-  onStream?: (chunk: any) => void;
-}
+type QueueItem = {
+  type: "generate" | "generateStream";
+  data: unknown;
+  onStream?: (chunk: unknown) => void;
+  resolve: (value: unknown) => void;
+  reject: (reason: Error) => void;
+};
 
 export class QueueManager {
-  private _isGenerating: boolean = false;
-  private _queue: QueueItem[] = [];
-  private _currentExecution: ExecutionContext | null = null; // Track current execution
-  
-  constructor() {}
-  
-  async enqueueGenerate(
-    data: { userInput: any, modelConfig?: object, generateConfig?: object },
-    worker: Worker | null,
-    mode: WebAIMode | null
-  ): Promise<any> {
-    return new Promise((resolve, reject) => {
-      this._queue.push({
-        type: 'generate',
-        data,
-        resolve,
-        reject
-      });
+  private readonly _workerManager: WorkerManager;
+  private readonly _queue: QueueItem[] = [];
+  private _current: QueueItem | null = null;
+  private _currentAbortController: AbortController | null = null;
 
-      if (!this._isGenerating) {
-        this.processNextInQueue(worker, mode);
-      }
-    });
+  constructor(workerManager: WorkerManager) {
+    this._workerManager = workerManager;
   }
-  
-  async enqueueGenerateStream(
-    data: {
-      userInput: any,
-      modelConfig?: object,
-      generateConfig?: object,
-      onStream: (chunk: any) => void
-    },
-    worker: Worker | null,
-    mode: WebAIMode | null
+
+  enqueueGenerate<T = unknown>(data: unknown): Promise<WebAIResult<T>> {
+    return this.enqueue({ type: "generate", data }) as Promise<WebAIResult<T>>;
+  }
+
+  enqueueGenerateStream(
+    data: unknown,
+    onStream: (chunk: unknown) => void,
   ): Promise<void> {
-    return new Promise((resolve, reject) => {
-      this._queue.push({
-        type: 'generateStream',
-        data,
-        resolve,
-        reject
-      });
+    return this.enqueue({ type: "generateStream", data, onStream }) as Promise<void>;
+  }
 
-      if (!this._isGenerating) {
-        this.processNextInQueue(worker, mode);
-      }
+  private enqueue(item: Pick<QueueItem, "type" | "data" | "onStream">): Promise<unknown> {
+    return new Promise((resolve, reject) => {
+      this._queue.push({ ...item, resolve, reject });
+      void this.processNext();
     });
   }
 
-  /**
-   * Handle forced interruption (for WASM worker reload)
-   * This resolves the current generation with an interruption result
-   */
-  handleForcedInterruption(): void {
-    if (this._currentExecution && this._isGenerating) {
-      console.log("WebAI generation is manually interrupted (forced).");
-      // Resolve current execution as interrupted (same as WebGPU interrupt response)
-      this._currentExecution.resolve(undefined);
-      this._currentExecution = null;
-    }
-    this._isGenerating = false;
-  }
+  private async processNext(): Promise<void> {
+    if (this._current || this._queue.length === 0) return;
+    const item = this._queue.shift();
+    if (!item) return;
+    this._current = item;
+    this._currentAbortController = new AbortController();
+    const startedAt = performance.now();
 
-  // Process the next item in the queue
-  processNextInQueue(worker: Worker | null, mode: WebAIMode | null): void {
-    if (this._queue.length === 0) {
-      this._isGenerating = false;
-      this._currentExecution = null;
-      return;
-    }
-
-    this._isGenerating = true;
-    const nextItem = this._queue.shift()!;
-
-    const isStream = nextItem.type === 'generateStream';
-    const { onStream, ...dataWithoutOnStream } = nextItem.data;
-
-    const context: ExecutionContext = {
-      data: isStream ? dataWithoutOnStream : nextItem.data,
-      resolve: nextItem.resolve,
-      reject: nextItem.reject,
-      worker,
-      mode,
-      isStream,
-      onStream: isStream ? onStream : undefined
-    };
-
-    this._executeGeneration(context);
-  }
-
-  // Unified execution method for both generate and generateStream
-  private _executeGeneration(context: ExecutionContext): void {
-    const { data, resolve, reject, worker, mode, isStream, onStream } = context;
-
-    // Store current execution context for potential forced interruption
-    this._currentExecution = context;
-
-    // Validation
-    if (!worker) {
-      reject(createWorkerError(
-        "Worker is not initialized",
-        'initialization_failed'
-      ));
-      this._currentExecution = null;
-      this.processNextInQueue(worker, mode);
-      return;
-    }
-
-    if (!mode) {
-      reject(createWorkerError(
-        "WebAI is not initialized. Call init() before generate()",
-        'initialization_failed'
-      ));
-      this._currentExecution = null;
-      this.processNextInQueue(worker, mode);
-      return;
-    }
-
-    // Setup cleanup and event handlers
-    const cleanup = () => {
-      worker?.removeEventListener("message", handleMessage);
-      worker?.removeEventListener("error", handleError);
-      this._currentExecution = null; // Clear current execution
-    };
-
-    const handleMessage = (event: MessageEvent) => {
-      // Handle error messages first
-      if (event.data.type === "error") {
-        const errorMessage = isStream 
-          ? "Stream generation error" 
-          : "Generation error";
-        console.log(`WebAI ${isStream ? 'stream ' : ''}generation error:`, event.data.data.message);
-        
-        cleanup();
-        reject(createWorkerError(
-          event.data.data.message || errorMessage,
-          'runtime_error'
-        ));
-        this.processNextInQueue(worker, mode);
-        return;
-      }
-
-      if (event.data.type === "interrupted") {
-        console.log(`WebAI generation is manually interrupted.`);
-        cleanup();
-        resolve(undefined); // Consistent interrupt response
-        this.processNextInQueue(worker, mode);
-        return;
-      }
-
-      // Handle streaming data (only for generateStream)
-      if (event.data.type === "stream" && isStream && onStream) {
-        onStream(event.data.data);
-        return;
-      }
-
-      // Handle completion
-      if (event.data.type === "generated") {
-        if (isStream) {
-          console.log("stream ****", event.data.data.result);
-        }
-        cleanup();
-        resolve(event.data.data.result);
-        this.processNextInQueue(worker, mode);
-        return;
-      } 
-      
-      if (event.data.type === "generateError") {
-        cleanup();
-        reject(createWorkerError(
-          `Generation error: ${event.data.error}`,
-          'runtime_error'
-        ));
-        this.processNextInQueue(worker, mode);
-        return;
-      }
-    };
-
-    const handleError = (error: ErrorEvent) => {
-      const errorMessage = isStream 
-        ? `Worker error during stream generation: ${error.message}`
-        : `Worker error during generation: ${error.message}`;
-      
-      cleanup();
-      reject(createWorkerError(errorMessage, 'runtime_error'));
-      this.processNextInQueue(worker, mode);
-    };
-
-    // Attach event listeners
-    worker.addEventListener("message", handleMessage);
-    worker.addEventListener("error", handleError);
-
-    // Send the message
     try {
-      worker.postMessage({
-        type: isStream ? "generateStream" : "generate",
-        data
+      const data = await this._workerManager.request<{
+        status: string;
+        result?: unknown;
+      }>(item.type, item.data, {
+        expectedType: "generated",
+        signal: this._currentAbortController.signal,
+        onProgress: item.onStream,
+      });
+      if (data.status !== "success") {
+        throw createWorkerError("Generation failed", "runtime_error");
+      }
+      item.resolve({
+        result: data.result,
+        runtime: { durationMs: performance.now() - startedAt },
       });
     } catch (error) {
-      const errorMessage = isStream 
-        ? "Failed to send stream generation request"
-        : "Failed to send generation request";
-      
-      cleanup();
-      reject(createWorkerError(
-        error instanceof Error
-          ? `${errorMessage}: ${error.message}`
-          : `${errorMessage}: Unknown error`,
-        'runtime_error'
-      ));
-      this.processNextInQueue(worker, mode);
+      item.reject(error instanceof Error
+        ? error
+        : createWorkerError("Unknown generation failure", "runtime_error"));
+    } finally {
+      this._current = null;
+      this._currentAbortController = null;
+      void this.processNext();
     }
   }
-  
-  // Get the current queue size
-  get queueSize(): number {
-    return this._queue.length;
-  }
 
-  // Check if generation is in progress
-  get isGenerating(): boolean {
-    return this._isGenerating;
-  }
-
-  // Check if there's a current execution (useful for debugging)
-  get hasCurrentExecution(): boolean {
-    return this._currentExecution !== null;
-  }
-
-  // Get current execution type (useful for debugging)
-  get currentExecutionType(): 'generate' | 'generateStream' | null {
-    if (!this._currentExecution) return null;
-    return this._currentExecution.isStream ? 'generateStream' : 'generate';
-  }
-
-  // Clear the queue
   clearQueue(): void {
-    // Only clear pending items, don't affect current execution
-    this._queue = [];
+    for (const item of this._queue.splice(0)) {
+      item.reject(createWorkerError("Generation request cancelled", "interrupted"));
+    }
   }
 
-  // Force clear everything including current execution (emergency use)
-  forceReset(): void {
-    this._queue = [];
-    this._currentExecution = null;
-    this._isGenerating = false;
+  cancelCurrent(): void {
+    this._currentAbortController?.abort();
   }
+
+  cancelAll(): void {
+    this.clearQueue();
+    this.cancelCurrent();
+  }
+
+  get isGenerating(): boolean { return this._current !== null; }
+  get queueLength(): number { return this._queue.length; }
 }

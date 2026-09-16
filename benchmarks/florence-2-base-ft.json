@@ -1,0 +1,777 @@
+{
+  "contractVersion": "1.0",
+  "model": {
+    "id": "florence-2-base-ft",
+    "displayName": "Florence-2 Base FT — Vision to Text",
+    "provider": "Microsoft",
+    "providerUrl": "https://www.microsoft.com/en-us/research/",
+    "license": "MIT",
+    "licenseUrl": "https://huggingface.co/microsoft/Florence-2-base-ft/blob/main/LICENSE",
+    "lastUpdated": "2025-08-04T17:12:06.000Z",
+    "sourceRepository": "microsoft/Florence-2-base-ft",
+    "repository": "onnx-community/Florence-2-base-ft",
+    "artifactRevision": "e88a44eaf3791a35eae0c5a47b3dbcd36e67eb6f",
+    "artifactLastUpdated": "2025-05-08T19:33:57.000Z",
+    "task": "image-text-to-text",
+    "description": "A 230-million-parameter fine-tuned Microsoft vision model that performs captioning, OCR, detection, grounding, and region-description tasks locally in the browser.",
+    "intendedUses": [
+      "Generate short or detailed descriptions of photographs.",
+      "Extract visible text or spatially grounded labels from images.",
+      "Prototype object detection, region proposal, and phrase-grounding interfaces."
+    ],
+    "limitations": [
+      "Outputs can be incomplete, incorrect, biased, or hallucinated and require review.",
+      "Small, blurry, rotated, stylized, low-contrast, or dense text can reduce OCR accuracy.",
+      "Bounding boxes and region labels can miss, merge, or mislocalize objects.",
+      "The model is English-centric and must not be the sole basis for safety-critical, accessibility, or identity decisions."
+    ]
+  },
+  "runtime": {
+    "engine": {
+      "name": "Transformers.js",
+      "version": "4.2.0"
+    },
+    "precisions": {
+      "fp32": {
+        "weightsSize": 1085912345,
+        "size": 1090141600,
+        "dtype": "fp32",
+        "modelKeys": [
+          "decoder_model_merged.onnx",
+          "embed_tokens.onnx",
+          "encoder_model.onnx",
+          "vision_encoder.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "int8": {
+        "weightsSize": 274966101,
+        "size": 279195356,
+        "dtype": "int8",
+        "modelKeys": [
+          "decoder_model_merged_int8.onnx",
+          "embed_tokens_int8.onnx",
+          "encoder_model_int8.onnx",
+          "vision_encoder_int8.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "uint8": {
+        "weightsSize": 274966162,
+        "size": 279195417,
+        "dtype": "uint8",
+        "modelKeys": [
+          "decoder_model_merged_uint8.onnx",
+          "embed_tokens_uint8.onnx",
+          "encoder_model_uint8.onnx",
+          "vision_encoder_uint8.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q8": {
+        "weightsSize": 274966163,
+        "size": 279195418,
+        "dtype": "q8",
+        "modelKeys": [
+          "decoder_model_merged_quantized.onnx",
+          "embed_tokens_quantized.onnx",
+          "encoder_model_quantized.onnx",
+          "vision_encoder_quantized.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4": {
+        "weightsSize": 333249173,
+        "size": 337478428,
+        "dtype": "q4",
+        "modelKeys": [
+          "decoder_model_merged_q4.onnx",
+          "embed_tokens_q4.onnx",
+          "encoder_model_q4.onnx",
+          "vision_encoder_q4.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "bnb4": {
+        "weightsSize": 319312207,
+        "size": 323541462,
+        "dtype": "bnb4",
+        "modelKeys": [
+          "decoder_model_merged_bnb4.onnx",
+          "embed_tokens_bnb4.onnx",
+          "encoder_model_bnb4.onnx",
+          "vision_encoder_bnb4.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      }
+    }
+  },
+  "benchmark": {
+    "report": "benchmarks/florence-2-base-ft.json",
+    "testedAt": "2026-09-12T18:20:09.043Z",
+    "fixture": {
+      "file": "modnet-portrait-pexels-5965592.jpg",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+      "size": 78124,
+      "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818",
+      "width": 1024,
+      "height": 683,
+      "license": "Pexels License",
+      "licenseUrl": "https://www.pexels.com/license/"
+    },
+    "candidates": {
+      "fp32": {
+        "weightsSize": 1085912345,
+        "size": 1090141600,
+        "dtype": "fp32",
+        "modelKeys": [
+          "decoder_model_merged.onnx",
+          "embed_tokens.onnx",
+          "encoder_model.onnx",
+          "vision_encoder.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "fp16": {
+        "weightsSize": 544004842,
+        "size": 548234097,
+        "dtype": "fp16",
+        "modelKeys": [
+          "decoder_model_merged_fp16.onnx",
+          "embed_tokens_fp16.onnx",
+          "encoder_model_fp16.onnx",
+          "vision_encoder_fp16.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "int8": {
+        "weightsSize": 274966101,
+        "size": 279195356,
+        "dtype": "int8",
+        "modelKeys": [
+          "decoder_model_merged_int8.onnx",
+          "embed_tokens_int8.onnx",
+          "encoder_model_int8.onnx",
+          "vision_encoder_int8.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "uint8": {
+        "weightsSize": 274966162,
+        "size": 279195417,
+        "dtype": "uint8",
+        "modelKeys": [
+          "decoder_model_merged_uint8.onnx",
+          "embed_tokens_uint8.onnx",
+          "encoder_model_uint8.onnx",
+          "vision_encoder_uint8.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q8": {
+        "weightsSize": 274966163,
+        "size": 279195418,
+        "dtype": "q8",
+        "modelKeys": [
+          "decoder_model_merged_quantized.onnx",
+          "embed_tokens_quantized.onnx",
+          "encoder_model_quantized.onnx",
+          "vision_encoder_quantized.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4": {
+        "weightsSize": 333249173,
+        "size": 337478428,
+        "dtype": "q4",
+        "modelKeys": [
+          "decoder_model_merged_q4.onnx",
+          "embed_tokens_q4.onnx",
+          "encoder_model_q4.onnx",
+          "vision_encoder_q4.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4f16": {
+        "weightsSize": 223446634,
+        "size": 227675889,
+        "dtype": "q4f16",
+        "modelKeys": [
+          "decoder_model_merged_q4f16.onnx",
+          "embed_tokens_q4f16.onnx",
+          "encoder_model_q4f16.onnx",
+          "vision_encoder_q4f16.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "bnb4": {
+        "weightsSize": 319312207,
+        "size": 323541462,
+        "dtype": "bnb4",
+        "modelKeys": [
+          "decoder_model_merged_bnb4.onnx",
+          "embed_tokens_bnb4.onnx",
+          "encoder_model_bnb4.onnx",
+          "vision_encoder_bnb4.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      }
+    },
+    "qualityGate": "Non-empty, non-repetitive caption that identifies a person in the checked-in portrait; streamed text must equal non-streamed text.",
+    "invalidatedBy": [
+      "artifact revision change",
+      "runtime version change",
+      "fixture or quality-gate change",
+      "browser/backend behavior change"
+    ],
+    "results": [
+      {
+        "precision": "fp32",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 108049.29999999702,
+          "inferenceMs": 11079.20000000298,
+          "totalMs": 131064.69999999553,
+          "grade": "very-slow",
+          "streamInferenceMs": 10583.89999999851,
+          "imagesPerSecond": 0.09025922449271888
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 7
+        },
+        "quality": {
+          "identifiesPerson": true,
+          "finite": true,
+          "nonRepetitive": true,
+          "streamMatches": true,
+          "wordCount": 12,
+          "grade": "caption-pass"
+        },
+        "nativeOutput": {
+          "text": "A woman wearing a face mask standing in front of a building.",
+          "result": {
+            "<CAPTION>": "A woman wearing a face mask standing in front of a building."
+          }
+        },
+        "streamOutput": "A woman wearing a face mask standing in front of a building."
+      },
+      {
+        "precision": "fp32",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 108948.60000000149,
+          "inferenceMs": 617.6999999955297,
+          "totalMs": 111278,
+          "grade": "excellent",
+          "streamInferenceMs": 454.20000000298023,
+          "imagesPerSecond": 1.6189088554431554
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 7
+        },
+        "quality": {
+          "identifiesPerson": true,
+          "finite": true,
+          "nonRepetitive": true,
+          "streamMatches": true,
+          "wordCount": 12,
+          "grade": "caption-pass"
+        },
+        "nativeOutput": {
+          "text": "A woman wearing a face mask standing in front of a building.",
+          "result": {
+            "<CAPTION>": "A woman wearing a face mask standing in front of a building."
+          }
+        },
+        "streamOutput": "A woman wearing a face mask standing in front of a building."
+      },
+      {
+        "precision": "fp16",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 32635.5,
+          "grade": "failed"
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 7
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 1, ERROR_MESSAGE: /mnt/vss/_work/1/s/onnxruntime/core/graph/graph_utils.cc:30 int onnxruntime::graph_utils::GetIndexFromName(const Node &, const std::string &, bool) itr != node_args.end() was false. Attempting to get index by a name which does not exist:InsertedPrecisionFreeCast_/layers.5/self_attn_layer_norm/Constant_output_0for node: /layernorm_embedding/Mul/SimplifiedLayerNormFusion/\n"
+      },
+      {
+        "precision": "fp16",
+        "device": "webgpu",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 60980,
+          "grade": "failed"
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 9
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 1, ERROR_MESSAGE: /mnt/vss/_work/1/s/onnxruntime/core/graph/graph.cc:1491 void onnxruntime::Graph::InitializeStateFromModelFileGraphProto() This is an invalid model. Subgraph output (logits) is an outer scope value being returned directly. Please update the model to add an Identity node between the outer scope value and the subgraph output.\n"
+      },
+      {
+        "precision": "int8",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 33050.10000000149,
+          "inferenceMs": 11720.39999999851,
+          "totalMs": 57501.60000000149,
+          "grade": "very-slow",
+          "streamInferenceMs": 11499.20000000298,
+          "imagesPerSecond": 0.0853213200914753
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 9
+        },
+        "quality": {
+          "identifiesPerson": true,
+          "finite": true,
+          "nonRepetitive": true,
+          "streamMatches": true,
+          "wordCount": 12,
+          "grade": "caption-pass"
+        },
+        "nativeOutput": {
+          "text": "A woman wearing a face mask standing in front of a building.",
+          "result": {
+            "<CAPTION>": "A woman wearing a face mask standing in front of a building."
+          }
+        },
+        "streamOutput": "A woman wearing a face mask standing in front of a building."
+      },
+      {
+        "precision": "int8",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 32247.70000000298,
+          "inferenceMs": 11916.89999999851,
+          "totalMs": 57049.30000000447,
+          "grade": "very-slow",
+          "streamInferenceMs": 11538.80000000447,
+          "imagesPerSecond": 0.08391444083613397
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 9
+        },
+        "quality": {
+          "identifiesPerson": true,
+          "finite": true,
+          "nonRepetitive": true,
+          "streamMatches": true,
+          "wordCount": 12,
+          "grade": "caption-pass"
+        },
+        "nativeOutput": {
+          "text": "A woman wearing a face mask standing in front of a building.",
+          "result": {
+            "<CAPTION>": "A woman wearing a face mask standing in front of a building."
+          }
+        },
+        "streamOutput": "A woman wearing a face mask standing in front of a building."
+      },
+      {
+        "precision": "uint8",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 31642.10000000149,
+          "inferenceMs": 10279,
+          "totalMs": 53303.39999999851,
+          "grade": "very-slow",
+          "streamInferenceMs": 10117.20000000298,
+          "imagesPerSecond": 0.09728572818367545
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 9
+        },
+        "quality": {
+          "identifiesPerson": true,
+          "finite": true,
+          "nonRepetitive": true,
+          "streamMatches": true,
+          "wordCount": 12,
+          "grade": "caption-pass"
+        },
+        "nativeOutput": {
+          "text": "A woman wearing a face mask standing in front of a building.",
+          "result": {
+            "<CAPTION>": "A woman wearing a face mask standing in front of a building."
+          }
+        },
+        "streamOutput": "A woman wearing a face mask standing in front of a building."
+      },
+      {
+        "precision": "uint8",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 31365.29999999702,
+          "inferenceMs": 10366.5,
+          "totalMs": 53327.5,
+          "grade": "very-slow",
+          "streamInferenceMs": 10168.30000000447,
+          "imagesPerSecond": 0.0964645733854242
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 9
+        },
+        "quality": {
+          "identifiesPerson": true,
+          "finite": true,
+          "nonRepetitive": true,
+          "streamMatches": true,
+          "wordCount": 12,
+          "grade": "caption-pass"
+        },
+        "nativeOutput": {
+          "text": "A woman wearing a face mask standing in front of a building.",
+          "result": {
+            "<CAPTION>": "A woman wearing a face mask standing in front of a building."
+          }
+        },
+        "streamOutput": "A woman wearing a face mask standing in front of a building."
+      },
+      {
+        "precision": "q8",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 30896.20000000298,
+          "inferenceMs": 10247.89999999851,
+          "totalMs": 52584.10000000149,
+          "grade": "very-slow",
+          "streamInferenceMs": 10127.60000000149,
+          "imagesPerSecond": 0.0975809678080529
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 9
+        },
+        "quality": {
+          "identifiesPerson": true,
+          "finite": true,
+          "nonRepetitive": true,
+          "streamMatches": true,
+          "wordCount": 12,
+          "grade": "caption-pass"
+        },
+        "nativeOutput": {
+          "text": "A woman wearing a face mask standing in front of a building.",
+          "result": {
+            "<CAPTION>": "A woman wearing a face mask standing in front of a building."
+          }
+        },
+        "streamOutput": "A woman wearing a face mask standing in front of a building."
+      },
+      {
+        "precision": "q8",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 32917.60000000149,
+          "inferenceMs": 10382.60000000149,
+          "totalMs": 54766.90000000596,
+          "grade": "very-slow",
+          "streamInferenceMs": 10149.89999999851,
+          "imagesPerSecond": 0.09631498853850254
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 9
+        },
+        "quality": {
+          "identifiesPerson": true,
+          "finite": true,
+          "nonRepetitive": true,
+          "streamMatches": true,
+          "wordCount": 12,
+          "grade": "caption-pass"
+        },
+        "nativeOutput": {
+          "text": "A woman wearing a face mask standing in front of a building.",
+          "result": {
+            "<CAPTION>": "A woman wearing a face mask standing in front of a building."
+          }
+        },
+        "streamOutput": "A woman wearing a face mask standing in front of a building."
+      },
+      {
+        "precision": "q4",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 42147.69999999553,
+          "inferenceMs": 11727.30000000447,
+          "totalMs": 66847.5,
+          "grade": "very-slow",
+          "streamInferenceMs": 11659.39999999851,
+          "imagesPerSecond": 0.08527111952449573
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 9
+        },
+        "quality": {
+          "identifiesPerson": true,
+          "finite": true,
+          "nonRepetitive": true,
+          "streamMatches": true,
+          "wordCount": 12,
+          "grade": "caption-pass"
+        },
+        "nativeOutput": {
+          "text": "A woman wearing a face mask standing in front of a building.",
+          "result": {
+            "<CAPTION>": "A woman wearing a face mask standing in front of a building."
+          }
+        },
+        "streamOutput": "A woman wearing a face mask standing in front of a building."
+      },
+      {
+        "precision": "q4",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 41324.70000000298,
+          "inferenceMs": 543.9000000059605,
+          "totalMs": 43678.60000000149,
+          "grade": "excellent",
+          "streamInferenceMs": 440,
+          "imagesPerSecond": 1.8385732671245472
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 9
+        },
+        "quality": {
+          "identifiesPerson": true,
+          "finite": true,
+          "nonRepetitive": true,
+          "streamMatches": true,
+          "wordCount": 12,
+          "grade": "caption-pass"
+        },
+        "nativeOutput": {
+          "text": "A woman wearing a face mask standing in front of a building.",
+          "result": {
+            "<CAPTION>": "A woman wearing a face mask standing in front of a building."
+          }
+        },
+        "streamOutput": "A woman wearing a face mask standing in front of a building."
+      },
+      {
+        "precision": "q4f16",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 19000.10000000149,
+          "grade": "failed"
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 6
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 1, ERROR_MESSAGE: /mnt/vss/_work/1/s/onnxruntime/core/graph/graph_utils.cc:30 int onnxruntime::graph_utils::GetIndexFromName(const Node &, const std::string &, bool) itr != node_args.end() was false. Attempting to get index by a name which does not exist:InsertedPrecisionFreeCast_/layers.5/self_attn_layer_norm/Constant_output_0for node: /layernorm_embedding/Mul/SimplifiedLayerNormFusion/\n"
+      },
+      {
+        "precision": "q4f16",
+        "device": "webgpu",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 47430.10000000149,
+          "grade": "failed"
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 7
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 1, ERROR_MESSAGE: /mnt/vss/_work/1/s/onnxruntime/core/graph/graph.cc:1491 void onnxruntime::Graph::InitializeStateFromModelFileGraphProto() This is an invalid model. Subgraph output (logits) is an outer scope value being returned directly. Please update the model to add an Identity node between the outer scope value and the subgraph output.\n"
+      },
+      {
+        "precision": "bnb4",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 40501.5,
+          "inferenceMs": 10628.29999999702,
+          "totalMs": 63013.19999999553,
+          "grade": "very-slow",
+          "streamInferenceMs": 10512.30000000447,
+          "imagesPerSecond": 0.09408842430118461
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 9
+        },
+        "quality": {
+          "identifiesPerson": true,
+          "finite": true,
+          "nonRepetitive": true,
+          "streamMatches": true,
+          "wordCount": 12,
+          "grade": "caption-pass"
+        },
+        "nativeOutput": {
+          "text": "A woman wearing a face mask standing in front of a building.",
+          "result": {
+            "<CAPTION>": "A woman wearing a face mask standing in front of a building."
+          }
+        },
+        "streamOutput": "A woman wearing a face mask standing in front of a building."
+      },
+      {
+        "precision": "bnb4",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 40026.30000000447,
+          "inferenceMs": 10309.29999999702,
+          "totalMs": 61939.60000000149,
+          "grade": "very-slow",
+          "streamInferenceMs": 10240.60000000149,
+          "imagesPerSecond": 0.09699979630045581
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 9
+        },
+        "quality": {
+          "identifiesPerson": true,
+          "finite": true,
+          "nonRepetitive": true,
+          "streamMatches": true,
+          "wordCount": 12,
+          "grade": "caption-pass"
+        },
+        "nativeOutput": {
+          "text": "A woman wearing a face mask standing in front of a building.",
+          "result": {
+            "<CAPTION>": "A woman wearing a face mask standing in front of a building."
+          }
+        },
+        "streamOutput": "A woman wearing a face mask standing in front of a building."
+      }
+    ],
+    "environment": "Isolated headless Chrome on macOS; Transformers.js 4.2.0"
+  }
+}
