@@ -1,10 +1,14 @@
 {
   "name": "@axols/webai-js",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "publishConfig": {
     "access": "public"
   },
-  "description": "A free, open source library to embed powerful AI models directly into your web applications. Run AI in the front-end with complete data privacy and zero hosting costs. Compatible with major front-end frameworks like React, Next.js, Vue, etc.",
+  "description": "Run v4 browser AI model workers locally through one JavaScript API, with manifest-driven inputs, downloads, benchmarks, and lifecycle management.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/axolsai/webai-js.git"
+  },
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
