@@ -1,0 +1,39 @@
+"use client";
+
+import Link from "next/link";
+import { useMemo, useState } from "react";
+import { ArrowLeftCircle, Building2, Calendar, Check, ChevronDown, ChevronUp, Copy, Cpu, ExternalLink, FileDigit, Gauge, HardDrive, Scale } from "lucide-react";
+
+type Precision={size?:number;weightsSize?:number;supportedDevices?:string[];modelQuantization?:string;runtimePrecision?:string;acceleration?:string};
+type Result={precision?:string;device?:string;status?:string;grade?:string;inferenceMs?:number|null;tokensPerSecond?:number|null;realTimeFactor?:number|null};
+export type SidebarModel={model:{id:string;displayName:string;description?:string;task?:string;provider?:string;providerUrl?:string;license?:string;licenseUrl?:string;lastUpdated?:string;repository?:string};runtime:{engine?:{name?:string;version?:string}|string|null;precisions?:Record<string,Precision>};benchmark?:{passed?:number;results?:Result[]};smallestDownloadBytes?:number|null};
+const size=(n?:number|null)=>!n?"Varies":n>=1024**3?`${(n/1024**3).toFixed(2)} GB`:`${(n/1024**2).toFixed(2)} MB`;
+const date=(value?:string)=>{if(!value)return"Unknown";const d=new Date(value);return Number.isNaN(d.valueOf())?value:d.toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"})};
+const label=(value?:string)=>value?value.split("-").map(x=>x[0]?.toUpperCase()+x.slice(1)).join(" "):"Model";
+const category=(task?:string)=>({"automatic-speech-recognition":"Speech Recognition","text-generation":"Text Generation","image-classification":"Image Classification","image-segmentation":"Image Segmentation","object-detection":"Object Detection","feature-extraction":"Embeddings","text-classification":"Text Classification","text-to-speech":"Text to Speech"}[task??""]??label(task));
+
+export default function ModelInfoSidebar({model}:{model:SidebarModel}){
+ const precisions=model.runtime.precisions??{},names=Object.keys(precisions),[precision,setPrecision]=useState(names[0]??""),[expanded,setExpanded]=useState(false),[supportOpen,setSupportOpen]=useState(false),[copied,setCopied]=useState(false);const activePrecision=precision&&precisions[precision]?precision:(names[0]??"");const selected=precisions[activePrecision];
+ const fastest=useMemo(()=>model.benchmark?.results?.filter(x=>x.precision===activePrecision&&x.status==="pass").sort((a,b)=>(a.inferenceMs??Infinity)-(b.inferenceMs??Infinity))[0],[model,activePrecision]);
+ const engine=typeof model.runtime.engine==="string"?model.runtime.engine:model.runtime.engine?.name;
+ const copy=async()=>{await navigator.clipboard.writeText(model.model.id);setCopied(true);setTimeout(()=>setCopied(false),1200)};
+ return <aside className="hidden h-full w-[340px] min-w-[340px] overflow-y-auto border-r border-white/10 bg-card px-6 pb-6 pt-4 lg:block">
+  <div className="flex min-w-0 items-center gap-2 text-[13px] text-neutral-400"><Link href="/models" aria-label="Back to models" className="shrink-0 rounded-full p-1.5 hover:bg-white/5 hover:text-white"><ArrowLeftCircle className="h-5 w-5"/></Link><span className="min-w-0 truncate whitespace-nowrap font-medium text-neutral-300">{category(model.model.task)}</span><span className="shrink-0 text-neutral-500">/</span><span className="shrink-0 whitespace-nowrap">{engine??"Web AI"}</span></div>
+  <div className="mt-5 grid h-40 place-items-center rounded-md border border-primary/20 bg-[radial-gradient(circle_at_center,hsl(var(--primary)/.2),transparent_70%)]"><Cpu className="h-12 w-12 text-primary"/></div>
+  <h1 className="mt-5 text-xl font-bold leading-7">{model.model.displayName}</h1>
+  <div className="mt-2 flex items-center gap-2 text-sm text-neutral-400"><span>ID: {model.model.id}</span><button onClick={copy} title="Copy model ID" className="hover:text-primary">{copied?<Check className="h-3.5 w-3.5"/>:<Copy className="h-3.5 w-3.5"/>}</button></div>
+  <section className="mt-6"><h2 className="text-sm font-semibold">Description</h2><p className={`mt-1 text-sm leading-6 text-neutral-400 ${expanded?"":"line-clamp-2"}`}>{model.model.description}</p><button onClick={()=>setExpanded(x=>!x)} className="mt-1 text-sm text-primary hover:underline">{expanded?"Show less":"Show more"}</button></section>
+  <div className="mt-5 space-y-3 text-sm">
+   <Row icon={Scale} title="License"><External value={model.model.license??"Unknown"} href={model.model.licenseUrl}/></Row>
+   <Row icon={Building2} title="Developer"><External value={model.model.provider??"Unknown"} href={model.model.providerUrl}/></Row>
+   <Row icon={Calendar} title="Last Updated"><span className="text-right">{date(model.model.lastUpdated)}</span></Row>
+   <Row icon={HardDrive} title="Size"><span>{size(selected?.size??selected?.weightsSize)}</span></Row>
+   <Row icon={Gauge} title="Performance"><span className="capitalize">{fastest?.grade?.replaceAll("-"," ")??"Verified"}</span></Row>
+   <Row icon={Cpu} title="Device"><span className="flex flex-wrap justify-end gap-1">{selected?.supportedDevices?.map(d=><b key={d} className={`rounded px-2 py-0.5 text-xs font-medium text-white ${d==="wasm"?"bg-orange-500":"bg-primary"}`}>{d==="webgpu"?"WebGPU":d.toUpperCase()}</b>)}</span></Row>
+   <Row icon={FileDigit} title="Precision"><select value={activePrecision} onChange={e=>setPrecision(e.target.value)} className="h-8 min-w-20 rounded border border-white/10 bg-background px-2 text-xs uppercase">{names.map(p=><option key={p}>{p}</option>)}</select></Row>
+  </div>
+  <div className="mt-6 overflow-hidden rounded-md border border-white/10"><button onClick={()=>setSupportOpen(x=>!x)} className="flex w-full items-center justify-between bg-white/[.03] p-2 text-sm font-medium hover:bg-white/[.06]"><span>Show Full Precision Support</span>{supportOpen?<ChevronUp className="h-4 w-4"/>:<ChevronDown className="h-4 w-4"/>}</button>{supportOpen&&<div>{Object.entries(precisions).map(([name,p])=><div key={name} className="border-t border-white/10 px-3 py-3 text-xs"><div className="flex items-center justify-between"><div><span className="rounded border border-white/15 px-1.5 py-0.5 uppercase">{name}</span><span className="ml-2 text-neutral-400">{size(p.size??p.weightsSize)}</span></div><div className="flex gap-1">{p.supportedDevices?.map(d=><span key={d} className={`rounded px-1.5 py-0.5 text-white ${d==="wasm"?"bg-orange-500":"bg-primary/80"}`}>{d==="webgpu"?"WebGPU":d.toUpperCase()}</span>)}</div></div>{p.modelQuantization&&<p className="mt-2 leading-5 text-neutral-400">{p.modelQuantization}</p>}{p.runtimePrecision&&<div className="mt-2 flex justify-between text-neutral-400"><span>Runtime precision</span><span>{p.runtimePrecision}</span></div>}{p.acceleration&&<div className="mt-1 flex justify-between text-neutral-400"><span>Acceleration</span><span>{p.acceleration}</span></div>}{model.benchmark?.results?.filter(x=>x.precision===name&&x.status==="pass").map(r=><div key={r.device} className="mt-2 flex justify-between text-neutral-400"><span>{r.device?.toUpperCase()} speed</span><span>{r.tokensPerSecond?`${r.tokensPerSecond.toFixed(2)} tok/s`:r.realTimeFactor?`${r.realTimeFactor.toFixed(2)}× realtime`:r.inferenceMs?`${r.inferenceMs.toFixed(0)} ms`:r.grade?.replaceAll("-"," ")}</span></div>)}</div>)}</div>}</div>
+ </aside>
+}
+function Row({icon:Icon,title,children}:{icon:typeof Cpu;title:string;children:React.ReactNode}){return <div className="flex items-center justify-between gap-3"><div className="flex shrink-0 items-center text-neutral-400"><Icon className="mr-2 h-4 w-4"/><span>{title}</span></div>{children}</div>}
+function External({value,href}:{value:string;href?:string}){return href?<a href={href} target="_blank" rel="noreferrer" className="flex max-w-[165px] items-center text-right hover:text-primary hover:underline"><span className="truncate">{value}</span><ExternalLink className="ml-1 h-3 w-3 shrink-0"/></a>:<span>{value}</span>}

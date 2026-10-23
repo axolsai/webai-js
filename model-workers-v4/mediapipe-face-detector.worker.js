@@ -32,8 +32,8 @@ const MANIFEST = {
     limitations: ["Designed for short-range faces, typically within roughly two metres of the camera.", "Small, occluded, rotated, poorly lit, or profile faces can be missed.", "It detects faces but does not identify people or infer identity, emotion, health, or demographics.", "Do not use detection results for biometric identification or consequential decisions."],
   },
   runtime: { engine: { name: "MediaPipe Tasks Vision", version: CONFIG.RUNTIME_VERSION, backend: "WASM CPU", workerBridge: "classic-worker-inside-module-worker" }, precisions: CONFIG.PRECISIONS },
-  input: { description: "Provide exactly one browser blob URL containing a decodable image.", alternatives: [{ name: "image blob", fields: [{ name: "image_blob_url", type: "string(blob URL)", required: true, description: "Image fetched and decoded inside the worker." }] }] },
-  config: { model: [{ name: "minDetectionConfidence", type: "number", default: 0.5, minimum: 0, maximum: 1, description: "Minimum confidence retained by MediaPipe." }], generation: [] },
+  input: { description: "Provide either one browser blob URL or one raw RGBA frame, selected by generateConfig.useImageConversion.", alternatives: [{ name: "image blob", fields: [{ name: "image_blob_url", type: "string(blob URL)", required: true, minLength: 1, format: "blob-url", description: "Default path; fetched and decoded inside the worker." }] }, { name: "raw RGBA frame", fields: [{ name: "image_data", type: "{ data: Uint8ClampedArray, width: integer, height: integer }", required: true, description: "Realtime path without blob encoding or image decoding." }] }] },
+  config: { model: [{ name: "minDetectionConfidence", type: "number", default: 0.5, minimum: 0, maximum: 1, description: "Minimum confidence retained by MediaPipe." }], generation: [{ name: "useImageConversion", type: "boolean", default: true, description: "True accepts image_blob_url and performs browser image decoding; false requires raw image_data RGBA pixels." }] },
   output: { description: "MediaPipe detections in source-image pixel coordinates.", fields: [{ name: "detections", type: "Array<{ boundingBox, categories, keypoints }>", required: true }, { name: "image", type: "{ width: integer, height: integer }", required: true }, { name: "device", type: "string", required: true }], example: { detections: [{ boundingBox: { originX: 100, originY: 80, width: 220, height: 220, angle: 0 }, categories: [{ index: 0, score: 0.98, categoryName: "face", displayName: "" }], keypoints: [{ x: 0.42, y: 0.38, label: "right eye", score: 0 }] }], image: { width: 640, height: 480 }, device: "wasm" } },
   operations: ["checkModelSupports", "init", "download", "generate", "clearMemory"],
   benchmark: {
@@ -171,12 +171,18 @@ self.addEventListener("message", async ({ data: message = {} }) => {
     } else if (type === "generate") {
       if (!initialized) throw new Error("Call init before generate.");
       if (generating) throw new Error("Generation already in progress.");
-      const userInput = data?.userInput;
-      if (!userInput || Object.keys(userInput).filter((key) => userInput[key] != null).length !== 1 || typeof userInput.image_blob_url !== "string" || !userInput.image_blob_url.startsWith("blob:")) throw new Error("userInput must contain exactly one valid image_blob_url.");
+      const userInput = data?.userInput, useImageConversion = data?.generateConfig?.useImageConversion ?? true;
+      if (typeof useImageConversion !== "boolean") throw new Error("generateConfig.useImageConversion must be boolean.");
+      if (!userInput || Object.keys(userInput).filter((key) => userInput[key] != null).length !== 1) throw new Error("userInput must contain exactly one supported image input.");
+      const raw = userInput.image_data;
+      const isBlob = typeof userInput.image_blob_url === "string" && userInput.image_blob_url.startsWith("blob:");
+      const isRaw = raw && (raw.data instanceof Uint8ClampedArray || raw.data instanceof Uint8Array) && Number.isInteger(raw.width) && raw.width > 0 && Number.isInteger(raw.height) && raw.height > 0 && raw.data.byteLength === raw.width * raw.height * 4;
+      if (useImageConversion ? !isBlob : !isRaw) throw new Error(useImageConversion ? "useImageConversion=true requires image_blob_url." : "useImageConversion=false requires raw image_data.");
       generating = true;
       try {
-        const image = await decodeImage(userInput.image_blob_url);
-        const result = await callBridge("generate", { pixels: image.pixels.buffer, width: image.width, height: image.height }, [image.pixels.buffer]);
+        const image = useImageConversion ? await decodeImage(userInput.image_blob_url) : { pixels: new Uint8ClampedArray(raw.data.buffer, raw.data.byteOffset, raw.data.byteLength), width: raw.width, height: raw.height };
+        const pixels = image.pixels.byteOffset === 0 && image.pixels.byteLength === image.pixels.buffer.byteLength ? image.pixels : image.pixels.slice();
+        const result = await callBridge("generate", { pixels: pixels.buffer, width: image.width, height: image.height }, [pixels.buffer]);
         respond(requestId, "generated", { status: "success", result: { ...result, image: { width: image.width, height: image.height }, device: selectedDevice, precision: selectedPrecision } });
       } finally { generating = false; }
     } else if (type === "clearMemory") {

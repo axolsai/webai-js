@@ -1,0 +1,1099 @@
+{
+  "contractVersion": "1.0",
+  "model": {
+    "id": "open-jev-laya-multilingual",
+    "displayName": "Open Jev Laya Multilingual — Typed Decisions",
+    "provider": "Convai Innovations",
+    "providerUrl": "https://huggingface.co/convaiinnovations",
+    "license": "Apache-2.0",
+    "licenseUrl": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+    "lastUpdated": "2026-09-23T08:09:01.000Z",
+    "sourceRepository": "convaiinnovations/laya (multilingual checkpoint)",
+    "sourceRevision": "5e7b2b1b8ca2ecdd3f2322d94069c9b6ce7e844b",
+    "repository": "killkli/open-jev-laya-multilingual-onnx",
+    "artifactRevision": "643219b2b3a112ff1c40fb1143f050aa871f76f7",
+    "artifactLastUpdated": "2026-09-23T12:31:22.000Z",
+    "task": "multilingual-typed-decision-classification",
+    "description": "A multilingual Laya System One decision model exported for local Transformers.js inference. It returns distributions for categorical choices, ordered scores, and yes/no questions without generating text.",
+    "intendedUses": [
+      "Route and classify multilingual workflow inputs among application-provided choices.",
+      "Estimate ordered ratings and yes/no probabilities for human-reviewed multilingual workflows.",
+      "Prototype deterministic structured-decision interfaces in a browser."
+    ],
+    "limitations": [
+      "This open model is not TypeSafe AI's proprietary Jev model and is not affiliated with TypeSafe AI.",
+      "The source describes support for more than 100 languages, but accuracy and calibration vary by language and domain and require application-specific evaluation.",
+      "The ONNX publisher reports fp16/fp32 parity, not task accuracy; parity does not prove that a decision is correct.",
+      "The exported checkpoint uses neutral temperature values and its decision probabilities have not been independently recalibrated for this adapter's workloads.",
+      "Long states are truncated to fit the 1,024-token context; option text is truncated within a fixed 256-token question-head budget.",
+      "It cannot generate explanations, and its outputs must not be the sole basis for safety-critical or consequential decisions.",
+      "The fp16 first download is approximately 681 MB including tokenizer assets and may not persist in every browser cache profile."
+    ]
+  },
+  "runtime": {
+    "engine": {
+      "name": "Transformers.js",
+      "version": "4.2.0"
+    },
+    "precisions": {
+      "fp32": {
+        "weightsSize": 1290793955,
+        "size": 1325157875,
+        "dtype": "fp32",
+        "modelKeys": [
+          "laya.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "fp16": {
+        "weightsSize": 646982318,
+        "size": 681346238,
+        "dtype": "fp16",
+        "modelKeys": [
+          "laya_fp16.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      }
+    }
+  },
+  "benchmark": {
+    "report": "benchmarks/open-jev-laya-multilingual.json",
+    "testedAt": "2026-09-25T08:11:04.378Z",
+    "fixture": {
+      "file": "open-jev-laya-multilingual.json",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/open-jev-laya-multilingual.json",
+      "size": 1368,
+      "sha1": "ff4a5039dbc0c37a52717f0c82420ff45e0a2803",
+      "source": "WebAI-authored multilingual regression cases with unambiguous gold labels.",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "preprocessing": "Pinned mmBERT tokenizer; each question/options prefix uses Laya's marker format and the shared state is truncated to the remaining context."
+    },
+    "candidates": {
+      "fp32": {
+        "weightsSize": 1290793955,
+        "size": 1325157875,
+        "dtype": "fp32",
+        "modelKeys": [
+          "laya.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "fp16": {
+        "weightsSize": 646982318,
+        "size": 681346238,
+        "dtype": "fp16",
+        "modelKeys": [
+          "laya_fp16.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      }
+    },
+    "qualityGate": "Every English, Chinese, and Spanish case must return finite normalized non-degenerate distributions and the checked-in expected choice/yes-no result or ordered-score interval.",
+    "environment": "Isolated headless Google Chrome on macOS; Transformers.js 4.2.0",
+    "invalidatedBy": [
+      "artifact revision change",
+      "runtime version change",
+      "fixture or quality-gate change",
+      "browser/backend behavior change"
+    ],
+    "results": [
+      {
+        "precision": "fp32",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 141147.90000000596,
+          "inferenceMs": 1615.800000011921,
+          "totalMs": 144071.10000002384,
+          "grade": "good",
+          "questionsPerSecond": 3.713330857752032
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 3
+        },
+        "quality": {
+          "cases": [
+            {
+              "index": 0,
+              "language": "en",
+              "type": "choice",
+              "finite": true,
+              "normalized": true,
+              "nondegenerate": true,
+              "correct": true,
+              "actual": "refund",
+              "expected": {
+                "choice": "refund"
+              },
+              "pass": true
+            },
+            {
+              "index": 1,
+              "language": "en",
+              "type": "noul",
+              "finite": true,
+              "normalized": true,
+              "nondegenerate": true,
+              "correct": true,
+              "actual": 0.9061670085190799,
+              "expected": {
+                "noulMinimum": 0.5
+              },
+              "pass": true
+            },
+            {
+              "index": 2,
+              "language": "zh",
+              "type": "choice",
+              "finite": true,
+              "normalized": true,
+              "nondegenerate": true,
+              "correct": true,
+              "actual": "满意",
+              "expected": {
+                "choice": "满意"
+              },
+              "pass": true
+            },
+            {
+              "index": 3,
+              "language": "zh",
+              "type": "noul",
+              "finite": true,
+              "normalized": true,
+              "nondegenerate": true,
+              "correct": true,
+              "actual": 0.9877007001175497,
+              "expected": {
+                "noulMinimum": 0.5
+              },
+              "pass": true
+            },
+            {
+              "index": 4,
+              "language": "es",
+              "type": "score",
+              "finite": true,
+              "normalized": true,
+              "nondegenerate": true,
+              "correct": true,
+              "actual": 3.4299705637308673,
+              "expected": {
+                "scoreMinimum": 3,
+                "scoreMaximum": 4
+              },
+              "pass": true
+            },
+            {
+              "index": 5,
+              "language": "es",
+              "type": "noul",
+              "finite": true,
+              "normalized": true,
+              "nondegenerate": true,
+              "correct": true,
+              "actual": 0.9842700140338633,
+              "expected": {
+                "noulMinimum": 0.5
+              },
+              "pass": true
+            }
+          ],
+          "grade": "multilingual-typed-decision-pass"
+        },
+        "nativeOutput": [
+          {
+            "decisions": [
+              {
+                "type": "choice",
+                "confidence": 0.6227579087562529,
+                "answerConfidence": 0.8716637768959078,
+                "actProbability": 1,
+                "probabilities": [
+                  {
+                    "option": "refund",
+                    "probability": 0.8716637768959078
+                  },
+                  {
+                    "option": "password reset",
+                    "probability": 0.008479250221319491
+                  },
+                  {
+                    "option": "shipping update",
+                    "probability": 0.11985697288277274
+                  }
+                ],
+                "choice": "refund"
+              },
+              {
+                "type": "noul",
+                "confidence": 0.5508639370875457,
+                "answerConfidence": 0.9061670085190799,
+                "actProbability": 1,
+                "probabilities": [
+                  {
+                    "option": "false",
+                    "probability": 0.09383299148092009
+                  },
+                  {
+                    "option": "true",
+                    "probability": 0.9061670085190799
+                  }
+                ],
+                "noul": 0.9061670085190799
+              }
+            ]
+          },
+          {
+            "decisions": [
+              {
+                "type": "choice",
+                "confidence": 0.9175657447293266,
+                "answerConfidence": 0.9833234434054366,
+                "actProbability": 1,
+                "probabilities": [
+                  {
+                    "option": "满意",
+                    "probability": 0.9833234434054366
+                  },
+                  {
+                    "option": "不满意",
+                    "probability": 0.014852544512752149
+                  },
+                  {
+                    "option": "不确定",
+                    "probability": 0.0018240120818111218
+                  }
+                ],
+                "choice": "满意"
+              },
+              {
+                "type": "noul",
+                "confidence": 0.9043229299396017,
+                "answerConfidence": 0.9877007001175497,
+                "actProbability": 1,
+                "probabilities": [
+                  {
+                    "option": "false",
+                    "probability": 0.012299299882450194
+                  },
+                  {
+                    "option": "true",
+                    "probability": 0.9877007001175497
+                  }
+                ],
+                "noul": 0.9877007001175497
+              }
+            ]
+          },
+          {
+            "decisions": [
+              {
+                "type": "score",
+                "confidence": 0.4966037416410609,
+                "answerConfidence": 0.7576891396885387,
+                "actProbability": 1,
+                "probabilities": [
+                  {
+                    "option": "muy negativa",
+                    "probability": 0.009944690256946283
+                  },
+                  {
+                    "option": "negativa",
+                    "probability": 0.1355330365714412
+                  },
+                  {
+                    "option": "neutral",
+                    "probability": 0.026818432043949927
+                  },
+                  {
+                    "option": "positiva",
+                    "probability": 0.07001470143912389
+                  },
+                  {
+                    "option": "muy positiva",
+                    "probability": 0.7576891396885387
+                  }
+                ],
+                "score": 3.4299705637308673
+              },
+              {
+                "type": "noul",
+                "confidence": 0.8832579099757234,
+                "answerConfidence": 0.9842700140338633,
+                "actProbability": 1,
+                "probabilities": [
+                  {
+                    "option": "false",
+                    "probability": 0.015729985966136697
+                  },
+                  {
+                    "option": "true",
+                    "probability": 0.9842700140338633
+                  }
+                ],
+                "noul": 0.9842700140338633
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "precision": "fp32",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 132489.80000001192,
+          "inferenceMs": 524.1999999880791,
+          "totalMs": 134322.40000000596,
+          "grade": "excellent",
+          "questionsPerSecond": 11.446012972408331
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 3
+        },
+        "quality": {
+          "cases": [
+            {
+              "index": 0,
+              "language": "en",
+              "type": "choice",
+              "finite": true,
+              "normalized": true,
+              "nondegenerate": true,
+              "correct": true,
+              "actual": "refund",
+              "expected": {
+                "choice": "refund"
+              },
+              "pass": true
+            },
+            {
+              "index": 1,
+              "language": "en",
+              "type": "noul",
+              "finite": true,
+              "normalized": true,
+              "nondegenerate": true,
+              "correct": true,
+              "actual": 0.9061673075356835,
+              "expected": {
+                "noulMinimum": 0.5
+              },
+              "pass": true
+            },
+            {
+              "index": 2,
+              "language": "zh",
+              "type": "choice",
+              "finite": true,
+              "normalized": true,
+              "nondegenerate": true,
+              "correct": true,
+              "actual": "满意",
+              "expected": {
+                "choice": "满意"
+              },
+              "pass": true
+            },
+            {
+              "index": 3,
+              "language": "zh",
+              "type": "noul",
+              "finite": true,
+              "normalized": true,
+              "nondegenerate": true,
+              "correct": true,
+              "actual": 0.9877007901745298,
+              "expected": {
+                "noulMinimum": 0.5
+              },
+              "pass": true
+            },
+            {
+              "index": 4,
+              "language": "es",
+              "type": "score",
+              "finite": true,
+              "normalized": true,
+              "nondegenerate": true,
+              "correct": true,
+              "actual": 3.4299691478386434,
+              "expected": {
+                "scoreMinimum": 3,
+                "scoreMaximum": 4
+              },
+              "pass": true
+            },
+            {
+              "index": 5,
+              "language": "es",
+              "type": "noul",
+              "finite": true,
+              "normalized": true,
+              "nondegenerate": true,
+              "correct": true,
+              "actual": 0.9842700103425345,
+              "expected": {
+                "noulMinimum": 0.5
+              },
+              "pass": true
+            }
+          ],
+          "grade": "multilingual-typed-decision-pass"
+        },
+        "nativeOutput": [
+          {
+            "decisions": [
+              {
+                "type": "choice",
+                "confidence": 0.6227581709651357,
+                "answerConfidence": 0.8716638686244029,
+                "actProbability": 1,
+                "probabilities": [
+                  {
+                    "option": "refund",
+                    "probability": 0.8716638686244029
+                  },
+                  {
+                    "option": "password reset",
+                    "probability": 0.008479210176099273
+                  },
+                  {
+                    "option": "shipping update",
+                    "probability": 0.11985692119949778
+                  }
+                ],
+                "choice": "refund"
+              },
+              {
+                "type": "noul",
+                "confidence": 0.550864915353955,
+                "answerConfidence": 0.9061673075356835,
+                "actProbability": 1,
+                "probabilities": [
+                  {
+                    "option": "false",
+                    "probability": 0.09383269246431658
+                  },
+                  {
+                    "option": "true",
+                    "probability": 0.9061673075356835
+                  }
+                ],
+                "noul": 0.9061673075356835
+              }
+            ]
+          },
+          {
+            "decisions": [
+              {
+                "type": "choice",
+                "confidence": 0.9175657123340345,
+                "answerConfidence": 0.9833234283775969,
+                "actProbability": 1,
+                "probabilities": [
+                  {
+                    "option": "满意",
+                    "probability": 0.9833234283775969
+                  },
+                  {
+                    "option": "不满意",
+                    "probability": 0.014852572614772182
+                  },
+                  {
+                    "option": "不确定",
+                    "probability": 0.0018239990076310798
+                  }
+                ],
+                "choice": "满意"
+              },
+              {
+                "type": "noul",
+                "confidence": 0.904323499768946,
+                "answerConfidence": 0.9877007901745298,
+                "actProbability": 1,
+                "probabilities": [
+                  {
+                    "option": "false",
+                    "probability": 0.012299209825470031
+                  },
+                  {
+                    "option": "true",
+                    "probability": 0.9877007901745298
+                  }
+                ],
+                "noul": 0.9877007901745298
+              }
+            ]
+          },
+          {
+            "decisions": [
+              {
+                "type": "score",
+                "confidence": 0.49660294606148647,
+                "answerConfidence": 0.7576885106309966,
+                "actProbability": 1,
+                "probabilities": [
+                  {
+                    "option": "muy negativa",
+                    "probability": 0.009944681407799971
+                  },
+                  {
+                    "option": "negativa",
+                    "probability": 0.13553341683041314
+                  },
+                  {
+                    "option": "neutral",
+                    "probability": 0.0268184849081268
+                  },
+                  {
+                    "option": "positiva",
+                    "probability": 0.0700149062226634
+                  },
+                  {
+                    "option": "muy positiva",
+                    "probability": 0.7576885106309966
+                  }
+                ],
+                "score": 3.4299691478386434
+              },
+              {
+                "type": "noul",
+                "confidence": 0.8832578879478491,
+                "answerConfidence": 0.9842700103425345,
+                "actProbability": 1,
+                "probabilities": [
+                  {
+                    "option": "false",
+                    "probability": 0.015729989657465533
+                  },
+                  {
+                    "option": "true",
+                    "probability": 0.9842700103425345
+                  }
+                ],
+                "noul": 0.9842700103425345
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "precision": "fp16",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 72630.69999998808,
+          "inferenceMs": 1860.800000011921,
+          "totalMs": 75768.90000000596,
+          "grade": "good",
+          "questionsPerSecond": 3.224419604450538
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 3
+        },
+        "quality": {
+          "cases": [
+            {
+              "index": 0,
+              "language": "en",
+              "type": "choice",
+              "finite": true,
+              "normalized": true,
+              "nondegenerate": true,
+              "correct": true,
+              "actual": "refund",
+              "expected": {
+                "choice": "refund"
+              },
+              "pass": true
+            },
+            {
+              "index": 1,
+              "language": "en",
+              "type": "noul",
+              "finite": true,
+              "normalized": true,
+              "nondegenerate": true,
+              "correct": true,
+              "actual": 0.9065027463642118,
+              "expected": {
+                "noulMinimum": 0.5
+              },
+              "pass": true
+            },
+            {
+              "index": 2,
+              "language": "zh",
+              "type": "choice",
+              "finite": true,
+              "normalized": true,
+              "nondegenerate": true,
+              "correct": true,
+              "actual": "满意",
+              "expected": {
+                "choice": "满意"
+              },
+              "pass": true
+            },
+            {
+              "index": 3,
+              "language": "zh",
+              "type": "noul",
+              "finite": true,
+              "normalized": true,
+              "nondegenerate": true,
+              "correct": true,
+              "actual": 0.9876492555254636,
+              "expected": {
+                "noulMinimum": 0.5
+              },
+              "pass": true
+            },
+            {
+              "index": 4,
+              "language": "es",
+              "type": "score",
+              "finite": true,
+              "normalized": true,
+              "nondegenerate": true,
+              "correct": true,
+              "actual": 3.427786046693595,
+              "expected": {
+                "scoreMinimum": 3,
+                "scoreMaximum": 4
+              },
+              "pass": true
+            },
+            {
+              "index": 5,
+              "language": "es",
+              "type": "noul",
+              "finite": true,
+              "normalized": true,
+              "nondegenerate": true,
+              "correct": true,
+              "actual": 0.9842676126443798,
+              "expected": {
+                "noulMinimum": 0.5
+              },
+              "pass": true
+            }
+          ],
+          "grade": "multilingual-typed-decision-pass"
+        },
+        "nativeOutput": [
+          {
+            "decisions": [
+              {
+                "type": "choice",
+                "confidence": 0.6230037778153945,
+                "answerConfidence": 0.8717794081505277,
+                "actProbability": 1,
+                "probabilities": [
+                  {
+                    "option": "refund",
+                    "probability": 0.8717794081505277
+                  },
+                  {
+                    "option": "password reset",
+                    "probability": 0.008463911719699917
+                  },
+                  {
+                    "option": "shipping update",
+                    "probability": 0.11975668012977242
+                  }
+                ],
+                "choice": "refund"
+              },
+              {
+                "type": "noul",
+                "confidence": 0.551963297608286,
+                "answerConfidence": 0.9065027463642118,
+                "actProbability": 1,
+                "probabilities": [
+                  {
+                    "option": "false",
+                    "probability": 0.09349725363578815
+                  },
+                  {
+                    "option": "true",
+                    "probability": 0.9065027463642118
+                  }
+                ],
+                "noul": 0.9065027463642118
+              }
+            ]
+          },
+          {
+            "decisions": [
+              {
+                "type": "choice",
+                "confidence": 0.9177638247112218,
+                "answerConfidence": 0.9833689624007641,
+                "actProbability": 1,
+                "probabilities": [
+                  {
+                    "option": "满意",
+                    "probability": 0.9833689624007641
+                  },
+                  {
+                    "option": "不满意",
+                    "probability": 0.014819748032363255
+                  },
+                  {
+                    "option": "不确定",
+                    "probability": 0.0018112895668727094
+                  }
+                ],
+                "choice": "满意"
+              },
+              {
+                "type": "noul",
+                "confidence": 0.9039975750341547,
+                "answerConfidence": 0.9876492555254636,
+                "actProbability": 1,
+                "probabilities": [
+                  {
+                    "option": "false",
+                    "probability": 0.012350744474536386
+                  },
+                  {
+                    "option": "true",
+                    "probability": 0.9876492555254636
+                  }
+                ],
+                "noul": 0.9876492555254636
+              }
+            ]
+          },
+          {
+            "decisions": [
+              {
+                "type": "score",
+                "confidence": 0.4954330511303011,
+                "answerConfidence": 0.7568024159042337,
+                "actProbability": 1,
+                "probabilities": [
+                  {
+                    "option": "muy negativa",
+                    "probability": 0.009989209159933147
+                  },
+                  {
+                    "option": "negativa",
+                    "probability": 0.13608718217690519
+                  },
+                  {
+                    "option": "neutral",
+                    "probability": 0.026874377377028896
+                  },
+                  {
+                    "option": "positiva",
+                    "probability": 0.07024681538189907
+                  },
+                  {
+                    "option": "muy positiva",
+                    "probability": 0.7568024159042337
+                  }
+                ],
+                "score": 3.427786046693595
+              },
+              {
+                "type": "noul",
+                "confidence": 0.8832435800370397,
+                "answerConfidence": 0.9842676126443798,
+                "actProbability": 1,
+                "probabilities": [
+                  {
+                    "option": "false",
+                    "probability": 0.01573238735562029
+                  },
+                  {
+                    "option": "true",
+                    "probability": 0.9842676126443798
+                  }
+                ],
+                "noul": 0.9842676126443798
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "precision": "fp16",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 79046.5,
+          "inferenceMs": 1648.2000000178814,
+          "totalMs": 81778.79999998212,
+          "grade": "good",
+          "questionsPerSecond": 3.640334910772301
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 3
+        },
+        "quality": {
+          "cases": [
+            {
+              "index": 0,
+              "language": "en",
+              "type": "choice",
+              "finite": true,
+              "normalized": true,
+              "nondegenerate": true,
+              "correct": true,
+              "actual": "refund",
+              "expected": {
+                "choice": "refund"
+              },
+              "pass": true
+            },
+            {
+              "index": 1,
+              "language": "en",
+              "type": "noul",
+              "finite": true,
+              "normalized": true,
+              "nondegenerate": true,
+              "correct": true,
+              "actual": 0.9099470254914263,
+              "expected": {
+                "noulMinimum": 0.5
+              },
+              "pass": true
+            },
+            {
+              "index": 2,
+              "language": "zh",
+              "type": "choice",
+              "finite": true,
+              "normalized": true,
+              "nondegenerate": true,
+              "correct": true,
+              "actual": "满意",
+              "expected": {
+                "choice": "满意"
+              },
+              "pass": true
+            },
+            {
+              "index": 3,
+              "language": "zh",
+              "type": "noul",
+              "finite": true,
+              "normalized": true,
+              "nondegenerate": true,
+              "correct": true,
+              "actual": 0.9876277805596698,
+              "expected": {
+                "noulMinimum": 0.5
+              },
+              "pass": true
+            },
+            {
+              "index": 4,
+              "language": "es",
+              "type": "score",
+              "finite": true,
+              "normalized": true,
+              "nondegenerate": true,
+              "correct": true,
+              "actual": 3.4821235371280577,
+              "expected": {
+                "scoreMinimum": 3,
+                "scoreMaximum": 4
+              },
+              "pass": true
+            },
+            {
+              "index": 5,
+              "language": "es",
+              "type": "noul",
+              "finite": true,
+              "normalized": true,
+              "nondegenerate": true,
+              "correct": true,
+              "actual": 0.9846936454393053,
+              "expected": {
+                "noulMinimum": 0.5
+              },
+              "pass": true
+            }
+          ],
+          "grade": "multilingual-typed-decision-pass"
+        },
+        "nativeOutput": [
+          {
+            "decisions": [
+              {
+                "type": "choice",
+                "confidence": 0.6152823191604431,
+                "answerConfidence": 0.8682717551005948,
+                "actProbability": 1,
+                "probabilities": [
+                  {
+                    "option": "refund",
+                    "probability": 0.8682717551005948
+                  },
+                  {
+                    "option": "password reset",
+                    "probability": 0.009061228868651513
+                  },
+                  {
+                    "option": "shipping update",
+                    "probability": 0.12266701603075379
+                  }
+                ],
+                "choice": "refund"
+              },
+              {
+                "type": "noul",
+                "confidence": 0.5633533856446612,
+                "answerConfidence": 0.9099470254914263,
+                "actProbability": 1,
+                "probabilities": [
+                  {
+                    "option": "false",
+                    "probability": 0.0900529745085738
+                  },
+                  {
+                    "option": "true",
+                    "probability": 0.9099470254914263
+                  }
+                ],
+                "noul": 0.9099470254914263
+              }
+            ]
+          },
+          {
+            "decisions": [
+              {
+                "type": "choice",
+                "confidence": 0.9102178178576598,
+                "answerConfidence": 0.9813984052679814,
+                "actProbability": 1,
+                "probabilities": [
+                  {
+                    "option": "满意",
+                    "probability": 0.9813984052679814
+                  },
+                  {
+                    "option": "不满意",
+                    "probability": 0.01672179358441124
+                  },
+                  {
+                    "option": "不确定",
+                    "probability": 0.001879801147607375
+                  }
+                ],
+                "choice": "满意"
+              },
+              {
+                "type": "noul",
+                "confidence": 0.903861851968971,
+                "answerConfidence": 0.9876277805596698,
+                "actProbability": 1,
+                "probabilities": [
+                  {
+                    "option": "false",
+                    "probability": 0.012372219440330222
+                  },
+                  {
+                    "option": "true",
+                    "probability": 0.9876277805596698
+                  }
+                ],
+                "noul": 0.9876277805596698
+              }
+            ]
+          },
+          {
+            "decisions": [
+              {
+                "type": "score",
+                "confidence": 0.5214382761772629,
+                "answerConfidence": 0.7775642881141371,
+                "actProbability": 1,
+                "probabilities": [
+                  {
+                    "option": "muy negativa",
+                    "probability": 0.009636339593654477
+                  },
+                  {
+                    "option": "negativa",
+                    "probability": 0.12029600199600475
+                  },
+                  {
+                    "option": "neutral",
+                    "probability": 0.0259397282131067
+                  },
+                  {
+                    "option": "positiva",
+                    "probability": 0.066563642083097
+                  },
+                  {
+                    "option": "muy positiva",
+                    "probability": 0.7775642881141371
+                  }
+                ],
+                "score": 3.4821235371280577
+              },
+              {
+                "type": "noul",
+                "confidence": 0.8857943517576267,
+                "answerConfidence": 0.9846936454393053,
+                "actProbability": 1,
+                "probabilities": [
+                  {
+                    "option": "false",
+                    "probability": 0.015306354560694808
+                  },
+                  {
+                    "option": "true",
+                    "probability": 0.9846936454393053
+                  }
+                ],
+                "noul": 0.9846936454393053
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

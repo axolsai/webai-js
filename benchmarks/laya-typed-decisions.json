@@ -1,0 +1,733 @@
+{
+  "contractVersion": "1.0",
+  "model": {
+    "id": "laya-typed-decisions",
+    "displayName": "Laya Typed Decisions — Q4",
+    "provider": "Convai Innovations",
+    "providerUrl": "https://huggingface.co/convaiinnovations",
+    "license": "Apache-2.0",
+    "licenseUrl": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+    "lastUpdated": "2026-09-20T01:43:36.000Z",
+    "sourceRepository": "convaiinnovations/laya (typed-decisions checkpoint)",
+    "sourceRevision": "1c5edc17a7acd8701df6fc341c0d179f1c62c982",
+    "repository": "m1rhan/laya-typed-decisions-ONNX",
+    "artifactRevision": "7388ca40228f08fd72fb3d2fdbd29153e9bc63d4",
+    "artifactLastUpdated": "2026-09-22T12:10:34.000Z",
+    "task": "typed-decision-classification",
+    "description": "An English Laya System One specialist fine-tuned for typed decisions in agent observability, customer service, invoice processing, and security incidents, exported as a Q4 ONNX model for local Transformers.js inference.",
+    "intendedUses": [
+      "Classify and score English agent traces, customer-service cases, invoices, and security incidents.",
+      "Return application-provided choices, ordered ratings, and yes/no probabilities for human-reviewed workflow automation.",
+      "Prototype deterministic structured-decision interfaces in a browser."
+    ],
+    "limitations": [
+      "This open model is not TypeSafe AI's proprietary Jev model and is not affiliated with TypeSafe AI.",
+      "The source reports 0.766 accuracy on its four synthetic workflow families, but performance outside those English domains may fall back to the weaker general checkpoint behavior.",
+      "The source reports ECE 0.213 and warns that the checkpoint remains over-confident; recalibrate probabilities on held-out application data before thresholding them.",
+      "The Q4 publisher reports six-of-six argmax parity cases, not task accuracy; conversion parity does not prove that a decision is correct.",
+      "The source model's option-count calibration includes a value below the SDK's safe range for 11+ choices; this adapter clamps it to 0.5 and treats affected confidence as uncalibrated.",
+      "The model is English-only and choice questions should remain below roughly 20 options because they share a fixed question-head token budget.",
+      "Long states are truncated to fit the 1,024-token context; option text is truncated within a fixed 256-token question-head budget.",
+      "It cannot generate explanations, and its outputs must not be the sole basis for safety-critical or consequential decisions.",
+      "The Q4 first download is approximately 452 MB including tokenizer assets and may not persist in every browser cache profile."
+    ]
+  },
+  "runtime": {
+    "engine": {
+      "name": "Transformers.js",
+      "version": "4.2.0"
+    },
+    "precisions": {
+      "q4": {
+        "weightsSize": 448638677,
+        "size": 452224326,
+        "dtype": "q4",
+        "modelKeys": [
+          "model_q4.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      }
+    }
+  },
+  "benchmark": {
+    "report": "benchmarks/laya-typed-decisions.json",
+    "testedAt": "2026-09-25T09:51:15.016Z",
+    "fixture": {
+      "file": "laya-typed-decisions.json",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/laya-typed-decisions.json",
+      "size": 2242,
+      "sha1": "cee490dc2efc280f3d781dd6c7ec47c6d23ba737",
+      "source": "WebAI-authored regression cases representing the source model's four intended workflow families.",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "preprocessing": "Pinned ModernBERT tokenizer; each question/options prefix uses Laya's marker format and the shared state is truncated to the remaining context."
+    },
+    "candidates": {
+      "q4": {
+        "weightsSize": 448638677,
+        "size": 452224326,
+        "dtype": "q4",
+        "modelKeys": [
+          "model_q4.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      }
+    },
+    "qualityGate": "Every agent-observability, customer-service, invoice, and security case must return finite normalized non-degenerate distributions and the checked-in expected choice/yes-no result or ordered-score interval.",
+    "environment": "Isolated headless Google Chrome on macOS; Transformers.js 4.2.0",
+    "invalidatedBy": [
+      "artifact revision change",
+      "runtime version change",
+      "fixture or quality-gate change",
+      "browser/backend behavior change"
+    ],
+    "results": [
+      {
+        "precision": "q4",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 53499.40000000596,
+          "inferenceMs": 9939.800000011921,
+          "totalMs": 64657.89999997616,
+          "grade": "very-slow",
+          "questionsPerSecond": 0.8048451679098579
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 3
+        },
+        "quality": {
+          "cases": [
+            {
+              "index": 0,
+              "domain": "agent-observability",
+              "type": "choice",
+              "finite": true,
+              "normalized": true,
+              "nondegenerate": true,
+              "correct": true,
+              "actual": "escalate to a human",
+              "expected": {
+                "choice": "escalate to a human"
+              },
+              "pass": true
+            },
+            {
+              "index": 1,
+              "domain": "agent-observability",
+              "type": "noul",
+              "finite": true,
+              "normalized": true,
+              "nondegenerate": true,
+              "correct": true,
+              "actual": 0.1365138137591851,
+              "expected": {
+                "noulMaximum": 0.5
+              },
+              "pass": true
+            },
+            {
+              "index": 2,
+              "domain": "customer-service",
+              "type": "choice",
+              "finite": true,
+              "normalized": true,
+              "nondegenerate": true,
+              "correct": true,
+              "actual": "issue a duplicate-charge refund",
+              "expected": {
+                "choice": "issue a duplicate-charge refund"
+              },
+              "pass": true
+            },
+            {
+              "index": 3,
+              "domain": "customer-service",
+              "type": "noul",
+              "finite": true,
+              "normalized": true,
+              "nondegenerate": true,
+              "correct": true,
+              "actual": 0.5924459040754319,
+              "expected": {
+                "noulMinimum": 0.5
+              },
+              "pass": true
+            },
+            {
+              "index": 4,
+              "domain": "invoice-processing",
+              "type": "choice",
+              "finite": true,
+              "normalized": true,
+              "nondegenerate": true,
+              "correct": true,
+              "actual": "overdue",
+              "expected": {
+                "choice": "overdue"
+              },
+              "pass": true
+            },
+            {
+              "index": 5,
+              "domain": "invoice-processing",
+              "type": "score",
+              "finite": true,
+              "normalized": true,
+              "nondegenerate": true,
+              "correct": true,
+              "actual": 2.1685335716402356,
+              "expected": {
+                "scoreMinimum": 2,
+                "scoreMaximum": 4
+              },
+              "pass": true
+            },
+            {
+              "index": 6,
+              "domain": "security-incidents",
+              "type": "choice",
+              "finite": true,
+              "normalized": true,
+              "nondegenerate": true,
+              "correct": true,
+              "actual": "likely security incident",
+              "expected": {
+                "choice": "likely security incident"
+              },
+              "pass": true
+            },
+            {
+              "index": 7,
+              "domain": "security-incidents",
+              "type": "noul",
+              "finite": true,
+              "normalized": true,
+              "nondegenerate": true,
+              "correct": true,
+              "actual": 0.6305331022848533,
+              "expected": {
+                "noulMinimum": 0.5
+              },
+              "pass": true
+            }
+          ],
+          "grade": "typed-decision-pass"
+        },
+        "nativeOutput": [
+          {
+            "decisions": [
+              {
+                "type": "choice",
+                "confidence": 0.04823080334705554,
+                "answerConfidence": 0.4783337527223487,
+                "actProbability": 1,
+                "probabilities": [
+                  {
+                    "option": "escalate to a human",
+                    "probability": 0.4783337527223487
+                  },
+                  {
+                    "option": "report success",
+                    "probability": 0.21477946976628481
+                  },
+                  {
+                    "option": "repeat indefinitely",
+                    "probability": 0.30688677751136645
+                  }
+                ],
+                "choice": "escalate to a human"
+              },
+              {
+                "type": "noul",
+                "confidence": 0.424964523111098,
+                "answerConfidence": 0.863486186240815,
+                "actProbability": 1,
+                "probabilities": [
+                  {
+                    "option": "false",
+                    "probability": 0.863486186240815
+                  },
+                  {
+                    "option": "true",
+                    "probability": 0.1365138137591851
+                  }
+                ],
+                "noul": 0.1365138137591851
+              }
+            ]
+          },
+          {
+            "decisions": [
+              {
+                "type": "choice",
+                "confidence": 0.3965319287609911,
+                "answerConfidence": 0.7830146208292552,
+                "actProbability": 1,
+                "probabilities": [
+                  {
+                    "option": "issue a duplicate-charge refund",
+                    "probability": 0.7830146208292552
+                  },
+                  {
+                    "option": "reset the password",
+                    "probability": 0.0750299008168247
+                  },
+                  {
+                    "option": "send tracking information",
+                    "probability": 0.14195547835392017
+                  }
+                ],
+                "choice": "issue a duplicate-charge refund"
+              },
+              {
+                "type": "noul",
+                "confidence": 0.024801704173653794,
+                "answerConfidence": 0.5924459040754319,
+                "actProbability": 1,
+                "probabilities": [
+                  {
+                    "option": "false",
+                    "probability": 0.4075540959245682
+                  },
+                  {
+                    "option": "true",
+                    "probability": 0.5924459040754319
+                  }
+                ],
+                "noul": 0.5924459040754319
+              }
+            ]
+          },
+          {
+            "decisions": [
+              {
+                "type": "choice",
+                "confidence": 0.18437216698766135,
+                "answerConfidence": 0.6002632070363093,
+                "actProbability": 1,
+                "probabilities": [
+                  {
+                    "option": "overdue",
+                    "probability": 0.6002632070363093
+                  },
+                  {
+                    "option": "paid",
+                    "probability": 0.09846181499613915
+                  },
+                  {
+                    "option": "cancelled",
+                    "probability": 0.3012749779675515
+                  }
+                ],
+                "choice": "overdue"
+              },
+              {
+                "type": "score",
+                "confidence": 0.02436603123484271,
+                "answerConfidence": 0.279727223946278,
+                "actProbability": 1,
+                "probabilities": [
+                  {
+                    "option": "not urgent",
+                    "probability": 0.12725618341617184
+                  },
+                  {
+                    "option": "low",
+                    "probability": 0.17114576103339857
+                  },
+                  {
+                    "option": "medium",
+                    "probability": 0.279727223946278
+                  },
+                  {
+                    "option": "high",
+                    "probability": 0.24954996370232504
+                  },
+                  {
+                    "option": "critical",
+                    "probability": 0.17232086790182638
+                  }
+                ],
+                "score": 2.1685335716402356
+              }
+            ]
+          },
+          {
+            "decisions": [
+              {
+                "type": "choice",
+                "confidence": 0.4144714118729723,
+                "answerConfidence": 0.7979283315560542,
+                "actProbability": 1,
+                "probabilities": [
+                  {
+                    "option": "likely security incident",
+                    "probability": 0.7979283315560542
+                  },
+                  {
+                    "option": "routine maintenance",
+                    "probability": 0.09862578342730632
+                  },
+                  {
+                    "option": "benign document edit",
+                    "probability": 0.10344588501663946
+                  }
+                ],
+                "choice": "likely security incident"
+              },
+              {
+                "type": "noul",
+                "confidence": 0.04973811705456954,
+                "answerConfidence": 0.6305331022848533,
+                "actProbability": 1,
+                "probabilities": [
+                  {
+                    "option": "false",
+                    "probability": 0.3694668977151467
+                  },
+                  {
+                    "option": "true",
+                    "probability": 0.6305331022848533
+                  }
+                ],
+                "noul": 0.6305331022848533
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "precision": "q4",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 53566.30000001192,
+          "inferenceMs": 938.6999999880791,
+          "totalMs": 55818.59999999404,
+          "grade": "good",
+          "questionsPerSecond": 8.52242462991541
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 3
+        },
+        "quality": {
+          "cases": [
+            {
+              "index": 0,
+              "domain": "agent-observability",
+              "type": "choice",
+              "finite": true,
+              "normalized": true,
+              "nondegenerate": true,
+              "correct": true,
+              "actual": "escalate to a human",
+              "expected": {
+                "choice": "escalate to a human"
+              },
+              "pass": true
+            },
+            {
+              "index": 1,
+              "domain": "agent-observability",
+              "type": "noul",
+              "finite": true,
+              "normalized": true,
+              "nondegenerate": true,
+              "correct": true,
+              "actual": 0.136513985567376,
+              "expected": {
+                "noulMaximum": 0.5
+              },
+              "pass": true
+            },
+            {
+              "index": 2,
+              "domain": "customer-service",
+              "type": "choice",
+              "finite": true,
+              "normalized": true,
+              "nondegenerate": true,
+              "correct": true,
+              "actual": "issue a duplicate-charge refund",
+              "expected": {
+                "choice": "issue a duplicate-charge refund"
+              },
+              "pass": true
+            },
+            {
+              "index": 3,
+              "domain": "customer-service",
+              "type": "noul",
+              "finite": true,
+              "normalized": true,
+              "nondegenerate": true,
+              "correct": true,
+              "actual": 0.5924460256152709,
+              "expected": {
+                "noulMinimum": 0.5
+              },
+              "pass": true
+            },
+            {
+              "index": 4,
+              "domain": "invoice-processing",
+              "type": "choice",
+              "finite": true,
+              "normalized": true,
+              "nondegenerate": true,
+              "correct": true,
+              "actual": "overdue",
+              "expected": {
+                "choice": "overdue"
+              },
+              "pass": true
+            },
+            {
+              "index": 5,
+              "domain": "invoice-processing",
+              "type": "score",
+              "finite": true,
+              "normalized": true,
+              "nondegenerate": true,
+              "correct": true,
+              "actual": 2.165239685667947,
+              "expected": {
+                "scoreMinimum": 2,
+                "scoreMaximum": 4
+              },
+              "pass": true
+            },
+            {
+              "index": 6,
+              "domain": "security-incidents",
+              "type": "choice",
+              "finite": true,
+              "normalized": true,
+              "nondegenerate": true,
+              "correct": true,
+              "actual": "likely security incident",
+              "expected": {
+                "choice": "likely security incident"
+              },
+              "pass": true
+            },
+            {
+              "index": 7,
+              "domain": "security-incidents",
+              "type": "noul",
+              "finite": true,
+              "normalized": true,
+              "nondegenerate": true,
+              "correct": true,
+              "actual": 0.6305328467522882,
+              "expected": {
+                "noulMinimum": 0.5
+              },
+              "pass": true
+            }
+          ],
+          "grade": "typed-decision-pass"
+        },
+        "nativeOutput": [
+          {
+            "decisions": [
+              {
+                "type": "choice",
+                "confidence": 0.04823061533484729,
+                "answerConfidence": 0.47833364216360147,
+                "actProbability": 1,
+                "probabilities": [
+                  {
+                    "option": "escalate to a human",
+                    "probability": 0.47833364216360147
+                  },
+                  {
+                    "option": "report success",
+                    "probability": 0.21477991106192995
+                  },
+                  {
+                    "option": "repeat indefinitely",
+                    "probability": 0.3068864467744686
+                  }
+                ],
+                "choice": "escalate to a human"
+              },
+              {
+                "type": "noul",
+                "confidence": 0.42496406590800806,
+                "answerConfidence": 0.863486014432624,
+                "actProbability": 1,
+                "probabilities": [
+                  {
+                    "option": "false",
+                    "probability": 0.863486014432624
+                  },
+                  {
+                    "option": "true",
+                    "probability": 0.136513985567376
+                  }
+                ],
+                "noul": 0.136513985567376
+              }
+            ]
+          },
+          {
+            "decisions": [
+              {
+                "type": "choice",
+                "confidence": 0.39653119158303574,
+                "answerConfidence": 0.7830142194858685,
+                "actProbability": 1,
+                "probabilities": [
+                  {
+                    "option": "issue a duplicate-charge refund",
+                    "probability": 0.7830142194858685
+                  },
+                  {
+                    "option": "reset the password",
+                    "probability": 0.07503009610990077
+                  },
+                  {
+                    "option": "send tracking information",
+                    "probability": 0.14195568440423062
+                  }
+                ],
+                "choice": "issue a duplicate-charge refund"
+              },
+              {
+                "type": "noul",
+                "confidence": 0.024801769767760162,
+                "answerConfidence": 0.5924460256152709,
+                "actProbability": 1,
+                "probabilities": [
+                  {
+                    "option": "false",
+                    "probability": 0.4075539743847291
+                  },
+                  {
+                    "option": "true",
+                    "probability": 0.5924460256152709
+                  }
+                ],
+                "noul": 0.5924460256152709
+              }
+            ]
+          },
+          {
+            "decisions": [
+              {
+                "type": "choice",
+                "confidence": 0.18437248235562986,
+                "answerConfidence": 0.600263508609215,
+                "actProbability": 1,
+                "probabilities": [
+                  {
+                    "option": "overdue",
+                    "probability": 0.600263508609215
+                  },
+                  {
+                    "option": "paid",
+                    "probability": 0.0984616910826736
+                  },
+                  {
+                    "option": "cancelled",
+                    "probability": 0.3012748003081114
+                  }
+                ],
+                "choice": "overdue"
+              },
+              {
+                "type": "score",
+                "confidence": 0.02436461783626942,
+                "answerConfidence": 0.28006894051339015,
+                "actProbability": 1,
+                "probabilities": [
+                  {
+                    "option": "not urgent",
+                    "probability": 0.127627174459118
+                  },
+                  {
+                    "option": "low",
+                    "probability": 0.17157219797417644
+                  },
+                  {
+                    "option": "medium",
+                    "probability": 0.28006894051339015
+                  },
+                  {
+                    "option": "high",
+                    "probability": 0.24939714154627188
+                  },
+                  {
+                    "option": "critical",
+                    "probability": 0.1713345455070436
+                  }
+                ],
+                "score": 2.165239685667947
+              }
+            ]
+          },
+          {
+            "decisions": [
+              {
+                "type": "choice",
+                "confidence": 0.4144705453964279,
+                "answerConfidence": 0.7979278676988345,
+                "actProbability": 1,
+                "probabilities": [
+                  {
+                    "option": "likely security incident",
+                    "probability": 0.7979278676988345
+                  },
+                  {
+                    "option": "routine maintenance",
+                    "probability": 0.09862587304469725
+                  },
+                  {
+                    "option": "benign document edit",
+                    "probability": 0.10344625925646829
+                  }
+                ],
+                "choice": "likely security incident"
+              },
+              {
+                "type": "noul",
+                "confidence": 0.04973792000671129,
+                "answerConfidence": 0.6305328467522882,
+                "actProbability": 1,
+                "probabilities": [
+                  {
+                    "option": "false",
+                    "probability": 0.36946715324771173
+                  },
+                  {
+                    "option": "true",
+                    "probability": 0.6305328467522882
+                  }
+                ],
+                "noul": 0.6305328467522882
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

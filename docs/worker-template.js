@@ -21,7 +21,13 @@ const MANIFEST = {
     limitations: ["Describe an important accuracy, safety, or runtime limitation."],
   },
   runtime: { engine: { name: "replace-me", version: "exact-version" }, precisions: {} },
-  input: { description: "Describe the accepted input.", alternatives: [] },
+  input: {
+    description: "Describe the accepted input.",
+    alternatives: [{
+      name: "text",
+      fields: [{ name: "text", type: "string", required: true, minLength: 1 }],
+    }],
+  },
   config: { model: [], generation: [] },
   output: { description: "Describe the native model output.", fields: [], example: {} },
   operations: ["checkModelSupports", "init", "download", "generate", "clearMemory"],

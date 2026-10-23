@@ -1,0 +1,63 @@
+{
+  "passed": true,
+  "configuration": {
+    "precision": "q4",
+    "device": "webgpu"
+  },
+  "manifestDiscovered": true,
+  "downloadProgressEvents": 13793,
+  "cache": {
+    "cold": false,
+    "downloaded": false,
+    "deleted": true,
+    "otherModelPreserved": true
+  },
+  "invalidInputRejected": true,
+  "unsupportedStreamingRejected": true,
+  "clearMemoryVerified": true,
+  "runtime": {
+    "durationMs": 264.40000000596046
+  },
+  "nativeOutput": {
+    "decisions": [
+      {
+        "type": "choice",
+        "confidence": 0.4144705453964279,
+        "answerConfidence": 0.7979278676988345,
+        "actProbability": 1,
+        "probabilities": [
+          {
+            "option": "likely security incident",
+            "probability": 0.7979278676988345
+          },
+          {
+            "option": "routine maintenance",
+            "probability": 0.09862587304469725
+          },
+          {
+            "option": "benign document edit",
+            "probability": 0.10344625925646829
+          }
+        ],
+        "choice": "likely security incident"
+      },
+      {
+        "type": "noul",
+        "confidence": 0.04973792000671129,
+        "answerConfidence": 0.6305328467522882,
+        "actProbability": 1,
+        "probabilities": [
+          {
+            "option": "false",
+            "probability": 0.36946715324771173
+          },
+          {
+            "option": "true",
+            "probability": 0.6305328467522882
+          }
+        ],
+        "noul": 0.6305328467522882
+      }
+    ]
+  }
+}

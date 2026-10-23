@@ -1,0 +1,949 @@
+{
+  "contractVersion": "1.0",
+  "model": {
+    "id": "open-jev-deberta-v3-large",
+    "displayName": "Open Jev DeBERTa V3 Large — Typed Decisions",
+    "provider": "Kotoba Labs",
+    "providerUrl": "https://huggingface.co/com-kotobalabs",
+    "license": "Apache-2.0",
+    "licenseUrl": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+    "lastUpdated": "2026-09-18T10:02:28.000Z",
+    "sourceRepository": "com-kotobalabs/open-jev-deberta-v3-large",
+    "sourceRevision": "19bf9a64815add579fbf6c907bef584d9277a8e4",
+    "repository": "onnx-community/open-jev-deberta-v3-large-ONNX",
+    "artifactRevision": "7c79f25b5ac496089f448a969c801872ad59d31c",
+    "artifactLastUpdated": "2026-09-20T12:30:02.000Z",
+    "task": "typed-decision-classification",
+    "description": "An independent open Jev-shaped English decision model that runs locally through Transformers.js and returns calibrated distributions for categorical choices, ordered scores, and yes/no questions without generating text.",
+    "intendedUses": [
+      "Route or classify English inputs among an application-provided set of choices.",
+      "Estimate ordered ratings and yes/no probabilities for human-reviewed workflows.",
+      "Prototype deterministic structured decision interfaces in the browser."
+    ],
+    "limitations": [
+      "This independent reproduction is not TypeSafe AI's proprietary Jev model and is not affiliated with TypeSafe AI.",
+      "The source reports 0.854 in-domain accuracy but 0.690 on new instructions and option sets; application-specific evaluation and recalibration are required.",
+      "It is English-only, has a 512-token total context, and was trained on banking support, movie reviews, and Wikipedia yes/no data.",
+      "Unseen ordered scales are a weak case, and out-of-domain confidence may be over-confident.",
+      "It cannot generate explanations, and its probabilities do not establish truth, safety, or suitability for consequential decisions.",
+      "The model is large for browser use: even the smallest artifact is roughly 348 MB before shared tokenizer files."
+    ]
+  },
+  "runtime": {
+    "engine": {
+      "name": "Transformers.js",
+      "version": "4.2.0"
+    },
+    "precisions": {
+      "fp32": {
+        "weightsSize": 1749199550,
+        "size": 1760326360,
+        "dtype": "fp32",
+        "modelKeys": [
+          "model.onnx",
+          "model.onnx_data",
+          "model.onnx_data_1"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "fp16": {
+        "weightsSize": 874883488,
+        "size": 886010298,
+        "dtype": "fp16",
+        "modelKeys": [
+          "model_fp16.onnx",
+          "model_fp16.onnx_data"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4": {
+        "weightsSize": 478017229,
+        "size": 489144039,
+        "dtype": "q4",
+        "modelKeys": [
+          "model_q4.onnx",
+          "model_q4.onnx_data"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "webgpu"
+        ]
+      },
+      "q4f16": {
+        "weightsSize": 348390087,
+        "size": 359516897,
+        "dtype": "q4f16",
+        "modelKeys": [
+          "model_q4f16.onnx",
+          "model_q4f16.onnx_data"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "webgpu"
+        ]
+      }
+    }
+  },
+  "benchmark": {
+    "report": "benchmarks/open-jev-deberta-v3-large.json",
+    "testedAt": "2026-09-22T14:47:49.157Z",
+    "fixture": {
+      "file": "open-jev-deberta-v3-large.json",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/open-jev-deberta-v3-large.json",
+      "size": 819,
+      "sha1": "bf1e5a03646050ac2c9b0fa51bf8f01b72f95ece",
+      "source": "Adapted from the pinned source model card usage example.",
+      "sourceUrl": "https://huggingface.co/com-kotobalabs/open-jev-deberta-v3-large/blob/19bf9a64815add579fbf6c907bef584d9277a8e4/README.md#use",
+      "license": "Apache-2.0",
+      "licenseUrl": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+      "preprocessing": "Pinned SentencePiece tokenizer; state truncates to 256 tokens; questions and options use the artifact's marker-token span interface."
+    },
+    "candidates": {
+      "fp32": {
+        "weightsSize": 1749199550,
+        "size": 1760326360,
+        "dtype": "fp32",
+        "modelKeys": [
+          "model.onnx",
+          "model.onnx_data",
+          "model.onnx_data_1"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "fp16": {
+        "weightsSize": 874883488,
+        "size": 886010298,
+        "dtype": "fp16",
+        "modelKeys": [
+          "model_fp16.onnx",
+          "model_fp16.onnx_data"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4": {
+        "weightsSize": 478017229,
+        "size": 489144039,
+        "dtype": "q4",
+        "modelKeys": [
+          "model_q4.onnx",
+          "model_q4.onnx_data"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4f16": {
+        "weightsSize": 348390087,
+        "size": 359516897,
+        "dtype": "q4f16",
+        "modelKeys": [
+          "model_q4f16.onnx",
+          "model_q4f16.onnx_data"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      }
+    },
+    "qualityGate": "All checked-in typed questions must return finite normalized distributions, the expected top choice/yes-no decision, and an ordered-score value within the fixture tolerance; outputs must be non-degenerate.",
+    "environment": "Isolated headless Google Chrome on macOS; Transformers.js 4.2.0",
+    "invalidatedBy": [
+      "artifact revision change",
+      "runtime version change",
+      "fixture or quality-gate change",
+      "browser/backend behavior change"
+    ],
+    "results": [
+      {
+        "precision": "fp32",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 182152.29999995232,
+          "inferenceMs": 1475.1000000238419,
+          "totalMs": 185097.30000007153,
+          "grade": "slow",
+          "questionsPerSecond": 2.0337604229892965
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "normalized": true,
+          "finite": true,
+          "expected": true,
+          "nondegenerate": true,
+          "choice": "fees & charges",
+          "score": 0.8192455279754328,
+          "noul": 0.9413643171529927,
+          "grade": "typed-decision-pass"
+        },
+        "nativeOutput": {
+          "decisions": [
+            {
+              "type": "choice",
+              "choice": "fees & charges",
+              "confidence": 0.7007196565213888,
+              "probabilities": [
+                {
+                  "option": "fees & charges",
+                  "probability": 0.7007196565213888
+                },
+                {
+                  "option": "pin & security",
+                  "probability": 0.07019998167095501
+                },
+                {
+                  "option": "refund & dispute",
+                  "probability": 0.18746444979822888
+                },
+                {
+                  "option": "top-up",
+                  "probability": 0.006507753537625719
+                },
+                {
+                  "option": "exchange & fiat",
+                  "probability": 0.01057956015706994
+                },
+                {
+                  "option": "atm & cash",
+                  "probability": 0.0038026780228150744
+                },
+                {
+                  "option": "transfer",
+                  "probability": 0.009683978610399926
+                },
+                {
+                  "option": "card",
+                  "probability": 0.004028313011038565
+                },
+                {
+                  "option": "account & identity",
+                  "probability": 0.0035151059406944452
+                },
+                {
+                  "option": "other",
+                  "probability": 0.0034985227297837595
+                }
+              ]
+            },
+            {
+              "type": "score",
+              "score": 0.8192455279754328,
+              "confidence": 0.5049323390127953,
+              "probabilities": [
+                {
+                  "option": "very negative",
+                  "probability": 0.34216976743629623
+                },
+                {
+                  "option": "negative",
+                  "probability": 0.5049323390127953
+                },
+                {
+                  "option": "neutral",
+                  "probability": 0.14640785969064893
+                },
+                {
+                  "option": "positive",
+                  "probability": 0.004462665859698535
+                },
+                {
+                  "option": "very positive",
+                  "probability": 0.0020273680005610095
+                }
+              ]
+            },
+            {
+              "type": "noul",
+              "noul": 0.9413643171529927,
+              "confidence": 0.9413643171529927,
+              "probabilities": [
+                {
+                  "option": "no",
+                  "probability": 0.05863568284700716
+                },
+                {
+                  "option": "yes",
+                  "probability": 0.9413643171529927
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "precision": "fp32",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 181271.29999995232,
+          "inferenceMs": 445.39999997615814,
+          "totalMs": 183191.60000002384,
+          "grade": "good",
+          "questionsPerSecond": 6.735518635295437
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "normalized": true,
+          "finite": true,
+          "expected": true,
+          "nondegenerate": true,
+          "choice": "fees & charges",
+          "score": 0.8192471458282966,
+          "noul": 0.9413640680502452,
+          "grade": "typed-decision-pass"
+        },
+        "nativeOutput": {
+          "decisions": [
+            {
+              "type": "choice",
+              "choice": "fees & charges",
+              "confidence": 0.7007198310448002,
+              "probabilities": [
+                {
+                  "option": "fees & charges",
+                  "probability": 0.7007198310448002
+                },
+                {
+                  "option": "pin & security",
+                  "probability": 0.07019989156036517
+                },
+                {
+                  "option": "refund & dispute",
+                  "probability": 0.18746435814703225
+                },
+                {
+                  "option": "top-up",
+                  "probability": 0.006507761069211547
+                },
+                {
+                  "option": "exchange & fiat",
+                  "probability": 0.010579560389796546
+                },
+                {
+                  "option": "atm & cash",
+                  "probability": 0.003802673789186436
+                },
+                {
+                  "option": "transfer",
+                  "probability": 0.009683974425635372
+                },
+                {
+                  "option": "card",
+                  "probability": 0.004028316758414789
+                },
+                {
+                  "option": "account & identity",
+                  "probability": 0.0035151100088144085
+                },
+                {
+                  "option": "other",
+                  "probability": 0.003498522806743413
+                }
+              ]
+            },
+            {
+              "type": "score",
+              "score": 0.8192471458282966,
+              "confidence": 0.5049334072893127,
+              "probabilities": [
+                {
+                  "option": "very negative",
+                  "probability": 0.3421684227344383
+                },
+                {
+                  "option": "negative",
+                  "probability": 0.5049334072893127
+                },
+                {
+                  "option": "neutral",
+                  "probability": 0.1464081361989836
+                },
+                {
+                  "option": "positive",
+                  "probability": 0.00446266896804484
+                },
+                {
+                  "option": "very positive",
+                  "probability": 0.002027364809220556
+                }
+              ]
+            },
+            {
+              "type": "noul",
+              "noul": 0.9413640680502452,
+              "confidence": 0.9413640680502452,
+              "probabilities": [
+                {
+                  "option": "no",
+                  "probability": 0.05863593194975487
+                },
+                {
+                  "option": "yes",
+                  "probability": 0.9413640680502452
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "precision": "fp16",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 110955.20000004768,
+          "inferenceMs": 2716.899999976158,
+          "totalMs": 115036.40000009537,
+          "grade": "slow",
+          "questionsPerSecond": 1.1041996393044744
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "normalized": true,
+          "finite": true,
+          "expected": true,
+          "nondegenerate": true,
+          "choice": "fees & charges",
+          "score": 0.819316366970346,
+          "noul": 0.9414209035445016,
+          "grade": "typed-decision-pass"
+        },
+        "nativeOutput": {
+          "decisions": [
+            {
+              "type": "choice",
+              "choice": "fees & charges",
+              "confidence": 0.701196494627842,
+              "probabilities": [
+                {
+                  "option": "fees & charges",
+                  "probability": 0.701196494627842
+                },
+                {
+                  "option": "pin & security",
+                  "probability": 0.07023318302595552
+                },
+                {
+                  "option": "refund & dispute",
+                  "probability": 0.18701214674424663
+                },
+                {
+                  "option": "top-up",
+                  "probability": 0.006506024736309778
+                },
+                {
+                  "option": "exchange & fiat",
+                  "probability": 0.010552466061387707
+                },
+                {
+                  "option": "atm & cash",
+                  "probability": 0.0038005820473512014
+                },
+                {
+                  "option": "transfer",
+                  "probability": 0.009669087947321683
+                },
+                {
+                  "option": "card",
+                  "probability": 0.004026179517774753
+                },
+                {
+                  "option": "account & identity",
+                  "probability": 0.003508431622108923
+                },
+                {
+                  "option": "other",
+                  "probability": 0.0034954036697019937
+                }
+              ]
+            },
+            {
+              "type": "score",
+              "score": 0.819316366970346,
+              "confidence": 0.5049926411520007,
+              "probabilities": [
+                {
+                  "option": "very negative",
+                  "probability": 0.34209259006225357
+                },
+                {
+                  "option": "negative",
+                  "probability": 0.5049926411520007
+                },
+                {
+                  "option": "neutral",
+                  "probability": 0.14644275935837128
+                },
+                {
+                  "option": "positive",
+                  "probability": 0.004449830607894724
+                },
+                {
+                  "option": "very positive",
+                  "probability": 0.002022178819479656
+                }
+              ]
+            },
+            {
+              "type": "noul",
+              "noul": 0.9414209035445016,
+              "confidence": 0.9414209035445016,
+              "probabilities": [
+                {
+                  "option": "no",
+                  "probability": 0.058579096455498504
+                },
+                {
+                  "option": "yes",
+                  "probability": 0.9414209035445016
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "precision": "fp16",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 97316.39999997616,
+          "inferenceMs": 965.6000000238419,
+          "totalMs": 99586.30000007153,
+          "grade": "good",
+          "questionsPerSecond": 3.1068765533615643
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "normalized": true,
+          "finite": true,
+          "expected": true,
+          "nondegenerate": true,
+          "choice": "fees & charges",
+          "score": 0.816693096039844,
+          "noul": 0.941668848604966,
+          "grade": "typed-decision-pass"
+        },
+        "nativeOutput": {
+          "decisions": [
+            {
+              "type": "choice",
+              "choice": "fees & charges",
+              "confidence": 0.6979081569449014,
+              "probabilities": [
+                {
+                  "option": "fees & charges",
+                  "probability": 0.6979081569449014
+                },
+                {
+                  "option": "pin & security",
+                  "probability": 0.07086939172866212
+                },
+                {
+                  "option": "refund & dispute",
+                  "probability": 0.1894535851764772
+                },
+                {
+                  "option": "top-up",
+                  "probability": 0.006511750715186753
+                },
+                {
+                  "option": "exchange & fiat",
+                  "probability": 0.010720097512236447
+                },
+                {
+                  "option": "atm & cash",
+                  "probability": 0.0038181048252393787
+                },
+                {
+                  "option": "transfer",
+                  "probability": 0.009570189339752106
+                },
+                {
+                  "option": "card",
+                  "probability": 0.00409775271142314
+                },
+                {
+                  "option": "account & identity",
+                  "probability": 0.0036041663293071256
+                },
+                {
+                  "option": "other",
+                  "probability": 0.0034468047168142745
+                }
+              ]
+            },
+            {
+              "type": "score",
+              "score": 0.816693096039844,
+              "confidence": 0.5003641049492644,
+              "probabilities": [
+                {
+                  "option": "very negative",
+                  "probability": 0.34580322433100646
+                },
+                {
+                  "option": "negative",
+                  "probability": 0.5003641049492644
+                },
+                {
+                  "option": "neutral",
+                  "probability": 0.1472074387100736
+                },
+                {
+                  "option": "positive",
+                  "probability": 0.0045868143681894805
+                },
+                {
+                  "option": "very positive",
+                  "probability": 0.002038417641465976
+                }
+              ]
+            },
+            {
+              "type": "noul",
+              "noul": 0.941668848604966,
+              "confidence": 0.941668848604966,
+              "probabilities": [
+                {
+                  "option": "no",
+                  "probability": 0.0583311513950339
+                },
+                {
+                  "option": "yes",
+                  "probability": 0.941668848604966
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "precision": "q4",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 64089.300000071526,
+          "grade": "failed"
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 9, ERROR_MESSAGE: Could not find an implementation for GatherBlockQuantized(1) node with name '/backbone/embeddings/word_embeddings/Gather_Q4'"
+      },
+      {
+        "precision": "q4",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 58865.60000002384,
+          "inferenceMs": 745.2999999523163,
+          "totalMs": 61101.10000002384,
+          "grade": "good",
+          "questionsPerSecond": 4.025224741972276
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "normalized": true,
+          "finite": true,
+          "expected": true,
+          "nondegenerate": true,
+          "choice": "fees & charges",
+          "score": 0.8354463400306885,
+          "noul": 0.9164181335959919,
+          "grade": "typed-decision-pass"
+        },
+        "nativeOutput": {
+          "decisions": [
+            {
+              "type": "choice",
+              "choice": "fees & charges",
+              "confidence": 0.7589055527532881,
+              "probabilities": [
+                {
+                  "option": "fees & charges",
+                  "probability": 0.7589055527532881
+                },
+                {
+                  "option": "pin & security",
+                  "probability": 0.07058856781093403
+                },
+                {
+                  "option": "refund & dispute",
+                  "probability": 0.1262164606808675
+                },
+                {
+                  "option": "top-up",
+                  "probability": 0.005628809885385237
+                },
+                {
+                  "option": "exchange & fiat",
+                  "probability": 0.011455420840711059
+                },
+                {
+                  "option": "atm & cash",
+                  "probability": 0.0038552208404560515
+                },
+                {
+                  "option": "transfer",
+                  "probability": 0.011815044558920818
+                },
+                {
+                  "option": "card",
+                  "probability": 0.005101693892125365
+                },
+                {
+                  "option": "account & identity",
+                  "probability": 0.0029293539282317805
+                },
+                {
+                  "option": "other",
+                  "probability": 0.0035038748090801693
+                }
+              ]
+            },
+            {
+              "type": "score",
+              "score": 0.8354463400306885,
+              "confidence": 0.5002727665302412,
+              "probabilities": [
+                {
+                  "option": "very negative",
+                  "probability": 0.33709217627209936
+                },
+                {
+                  "option": "negative",
+                  "probability": 0.5002727665302412
+                },
+                {
+                  "option": "neutral",
+                  "probability": 0.1551042467535769
+                },
+                {
+                  "option": "positive",
+                  "probability": 0.005158161783036558
+                },
+                {
+                  "option": "very positive",
+                  "probability": 0.002372648661045971
+                }
+              ]
+            },
+            {
+              "type": "noul",
+              "noul": 0.9164181335959919,
+              "confidence": 0.9164181335959919,
+              "probabilities": [
+                {
+                  "option": "no",
+                  "probability": 0.08358186640400815
+                },
+                {
+                  "option": "yes",
+                  "probability": 0.9164181335959919
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "precision": "q4f16",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 43624.300000071526,
+          "grade": "failed"
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 9, ERROR_MESSAGE: Failed to find kernel for com.microsoft.GatherBlockQuantized(1) (node:'/backbone/embeddings/word_embeddings/Gather_Q4' ep:'CPUExecutionProvider'). Kernel not found"
+      },
+      {
+        "precision": "q4f16",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 45219.199999928474,
+          "inferenceMs": 387.90000009536743,
+          "totalMs": 47054.60000002384,
+          "grade": "good",
+          "questionsPerSecond": 7.7339520475958565
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "normalized": true,
+          "finite": true,
+          "expected": true,
+          "nondegenerate": true,
+          "choice": "fees & charges",
+          "score": 0.8361779714049125,
+          "noul": 0.9159558086771841,
+          "grade": "typed-decision-pass"
+        },
+        "nativeOutput": {
+          "decisions": [
+            {
+              "type": "choice",
+              "choice": "fees & charges",
+              "confidence": 0.7578928891070297,
+              "probabilities": [
+                {
+                  "option": "fees & charges",
+                  "probability": 0.7578928891070297
+                },
+                {
+                  "option": "pin & security",
+                  "probability": 0.07081372636366923
+                },
+                {
+                  "option": "refund & dispute",
+                  "probability": 0.12693373876447406
+                },
+                {
+                  "option": "top-up",
+                  "probability": 0.00563573953206963
+                },
+                {
+                  "option": "exchange & fiat",
+                  "probability": 0.01149088340023454
+                },
+                {
+                  "option": "atm & cash",
+                  "probability": 0.0038633095452579908
+                },
+                {
+                  "option": "transfer",
+                  "probability": 0.01183801398857245
+                },
+                {
+                  "option": "card",
+                  "probability": 0.005087679487861204
+                },
+                {
+                  "option": "account & identity",
+                  "probability": 0.002917264129365521
+                },
+                {
+                  "option": "other",
+                  "probability": 0.0035267556814656356
+                }
+              ]
+            },
+            {
+              "type": "score",
+              "score": 0.8361779714049125,
+              "confidence": 0.5006460159199219,
+              "probabilities": [
+                {
+                  "option": "very negative",
+                  "probability": 0.33655577295350747
+                },
+                {
+                  "option": "negative",
+                  "probability": 0.5006460159199219
+                },
+                {
+                  "option": "neutral",
+                  "probability": 0.15523721336303994
+                },
+                {
+                  "option": "positive",
+                  "probability": 0.00518646229521205
+                },
+                {
+                  "option": "very positive",
+                  "probability": 0.0023745354683186552
+                }
+              ]
+            },
+            {
+              "type": "noul",
+              "noul": 0.9159558086771841,
+              "confidence": 0.9159558086771841,
+              "probabilities": [
+                {
+                  "option": "no",
+                  "probability": 0.0840441913228159
+                },
+                {
+                  "option": "yes",
+                  "probability": 0.9159558086771841
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

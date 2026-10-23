@@ -76,8 +76,8 @@ const MANIFEST = {
       name: "image URL and points",
       description: "A browser-readable image plus positive or negative image-space point prompts.",
       fields: [
-        { name: "image", type: "string(URL)", required: true, description: "A URL readable by the worker." },
-        { name: "input_points", type: "number[][][]", required: true, description: "Groups of [x, y] image-space points." },
+        { name: "image", type: "string(URL)", required: true, minLength: 1, format: "url", description: "A URL readable by the worker." },
+        { name: "input_points", type: "number[][][]", required: true, minItems: 1, description: "Groups of [x, y] image-space points." },
         { name: "input_labels", type: "number[][]", required: false, description: "Labels matching every point: 1 positive, 0 negative." },
       ],
     }],

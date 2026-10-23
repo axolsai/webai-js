@@ -62,8 +62,8 @@ const MANIFEST = {
   input: {
     description: "One browser-readable image URL and at least two non-empty English candidate labels.",
     alternatives: [
-      { name: "image_blob_url", type: "string", required: true },
-      { name: "candidate_labels", type: "string[]", required: true },
+      { name: "image_blob_url", type: "string", required: true, minLength: 1 },
+      { name: "candidate_labels", type: "string[]", required: true, minItems: 1, items: { type: "string", minLength: 1 } },
     ],
   },
   config: { model: [], generation: [{ name: "hypothesis_template", type: "string", default: "This is a photo of {}", description: "English template containing one {} placeholder." }] },

@@ -1,0 +1,29 @@
+{
+  "passed": true,
+  "configuration": {
+    "precision": "q4",
+    "device": "webgpu"
+  },
+  "manifestDiscovered": true,
+  "downloadProgressEvents": 567,
+  "cache": {
+    "cold": false,
+    "downloaded": true,
+    "reinitialization": true,
+    "deleted": true,
+    "otherModelPreserved": true
+  },
+  "invalidInputRejected": true,
+  "unsupportedStreamingRejected": true,
+  "clearMemoryVerified": true,
+  "runtime": {
+    "durationMs": 138.60000002384186
+  },
+  "nativeOutput": {
+    "width": 1024,
+    "height": 683,
+    "personCount": 1,
+    "topPersonScore": 0.8565835356712341,
+    "visibleKeypoints": 13
+  }
+}

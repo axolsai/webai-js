@@ -46,7 +46,7 @@ const MANIFEST = {
   runtime: { engine: { name: "Transformers.js", version: "4.2.0" }, precisions: SUPPORTED },
   input: {
     description: "One non-empty query and one or more non-empty candidate passages.",
-    alternatives: [{ name: "query and documents", description: "Scores every document against the same query.", fields: [{ name: "query", type: "string", required: true }, { name: "documents", type: "string[]", required: true }] }],
+    alternatives: [{ name: "query and documents", description: "Scores every document against the same query.", fields: [{ name: "query", type: "string", required: true, minLength: 1 }, { name: "documents", type: "string[]", required: true, minItems: 1, items: { type: "string", minLength: 1 } }] }],
   },
   config: {
     model: [{ name: "max_length", type: "integer", default: 512, minimum: 8, maximum: 512 }, { name: "top_k", type: "integer|null", default: null, minimum: 1 }, { name: "normalize_scores", type: "boolean", default: true }],

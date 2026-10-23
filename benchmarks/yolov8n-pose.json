@@ -1,0 +1,3363 @@
+{
+  "contractVersion": "1.0",
+  "model": {
+    "id": "yolov8n-pose",
+    "displayName": "YOLOv8 Nano Pose",
+    "provider": "Ultralytics",
+    "providerUrl": "https://www.ultralytics.com/",
+    "license": "AGPL-3.0-only",
+    "licenseUrl": "https://github.com/ultralytics/ultralytics/blob/main/LICENSE",
+    "lastUpdated": "2024-04-17T05:32:48.000Z",
+    "sourceRepository": "ultralytics/assets",
+    "sourceRevision": "v8.2.0",
+    "repository": "Xenova/yolov8n-pose",
+    "artifactRevision": "da4224085e2f6ce4c9ff9b670e28765194619db2",
+    "artifactLastUpdated": "2025-08-18T15:41:44.000Z",
+    "task": "pose-estimation",
+    "description": "The nano YOLOv8 pose model converted to ONNX for browser-local inference. It detects people and returns bounding boxes plus 17 COCO-style body keypoints per detection.",
+    "intendedUses": [
+      "Interactive, user-reviewed human-pose overlays in browser applications.",
+      "Fitness, animation, and accessibility prototypes where approximate 2D landmarks are sufficient.",
+      "Benchmarking browser pose estimation across ONNX precisions."
+    ],
+    "limitations": [
+      "Small, occluded, blurred, crowded, rotated, or partially visible people can be missed or assigned incorrect landmarks.",
+      "Two-dimensional keypoints do not establish depth, identity, intent, health, or biomechanical safety.",
+      "Accuracy can vary across body types, clothing, skin tones, camera viewpoints, lighting, and activities represented unevenly in training data.",
+      "Do not use outputs for biometric identification, surveillance, medical diagnosis, employment, law enforcement, or other consequential decisions."
+    ]
+  },
+  "runtime": {
+    "engine": {
+      "name": "Transformers.js",
+      "version": "4.2.0"
+    },
+    "precisions": {
+      "fp32": {
+        "weightsSize": 13484153,
+        "size": 13485224,
+        "modelKeys": [
+          "model.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "fp16": {
+        "weightsSize": 6789736,
+        "size": 6790807,
+        "modelKeys": [
+          "model_fp16.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "int8": {
+        "weightsSize": 3755740,
+        "size": 3756811,
+        "modelKeys": [
+          "model_int8.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "uint8": {
+        "weightsSize": 3755780,
+        "size": 3756851,
+        "modelKeys": [
+          "model_uint8.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q8": {
+        "weightsSize": 3755780,
+        "size": 3756851,
+        "modelKeys": [
+          "model_quantized.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4": {
+        "weightsSize": 13484172,
+        "size": 13485243,
+        "modelKeys": [
+          "model_q4.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "bnb4": {
+        "weightsSize": 13484172,
+        "size": 13485243,
+        "modelKeys": [
+          "model_bnb4.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      }
+    }
+  },
+  "benchmark": {
+    "report": "benchmarks/yolov8n-pose.json",
+    "testedAt": "2026-10-23T13:09:50.699Z",
+    "fixture": {
+      "file": "modnet-portrait-pexels-5965592.jpg",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+      "size": 78124,
+      "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818",
+      "width": 1024,
+      "height": 683,
+      "source": "https://www.pexels.com/photo/woman-wearing-pink-turtleneck-sweater-5965592/",
+      "license": "Pexels License",
+      "licenseUrl": "https://www.pexels.com/license/",
+      "preprocessing": "Decode RGB, resize directly to 640×640, rescale pixels by 1/255.",
+      "expected": {
+        "file": "yolov8n-pose.json",
+        "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/yolov8n-pose.json",
+        "size": 1901,
+        "sha1": "91cac63bf855b61c269ac362e4c93ae5df5c8e45",
+        "description": "FP32/WASM normalized top-person box, confidence, and 17-keypoint signature."
+      }
+    },
+    "candidates": {
+      "fp32": {
+        "weightsSize": 13484153,
+        "size": 13485224,
+        "modelKeys": [
+          "model.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "fp16": {
+        "weightsSize": 6789736,
+        "size": 6790807,
+        "modelKeys": [
+          "model_fp16.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "int8": {
+        "weightsSize": 3755740,
+        "size": 3756811,
+        "modelKeys": [
+          "model_int8.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "uint8": {
+        "weightsSize": 3755780,
+        "size": 3756851,
+        "modelKeys": [
+          "model_uint8.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q8": {
+        "weightsSize": 3755780,
+        "size": 3756851,
+        "modelKeys": [
+          "model_quantized.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4": {
+        "weightsSize": 13484172,
+        "size": 13485243,
+        "modelKeys": [
+          "model_q4.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "bnb4": {
+        "weightsSize": 13484172,
+        "size": 13485243,
+        "modelKeys": [
+          "model_bnb4.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      }
+    },
+    "qualityGate": "At least one finite person pose with a confidence of 0.5 or greater, at least five visible keypoints, valid source-image coordinates, and a normalized pose signature within 0.08 mean absolute error of the checked-in FP32/WASM reference.",
+    "environment": "Isolated headless Google Chrome on macOS; Transformers.js 4.2.0",
+    "invalidatedBy": [
+      "artifact revision change",
+      "runtime version change",
+      "fixture or quality-gate change",
+      "browser/backend behavior change"
+    ],
+    "results": [
+      {
+        "precision": "fp32",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 2838.600000023842,
+          "inferenceMs": 275.3000000715256,
+          "totalMs": 3208.899999976158,
+          "grade": "good",
+          "imagesPerSecond": 3.632401016128552
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 3
+        },
+        "quality": {
+          "finite": true,
+          "validCoordinates": true,
+          "personCount": 1,
+          "topPersonScore": 0.8565833568572998,
+          "visibleKeypoints": 13,
+          "signatureMeanAbsoluteError": 0,
+          "maximumSignatureMeanAbsoluteError": 0.08,
+          "signature": [
+            0.24768731594085697,
+            0.08357219696044918,
+            0.6562162637710571,
+            1,
+            0.8565833568572998,
+            0.45265202522277836,
+            0.25551228523254393,
+            0.995742917060852,
+            0.4757478713989258,
+            0.22167277336120605,
+            0.9728751182556152,
+            0.4181562900543213,
+            0.2247836112976074,
+            0.9877252578735352,
+            0.5065527439117432,
+            0.24935102462768555,
+            0.5888579487800598,
+            0.3758644819259644,
+            0.25843641757965086,
+            0.8775671720504761,
+            0.559018087387085,
+            0.4931444644927978,
+            0.98572838306427,
+            0.33629443645477297,
+            0.4929936408996582,
+            0.9911119937896729,
+            0.6000380992889405,
+            0.7561989307403564,
+            0.8165667057037354,
+            0.35554161071777346,
+            0.7676851272583008,
+            0.917667031288147,
+            0.6121465682983399,
+            0.7447871208190918,
+            0.8478214144706726,
+            0.5209981918334962,
+            0.7807057857513428,
+            0.918401837348938,
+            0.5303556442260743,
+            0.9381103515625,
+            0.4559326469898224,
+            0.3917432308197022,
+            0.9421658515930176,
+            0.5382130146026611,
+            0.5180266857147217,
+            0.9731035232543945,
+            0.014056682586669922,
+            0.43246178627014165,
+            0.9500435829162597,
+            0.0194871723651886,
+            0.5056438446044922,
+            1.0071640968322753,
+            0.0011985599994659424,
+            0.5188808917999268,
+            0.9444103240966797,
+            0.001418977975845337
+          ],
+          "grade": "excellent"
+        },
+        "nativeOutput": {
+          "persons": [
+            {
+              "score": 0.8565833568572998,
+              "box": {
+                "x1": 253.63181152343753,
+                "y1": 57.079810523986794,
+                "x2": 671.9654541015625,
+                "y2": 683
+              },
+              "keypoints": [
+                {
+                  "label": "nose",
+                  "x": 463.51567382812505,
+                  "y": 174.51489081382752,
+                  "score": 0.995742917060852,
+                  "visible": true
+                },
+                {
+                  "label": "left_eye",
+                  "x": 487.16582031250005,
+                  "y": 151.40250420570374,
+                  "score": 0.9728751182556152,
+                  "visible": true
+                },
+                {
+                  "label": "right_eye",
+                  "x": 428.192041015625,
+                  "y": 153.52720651626586,
+                  "score": 0.9877252578735352,
+                  "visible": true
+                },
+                {
+                  "label": "left_ear",
+                  "x": 518.710009765625,
+                  "y": 170.30674982070923,
+                  "score": 0.5888579487800598,
+                  "visible": true
+                },
+                {
+                  "label": "right_ear",
+                  "x": 384.88522949218753,
+                  "y": 176.51207320690153,
+                  "score": 0.8775671720504761,
+                  "visible": true
+                },
+                {
+                  "label": "left_shoulder",
+                  "x": 572.4345214843751,
+                  "y": 336.8176692485809,
+                  "score": 0.98572838306427,
+                  "visible": true
+                },
+                {
+                  "label": "right_shoulder",
+                  "x": 344.3655029296875,
+                  "y": 336.71465673446653,
+                  "score": 0.9911119937896729,
+                  "visible": true
+                },
+                {
+                  "label": "left_elbow",
+                  "x": 614.439013671875,
+                  "y": 516.4838696956634,
+                  "score": 0.8165667057037354,
+                  "visible": true
+                },
+                {
+                  "label": "right_elbow",
+                  "x": 364.074609375,
+                  "y": 524.3289419174195,
+                  "score": 0.917667031288147,
+                  "visible": true
+                },
+                {
+                  "label": "left_wrist",
+                  "x": 626.8380859375001,
+                  "y": 508.6896035194397,
+                  "score": 0.8478214144706726,
+                  "visible": true
+                },
+                {
+                  "label": "right_wrist",
+                  "x": 533.5021484375001,
+                  "y": 533.2220516681671,
+                  "score": 0.918401837348938,
+                  "visible": true
+                },
+                {
+                  "label": "left_hip",
+                  "x": 543.0841796875001,
+                  "y": 640.7293701171875,
+                  "score": 0.4559326469898224,
+                  "visible": true
+                },
+                {
+                  "label": "right_hip",
+                  "x": 401.14506835937505,
+                  "y": 643.499276638031,
+                  "score": 0.5382130146026611,
+                  "visible": true
+                },
+                {
+                  "label": "left_knee",
+                  "x": 530.459326171875,
+                  "y": 664.6297063827515,
+                  "score": 0.014056682586669922,
+                  "visible": false
+                },
+                {
+                  "label": "right_knee",
+                  "x": 442.84086914062505,
+                  "y": 648.8797671318054,
+                  "score": 0.0194871723651886,
+                  "visible": false
+                },
+                {
+                  "label": "left_ankle",
+                  "x": 517.779296875,
+                  "y": 687.893078136444,
+                  "score": 0.0011985599994659424,
+                  "visible": false
+                },
+                {
+                  "label": "right_ankle",
+                  "x": 531.334033203125,
+                  "y": 645.0322513580322,
+                  "score": 0.001418977975845337,
+                  "visible": false
+                }
+              ]
+            }
+          ],
+          "width": 1024,
+          "height": 683
+        }
+      },
+      {
+        "precision": "fp32",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 2807,
+          "inferenceMs": 706,
+          "totalMs": 3607.7999999523163,
+          "grade": "slow",
+          "imagesPerSecond": 1.4164305949008498
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 3
+        },
+        "quality": {
+          "finite": true,
+          "validCoordinates": true,
+          "personCount": 1,
+          "topPersonScore": 0.8565835356712341,
+          "visibleKeypoints": 13,
+          "signatureMeanAbsoluteError": 1.2275912533101746E-7,
+          "maximumSignatureMeanAbsoluteError": 0.08,
+          "signature": [
+            0.24768729209899906,
+            0.08357229232788084,
+            0.6562162876129151,
+            1,
+            0.8565835356712341,
+            0.4526520729064942,
+            0.25551238059997555,
+            0.995742917060852,
+            0.47574796676635744,
+            0.22167286872863767,
+            0.9728751182556152,
+            0.4181562900543213,
+            0.2247838020324707,
+            0.9877251982688904,
+            0.506552791595459,
+            0.249351167678833,
+            0.5888575911521912,
+            0.37586450576782227,
+            0.25843660831451415,
+            0.8775674104690552,
+            0.5590181827545166,
+            0.49314460754394535,
+            0.9857283234596252,
+            0.3362944602966309,
+            0.4929938316345215,
+            0.9911120533943176,
+            0.6000380516052246,
+            0.756199073791504,
+            0.8165661096572876,
+            0.35554156303405765,
+            0.7676852226257324,
+            0.9176669120788574,
+            0.6121465682983399,
+            0.7447871685028076,
+            0.8478209376335144,
+            0.5209982395172119,
+            0.7807057380676269,
+            0.9184017181396484,
+            0.5303556442260743,
+            0.9381104469299316,
+            0.4559316635131836,
+            0.3917432308197022,
+            0.9421660423278809,
+            0.538212239742279,
+            0.5180266857147217,
+            0.9731035232543945,
+            0.014056621119379997,
+            0.43246183395385746,
+            0.9500436782836914,
+            0.019487103447318077,
+            0.5056438446044922,
+            1.007164192199707,
+            0.001198575715534389,
+            0.5188810348510743,
+            0.9444103240966797,
+            0.0014190127840265632
+          ],
+          "grade": "excellent"
+        },
+        "nativeOutput": {
+          "persons": [
+            {
+              "score": 0.8565835356712341,
+              "box": {
+                "x1": 253.63178710937504,
+                "y1": 57.079875659942616,
+                "x2": 671.965478515625,
+                "y2": 683
+              },
+              "keypoints": [
+                {
+                  "label": "nose",
+                  "x": 463.51572265625003,
+                  "y": 174.5149559497833,
+                  "score": 0.995742917060852,
+                  "visible": true
+                },
+                {
+                  "label": "left_eye",
+                  "x": 487.16591796875,
+                  "y": 151.40256934165953,
+                  "score": 0.9728751182556152,
+                  "visible": true
+                },
+                {
+                  "label": "right_eye",
+                  "x": 428.192041015625,
+                  "y": 153.52733678817748,
+                  "score": 0.9877251982688904,
+                  "visible": true
+                },
+                {
+                  "label": "left_ear",
+                  "x": 518.71005859375,
+                  "y": 170.30684752464293,
+                  "score": 0.5888575911521912,
+                  "visible": true
+                },
+                {
+                  "label": "right_ear",
+                  "x": 384.88525390625,
+                  "y": 176.51220347881318,
+                  "score": 0.8775674104690552,
+                  "visible": true
+                },
+                {
+                  "label": "left_shoulder",
+                  "x": 572.434619140625,
+                  "y": 336.81776695251466,
+                  "score": 0.9857283234596252,
+                  "visible": true
+                },
+                {
+                  "label": "right_shoulder",
+                  "x": 344.36552734375005,
+                  "y": 336.7147870063782,
+                  "score": 0.9911120533943176,
+                  "visible": true
+                },
+                {
+                  "label": "left_elbow",
+                  "x": 614.43896484375,
+                  "y": 516.4839673995972,
+                  "score": 0.8165661096572876,
+                  "visible": true
+                },
+                {
+                  "label": "right_elbow",
+                  "x": 364.07456054687503,
+                  "y": 524.3290070533752,
+                  "score": 0.9176669120788574,
+                  "visible": true
+                },
+                {
+                  "label": "left_wrist",
+                  "x": 626.8380859375001,
+                  "y": 508.68963608741757,
+                  "score": 0.8478209376335144,
+                  "visible": true
+                },
+                {
+                  "label": "right_wrist",
+                  "x": 533.502197265625,
+                  "y": 533.2220191001892,
+                  "score": 0.9184017181396484,
+                  "visible": true
+                },
+                {
+                  "label": "left_hip",
+                  "x": 543.0841796875001,
+                  "y": 640.7294352531433,
+                  "score": 0.4559316635131836,
+                  "visible": true
+                },
+                {
+                  "label": "right_hip",
+                  "x": 401.14506835937505,
+                  "y": 643.4994069099426,
+                  "score": 0.538212239742279,
+                  "visible": true
+                },
+                {
+                  "label": "left_knee",
+                  "x": 530.459326171875,
+                  "y": 664.6297063827515,
+                  "score": 0.014056621119379997,
+                  "visible": false
+                },
+                {
+                  "label": "right_knee",
+                  "x": 442.84091796875003,
+                  "y": 648.8798322677612,
+                  "score": 0.019487103447318077,
+                  "visible": false
+                },
+                {
+                  "label": "left_ankle",
+                  "x": 517.779296875,
+                  "y": 687.8931432723999,
+                  "score": 0.001198575715534389,
+                  "visible": false
+                },
+                {
+                  "label": "right_ankle",
+                  "x": 531.3341796875001,
+                  "y": 645.0322513580322,
+                  "score": 0.0014190127840265632,
+                  "visible": false
+                }
+              ]
+            }
+          ],
+          "width": 1024,
+          "height": 683
+        }
+      },
+      {
+        "precision": "fp16",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 2619.899999976158,
+          "inferenceMs": 298.5,
+          "totalMs": 3023.5,
+          "grade": "good",
+          "imagesPerSecond": 3.3500837520938025
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 3
+        },
+        "quality": {
+          "finite": true,
+          "validCoordinates": true,
+          "personCount": 1,
+          "topPersonScore": 0.85693359375,
+          "visibleKeypoints": 13,
+          "signatureMeanAbsoluteError": 0.00014057819332395118,
+          "maximumSignatureMeanAbsoluteError": 0.08,
+          "signature": [
+            0.24765625,
+            0.08359374999999998,
+            0.65625,
+            1,
+            0.85693359375,
+            0.452734375,
+            0.25546874999999997,
+            0.99560546875,
+            0.47578125000000004,
+            0.22148437499999998,
+            0.97314453125,
+            0.41796875,
+            0.224609375,
+            0.98779296875,
+            0.5066406250000001,
+            0.24921875000000002,
+            0.5888671875,
+            0.37578125,
+            0.25839843749999997,
+            0.8779296875,
+            0.558984375,
+            0.49296874999999996,
+            0.98583984375,
+            0.33632812500000003,
+            0.49296874999999996,
+            0.9912109375,
+            0.6000000000000001,
+            0.75625,
+            0.81640625,
+            0.35546875,
+            0.767578125,
+            0.91796875,
+            0.6121093750000001,
+            0.744921875,
+            0.84765625,
+            0.52109375,
+            0.7808593749999999,
+            0.91845703125,
+            0.53046875,
+            0.9382812500000001,
+            0.45654296875,
+            0.39179687500000004,
+            0.9421875000000001,
+            0.5390625,
+            0.51796875,
+            0.9734375000000001,
+            0.01406097412109375,
+            0.43203125000000003,
+            0.9500000000000001,
+            0.01953125,
+            0.50546875,
+            1.00703125,
+            0.0011968612670898438,
+            0.5183593750000001,
+            0.9445312499999999,
+            0.0014209747314453125
+          ],
+          "grade": "excellent"
+        },
+        "nativeOutput": {
+          "persons": [
+            {
+              "score": 0.85693359375,
+              "box": {
+                "x1": 253.6,
+                "y1": 57.09453124999999,
+                "x2": 672,
+                "y2": 683
+              },
+              "keypoints": [
+                {
+                  "label": "nose",
+                  "x": 463.6,
+                  "y": 174.48515625,
+                  "score": 0.99560546875,
+                  "visible": true
+                },
+                {
+                  "label": "left_eye",
+                  "x": 487.20000000000005,
+                  "y": 151.273828125,
+                  "score": 0.97314453125,
+                  "visible": true
+                },
+                {
+                  "label": "right_eye",
+                  "x": 428,
+                  "y": 153.408203125,
+                  "score": 0.98779296875,
+                  "visible": true
+                },
+                {
+                  "label": "left_ear",
+                  "x": 518.8000000000001,
+                  "y": 170.21640625,
+                  "score": 0.5888671875,
+                  "visible": true
+                },
+                {
+                  "label": "right_ear",
+                  "x": 384.8,
+                  "y": 176.4861328125,
+                  "score": 0.8779296875,
+                  "visible": true
+                },
+                {
+                  "label": "left_shoulder",
+                  "x": 572.4,
+                  "y": 336.69765624999997,
+                  "score": 0.98583984375,
+                  "visible": true
+                },
+                {
+                  "label": "right_shoulder",
+                  "x": 344.40000000000003,
+                  "y": 336.69765624999997,
+                  "score": 0.9912109375,
+                  "visible": true
+                },
+                {
+                  "label": "left_elbow",
+                  "x": 614.4000000000001,
+                  "y": 516.51875,
+                  "score": 0.81640625,
+                  "visible": true
+                },
+                {
+                  "label": "right_elbow",
+                  "x": 364,
+                  "y": 524.255859375,
+                  "score": 0.91796875,
+                  "visible": true
+                },
+                {
+                  "label": "left_wrist",
+                  "x": 626.8000000000001,
+                  "y": 508.78164062499997,
+                  "score": 0.84765625,
+                  "visible": true
+                },
+                {
+                  "label": "right_wrist",
+                  "x": 533.6,
+                  "y": 533.3269531249999,
+                  "score": 0.91845703125,
+                  "visible": true
+                },
+                {
+                  "label": "left_hip",
+                  "x": 543.2,
+                  "y": 640.84609375,
+                  "score": 0.45654296875,
+                  "visible": true
+                },
+                {
+                  "label": "right_hip",
+                  "x": 401.20000000000005,
+                  "y": 643.5140625,
+                  "score": 0.5390625,
+                  "visible": true
+                },
+                {
+                  "label": "left_knee",
+                  "x": 530.4,
+                  "y": 664.8578125,
+                  "score": 0.01406097412109375,
+                  "visible": false
+                },
+                {
+                  "label": "right_knee",
+                  "x": 442.40000000000003,
+                  "y": 648.85,
+                  "score": 0.01953125,
+                  "visible": false
+                },
+                {
+                  "label": "left_ankle",
+                  "x": 517.6,
+                  "y": 687.80234375,
+                  "score": 0.0011968612670898438,
+                  "visible": false
+                },
+                {
+                  "label": "right_ankle",
+                  "x": 530.8000000000001,
+                  "y": 645.11484375,
+                  "score": 0.0014209747314453125,
+                  "visible": false
+                }
+              ]
+            }
+          ],
+          "width": 1024,
+          "height": 683
+        }
+      },
+      {
+        "precision": "fp16",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 2632.2000000476837,
+          "inferenceMs": 729.5,
+          "totalMs": 3457,
+          "grade": "slow",
+          "imagesPerSecond": 1.3708019191226868
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 3
+        },
+        "quality": {
+          "finite": true,
+          "validCoordinates": true,
+          "personCount": 1,
+          "topPersonScore": 0.857421875,
+          "visibleKeypoints": 13,
+          "signatureMeanAbsoluteError": 0.0009486113275800521,
+          "maximumSignatureMeanAbsoluteError": 0.08,
+          "signature": [
+            0.24726562500000002,
+            0.08437500000000002,
+            0.655859375,
+            1,
+            0.857421875,
+            0.45351562500000003,
+            0.256640625,
+            0.9951171875,
+            0.4765625,
+            0.22304687499999998,
+            0.9716796875,
+            0.41953125,
+            0.22578125000000002,
+            0.9873046875,
+            0.50703125,
+            0.25078125,
+            0.5810546875,
+            0.37714843750000004,
+            0.259765625,
+            0.875,
+            0.558984375,
+            0.493359375,
+            0.9853515625,
+            0.3376953125,
+            0.49257812500000003,
+            0.9912109375,
+            0.59921875,
+            0.7570312499999999,
+            0.81787109375,
+            0.35664062500000004,
+            0.7671874999999999,
+            0.91845703125,
+            0.6117187500000001,
+            0.74453125,
+            0.84765625,
+            0.5203125000000001,
+            0.78125,
+            0.91845703125,
+            0.5300781250000001,
+            0.9382812500000001,
+            0.46044921875,
+            0.3921875,
+            0.9421875000000001,
+            0.54296875,
+            0.5183593750000001,
+            0.9742187499999999,
+            0.01422119140625,
+            0.43359375,
+            0.9515625,
+            0.0196075439453125,
+            0.50625,
+            1.0078125,
+            0.001201629638671875,
+            0.519921875,
+            0.9445312499999999,
+            0.00142669677734375
+          ],
+          "grade": "excellent"
+        },
+        "nativeOutput": {
+          "persons": [
+            {
+              "score": 0.857421875,
+              "box": {
+                "x1": 253.20000000000002,
+                "y1": 57.62812500000001,
+                "x2": 671.6,
+                "y2": 683
+              },
+              "keypoints": [
+                {
+                  "label": "nose",
+                  "x": 464.40000000000003,
+                  "y": 175.285546875,
+                  "score": 0.9951171875,
+                  "visible": true
+                },
+                {
+                  "label": "left_eye",
+                  "x": 488,
+                  "y": 152.34101562499998,
+                  "score": 0.9716796875,
+                  "visible": true
+                },
+                {
+                  "label": "right_eye",
+                  "x": 429.6,
+                  "y": 154.20859375,
+                  "score": 0.9873046875,
+                  "visible": true
+                },
+                {
+                  "label": "left_ear",
+                  "x": 519.2,
+                  "y": 171.28359375,
+                  "score": 0.5810546875,
+                  "visible": true
+                },
+                {
+                  "label": "right_ear",
+                  "x": 386.20000000000005,
+                  "y": 177.419921875,
+                  "score": 0.875,
+                  "visible": true
+                },
+                {
+                  "label": "left_shoulder",
+                  "x": 572.4,
+                  "y": 336.964453125,
+                  "score": 0.9853515625,
+                  "visible": true
+                },
+                {
+                  "label": "right_shoulder",
+                  "x": 345.8,
+                  "y": 336.430859375,
+                  "score": 0.9912109375,
+                  "visible": true
+                },
+                {
+                  "label": "left_elbow",
+                  "x": 613.6,
+                  "y": 517.05234375,
+                  "score": 0.81787109375,
+                  "visible": true
+                },
+                {
+                  "label": "right_elbow",
+                  "x": 365.20000000000005,
+                  "y": 523.9890624999999,
+                  "score": 0.91845703125,
+                  "visible": true
+                },
+                {
+                  "label": "left_wrist",
+                  "x": 626.4000000000001,
+                  "y": 508.51484374999995,
+                  "score": 0.84765625,
+                  "visible": true
+                },
+                {
+                  "label": "right_wrist",
+                  "x": 532.8000000000001,
+                  "y": 533.59375,
+                  "score": 0.91845703125,
+                  "visible": true
+                },
+                {
+                  "label": "left_hip",
+                  "x": 542.8000000000001,
+                  "y": 640.84609375,
+                  "score": 0.46044921875,
+                  "visible": true
+                },
+                {
+                  "label": "right_hip",
+                  "x": 401.6,
+                  "y": 643.5140625,
+                  "score": 0.54296875,
+                  "visible": true
+                },
+                {
+                  "label": "left_knee",
+                  "x": 530.8000000000001,
+                  "y": 665.3914062499999,
+                  "score": 0.01422119140625,
+                  "visible": false
+                },
+                {
+                  "label": "right_knee",
+                  "x": 444,
+                  "y": 649.9171875,
+                  "score": 0.0196075439453125,
+                  "visible": false
+                },
+                {
+                  "label": "left_ankle",
+                  "x": 518.4,
+                  "y": 688.3359375,
+                  "score": 0.001201629638671875,
+                  "visible": false
+                },
+                {
+                  "label": "right_ankle",
+                  "x": 532.4,
+                  "y": 645.11484375,
+                  "score": 0.00142669677734375,
+                  "visible": false
+                }
+              ]
+            }
+          ],
+          "width": 1024,
+          "height": 683
+        }
+      },
+      {
+        "precision": "int8",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 2615.1999999284744,
+          "inferenceMs": 733.5,
+          "totalMs": 3485.399999976158,
+          "grade": "slow",
+          "imagesPerSecond": 1.3633265167007498
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 3
+        },
+        "quality": {
+          "finite": true,
+          "validCoordinates": true,
+          "personCount": 1,
+          "topPersonScore": 0.8684908151626587,
+          "visibleKeypoints": 13,
+          "signatureMeanAbsoluteError": 0.011017516468252456,
+          "maximumSignatureMeanAbsoluteError": 0.08,
+          "signature": [
+            0.2532859802246094,
+            0.07992887496948242,
+            0.6551103591918945,
+            0.9986077308654785,
+            0.8684908151626587,
+            0.45093898773193364,
+            0.25199477672576903,
+            0.9955787062644958,
+            0.4720918655395508,
+            0.2159682273864746,
+            0.9676360487937927,
+            0.41690750122070314,
+            0.22151689529418947,
+            0.9859257340431213,
+            0.4979726791381836,
+            0.2383496284484863,
+            0.5366458892822266,
+            0.3693912744522095,
+            0.2555781126022339,
+            0.8678977489471436,
+            0.5514537811279298,
+            0.49190406799316405,
+            0.9881576895713806,
+            0.3390102863311768,
+            0.4917530059814453,
+            0.9917417764663696,
+            0.6085113525390625,
+            0.7490428924560547,
+            0.85932856798172,
+            0.3477858066558838,
+            0.7501945495605469,
+            0.923629879951477,
+            0.6115732192993164,
+            0.7502464294433593,
+            0.8857666254043579,
+            0.4936532974243164,
+            0.7917455673217773,
+            0.9295766353607178,
+            0.529026222229004,
+            0.9309139251708984,
+            0.5547013282775879,
+            0.38874781131744385,
+            0.9385097503662109,
+            0.6194303631782532,
+            0.4965343475341797,
+            0.9774478912353515,
+            0.019294053316116333,
+            0.4225214004516602,
+            0.961746597290039,
+            0.024204522371292114,
+            0.5153381347656251,
+            1.0000146865844726,
+            0.0015308856964111328,
+            0.5199457168579101,
+            0.9382738113403319,
+            0.0017148256301879883
+          ],
+          "grade": "good"
+        },
+        "nativeOutput": {
+          "persons": [
+            {
+              "score": 0.8684908151626587,
+              "box": {
+                "x1": 259.36484375000003,
+                "y1": 54.591421604156494,
+                "x2": 670.8330078125,
+                "y2": 682.0490801811218
+              },
+              "keypoints": [
+                {
+                  "label": "nose",
+                  "x": 461.76152343750005,
+                  "y": 172.11243250370026,
+                  "score": 0.9955787062644958,
+                  "visible": true
+                },
+                {
+                  "label": "left_eye",
+                  "x": 483.4220703125,
+                  "y": 147.50629930496214,
+                  "score": 0.9676360487937927,
+                  "visible": true
+                },
+                {
+                  "label": "right_eye",
+                  "x": 426.91328125,
+                  "y": 151.2960394859314,
+                  "score": 0.9859257340431213,
+                  "visible": true
+                },
+                {
+                  "label": "left_ear",
+                  "x": 509.9240234375,
+                  "y": 162.79279623031616,
+                  "score": 0.5366458892822266,
+                  "visible": true
+                },
+                {
+                  "label": "right_ear",
+                  "x": 378.2566650390625,
+                  "y": 174.55985090732574,
+                  "score": 0.8678977489471436,
+                  "visible": true
+                },
+                {
+                  "label": "left_shoulder",
+                  "x": 564.6886718750001,
+                  "y": 335.97047843933103,
+                  "score": 0.9881576895713806,
+                  "visible": true
+                },
+                {
+                  "label": "right_shoulder",
+                  "x": 347.14653320312505,
+                  "y": 335.86730308532714,
+                  "score": 0.9917417764663696,
+                  "visible": true
+                },
+                {
+                  "label": "left_elbow",
+                  "x": 623.115625,
+                  "y": 511.59629554748534,
+                  "score": 0.85932856798172,
+                  "visible": true
+                },
+                {
+                  "label": "right_elbow",
+                  "x": 356.13266601562503,
+                  "y": 512.3828773498535,
+                  "score": 0.923629879951477,
+                  "visible": true
+                },
+                {
+                  "label": "left_wrist",
+                  "x": 626.2509765625,
+                  "y": 512.4183113098144,
+                  "score": 0.8857666254043579,
+                  "visible": true
+                },
+                {
+                  "label": "right_wrist",
+                  "x": 505.5009765625,
+                  "y": 540.7622224807739,
+                  "score": 0.9295766353607178,
+                  "visible": true
+                },
+                {
+                  "label": "left_hip",
+                  "x": 541.7228515625001,
+                  "y": 635.8142108917236,
+                  "score": 0.5547013282775879,
+                  "visible": true
+                },
+                {
+                  "label": "right_hip",
+                  "x": 398.0777587890625,
+                  "y": 641.002159500122,
+                  "score": 0.6194303631782532,
+                  "visible": true
+                },
+                {
+                  "label": "left_knee",
+                  "x": 508.451171875,
+                  "y": 667.596909713745,
+                  "score": 0.019294053316116333,
+                  "visible": false
+                },
+                {
+                  "label": "right_knee",
+                  "x": 432.66191406250005,
+                  "y": 656.8729259490966,
+                  "score": 0.024204522371292114,
+                  "visible": false
+                },
+                {
+                  "label": "left_ankle",
+                  "x": 527.7062500000001,
+                  "y": 683.0100309371948,
+                  "score": 0.0015308856964111328,
+                  "visible": false
+                },
+                {
+                  "label": "right_ankle",
+                  "x": 532.4244140625,
+                  "y": 640.8410131454467,
+                  "score": 0.0017148256301879883,
+                  "visible": false
+                }
+              ]
+            }
+          ],
+          "width": 1024,
+          "height": 683
+        }
+      },
+      {
+        "precision": "int8",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 2685.399999976158,
+          "inferenceMs": 1025.6000000238419,
+          "totalMs": 3807.100000023842,
+          "grade": "very-slow",
+          "imagesPerSecond": 0.975039001537396
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 3
+        },
+        "quality": {
+          "finite": true,
+          "validCoordinates": true,
+          "personCount": 1,
+          "topPersonScore": 0.8723109364509583,
+          "visibleKeypoints": 13,
+          "signatureMeanAbsoluteError": 0.011645760467425659,
+          "maximumSignatureMeanAbsoluteError": 0.08,
+          "signature": [
+            0.25715885162353513,
+            0.08144025802612309,
+            0.6551763534545899,
+            0.9984969139099121,
+            0.8723109364509583,
+            0.4510509490966797,
+            0.25275135040283203,
+            0.9953408241271973,
+            0.47228426933288575,
+            0.21669960021972656,
+            0.9659170508384705,
+            0.4173920154571533,
+            0.22203502655029295,
+            0.9851173162460327,
+            0.4979873180389405,
+            0.23901538848876955,
+            0.5277061462402344,
+            0.37014021873474123,
+            0.25569839477539064,
+            0.8621759414672852,
+            0.5510998725891113,
+            0.49270834922790524,
+            0.9876432418823242,
+            0.3387798309326172,
+            0.4925154685974121,
+            0.9913135170936584,
+            0.6078083038330079,
+            0.7479748725891113,
+            0.8605068325996399,
+            0.34826672077178955,
+            0.7495549201965331,
+            0.9233766198158264,
+            0.6112046241760254,
+            0.7497017860412597,
+            0.8874467611312866,
+            0.49157285690307617,
+            0.7924470901489258,
+            0.9298304915428162,
+            0.5284136772155762,
+            0.9302089691162109,
+            0.556941032409668,
+            0.3877015829086304,
+            0.9377494812011719,
+            0.6203182935714722,
+            0.5001121044158936,
+            0.9770557403564454,
+            0.019377123564481735,
+            0.42002758979797367,
+            0.9608563423156737,
+            0.02419281005859375,
+            0.5217354774475098,
+            0.9999402999877929,
+            0.0015319930389523506,
+            0.5156989097595215,
+            0.9385470390319823,
+            0.0017117863753810525
+          ],
+          "grade": "good"
+        },
+        "nativeOutput": {
+          "persons": [
+            {
+              "score": 0.8723109364509583,
+              "box": {
+                "x1": 263.3306640625,
+                "y1": 55.623696231842075,
+                "x2": 670.9005859375001,
+                "y2": 681.97339220047
+              },
+              "keypoints": [
+                {
+                  "label": "nose",
+                  "x": 461.876171875,
+                  "y": 172.62917232513428,
+                  "score": 0.9953408241271973,
+                  "visible": true
+                },
+                {
+                  "label": "left_eye",
+                  "x": 483.619091796875,
+                  "y": 148.00582695007324,
+                  "score": 0.9659170508384705,
+                  "visible": true
+                },
+                {
+                  "label": "right_eye",
+                  "x": 427.409423828125,
+                  "y": 151.64992313385008,
+                  "score": 0.9851173162460327,
+                  "visible": true
+                },
+                {
+                  "label": "left_ear",
+                  "x": 509.93901367187505,
+                  "y": 163.2475103378296,
+                  "score": 0.5277061462402344,
+                  "visible": true
+                },
+                {
+                  "label": "right_ear",
+                  "x": 379.023583984375,
+                  "y": 174.6420036315918,
+                  "score": 0.8621759414672852,
+                  "visible": true
+                },
+                {
+                  "label": "left_shoulder",
+                  "x": 564.32626953125,
+                  "y": 336.5198025226593,
+                  "score": 0.9876432418823242,
+                  "visible": true
+                },
+                {
+                  "label": "right_shoulder",
+                  "x": 346.910546875,
+                  "y": 336.38806505203246,
+                  "score": 0.9913135170936584,
+                  "visible": true
+                },
+                {
+                  "label": "left_elbow",
+                  "x": 622.3957031250001,
+                  "y": 510.86683797836304,
+                  "score": 0.8605068325996399,
+                  "visible": true
+                },
+                {
+                  "label": "right_elbow",
+                  "x": 356.6251220703125,
+                  "y": 511.94601049423215,
+                  "score": 0.9233766198158264,
+                  "visible": true
+                },
+                {
+                  "label": "left_wrist",
+                  "x": 625.87353515625,
+                  "y": 512.0463198661804,
+                  "score": 0.8874467611312866,
+                  "visible": true
+                },
+                {
+                  "label": "right_wrist",
+                  "x": 503.37060546875,
+                  "y": 541.2413625717163,
+                  "score": 0.9298304915428162,
+                  "visible": true
+                },
+                {
+                  "label": "left_hip",
+                  "x": 541.09560546875,
+                  "y": 635.332725906372,
+                  "score": 0.556941032409668,
+                  "visible": true
+                },
+                {
+                  "label": "right_hip",
+                  "x": 397.0064208984375,
+                  "y": 640.4828956604003,
+                  "score": 0.6203182935714722,
+                  "visible": true
+                },
+                {
+                  "label": "left_knee",
+                  "x": 512.114794921875,
+                  "y": 667.3290706634522,
+                  "score": 0.019377123564481735,
+                  "visible": false
+                },
+                {
+                  "label": "right_knee",
+                  "x": 430.10825195312503,
+                  "y": 656.2648818016052,
+                  "score": 0.02419281005859375,
+                  "visible": false
+                },
+                {
+                  "label": "left_ankle",
+                  "x": 534.25712890625,
+                  "y": 682.9592248916625,
+                  "score": 0.0015319930389523506,
+                  "visible": false
+                },
+                {
+                  "label": "right_ankle",
+                  "x": 528.07568359375,
+                  "y": 641.0276276588439,
+                  "score": 0.0017117863753810525,
+                  "visible": false
+                }
+              ]
+            }
+          ],
+          "width": 1024,
+          "height": 683
+        }
+      },
+      {
+        "precision": "uint8",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 2583.399999976158,
+          "inferenceMs": 310.3000000715256,
+          "totalMs": 2998.600000023842,
+          "grade": "good",
+          "imagesPerSecond": 3.2226877208169364
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 3
+        },
+        "quality": {
+          "finite": true,
+          "validCoordinates": true,
+          "personCount": 1,
+          "topPersonScore": 0.6192495822906494,
+          "visibleKeypoints": 13,
+          "signatureMeanAbsoluteError": 0.01529609486460686,
+          "maximumSignatureMeanAbsoluteError": 0.08,
+          "signature": [
+            0.2534513473510742,
+            0.07717647552490232,
+            0.6590949058532716,
+            1,
+            0.6192495822906494,
+            0.4507026672363281,
+            0.24515738487243652,
+            0.9943447709083557,
+            0.47602524757385256,
+            0.21234660148620607,
+            0.9708620309829712,
+            0.41586103439331057,
+            0.21911678314208982,
+            0.9843053221702576,
+            0.5162749290466309,
+            0.2461139678955078,
+            0.7252458333969116,
+            0.3763389348983765,
+            0.25914440155029295,
+            0.8699902296066284,
+            0.5822110176086426,
+            0.5099129676818848,
+            0.98399817943573,
+            0.3383441686630249,
+            0.5096040725708008,
+            0.9933549761772156,
+            0.624462890625,
+            0.7586804389953613,
+            0.7749144434928894,
+            0.3486158847808838,
+            0.7642783164978026,
+            0.9212034344673157,
+            0.6269319534301758,
+            0.7428200721740722,
+            0.796436071395874,
+            0.5215296745300293,
+            0.7805314540863036,
+            0.9039159417152405,
+            0.5473217964172363,
+            0.9492418289184571,
+            0.42727184295654297,
+            0.4019036293029785,
+            0.9503549575805663,
+            0.5394895076751709,
+            0.5085415840148926,
+            0.990159797668457,
+            0.012201160192489624,
+            0.4308643817901612,
+            0.9561372756958008,
+            0.018124759197235107,
+            0.5216310977935791,
+            1.0147659301757812,
+            0.0008677840232849121,
+            0.5604528427124024,
+            0.9429195404052734,
+            0.0011866092681884766
+          ],
+          "grade": "good"
+        },
+        "nativeOutput": {
+          "persons": [
+            {
+              "score": 0.6192495822906494,
+              "box": {
+                "x1": 259.5341796875,
+                "y1": 52.71153278350829,
+                "x2": 674.9131835937501,
+                "y2": 683
+              },
+              "keypoints": [
+                {
+                  "label": "nose",
+                  "x": 461.51953125,
+                  "y": 167.44249386787413,
+                  "score": 0.9943447709083557,
+                  "visible": true
+                },
+                {
+                  "label": "left_eye",
+                  "x": 487.449853515625,
+                  "y": 145.03272881507874,
+                  "score": 0.9708620309829712,
+                  "visible": true
+                },
+                {
+                  "label": "right_eye",
+                  "x": 425.84169921875,
+                  "y": 149.65676288604735,
+                  "score": 0.9843053221702576,
+                  "visible": true
+                },
+                {
+                  "label": "left_ear",
+                  "x": 528.66552734375,
+                  "y": 168.09584007263183,
+                  "score": 0.7252458333969116,
+                  "visible": true
+                },
+                {
+                  "label": "right_ear",
+                  "x": 385.37106933593753,
+                  "y": 176.99562625885008,
+                  "score": 0.8699902296066284,
+                  "visible": true
+                },
+                {
+                  "label": "left_shoulder",
+                  "x": 596.18408203125,
+                  "y": 348.2705569267273,
+                  "score": 0.98399817943573,
+                  "visible": true
+                },
+                {
+                  "label": "right_shoulder",
+                  "x": 346.4644287109375,
+                  "y": 348.05958156585694,
+                  "score": 0.9933549761772156,
+                  "visible": true
+                },
+                {
+                  "label": "left_elbow",
+                  "x": 639.45,
+                  "y": 518.1787398338317,
+                  "score": 0.7749144434928894,
+                  "visible": true
+                },
+                {
+                  "label": "right_elbow",
+                  "x": 356.982666015625,
+                  "y": 522.0020901679992,
+                  "score": 0.9212034344673157,
+                  "visible": true
+                },
+                {
+                  "label": "left_wrist",
+                  "x": 641.9783203125,
+                  "y": 507.34610929489133,
+                  "score": 0.796436071395874,
+                  "visible": true
+                },
+                {
+                  "label": "right_wrist",
+                  "x": 534.04638671875,
+                  "y": 533.1029831409454,
+                  "score": 0.9039159417152405,
+                  "visible": true
+                },
+                {
+                  "label": "left_hip",
+                  "x": 560.45751953125,
+                  "y": 648.3321691513062,
+                  "score": 0.42727184295654297,
+                  "visible": true
+                },
+                {
+                  "label": "right_hip",
+                  "x": 411.54931640625,
+                  "y": 649.0924360275268,
+                  "score": 0.5394895076751709,
+                  "visible": true
+                },
+                {
+                  "label": "left_knee",
+                  "x": 520.74658203125,
+                  "y": 676.2791418075561,
+                  "score": 0.012201160192489624,
+                  "visible": false
+                },
+                {
+                  "label": "right_knee",
+                  "x": 441.20512695312505,
+                  "y": 653.0417593002319,
+                  "score": 0.018124759197235107,
+                  "visible": false
+                },
+                {
+                  "label": "left_ankle",
+                  "x": 534.150244140625,
+                  "y": 693.0851303100586,
+                  "score": 0.0008677840232849121,
+                  "visible": false
+                },
+                {
+                  "label": "right_ankle",
+                  "x": 573.9037109375,
+                  "y": 644.0140460968017,
+                  "score": 0.0011866092681884766,
+                  "visible": false
+                }
+              ]
+            }
+          ],
+          "width": 1024,
+          "height": 683
+        }
+      },
+      {
+        "precision": "uint8",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 8897.700000047684,
+          "inferenceMs": 392.39999997615814,
+          "totalMs": 9442,
+          "grade": "slow",
+          "imagesPerSecond": 2.5484199797674796
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 3
+        },
+        "quality": {
+          "finite": true,
+          "validCoordinates": true,
+          "personCount": 1,
+          "topPersonScore": 0.6333800554275513,
+          "visibleKeypoints": 13,
+          "signatureMeanAbsoluteError": 0.019260779258079962,
+          "maximumSignatureMeanAbsoluteError": 0.08,
+          "signature": [
+            0.23792178630828859,
+            0.08282613754272461,
+            0.6592084169387817,
+            0.9981787681579589,
+            0.6333800554275513,
+            0.44979605674743656,
+            0.2463369369506836,
+            0.9957542419433594,
+            0.47237606048583985,
+            0.2118133544921875,
+            0.9826192855834961,
+            0.41379957199096684,
+            0.21949596405029295,
+            0.9865069389343262,
+            0.5096796989440918,
+            0.2404438018798828,
+            0.8041055798530579,
+            0.375917911529541,
+            0.2588180541992187,
+            0.8303349018096924,
+            0.5790919303894043,
+            0.4934165000915527,
+            0.9843099117279053,
+            0.34371156692504884,
+            0.4986993789672851,
+            0.9915381669998169,
+            0.6336634159088135,
+            0.7581466674804687,
+            0.7983039617538452,
+            0.347761344909668,
+            0.7612509727478027,
+            0.8997159004211426,
+            0.6245526313781739,
+            0.7534597396850585,
+            0.7861261963844299,
+            0.5180433750152588,
+            0.7760654926300048,
+            0.8589972257614136,
+            0.5493360996246338,
+            0.9397369384765625,
+            0.4316164553165436,
+            0.3982496976852417,
+            0.9444150924682617,
+            0.5025358200073242,
+            0.5374512672424316,
+            0.9812485694885255,
+            0.008377796970307827,
+            0.41123237609863283,
+            0.9626370429992676,
+            0.010408462025225163,
+            0.55152006149292,
+            0.9987261772155761,
+            0.0006101094186306,
+            0.4926799297332764,
+            0.9452791213989258,
+            0.0007404218195006251
+          ],
+          "grade": "good"
+        },
+        "nativeOutput": {
+          "persons": [
+            {
+              "score": 0.6333800554275513,
+              "box": {
+                "x1": 243.6319091796875,
+                "y1": 56.57025194168091,
+                "x2": 675.0294189453125,
+                "y2": 681.756098651886
+              },
+              "keypoints": [
+                {
+                  "label": "nose",
+                  "x": 460.59116210937503,
+                  "y": 168.2481279373169,
+                  "score": 0.9957542419433594,
+                  "visible": true
+                },
+                {
+                  "label": "left_eye",
+                  "x": 483.7130859375,
+                  "y": 144.66852111816405,
+                  "score": 0.9826192855834961,
+                  "visible": true
+                },
+                {
+                  "label": "right_eye",
+                  "x": 423.73076171875005,
+                  "y": 149.9157434463501,
+                  "score": 0.9865069389343262,
+                  "visible": true
+                },
+                {
+                  "label": "left_ear",
+                  "x": 521.91201171875,
+                  "y": 164.22311668395994,
+                  "score": 0.8041055798530579,
+                  "visible": true
+                },
+                {
+                  "label": "right_ear",
+                  "x": 384.93994140625,
+                  "y": 176.7727310180664,
+                  "score": 0.8303349018096924,
+                  "visible": true
+                },
+                {
+                  "label": "left_shoulder",
+                  "x": 592.99013671875,
+                  "y": 337.0034695625305,
+                  "score": 0.9843099117279053,
+                  "visible": true
+                },
+                {
+                  "label": "right_shoulder",
+                  "x": 351.96064453125,
+                  "y": 340.6116758346557,
+                  "score": 0.9915381669998169,
+                  "visible": true
+                },
+                {
+                  "label": "left_elbow",
+                  "x": 648.871337890625,
+                  "y": 517.8141738891601,
+                  "score": 0.7983039617538452,
+                  "visible": true
+                },
+                {
+                  "label": "right_elbow",
+                  "x": 356.1076171875,
+                  "y": 519.9344143867493,
+                  "score": 0.8997159004211426,
+                  "visible": true
+                },
+                {
+                  "label": "left_wrist",
+                  "x": 639.54189453125,
+                  "y": 514.613002204895,
+                  "score": 0.7861261963844299,
+                  "visible": true
+                },
+                {
+                  "label": "right_wrist",
+                  "x": 530.476416015625,
+                  "y": 530.0527314662933,
+                  "score": 0.8589972257614136,
+                  "visible": true
+                },
+                {
+                  "label": "left_hip",
+                  "x": 562.520166015625,
+                  "y": 641.8403289794921,
+                  "score": 0.4316164553165436,
+                  "visible": true
+                },
+                {
+                  "label": "right_hip",
+                  "x": 407.8076904296875,
+                  "y": 645.0355081558228,
+                  "score": 0.5025358200073242,
+                  "visible": true
+                },
+                {
+                  "label": "left_knee",
+                  "x": 550.35009765625,
+                  "y": 670.1927729606629,
+                  "score": 0.008377796970307827,
+                  "visible": false
+                },
+                {
+                  "label": "right_knee",
+                  "x": 421.101953125,
+                  "y": 657.4811003684997,
+                  "score": 0.010408462025225163,
+                  "visible": false
+                },
+                {
+                  "label": "left_ankle",
+                  "x": 564.7565429687501,
+                  "y": 682.1299790382385,
+                  "score": 0.0006101094186306,
+                  "visible": false
+                },
+                {
+                  "label": "right_ankle",
+                  "x": 504.50424804687503,
+                  "y": 645.6256399154663,
+                  "score": 0.0007404218195006251,
+                  "visible": false
+                }
+              ]
+            }
+          ],
+          "width": 1024,
+          "height": 683
+        }
+      },
+      {
+        "precision": "q8",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 2761.7000000476837,
+          "inferenceMs": 297.2000000476837,
+          "totalMs": 3241.9000000953674,
+          "grade": "good",
+          "imagesPerSecond": 3.364737549931214
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 3
+        },
+        "quality": {
+          "finite": true,
+          "validCoordinates": true,
+          "personCount": 1,
+          "topPersonScore": 0.6192495822906494,
+          "visibleKeypoints": 13,
+          "signatureMeanAbsoluteError": 0.01529609486460686,
+          "maximumSignatureMeanAbsoluteError": 0.08,
+          "signature": [
+            0.2534513473510742,
+            0.07717647552490232,
+            0.6590949058532716,
+            1,
+            0.6192495822906494,
+            0.4507026672363281,
+            0.24515738487243652,
+            0.9943447709083557,
+            0.47602524757385256,
+            0.21234660148620607,
+            0.9708620309829712,
+            0.41586103439331057,
+            0.21911678314208982,
+            0.9843053221702576,
+            0.5162749290466309,
+            0.2461139678955078,
+            0.7252458333969116,
+            0.3763389348983765,
+            0.25914440155029295,
+            0.8699902296066284,
+            0.5822110176086426,
+            0.5099129676818848,
+            0.98399817943573,
+            0.3383441686630249,
+            0.5096040725708008,
+            0.9933549761772156,
+            0.624462890625,
+            0.7586804389953613,
+            0.7749144434928894,
+            0.3486158847808838,
+            0.7642783164978026,
+            0.9212034344673157,
+            0.6269319534301758,
+            0.7428200721740722,
+            0.796436071395874,
+            0.5215296745300293,
+            0.7805314540863036,
+            0.9039159417152405,
+            0.5473217964172363,
+            0.9492418289184571,
+            0.42727184295654297,
+            0.4019036293029785,
+            0.9503549575805663,
+            0.5394895076751709,
+            0.5085415840148926,
+            0.990159797668457,
+            0.012201160192489624,
+            0.4308643817901612,
+            0.9561372756958008,
+            0.018124759197235107,
+            0.5216310977935791,
+            1.0147659301757812,
+            0.0008677840232849121,
+            0.5604528427124024,
+            0.9429195404052734,
+            0.0011866092681884766
+          ],
+          "grade": "good"
+        },
+        "nativeOutput": {
+          "persons": [
+            {
+              "score": 0.6192495822906494,
+              "box": {
+                "x1": 259.5341796875,
+                "y1": 52.71153278350829,
+                "x2": 674.9131835937501,
+                "y2": 683
+              },
+              "keypoints": [
+                {
+                  "label": "nose",
+                  "x": 461.51953125,
+                  "y": 167.44249386787413,
+                  "score": 0.9943447709083557,
+                  "visible": true
+                },
+                {
+                  "label": "left_eye",
+                  "x": 487.449853515625,
+                  "y": 145.03272881507874,
+                  "score": 0.9708620309829712,
+                  "visible": true
+                },
+                {
+                  "label": "right_eye",
+                  "x": 425.84169921875,
+                  "y": 149.65676288604735,
+                  "score": 0.9843053221702576,
+                  "visible": true
+                },
+                {
+                  "label": "left_ear",
+                  "x": 528.66552734375,
+                  "y": 168.09584007263183,
+                  "score": 0.7252458333969116,
+                  "visible": true
+                },
+                {
+                  "label": "right_ear",
+                  "x": 385.37106933593753,
+                  "y": 176.99562625885008,
+                  "score": 0.8699902296066284,
+                  "visible": true
+                },
+                {
+                  "label": "left_shoulder",
+                  "x": 596.18408203125,
+                  "y": 348.2705569267273,
+                  "score": 0.98399817943573,
+                  "visible": true
+                },
+                {
+                  "label": "right_shoulder",
+                  "x": 346.4644287109375,
+                  "y": 348.05958156585694,
+                  "score": 0.9933549761772156,
+                  "visible": true
+                },
+                {
+                  "label": "left_elbow",
+                  "x": 639.45,
+                  "y": 518.1787398338317,
+                  "score": 0.7749144434928894,
+                  "visible": true
+                },
+                {
+                  "label": "right_elbow",
+                  "x": 356.982666015625,
+                  "y": 522.0020901679992,
+                  "score": 0.9212034344673157,
+                  "visible": true
+                },
+                {
+                  "label": "left_wrist",
+                  "x": 641.9783203125,
+                  "y": 507.34610929489133,
+                  "score": 0.796436071395874,
+                  "visible": true
+                },
+                {
+                  "label": "right_wrist",
+                  "x": 534.04638671875,
+                  "y": 533.1029831409454,
+                  "score": 0.9039159417152405,
+                  "visible": true
+                },
+                {
+                  "label": "left_hip",
+                  "x": 560.45751953125,
+                  "y": 648.3321691513062,
+                  "score": 0.42727184295654297,
+                  "visible": true
+                },
+                {
+                  "label": "right_hip",
+                  "x": 411.54931640625,
+                  "y": 649.0924360275268,
+                  "score": 0.5394895076751709,
+                  "visible": true
+                },
+                {
+                  "label": "left_knee",
+                  "x": 520.74658203125,
+                  "y": 676.2791418075561,
+                  "score": 0.012201160192489624,
+                  "visible": false
+                },
+                {
+                  "label": "right_knee",
+                  "x": 441.20512695312505,
+                  "y": 653.0417593002319,
+                  "score": 0.018124759197235107,
+                  "visible": false
+                },
+                {
+                  "label": "left_ankle",
+                  "x": 534.150244140625,
+                  "y": 693.0851303100586,
+                  "score": 0.0008677840232849121,
+                  "visible": false
+                },
+                {
+                  "label": "right_ankle",
+                  "x": 573.9037109375,
+                  "y": 644.0140460968017,
+                  "score": 0.0011866092681884766,
+                  "visible": false
+                }
+              ]
+            }
+          ],
+          "width": 1024,
+          "height": 683
+        }
+      },
+      {
+        "precision": "q8",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 3049,
+          "inferenceMs": 389.2000000476837,
+          "totalMs": 3546.399999976158,
+          "grade": "slow",
+          "imagesPerSecond": 2.5693730726554027
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 3
+        },
+        "quality": {
+          "finite": true,
+          "validCoordinates": true,
+          "personCount": 1,
+          "topPersonScore": 0.6333800554275513,
+          "visibleKeypoints": 13,
+          "signatureMeanAbsoluteError": 0.019260779258079962,
+          "maximumSignatureMeanAbsoluteError": 0.08,
+          "signature": [
+            0.23792178630828859,
+            0.08282613754272461,
+            0.6592084169387817,
+            0.9981787681579589,
+            0.6333800554275513,
+            0.44979605674743656,
+            0.2463369369506836,
+            0.9957542419433594,
+            0.47237606048583985,
+            0.2118133544921875,
+            0.9826192855834961,
+            0.41379957199096684,
+            0.21949596405029295,
+            0.9865069389343262,
+            0.5096796989440918,
+            0.2404438018798828,
+            0.8041055798530579,
+            0.375917911529541,
+            0.2588180541992187,
+            0.8303349018096924,
+            0.5790919303894043,
+            0.4934165000915527,
+            0.9843099117279053,
+            0.34371156692504884,
+            0.4986993789672851,
+            0.9915381669998169,
+            0.6336634159088135,
+            0.7581466674804687,
+            0.7983039617538452,
+            0.347761344909668,
+            0.7612509727478027,
+            0.8997159004211426,
+            0.6245526313781739,
+            0.7534597396850585,
+            0.7861261963844299,
+            0.5180433750152588,
+            0.7760654926300048,
+            0.8589972257614136,
+            0.5493360996246338,
+            0.9397369384765625,
+            0.4316164553165436,
+            0.3982496976852417,
+            0.9444150924682617,
+            0.5025358200073242,
+            0.5374512672424316,
+            0.9812485694885255,
+            0.008377796970307827,
+            0.41123237609863283,
+            0.9626370429992676,
+            0.010408462025225163,
+            0.55152006149292,
+            0.9987261772155761,
+            0.0006101094186306,
+            0.4926799297332764,
+            0.9452791213989258,
+            0.0007404218195006251
+          ],
+          "grade": "good"
+        },
+        "nativeOutput": {
+          "persons": [
+            {
+              "score": 0.6333800554275513,
+              "box": {
+                "x1": 243.6319091796875,
+                "y1": 56.57025194168091,
+                "x2": 675.0294189453125,
+                "y2": 681.756098651886
+              },
+              "keypoints": [
+                {
+                  "label": "nose",
+                  "x": 460.59116210937503,
+                  "y": 168.2481279373169,
+                  "score": 0.9957542419433594,
+                  "visible": true
+                },
+                {
+                  "label": "left_eye",
+                  "x": 483.7130859375,
+                  "y": 144.66852111816405,
+                  "score": 0.9826192855834961,
+                  "visible": true
+                },
+                {
+                  "label": "right_eye",
+                  "x": 423.73076171875005,
+                  "y": 149.9157434463501,
+                  "score": 0.9865069389343262,
+                  "visible": true
+                },
+                {
+                  "label": "left_ear",
+                  "x": 521.91201171875,
+                  "y": 164.22311668395994,
+                  "score": 0.8041055798530579,
+                  "visible": true
+                },
+                {
+                  "label": "right_ear",
+                  "x": 384.93994140625,
+                  "y": 176.7727310180664,
+                  "score": 0.8303349018096924,
+                  "visible": true
+                },
+                {
+                  "label": "left_shoulder",
+                  "x": 592.99013671875,
+                  "y": 337.0034695625305,
+                  "score": 0.9843099117279053,
+                  "visible": true
+                },
+                {
+                  "label": "right_shoulder",
+                  "x": 351.96064453125,
+                  "y": 340.6116758346557,
+                  "score": 0.9915381669998169,
+                  "visible": true
+                },
+                {
+                  "label": "left_elbow",
+                  "x": 648.871337890625,
+                  "y": 517.8141738891601,
+                  "score": 0.7983039617538452,
+                  "visible": true
+                },
+                {
+                  "label": "right_elbow",
+                  "x": 356.1076171875,
+                  "y": 519.9344143867493,
+                  "score": 0.8997159004211426,
+                  "visible": true
+                },
+                {
+                  "label": "left_wrist",
+                  "x": 639.54189453125,
+                  "y": 514.613002204895,
+                  "score": 0.7861261963844299,
+                  "visible": true
+                },
+                {
+                  "label": "right_wrist",
+                  "x": 530.476416015625,
+                  "y": 530.0527314662933,
+                  "score": 0.8589972257614136,
+                  "visible": true
+                },
+                {
+                  "label": "left_hip",
+                  "x": 562.520166015625,
+                  "y": 641.8403289794921,
+                  "score": 0.4316164553165436,
+                  "visible": true
+                },
+                {
+                  "label": "right_hip",
+                  "x": 407.8076904296875,
+                  "y": 645.0355081558228,
+                  "score": 0.5025358200073242,
+                  "visible": true
+                },
+                {
+                  "label": "left_knee",
+                  "x": 550.35009765625,
+                  "y": 670.1927729606629,
+                  "score": 0.008377796970307827,
+                  "visible": false
+                },
+                {
+                  "label": "right_knee",
+                  "x": 421.101953125,
+                  "y": 657.4811003684997,
+                  "score": 0.010408462025225163,
+                  "visible": false
+                },
+                {
+                  "label": "left_ankle",
+                  "x": 564.7565429687501,
+                  "y": 682.1299790382385,
+                  "score": 0.0006101094186306,
+                  "visible": false
+                },
+                {
+                  "label": "right_ankle",
+                  "x": 504.50424804687503,
+                  "y": 645.6256399154663,
+                  "score": 0.0007404218195006251,
+                  "visible": false
+                }
+              ]
+            }
+          ],
+          "width": 1024,
+          "height": 683
+        }
+      },
+      {
+        "precision": "q4",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 2911.100000023842,
+          "inferenceMs": 276.60000002384186,
+          "totalMs": 3469.5,
+          "grade": "good",
+          "imagesPerSecond": 3.615328994626912
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 3
+        },
+        "quality": {
+          "finite": true,
+          "validCoordinates": true,
+          "personCount": 1,
+          "topPersonScore": 0.8565833568572998,
+          "visibleKeypoints": 13,
+          "signatureMeanAbsoluteError": 0,
+          "maximumSignatureMeanAbsoluteError": 0.08,
+          "signature": [
+            0.24768731594085697,
+            0.08357219696044918,
+            0.6562162637710571,
+            1,
+            0.8565833568572998,
+            0.45265202522277836,
+            0.25551228523254393,
+            0.995742917060852,
+            0.4757478713989258,
+            0.22167277336120605,
+            0.9728751182556152,
+            0.4181562900543213,
+            0.2247836112976074,
+            0.9877252578735352,
+            0.5065527439117432,
+            0.24935102462768555,
+            0.5888579487800598,
+            0.3758644819259644,
+            0.25843641757965086,
+            0.8775671720504761,
+            0.559018087387085,
+            0.4931444644927978,
+            0.98572838306427,
+            0.33629443645477297,
+            0.4929936408996582,
+            0.9911119937896729,
+            0.6000380992889405,
+            0.7561989307403564,
+            0.8165667057037354,
+            0.35554161071777346,
+            0.7676851272583008,
+            0.917667031288147,
+            0.6121465682983399,
+            0.7447871208190918,
+            0.8478214144706726,
+            0.5209981918334962,
+            0.7807057857513428,
+            0.918401837348938,
+            0.5303556442260743,
+            0.9381103515625,
+            0.4559326469898224,
+            0.3917432308197022,
+            0.9421658515930176,
+            0.5382130146026611,
+            0.5180266857147217,
+            0.9731035232543945,
+            0.014056682586669922,
+            0.43246178627014165,
+            0.9500435829162597,
+            0.0194871723651886,
+            0.5056438446044922,
+            1.0071640968322753,
+            0.0011985599994659424,
+            0.5188808917999268,
+            0.9444103240966797,
+            0.001418977975845337
+          ],
+          "grade": "excellent"
+        },
+        "nativeOutput": {
+          "persons": [
+            {
+              "score": 0.8565833568572998,
+              "box": {
+                "x1": 253.63181152343753,
+                "y1": 57.079810523986794,
+                "x2": 671.9654541015625,
+                "y2": 683
+              },
+              "keypoints": [
+                {
+                  "label": "nose",
+                  "x": 463.51567382812505,
+                  "y": 174.51489081382752,
+                  "score": 0.995742917060852,
+                  "visible": true
+                },
+                {
+                  "label": "left_eye",
+                  "x": 487.16582031250005,
+                  "y": 151.40250420570374,
+                  "score": 0.9728751182556152,
+                  "visible": true
+                },
+                {
+                  "label": "right_eye",
+                  "x": 428.192041015625,
+                  "y": 153.52720651626586,
+                  "score": 0.9877252578735352,
+                  "visible": true
+                },
+                {
+                  "label": "left_ear",
+                  "x": 518.710009765625,
+                  "y": 170.30674982070923,
+                  "score": 0.5888579487800598,
+                  "visible": true
+                },
+                {
+                  "label": "right_ear",
+                  "x": 384.88522949218753,
+                  "y": 176.51207320690153,
+                  "score": 0.8775671720504761,
+                  "visible": true
+                },
+                {
+                  "label": "left_shoulder",
+                  "x": 572.4345214843751,
+                  "y": 336.8176692485809,
+                  "score": 0.98572838306427,
+                  "visible": true
+                },
+                {
+                  "label": "right_shoulder",
+                  "x": 344.3655029296875,
+                  "y": 336.71465673446653,
+                  "score": 0.9911119937896729,
+                  "visible": true
+                },
+                {
+                  "label": "left_elbow",
+                  "x": 614.439013671875,
+                  "y": 516.4838696956634,
+                  "score": 0.8165667057037354,
+                  "visible": true
+                },
+                {
+                  "label": "right_elbow",
+                  "x": 364.074609375,
+                  "y": 524.3289419174195,
+                  "score": 0.917667031288147,
+                  "visible": true
+                },
+                {
+                  "label": "left_wrist",
+                  "x": 626.8380859375001,
+                  "y": 508.6896035194397,
+                  "score": 0.8478214144706726,
+                  "visible": true
+                },
+                {
+                  "label": "right_wrist",
+                  "x": 533.5021484375001,
+                  "y": 533.2220516681671,
+                  "score": 0.918401837348938,
+                  "visible": true
+                },
+                {
+                  "label": "left_hip",
+                  "x": 543.0841796875001,
+                  "y": 640.7293701171875,
+                  "score": 0.4559326469898224,
+                  "visible": true
+                },
+                {
+                  "label": "right_hip",
+                  "x": 401.14506835937505,
+                  "y": 643.499276638031,
+                  "score": 0.5382130146026611,
+                  "visible": true
+                },
+                {
+                  "label": "left_knee",
+                  "x": 530.459326171875,
+                  "y": 664.6297063827515,
+                  "score": 0.014056682586669922,
+                  "visible": false
+                },
+                {
+                  "label": "right_knee",
+                  "x": 442.84086914062505,
+                  "y": 648.8797671318054,
+                  "score": 0.0194871723651886,
+                  "visible": false
+                },
+                {
+                  "label": "left_ankle",
+                  "x": 517.779296875,
+                  "y": 687.893078136444,
+                  "score": 0.0011985599994659424,
+                  "visible": false
+                },
+                {
+                  "label": "right_ankle",
+                  "x": 531.334033203125,
+                  "y": 645.0322513580322,
+                  "score": 0.001418977975845337,
+                  "visible": false
+                }
+              ]
+            }
+          ],
+          "width": 1024,
+          "height": 683
+        }
+      },
+      {
+        "precision": "q4",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 2837.2999999523163,
+          "inferenceMs": 134.40000009536743,
+          "totalMs": 3067.100000023842,
+          "grade": "good",
+          "imagesPerSecond": 7.440476185196584
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 3
+        },
+        "quality": {
+          "finite": true,
+          "validCoordinates": true,
+          "personCount": 1,
+          "topPersonScore": 0.8565835356712341,
+          "visibleKeypoints": 13,
+          "signatureMeanAbsoluteError": 1.2275912533101746E-7,
+          "maximumSignatureMeanAbsoluteError": 0.08,
+          "signature": [
+            0.24768729209899906,
+            0.08357229232788084,
+            0.6562162876129151,
+            1,
+            0.8565835356712341,
+            0.4526520729064942,
+            0.25551238059997555,
+            0.995742917060852,
+            0.47574796676635744,
+            0.22167286872863767,
+            0.9728751182556152,
+            0.4181562900543213,
+            0.2247838020324707,
+            0.9877251982688904,
+            0.506552791595459,
+            0.249351167678833,
+            0.5888575911521912,
+            0.37586450576782227,
+            0.25843660831451415,
+            0.8775674104690552,
+            0.5590181827545166,
+            0.49314460754394535,
+            0.9857283234596252,
+            0.3362944602966309,
+            0.4929938316345215,
+            0.9911120533943176,
+            0.6000380516052246,
+            0.756199073791504,
+            0.8165661096572876,
+            0.35554156303405765,
+            0.7676852226257324,
+            0.9176669120788574,
+            0.6121465682983399,
+            0.7447871685028076,
+            0.8478209376335144,
+            0.5209982395172119,
+            0.7807057380676269,
+            0.9184017181396484,
+            0.5303556442260743,
+            0.9381104469299316,
+            0.4559316635131836,
+            0.3917432308197022,
+            0.9421660423278809,
+            0.538212239742279,
+            0.5180266857147217,
+            0.9731035232543945,
+            0.014056621119379997,
+            0.43246183395385746,
+            0.9500436782836914,
+            0.019487103447318077,
+            0.5056438446044922,
+            1.007164192199707,
+            0.001198575715534389,
+            0.5188810348510743,
+            0.9444103240966797,
+            0.0014190127840265632
+          ],
+          "grade": "excellent"
+        },
+        "nativeOutput": {
+          "persons": [
+            {
+              "score": 0.8565835356712341,
+              "box": {
+                "x1": 253.63178710937504,
+                "y1": 57.079875659942616,
+                "x2": 671.965478515625,
+                "y2": 683
+              },
+              "keypoints": [
+                {
+                  "label": "nose",
+                  "x": 463.51572265625003,
+                  "y": 174.5149559497833,
+                  "score": 0.995742917060852,
+                  "visible": true
+                },
+                {
+                  "label": "left_eye",
+                  "x": 487.16591796875,
+                  "y": 151.40256934165953,
+                  "score": 0.9728751182556152,
+                  "visible": true
+                },
+                {
+                  "label": "right_eye",
+                  "x": 428.192041015625,
+                  "y": 153.52733678817748,
+                  "score": 0.9877251982688904,
+                  "visible": true
+                },
+                {
+                  "label": "left_ear",
+                  "x": 518.71005859375,
+                  "y": 170.30684752464293,
+                  "score": 0.5888575911521912,
+                  "visible": true
+                },
+                {
+                  "label": "right_ear",
+                  "x": 384.88525390625,
+                  "y": 176.51220347881318,
+                  "score": 0.8775674104690552,
+                  "visible": true
+                },
+                {
+                  "label": "left_shoulder",
+                  "x": 572.434619140625,
+                  "y": 336.81776695251466,
+                  "score": 0.9857283234596252,
+                  "visible": true
+                },
+                {
+                  "label": "right_shoulder",
+                  "x": 344.36552734375005,
+                  "y": 336.7147870063782,
+                  "score": 0.9911120533943176,
+                  "visible": true
+                },
+                {
+                  "label": "left_elbow",
+                  "x": 614.43896484375,
+                  "y": 516.4839673995972,
+                  "score": 0.8165661096572876,
+                  "visible": true
+                },
+                {
+                  "label": "right_elbow",
+                  "x": 364.07456054687503,
+                  "y": 524.3290070533752,
+                  "score": 0.9176669120788574,
+                  "visible": true
+                },
+                {
+                  "label": "left_wrist",
+                  "x": 626.8380859375001,
+                  "y": 508.68963608741757,
+                  "score": 0.8478209376335144,
+                  "visible": true
+                },
+                {
+                  "label": "right_wrist",
+                  "x": 533.502197265625,
+                  "y": 533.2220191001892,
+                  "score": 0.9184017181396484,
+                  "visible": true
+                },
+                {
+                  "label": "left_hip",
+                  "x": 543.0841796875001,
+                  "y": 640.7294352531433,
+                  "score": 0.4559316635131836,
+                  "visible": true
+                },
+                {
+                  "label": "right_hip",
+                  "x": 401.14506835937505,
+                  "y": 643.4994069099426,
+                  "score": 0.538212239742279,
+                  "visible": true
+                },
+                {
+                  "label": "left_knee",
+                  "x": 530.459326171875,
+                  "y": 664.6297063827515,
+                  "score": 0.014056621119379997,
+                  "visible": false
+                },
+                {
+                  "label": "right_knee",
+                  "x": 442.84091796875003,
+                  "y": 648.8798322677612,
+                  "score": 0.019487103447318077,
+                  "visible": false
+                },
+                {
+                  "label": "left_ankle",
+                  "x": 517.779296875,
+                  "y": 687.8931432723999,
+                  "score": 0.001198575715534389,
+                  "visible": false
+                },
+                {
+                  "label": "right_ankle",
+                  "x": 531.3341796875001,
+                  "y": 645.0322513580322,
+                  "score": 0.0014190127840265632,
+                  "visible": false
+                }
+              ]
+            }
+          ],
+          "width": 1024,
+          "height": 683
+        }
+      },
+      {
+        "precision": "bnb4",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 3494.8000000715256,
+          "inferenceMs": 275.6999999284744,
+          "totalMs": 3909.7000000476837,
+          "grade": "good",
+          "imagesPerSecond": 3.6271309403679095
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 3
+        },
+        "quality": {
+          "finite": true,
+          "validCoordinates": true,
+          "personCount": 1,
+          "topPersonScore": 0.8565833568572998,
+          "visibleKeypoints": 13,
+          "signatureMeanAbsoluteError": 0,
+          "maximumSignatureMeanAbsoluteError": 0.08,
+          "signature": [
+            0.24768731594085697,
+            0.08357219696044918,
+            0.6562162637710571,
+            1,
+            0.8565833568572998,
+            0.45265202522277836,
+            0.25551228523254393,
+            0.995742917060852,
+            0.4757478713989258,
+            0.22167277336120605,
+            0.9728751182556152,
+            0.4181562900543213,
+            0.2247836112976074,
+            0.9877252578735352,
+            0.5065527439117432,
+            0.24935102462768555,
+            0.5888579487800598,
+            0.3758644819259644,
+            0.25843641757965086,
+            0.8775671720504761,
+            0.559018087387085,
+            0.4931444644927978,
+            0.98572838306427,
+            0.33629443645477297,
+            0.4929936408996582,
+            0.9911119937896729,
+            0.6000380992889405,
+            0.7561989307403564,
+            0.8165667057037354,
+            0.35554161071777346,
+            0.7676851272583008,
+            0.917667031288147,
+            0.6121465682983399,
+            0.7447871208190918,
+            0.8478214144706726,
+            0.5209981918334962,
+            0.7807057857513428,
+            0.918401837348938,
+            0.5303556442260743,
+            0.9381103515625,
+            0.4559326469898224,
+            0.3917432308197022,
+            0.9421658515930176,
+            0.5382130146026611,
+            0.5180266857147217,
+            0.9731035232543945,
+            0.014056682586669922,
+            0.43246178627014165,
+            0.9500435829162597,
+            0.0194871723651886,
+            0.5056438446044922,
+            1.0071640968322753,
+            0.0011985599994659424,
+            0.5188808917999268,
+            0.9444103240966797,
+            0.001418977975845337
+          ],
+          "grade": "excellent"
+        },
+        "nativeOutput": {
+          "persons": [
+            {
+              "score": 0.8565833568572998,
+              "box": {
+                "x1": 253.63181152343753,
+                "y1": 57.079810523986794,
+                "x2": 671.9654541015625,
+                "y2": 683
+              },
+              "keypoints": [
+                {
+                  "label": "nose",
+                  "x": 463.51567382812505,
+                  "y": 174.51489081382752,
+                  "score": 0.995742917060852,
+                  "visible": true
+                },
+                {
+                  "label": "left_eye",
+                  "x": 487.16582031250005,
+                  "y": 151.40250420570374,
+                  "score": 0.9728751182556152,
+                  "visible": true
+                },
+                {
+                  "label": "right_eye",
+                  "x": 428.192041015625,
+                  "y": 153.52720651626586,
+                  "score": 0.9877252578735352,
+                  "visible": true
+                },
+                {
+                  "label": "left_ear",
+                  "x": 518.710009765625,
+                  "y": 170.30674982070923,
+                  "score": 0.5888579487800598,
+                  "visible": true
+                },
+                {
+                  "label": "right_ear",
+                  "x": 384.88522949218753,
+                  "y": 176.51207320690153,
+                  "score": 0.8775671720504761,
+                  "visible": true
+                },
+                {
+                  "label": "left_shoulder",
+                  "x": 572.4345214843751,
+                  "y": 336.8176692485809,
+                  "score": 0.98572838306427,
+                  "visible": true
+                },
+                {
+                  "label": "right_shoulder",
+                  "x": 344.3655029296875,
+                  "y": 336.71465673446653,
+                  "score": 0.9911119937896729,
+                  "visible": true
+                },
+                {
+                  "label": "left_elbow",
+                  "x": 614.439013671875,
+                  "y": 516.4838696956634,
+                  "score": 0.8165667057037354,
+                  "visible": true
+                },
+                {
+                  "label": "right_elbow",
+                  "x": 364.074609375,
+                  "y": 524.3289419174195,
+                  "score": 0.917667031288147,
+                  "visible": true
+                },
+                {
+                  "label": "left_wrist",
+                  "x": 626.8380859375001,
+                  "y": 508.6896035194397,
+                  "score": 0.8478214144706726,
+                  "visible": true
+                },
+                {
+                  "label": "right_wrist",
+                  "x": 533.5021484375001,
+                  "y": 533.2220516681671,
+                  "score": 0.918401837348938,
+                  "visible": true
+                },
+                {
+                  "label": "left_hip",
+                  "x": 543.0841796875001,
+                  "y": 640.7293701171875,
+                  "score": 0.4559326469898224,
+                  "visible": true
+                },
+                {
+                  "label": "right_hip",
+                  "x": 401.14506835937505,
+                  "y": 643.499276638031,
+                  "score": 0.5382130146026611,
+                  "visible": true
+                },
+                {
+                  "label": "left_knee",
+                  "x": 530.459326171875,
+                  "y": 664.6297063827515,
+                  "score": 0.014056682586669922,
+                  "visible": false
+                },
+                {
+                  "label": "right_knee",
+                  "x": 442.84086914062505,
+                  "y": 648.8797671318054,
+                  "score": 0.0194871723651886,
+                  "visible": false
+                },
+                {
+                  "label": "left_ankle",
+                  "x": 517.779296875,
+                  "y": 687.893078136444,
+                  "score": 0.0011985599994659424,
+                  "visible": false
+                },
+                {
+                  "label": "right_ankle",
+                  "x": 531.334033203125,
+                  "y": 645.0322513580322,
+                  "score": 0.001418977975845337,
+                  "visible": false
+                }
+              ]
+            }
+          ],
+          "width": 1024,
+          "height": 683
+        }
+      },
+      {
+        "precision": "bnb4",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 3169.6999999284744,
+          "inferenceMs": 136.40000009536743,
+          "totalMs": 3424.2000000476837,
+          "grade": "good",
+          "imagesPerSecond": 7.33137829399432
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 3
+        },
+        "quality": {
+          "finite": true,
+          "validCoordinates": true,
+          "personCount": 1,
+          "topPersonScore": 0.8565835356712341,
+          "visibleKeypoints": 13,
+          "signatureMeanAbsoluteError": 1.2275912533101746E-7,
+          "maximumSignatureMeanAbsoluteError": 0.08,
+          "signature": [
+            0.24768729209899906,
+            0.08357229232788084,
+            0.6562162876129151,
+            1,
+            0.8565835356712341,
+            0.4526520729064942,
+            0.25551238059997555,
+            0.995742917060852,
+            0.47574796676635744,
+            0.22167286872863767,
+            0.9728751182556152,
+            0.4181562900543213,
+            0.2247838020324707,
+            0.9877251982688904,
+            0.506552791595459,
+            0.249351167678833,
+            0.5888575911521912,
+            0.37586450576782227,
+            0.25843660831451415,
+            0.8775674104690552,
+            0.5590181827545166,
+            0.49314460754394535,
+            0.9857283234596252,
+            0.3362944602966309,
+            0.4929938316345215,
+            0.9911120533943176,
+            0.6000380516052246,
+            0.756199073791504,
+            0.8165661096572876,
+            0.35554156303405765,
+            0.7676852226257324,
+            0.9176669120788574,
+            0.6121465682983399,
+            0.7447871685028076,
+            0.8478209376335144,
+            0.5209982395172119,
+            0.7807057380676269,
+            0.9184017181396484,
+            0.5303556442260743,
+            0.9381104469299316,
+            0.4559316635131836,
+            0.3917432308197022,
+            0.9421660423278809,
+            0.538212239742279,
+            0.5180266857147217,
+            0.9731035232543945,
+            0.014056621119379997,
+            0.43246183395385746,
+            0.9500436782836914,
+            0.019487103447318077,
+            0.5056438446044922,
+            1.007164192199707,
+            0.001198575715534389,
+            0.5188810348510743,
+            0.9444103240966797,
+            0.0014190127840265632
+          ],
+          "grade": "excellent"
+        },
+        "nativeOutput": {
+          "persons": [
+            {
+              "score": 0.8565835356712341,
+              "box": {
+                "x1": 253.63178710937504,
+                "y1": 57.079875659942616,
+                "x2": 671.965478515625,
+                "y2": 683
+              },
+              "keypoints": [
+                {
+                  "label": "nose",
+                  "x": 463.51572265625003,
+                  "y": 174.5149559497833,
+                  "score": 0.995742917060852,
+                  "visible": true
+                },
+                {
+                  "label": "left_eye",
+                  "x": 487.16591796875,
+                  "y": 151.40256934165953,
+                  "score": 0.9728751182556152,
+                  "visible": true
+                },
+                {
+                  "label": "right_eye",
+                  "x": 428.192041015625,
+                  "y": 153.52733678817748,
+                  "score": 0.9877251982688904,
+                  "visible": true
+                },
+                {
+                  "label": "left_ear",
+                  "x": 518.71005859375,
+                  "y": 170.30684752464293,
+                  "score": 0.5888575911521912,
+                  "visible": true
+                },
+                {
+                  "label": "right_ear",
+                  "x": 384.88525390625,
+                  "y": 176.51220347881318,
+                  "score": 0.8775674104690552,
+                  "visible": true
+                },
+                {
+                  "label": "left_shoulder",
+                  "x": 572.434619140625,
+                  "y": 336.81776695251466,
+                  "score": 0.9857283234596252,
+                  "visible": true
+                },
+                {
+                  "label": "right_shoulder",
+                  "x": 344.36552734375005,
+                  "y": 336.7147870063782,
+                  "score": 0.9911120533943176,
+                  "visible": true
+                },
+                {
+                  "label": "left_elbow",
+                  "x": 614.43896484375,
+                  "y": 516.4839673995972,
+                  "score": 0.8165661096572876,
+                  "visible": true
+                },
+                {
+                  "label": "right_elbow",
+                  "x": 364.07456054687503,
+                  "y": 524.3290070533752,
+                  "score": 0.9176669120788574,
+                  "visible": true
+                },
+                {
+                  "label": "left_wrist",
+                  "x": 626.8380859375001,
+                  "y": 508.68963608741757,
+                  "score": 0.8478209376335144,
+                  "visible": true
+                },
+                {
+                  "label": "right_wrist",
+                  "x": 533.502197265625,
+                  "y": 533.2220191001892,
+                  "score": 0.9184017181396484,
+                  "visible": true
+                },
+                {
+                  "label": "left_hip",
+                  "x": 543.0841796875001,
+                  "y": 640.7294352531433,
+                  "score": 0.4559316635131836,
+                  "visible": true
+                },
+                {
+                  "label": "right_hip",
+                  "x": 401.14506835937505,
+                  "y": 643.4994069099426,
+                  "score": 0.538212239742279,
+                  "visible": true
+                },
+                {
+                  "label": "left_knee",
+                  "x": 530.459326171875,
+                  "y": 664.6297063827515,
+                  "score": 0.014056621119379997,
+                  "visible": false
+                },
+                {
+                  "label": "right_knee",
+                  "x": 442.84091796875003,
+                  "y": 648.8798322677612,
+                  "score": 0.019487103447318077,
+                  "visible": false
+                },
+                {
+                  "label": "left_ankle",
+                  "x": 517.779296875,
+                  "y": 687.8931432723999,
+                  "score": 0.001198575715534389,
+                  "visible": false
+                },
+                {
+                  "label": "right_ankle",
+                  "x": 531.3341796875001,
+                  "y": 645.0322513580322,
+                  "score": 0.0014190127840265632,
+                  "visible": false
+                }
+              ]
+            }
+          ],
+          "width": 1024,
+          "height": 683
+        }
+      }
+    ]
+  }
+}

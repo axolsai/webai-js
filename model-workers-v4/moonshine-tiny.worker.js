@@ -61,7 +61,7 @@ const MANIFEST = {
   runtime: { engine: { name: "Transformers.js", version: "4.2.0" }, precisions: SUPPORTED },
   input: {
     description: "One non-empty mono Float32Array sampled at 16 kHz.",
-    alternatives: [{ name: "audio", type: "Float32Array", required: true }],
+    alternatives: [{ name: "audio", type: "Float32Array", required: true, minItems: 1 }],
   },
   config: {
     model: [{ name: "max_new_tokens", type: "integer", default: 256, minimum: 1, maximum: 512 }],

@@ -1,0 +1,52 @@
+{
+  "modelId": "bert-small-pii-detection",
+  "v4Contract": "not yet conformant",
+  "onboardingComplete": false,
+  "recommendedConfiguration": null,
+  "audit": {
+    "identityAndProvenance": "pass: original provider, Apache-2.0 license URL, source/artifact repositories, immutable revisions and separate update timestamps",
+    "runtimeProbe": "pass: Transformers.js 4.2.0 initialized in module Web Worker before adapter implementation",
+    "protocol": "pass: boot handshake, one message handler and error boundary; requestId echoed on replies/progress/errors; generated data uses standard status/result envelope",
+    "schema": "pass: non-whitespace English string, fixed 512-token truncation documented, closed simple/none aggregation enum, typed entities with UTF-16 offsets; defaults taken from manifest",
+    "lifecycle": "pass: init/download/generate/clearMemory guards, replaced pipeline disposal, correlated load progress, load/disposal errors propagated; streaming not advertised",
+    "artifactInventory": "pass: eight actual ONNX artifacts with exact weight bytes and 947847 shared bytes per complete download estimate",
+    "benchmarkMatrix": "executed: 16 isolated browser cases; none passes quality gate; full errors/native outputs retained; all cases disposed and cleared only model cache",
+    "performance": "pass: per-case runtime loadMs/inferenceMs/totalMs, textsPerSecond and grade retained; cold single-text measurement, not steady-state throughput",
+    "quality": "blocked: successful inference misses phone number; several variants also score Washington below 0.8",
+    "allowList": "pass: no failed precision/device pairs advertised; supported precision map intentionally empty",
+    "fixture": "pass: real public NASA contact block; checked-in expected spans in packaged JSON; identical local and public B2 fixture with byte count and SHA-1 verified",
+    "publicApi": "partial: real WebAI manifest discovery, unsupported Q4 rejection, streaming rejection, clearMemory and termination verified; recommended-config inference/cache smoke blocked because no combination passes quality gate"
+  },
+  "testedUnsupported": [
+    "fp32",
+    "fp16",
+    "int8",
+    "uint8",
+    "q8",
+    "q4",
+    "q4f16",
+    "bnb4"
+  ],
+  "devices": [
+    "wasm",
+    "webgpu"
+  ],
+  "blockers": [
+    "No precision/device combination passes the checked-in contact-span quality gate. All successful inference cases omit the reference phone number. FP16 and Q4F16 fail ONNX session creation on both backends.",
+    "A recommended configuration cannot be verified through the public WebAI API until a combination passes the quality gate."
+  ],
+  "passedCommands": [
+    "node --input-type=module --check < model-workers-v4/bert-small-pii-detection.worker.js",
+    "npm run typecheck",
+    "npm run build",
+    "npm run lint --prefix test-app",
+    "npm run build --prefix test-app",
+    "git diff --check",
+    "npm pack --dry-run --json",
+    "cd test-app && node scripts/benchmark-bert-small-pii-detection.mjs --output=../benchmarks/bert-small-pii-detection.json (execution passed; 0/16 quality-qualified cases)",
+    "cd test-app && node scripts/audit-bert-small-pii-detection-public-api.mjs (blocked-configuration checks passed)",
+    "Python JSON/embedded-matrix/allow-list/fixture-checksum/cleanup assertions",
+    "cmp benchmarks/bert-small-pii-detection-fixture.json /tmp/pii-public-fixture.json"
+  ],
+  "lintNotes": "One existing next/no-img-element warning in vision-to-text; no lint errors."
+}

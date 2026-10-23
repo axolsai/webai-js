@@ -56,6 +56,16 @@ export type WebAIWorkerField = {
   enum?: unknown[];
   minimum?: number;
   maximum?: number;
+  /** Minimum/maximum JavaScript string length. Token limits belong in descriptions or model config. */
+  minLength?: number;
+  maxLength?: number;
+  /** Minimum/maximum number of entries for array-like inputs. */
+  minItems?: number;
+  maxItems?: number;
+  /** Optional item schema for homogeneous arrays. */
+  items?: Omit<WebAIWorkerField, "name" | "required" | "default">;
+  /** UI and validation hint for URL-shaped strings. */
+  format?: "url" | "blob-url";
 };
 
 export type WebAIWorkerManifest = {

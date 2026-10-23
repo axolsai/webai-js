@@ -63,7 +63,7 @@ const MANIFEST = {
   },
   input: {
     description: "A chat transcript whose final message is from the user.",
-    alternatives: [{ name: "messages", type: "Array<{ role: 'system' | 'user' | 'assistant', content: string }>", required: true }],
+    alternatives: [{ name: "messages", type: "Array<{ role: 'system' | 'user' | 'assistant', content: string }>", required: true, minItems: 1, items: { type: "object", description: "A message with an allowed role and non-empty content." } }],
   },
   config: {
     model: [

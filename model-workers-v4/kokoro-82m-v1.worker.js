@@ -44,7 +44,7 @@ const MANIFEST = {
     limitations: ["The bundled phonemizer and advertised voices support English only.", "Names, acronyms, numbers, and unusual punctuation may be pronounced incorrectly.", "Long text is truncated to the model context; split long passages into sentences.", "Synthetic speech can sound unnatural and must not be used to impersonate a person or mislead listeners."],
   },
   runtime: { engine: { name: "kokoro-js (Transformers.js adapter)", version: "1.2.1 / 3.5.1" }, precisions: SUPPORTED },
-  input: { description: "A non-empty English text string.", alternatives: [{ name: "text", type: "string", required: true, maximumLength: 2000 }] },
+  input: { description: "A non-empty English text string.", alternatives: [{ name: "text", type: "string", required: true, minLength: 1, maximumLength: 2000 }] },
   config: {
     model: [],
     generation: [

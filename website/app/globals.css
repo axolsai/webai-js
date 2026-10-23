@@ -1,0 +1,309 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 224 71.4% 4.1%;
+    --card: 0 0% 100%;
+    --card-foreground: 224 71.4% 4.1%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 350 89% 60%;
+    --primary-foreground: 330 100% 97%;
+    --secondary: 357 92% 75%;
+    --secondary-foreground: 330 100% 97%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 220 13% 93%;
+    --input: 220 13% 91%;
+    --ring: 350 89% 60%;
+    --radius: 0.5rem;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --color-1: 0 100% 63%;
+    --color-2: 270 100% 63%;
+    --color-3: 210 100% 63%;
+    --color-4: 195 100% 63%;
+    --color-5: 90 100% 63%;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 350 89% 60%;
+    --primary-foreground: 0 0% 95%;
+    --secondary: 357 90% 65%;
+    --secondary-foreground: 0 0% 95%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 72%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 222 1% 16.9%;
+    --input: 215 27.9% 16.9%;
+    --ring: 350 89% 60%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+    --color-1: 0 100% 63%;
+    --color-2: 270 100% 63%;
+    --color-3: 210 100% 63%;
+    --color-4: 195 100% 63%;
+    --color-5: 90 100% 63%;
+  }
+  .theme {
+    --animate-marquee: marquee var(--duration) infinite linear;
+    --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
+    --animate-pulse: pulse var(--duration) ease-out infinite;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  /* width */
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  ::-webkit-scrollbar:horizontal {
+    height: 5px;
+  }
+
+  /* Fix for scrollbar corner overlap */
+  ::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+  }
+}
+
+.center {
+  @apply flex items-center justify-center;
+}
+.center-col {
+  @apply flex flex-col items-center justify-center;
+}
+.between {
+  @apply flex justify-between items-center;
+}
+.between-col {
+  @apply flex flex-col justify-between items-center;
+}
+
+.hide-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+button:hover .ql-stroke,
+.ql-picker-label:hover .ql-stroke {
+  @apply stroke-primary fill-none !important;
+}
+
+.ql-active .ql-stroke {
+  @apply stroke-primary fill-none !important;
+}
+
+.ql-stroke {
+  @apply stroke-muted-foreground fill-none !important;
+}
+.ql-fill {
+  @apply fill-muted-foreground stroke-none !important;
+}
+
+button:hover .ql-fill,
+.ql-picker-label:hover .ql-fill {
+  @apply fill-primary stroke-none text-primary !important;
+}
+
+.ql-active .ql-fill {
+  @apply fill-primary stroke-none !important;
+}
+
+.ql-picker-options {
+  @apply bg-background border border-foreground rounded-md shadow-lg text-foreground mt-1 !important;
+}
+
+button:hover .ql-picker-options {
+  @apply text-primary !important;
+}
+
+.ql-selected {
+  @apply text-primary !important;
+}
+
+.ql-picker-item {
+  @apply hover:text-primary !important;
+}
+
+.ql-picker-label::before:hover {
+  @apply text-primary !important;
+}
+
+.ql-picker-label.ql-active::before {
+  @apply text-primary !important;
+}
+
+.ql-picker-label {
+  @apply text-muted-foreground !important;
+}
+
+.ql-toolbar {
+  @apply rounded-t-md border-input !important;
+}
+.ql-container {
+  @apply rounded-b-md  border-input !important;
+}
+
+#editor-resizer .toolbar {
+  @apply bg-background border border-muted-foreground rounded-md shadow-lg text-foreground hover:text-primary !important;
+  .btn {
+    @apply text-muted-foreground hover:text-primary !important;
+  }
+  .input-wrapper {
+    @apply text-muted-foreground !important;
+  }
+}
+
+#editor-resizer {
+  @apply bg-muted-foreground/10 !important;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Keyframe animations */
+@keyframes meteor {
+  0% {
+    transform: rotate(var(--angle)) translateX(0);
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(var(--angle)) translateX(-500px);
+    opacity: 0;
+  }
+}
+
+@keyframes background-position-spin {
+  0% {
+    background-position: top center;
+  }
+  100% {
+    background-position: bottom center;
+  }
+}
+
+@keyframes shiny-text {
+  0%,
+  90%,
+  100% {
+    background-position: calc(-100% - var(--shiny-width)) 0;
+  }
+  30%,
+  60% {
+    background-position: calc(100% + var(--shiny-width)) 0;
+  }
+}
+
+@keyframes orbit {
+  0% {
+    transform: rotate(calc(var(--angle) * 1deg))
+      translateX(calc(var(--radius) * 1px)) rotate(calc(var(--angle) * -1deg));
+  }
+  100% {
+    transform: rotate(calc(var(--angle) * 1deg + 360deg))
+      translateX(calc(var(--radius) * 1px))
+      rotate(calc((var(--angle) * -1deg) - 360deg));
+  }
+}
+
+@keyframes elliptical-orbit {
+  from {
+    transform: rotate(var(--angle, 0deg)) translate(var(--h-radius, 160px), 0)
+      rotate(calc(var(--angle, 0deg) * -1));
+  }
+  to {
+    transform: rotate(calc(var(--angle, 0deg) + 360deg))
+      translate(var(--h-radius, 160px), 0)
+      rotate(calc((var(--angle, 0deg) + 360deg) * -1));
+  }
+}
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(-100% - var(--gap)));
+    }
+  }
+  @keyframes marquee-vertical {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(calc(-100% - var(--gap)));
+    }
+  }
+  @keyframes pulse {
+  0%, 100% {
+    boxShadow: 0 0 0 0 var(--pulse-color);
+    }
+  50% {
+    boxShadow: 0 0 0 8px var(--pulse-color);
+    }
+  }
+/* Add to your globals.css */
+@layer utilities {
+  .marquee-duration-20 {
+    --duration: 20s;
+  }
+
+  .marquee-gap-1 {
+    --gap: 1rem;
+  }
+}

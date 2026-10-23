@@ -56,7 +56,7 @@ const MANIFEST = {
   runtime: { engine: { name: "Transformers.js", version: "4.2.0" }, precisions: SUPPORTED },
   input: {
     description: "Provide exactly one 16 kHz mono Float32Array or a browser blob URL containing WAV/MP3 audio.",
-    alternatives: [{ name: "audio", type: "Float32Array", required: true }, { name: "audio_blob_url", type: "string(blob URL)", required: true }],
+    alternatives: [{ name: "audio", type: "Float32Array", required: true, minItems: 1 }, { name: "audio_blob_url", type: "string(blob URL)", required: true, minLength: 1, format: "blob-url" }],
   },
   config: {
     model: [{ name: "language", type: "string", default: "en", enum: ["en", "fr", "de", "es", "it", "pt", "nl", "pl", "el", "ar", "ja", "zh", "vi", "ko"], description: "Required spoken language: en (English), fr (French), de (German), es (Spanish), it (Italian), pt (Portuguese), nl (Dutch), pl (Polish), el (Greek), ar (Arabic), ja (Japanese), zh (Chinese/Mandarin), vi (Vietnamese), or ko (Korean). Automatic detection and code-switching are not supported." }, { name: "max_new_tokens", type: "integer", default: 256, minimum: 1, maximum: 1024 }],

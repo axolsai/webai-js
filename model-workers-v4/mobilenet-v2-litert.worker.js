@@ -31,7 +31,7 @@ const MANIFEST = {
     limitations: ["Only ImageNet-1k categories are available.", "It classifies the whole image and does not return boxes, segmentation, or captions.", "Small, obscured, unusual, or out-of-distribution subjects can be misclassified.", "Do not use predictions for identity, medical, safety, or other high-impact decisions."],
   },
   runtime: { engine: { name: "LiteRT.js", version: CONFIG.RUNTIME_VERSION, workerBridge: "classic-worker-inside-module-worker" }, precisions: CONFIG.PRECISIONS },
-  input: { description: "Provide exactly one browser blob URL containing a decodable image.", alternatives: [{ name: "image blob", fields: [{ name: "image_blob_url", type: "string(blob URL)", required: true, description: "Image fetched and decoded by the worker." }] }] },
+  input: { description: "Provide exactly one browser blob URL containing a decodable image.", alternatives: [{ name: "image blob", fields: [{ name: "image_blob_url", type: "string(blob URL)", required: true, minLength: 1, format: "blob-url", description: "Image fetched and decoded by the worker." }] }] },
   config: { model: [], generation: [{ name: "topK", type: "integer", default: 5, minimum: 1, maximum: 20, description: "Number of predictions returned." }] },
   output: { description: "Ranked ImageNet predictions plus LiteRT acceleration status.", fields: [{ name: "predictions", type: "Array<{ label: string, classIndex: integer, score: number }>", required: true }, { name: "fullyAccelerated", type: "boolean", required: true }], example: { predictions: [{ label: "golden retriever", classIndex: 207, score: 0.82 }], fullyAccelerated: true } },
   operations: ["checkModelSupports", "init", "download", "generate", "clearMemory"],

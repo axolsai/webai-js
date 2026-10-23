@@ -32,7 +32,7 @@ const MANIFEST = {
     limitations: ["Retrieval quality depends on using the documented query/document prefixes and varies by language, domain, ambiguity, and input quality.", "Inputs longer than 2,048 tokens are truncated by the model.", "Embedding similarity is not factual verification and can reproduce training-data gaps or bias.", "FP16 activations and derivatives are explicitly unsupported upstream; quantization and Matryoshka truncation can alter ranking margins."],
   },
   runtime: { engine: { name: "Transformers.js", version: "4.2.0" }, precisions: SUPPORTED },
-  input: { description: "One or more non-empty, preformatted query or document strings.", alternatives: [{ name: "texts", type: "string[]", required: true }] },
+  input: { description: "One or more non-empty, preformatted query or document strings.", alternatives: [{ name: "texts", type: "string[]", required: true, minItems: 1, items: { type: "string", minLength: 1 } }] },
   config: { model: [{ name: "dimensions", type: "integer", default: 768, enum: [768, 512, 256, 128], description: "Matryoshka output dimension; truncated vectors are re-normalized." }], generation: [] },
   output: { description: "One finite normalized embedding per input string.", fields: [{ name: "result", type: "number[][]", required: true }], example: { result: [[0.01, -0.02]] } },
   operations: ["checkModelSupports", "init", "download", "generate", "clearMemory"],

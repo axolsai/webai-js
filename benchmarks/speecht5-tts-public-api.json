@@ -1,0 +1,27 @@
+{
+  "passed": true,
+  "configuration": {
+    "precision": "q4",
+    "device": "wasm"
+  },
+  "manifestDiscovered": true,
+  "downloadProgressEvents": 1826,
+  "cache": {
+    "cold": false,
+    "downloaded": true,
+    "reinitialization": true,
+    "deleted": true,
+    "otherModelPreserved": true
+  },
+  "invalidInputRejected": true,
+  "unsupportedStreamingRejected": true,
+  "clearMemoryVerified": true,
+  "runtime": {
+    "durationMs": 8522.600000023842
+  },
+  "nativeOutput": {
+    "samplingRate": 16000,
+    "samples": 65536,
+    "durationSeconds": 4.096
+  }
+}

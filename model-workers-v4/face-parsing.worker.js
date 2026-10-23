@@ -34,7 +34,7 @@ const MANIFEST = {
     limitations: ["The source permits non-commercial research and educational use only; confirm the upstream terms before redistribution or commercial use.", "The model is trained for portrait-like faces and can fail on profiles, occlusion, unusual lighting, small faces, multiple people, illustrations, and out-of-domain images.", "Left/right labels follow model training conventions and may not match the viewer's perspective.", "Small regions such as earrings, lips, and eyebrows may be missing or fragmented.", "Face-region output must not be used for identity, biometric inference, medical conclusions, surveillance, or other high-impact decisions."],
   },
   runtime: { engine: { name: "Transformers.js", version: "4.2.0" }, precisions: SUPPORTED },
-  input: { description: "One browser-readable portrait image URL.", alternatives: [{ name: "image", fields: [{ name: "image", type: "string(URL)", required: true, description: "An HTTP(S), blob, data, or same-origin image URL readable by the worker." }] }] },
+  input: { description: "One browser-readable portrait image URL.", alternatives: [{ name: "image", fields: [{ name: "image", type: "string(URL)", required: true, minLength: 1, format: "url", description: "An HTTP(S), blob, data, or same-origin image URL readable by the worker." }] }] },
   config: { model: [], generation: [] },
   output: {
     description: "Original image dimensions and one binary byte mask per predicted face-parsing class. WebAI wraps this native value in { result, runtime: { durationMs } }.",

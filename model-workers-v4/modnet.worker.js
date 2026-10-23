@@ -85,7 +85,7 @@ const MANIFEST = {
     alternatives: [{
       name: "image blob",
       description: "The worker fetches and decodes the image while preserving its original dimensions for the returned PNGs.",
-      fields: [{ name: "image_blob_url", type: "string(blob URL)", required: true, description: "A blob: URL accessible from this worker." }],
+      fields: [{ name: "image_blob_url", type: "string(blob URL)", required: true, minLength: 1, format: "blob-url", description: "A blob: URL accessible from this worker." }],
     }],
   },
   config: { model: MODEL_CONFIG_FIELDS, generation: GENERATION_CONFIG_FIELDS },

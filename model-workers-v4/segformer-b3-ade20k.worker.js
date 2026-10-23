@@ -44,7 +44,7 @@ const MANIFEST = {
     limitations: ["The NVIDIA SegFormer license restricts use to non-commercial research or evaluation and requires preserving its license and notices.", "The fixed ADE20K taxonomy is incomplete and merges visually or functionally distinct objects.", "Predictions can fail on small objects, fine boundaries, unusual viewpoints, low light, occlusion, or domains unlike ADE20K.", "Masks are resized to the source image and can lose boundary detail after the model's 512×512 preprocessing.", "Output must not be used for surveillance, safety-critical navigation, medical analysis, or other high-impact automated decisions."],
   },
   runtime: { engine: { name: "Transformers.js", version: "4.2.0" }, precisions: SUPPORTED },
-  input: { description: "One browser-readable image URL for indoor or outdoor scene segmentation.", alternatives: [{ name: "image", fields: [{ name: "image", type: "string(URL)", required: true, description: "An HTTP(S), blob, data, or same-origin image URL readable by the worker." }] }] },
+  input: { description: "One browser-readable image URL for indoor or outdoor scene segmentation.", alternatives: [{ name: "image", fields: [{ name: "image", type: "string(URL)", required: true, minLength: 1, format: "url", description: "An HTTP(S), blob, data, or same-origin image URL readable by the worker." }] }] },
   config: { model: [], generation: [] },
   output: {
     description: "Original image dimensions and one binary byte mask per predicted ADE20K class. WebAI wraps this native value in { result, runtime: { durationMs } }.",

@@ -1,0 +1,81 @@
+{
+  "passed": true,
+  "configuration": {
+    "precision": "q4",
+    "device": "webgpu"
+  },
+  "manifestDiscovered": true,
+  "downloadProgressEvents": 4521,
+  "cache": {
+    "cold": false,
+    "downloaded": true,
+    "deleted": true,
+    "otherModelPreserved": true
+  },
+  "invalidInputRejected": true,
+  "unsupportedStreamingRejected": true,
+  "clearMemoryVerified": true,
+  "runtime": {
+    "durationMs": 73.29999995231628
+  },
+  "nativeOutput": {
+    "entities": [
+      {
+        "text": "Apollo 11",
+        "label": "MISC",
+        "score": 0.9903784394264221,
+        "start": 0,
+        "end": 9
+      },
+      {
+        "text": "Cape Kennedy",
+        "label": "LOC",
+        "score": 0.9928420782089233,
+        "start": 24,
+        "end": 36
+      },
+      {
+        "text": "Neil Armstrong",
+        "label": "PER",
+        "score": 0.9995550215244293,
+        "start": 74,
+        "end": 88
+      },
+      {
+        "text": "Mo",
+        "label": "MISC",
+        "score": 0.6837257146835327,
+        "start": 98,
+        "end": 100
+      },
+      {
+        "text": "Michael Collins",
+        "label": "PER",
+        "score": 0.9995963275432587,
+        "start": 111,
+        "end": 126
+      },
+      {
+        "text": "Mo",
+        "label": "MISC",
+        "score": 0.7674339413642883,
+        "start": 137,
+        "end": 139
+      },
+      {
+        "text": "Edwin Buzz Aldrin",
+        "label": "PER",
+        "score": 0.9127416491508484,
+        "start": 150,
+        "end": 167
+      },
+      {
+        "text": "Earth",
+        "label": "MISC",
+        "score": 0.40399664640426636,
+        "start": 184,
+        "end": 189
+      }
+    ]
+  }
+}

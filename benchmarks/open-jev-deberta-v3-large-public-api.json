@@ -1,0 +1,114 @@
+{
+  "passed": true,
+  "configuration": {
+    "precision": "q4f16",
+    "device": "webgpu"
+  },
+  "manifestDiscovered": true,
+  "downloadProgressEvents": 11825,
+  "cache": {
+    "cold": false,
+    "downloaded": false,
+    "deleted": true,
+    "otherModelPreserved": true
+  },
+  "invalidInputRejected": true,
+  "unsupportedStreamingRejected": true,
+  "clearMemoryVerified": true,
+  "runtime": {
+    "durationMs": 137.29999995231628
+  },
+  "nativeOutput": {
+    "decisions": [
+      {
+        "type": "choice",
+        "choice": "fees & charges",
+        "confidence": 0.7578928891070297,
+        "probabilities": [
+          {
+            "option": "fees & charges",
+            "probability": 0.7578928891070297
+          },
+          {
+            "option": "pin & security",
+            "probability": 0.07081372636366923
+          },
+          {
+            "option": "refund & dispute",
+            "probability": 0.12693373876447406
+          },
+          {
+            "option": "top-up",
+            "probability": 0.00563573953206963
+          },
+          {
+            "option": "exchange & fiat",
+            "probability": 0.01149088340023454
+          },
+          {
+            "option": "atm & cash",
+            "probability": 0.0038633095452579908
+          },
+          {
+            "option": "transfer",
+            "probability": 0.01183801398857245
+          },
+          {
+            "option": "card",
+            "probability": 0.005087679487861204
+          },
+          {
+            "option": "account & identity",
+            "probability": 0.002917264129365521
+          },
+          {
+            "option": "other",
+            "probability": 0.0035267556814656356
+          }
+        ]
+      },
+      {
+        "type": "score",
+        "score": 0.8361779714049125,
+        "confidence": 0.5006460159199219,
+        "probabilities": [
+          {
+            "option": "very negative",
+            "probability": 0.33655577295350747
+          },
+          {
+            "option": "negative",
+            "probability": 0.5006460159199219
+          },
+          {
+            "option": "neutral",
+            "probability": 0.15523721336303994
+          },
+          {
+            "option": "positive",
+            "probability": 0.00518646229521205
+          },
+          {
+            "option": "very positive",
+            "probability": 0.0023745354683186552
+          }
+        ]
+      },
+      {
+        "type": "noul",
+        "noul": 0.9159558086771841,
+        "confidence": 0.9159558086771841,
+        "probabilities": [
+          {
+            "option": "no",
+            "probability": 0.0840441913228159
+          },
+          {
+            "option": "yes",
+            "probability": 0.9159558086771841
+          }
+        ]
+      }
+    ]
+  }
+}

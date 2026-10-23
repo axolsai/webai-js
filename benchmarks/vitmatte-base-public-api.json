@@ -1,0 +1,56 @@
+[
+  {
+    "id": "vitmatte-base-distinctions-646",
+    "passed": true,
+    "configuration": {
+      "precision": "fp32",
+      "device": "webgpu"
+    },
+    "manifestDiscovered": true,
+    "downloadProgressEvents": 12167,
+    "cache": {
+      "cold": false,
+      "downloaded": false,
+      "deleted": true,
+      "otherModelPreserved": true
+    },
+    "invalidInputRejected": true,
+    "unsupportedStreamingRejected": true,
+    "clearMemoryVerified": true,
+    "runtime": {
+      "durationMs": 890.6000000238419
+    },
+    "nativeOutput": {
+      "width": 1024,
+      "height": 683,
+      "alphaLength": 699392
+    }
+  },
+  {
+    "id": "vitmatte-base-composition-1k",
+    "passed": true,
+    "configuration": {
+      "precision": "fp32",
+      "device": "webgpu"
+    },
+    "manifestDiscovered": true,
+    "downloadProgressEvents": 12389,
+    "cache": {
+      "cold": false,
+      "downloaded": false,
+      "deleted": true,
+      "otherModelPreserved": true
+    },
+    "invalidInputRejected": true,
+    "unsupportedStreamingRejected": true,
+    "clearMemoryVerified": true,
+    "runtime": {
+      "durationMs": 877
+    },
+    "nativeOutput": {
+      "width": 1024,
+      "height": 683,
+      "alphaLength": 699392
+    }
+  }
+]

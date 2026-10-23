@@ -61,7 +61,7 @@ const MANIFEST = {
   },
   input: {
     description: "One non-empty mono Float32Array sampled at 16 kHz.",
-    alternatives: [{ name: "audio", type: "Float32Array", required: true }],
+    alternatives: [{ name: "audio", type: "Float32Array", required: true, minItems: 1 }],
   },
   config: {
     model: [

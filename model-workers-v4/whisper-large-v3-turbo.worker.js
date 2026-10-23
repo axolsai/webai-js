@@ -106,12 +106,12 @@ const MANIFEST = {
       {
         name: "decoded audio",
         description: "Fastest path; audio is already decoded and resampled by the application.",
-        fields: [{ name: "audio", type: "Float32Array", required: true, description: "Mono PCM samples at 16 kHz in the range -1 to 1." }],
+        fields: [{ name: "audio", type: "Float32Array", required: true, minItems: 1, description: "Mono PCM samples at 16 kHz in the range -1 to 1." }],
       },
       {
         name: "audio blob",
         description: "Worker fetches and decodes a WAV or MP3 browser object URL.",
-        fields: [{ name: "audio_blob_url", type: "string(blob URL)", required: true, description: "A blob: URL accessible from this worker." }],
+        fields: [{ name: "audio_blob_url", type: "string(blob URL)", required: true, minLength: 1, format: "blob-url", description: "A blob: URL accessible from this worker." }],
       },
     ],
   },

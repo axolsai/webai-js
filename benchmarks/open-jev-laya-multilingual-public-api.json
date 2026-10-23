@@ -1,0 +1,63 @@
+{
+  "passed": true,
+  "configuration": {
+    "precision": "fp16",
+    "device": "webgpu"
+  },
+  "manifestDiscovered": true,
+  "downloadProgressEvents": 19420,
+  "cache": {
+    "cold": false,
+    "downloaded": false,
+    "deleted": true,
+    "otherModelPreserved": true
+  },
+  "invalidInputRejected": true,
+  "unsupportedStreamingRejected": true,
+  "clearMemoryVerified": true,
+  "runtime": {
+    "durationMs": 230.09999999403954
+  },
+  "nativeOutput": {
+    "decisions": [
+      {
+        "type": "choice",
+        "confidence": 0.9102178178576598,
+        "answerConfidence": 0.9813984052679814,
+        "actProbability": 1,
+        "probabilities": [
+          {
+            "option": "满意",
+            "probability": 0.9813984052679814
+          },
+          {
+            "option": "不满意",
+            "probability": 0.01672179358441124
+          },
+          {
+            "option": "不确定",
+            "probability": 0.001879801147607375
+          }
+        ],
+        "choice": "满意"
+      },
+      {
+        "type": "noul",
+        "confidence": 0.903861851968971,
+        "answerConfidence": 0.9876277805596698,
+        "actProbability": 1,
+        "probabilities": [
+          {
+            "option": "false",
+            "probability": 0.012372219440330222
+          },
+          {
+            "option": "true",
+            "probability": 0.9876277805596698
+          }
+        ],
+        "noul": 0.9876277805596698
+      }
+    ]
+  }
+}

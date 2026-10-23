@@ -69,6 +69,19 @@ The core library converts that into:
 - Keep one message handler and one error boundary.
 - Keep defaults and schemas together in the manifest to prevent documentation drift.
 
+## Field constraints
+
+Every input and configuration field must describe each hard restriction enforced by the
+worker. Use `required`, `enum`, `minimum`, and `maximum` for presence, closed choices, and
+numeric bounds. Use `minLength` and `maxLength` for JavaScript string length, `minItems` and
+`maxItems` for array length, and `items` for homogeneous array values. URL fields should also
+declare `format: "url"` or `format: "blob-url"`.
+
+Do not convert tokenizer limits into character limits. Document token truncation in the field
+description and expose an adjustable token limit as a bounded config field when the adapter
+supports one. Do not invent a maximum batch size when the adapter accepts arbitrary batch sizes;
+declare only the real nonempty-array constraint.
+
 ## Precision benchmark
 
 The repository includes one standard 29.49-second MP3 fixture and a browser benchmark agent.

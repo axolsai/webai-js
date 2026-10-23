@@ -1,0 +1,1907 @@
+{
+  "contractVersion": "1.0",
+  "model": {
+    "id": "bert-base-ner",
+    "displayName": "BERT Base NER — English Named Entities",
+    "provider": "dslim",
+    "providerUrl": "https://huggingface.co/dslim",
+    "license": "MIT",
+    "licenseUrl": "https://spdx.org/licenses/MIT.html",
+    "lastUpdated": "2024-10-08T07:51:39.000Z",
+    "sourceRepository": "dslim/bert-base-NER",
+    "sourceRevision": "d1a3e8f13f8c3566299d95fcfc9a8d2382a9affc",
+    "repository": "Xenova/bert-base-NER",
+    "artifactRevision": "8e892123e8b7c2c0c2bd1dcb598b7d244c4e53aa",
+    "artifactLastUpdated": "2026-09-14T15:58:49.000Z",
+    "task": "token-classification",
+    "description": "A cased English BERT model fine-tuned on CoNLL-2003 news text and converted by Xenova for local browser inference. It extracts person, organization, location, and miscellaneous entity spans with confidence scores and character offsets.",
+    "intendedUses": [
+      "Highlight named entities in English news-like text.",
+      "Prototype local document indexing, search annotation, and information-extraction workflows.",
+      "Provide candidate spans for human-reviewed downstream processing."
+    ],
+    "limitations": [
+      "The model recognizes only PER, ORG, LOC, and MISC; dates, quantities, products, events, and other entity types are not represented consistently.",
+      "It was trained on English Reuters news from a limited historical period and may generalize poorly to other languages, domains, emerging names, informal spelling, or unusual capitalization.",
+      "Subword tokenization can split, truncate, merge, or omit entity spans; character offsets and labels require application-level review.",
+      "Confidence scores are not calibrated guarantees and must not be used alone for consequential decisions about people.",
+      "Inputs longer than 512 tokens are truncated, so entities beyond the retained prefix are omitted."
+    ]
+  },
+  "runtime": {
+    "engine": {
+      "name": "Transformers.js",
+      "version": "4.2.0"
+    },
+    "precisions": {
+      "fp32": {
+        "weightsSize": 431172606,
+        "size": 432056488,
+        "dtype": "fp32",
+        "modelKeys": [
+          "model.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "fp16": {
+        "weightsSize": 215805679,
+        "size": 216689561,
+        "dtype": "fp16",
+        "modelKeys": [
+          "model_fp16.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "int8": {
+        "weightsSize": 108486236,
+        "size": 109370118,
+        "dtype": "int8",
+        "modelKeys": [
+          "model_int8.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "uint8": {
+        "weightsSize": 108486273,
+        "size": 109370155,
+        "dtype": "uint8",
+        "modelKeys": [
+          "model_uint8.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q8": {
+        "weightsSize": 108952255,
+        "size": 109836137,
+        "dtype": "q8",
+        "modelKeys": [
+          "model_quantized.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4": {
+        "weightsSize": 144540477,
+        "size": 145424359,
+        "dtype": "q4",
+        "modelKeys": [
+          "model_q4.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4f16": {
+        "weightsSize": 93661735,
+        "size": 94545617,
+        "dtype": "q4f16",
+        "modelKeys": [
+          "model_q4f16.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "bnb4": {
+        "weightsSize": 139232164,
+        "size": 140116046,
+        "dtype": "bnb4",
+        "modelKeys": [
+          "model_bnb4.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      }
+    }
+  },
+  "benchmark": {
+    "report": "benchmarks/bert-base-ner.json",
+    "testedAt": "2026-10-23T10:53:16.920Z",
+    "fixture": {
+      "file": "bert-base-ner.json",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/bert-base-ner.json",
+      "size": 676,
+      "sha1": "a90640ef195e01ddb8f45899678975feaee59853",
+      "source": "NASA Apollo 11 Mission Overview; lightly shortened without changing named entities.",
+      "license": "United States government work",
+      "licenseUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+      "preprocessing": "Pinned cased BERT tokenizer with truncation at max_length; simple BIO aggregation."
+    },
+    "candidates": {
+      "fp32": {
+        "weightsSize": 431172606,
+        "size": 432056488,
+        "dtype": "fp32",
+        "modelKeys": [
+          "model.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "fp16": {
+        "weightsSize": 215805679,
+        "size": 216689561,
+        "dtype": "fp16",
+        "modelKeys": [
+          "model_fp16.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "int8": {
+        "weightsSize": 108486236,
+        "size": 109370118,
+        "dtype": "int8",
+        "modelKeys": [
+          "model_int8.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "uint8": {
+        "weightsSize": 108486273,
+        "size": 109370155,
+        "dtype": "uint8",
+        "modelKeys": [
+          "model_uint8.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q8": {
+        "weightsSize": 108952255,
+        "size": 109836137,
+        "dtype": "q8",
+        "modelKeys": [
+          "model_quantized.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4": {
+        "weightsSize": 144540477,
+        "size": 145424359,
+        "dtype": "q4",
+        "modelKeys": [
+          "model_q4.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "q4f16": {
+        "weightsSize": 93661735,
+        "size": 94545617,
+        "dtype": "q4f16",
+        "modelKeys": [
+          "model_q4f16.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      },
+      "bnb4": {
+        "weightsSize": 139232164,
+        "size": 140116046,
+        "dtype": "bnb4",
+        "modelKeys": [
+          "model_bnb4.onnx"
+        ],
+        "candidateDevices": [
+          "wasm",
+          "webgpu"
+        ]
+      }
+    },
+    "qualityGate": "Finite in-range scores and valid ordered offsets; every checked NASA location/person span must be recovered with the expected label, exact normalized text, and score >= 0.8; output must be non-empty and non-degenerate.",
+    "environment": "Isolated headless Google Chrome on macOS; Transformers.js 4.2.0",
+    "invalidatedBy": [
+      "artifact revision change",
+      "runtime version change",
+      "fixture or quality-gate change",
+      "browser/backend behavior change"
+    ],
+    "results": [
+      {
+        "precision": "fp32",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": 51071.199999928474,
+          "inferenceMs": 184.89999997615814,
+          "totalMs": 52634.700000047684,
+          "grade": "slow",
+          "textsPerSecond": 5.40832882709002
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "finite": true,
+          "validOffsets": true,
+          "nondegenerate": true,
+          "expected": [
+            {
+              "text": "Cape Kennedy",
+              "label": "LOC",
+              "found": true,
+              "score": 0.9919501543045044,
+              "pass": true
+            },
+            {
+              "text": "Neil Armstrong",
+              "label": "PER",
+              "found": true,
+              "score": 0.9995951950550079,
+              "pass": true
+            },
+            {
+              "text": "Michael Collins",
+              "label": "PER",
+              "found": true,
+              "score": 0.9996791481971741,
+              "pass": true
+            },
+            {
+              "text": "Edwin Buzz Aldrin",
+              "label": "PER",
+              "found": false,
+              "score": null,
+              "pass": false
+            }
+          ],
+          "recall": 0.75,
+          "grade": "failed"
+        },
+        "nativeOutput": {
+          "entities": [
+            {
+              "text": "Apollo 11",
+              "label": "MISC",
+              "score": 0.9915124177932739,
+              "start": 0,
+              "end": 9
+            },
+            {
+              "text": "Cape Kennedy",
+              "label": "LOC",
+              "score": 0.9919501543045044,
+              "start": 24,
+              "end": 36
+            },
+            {
+              "text": "Neil Armstrong",
+              "label": "PER",
+              "score": 0.9995951950550079,
+              "start": 74,
+              "end": 88
+            },
+            {
+              "text": "Mo",
+              "label": "MISC",
+              "score": 0.8026666045188904,
+              "start": 98,
+              "end": 100
+            },
+            {
+              "text": "Michael Collins",
+              "label": "PER",
+              "score": 0.9996791481971741,
+              "start": 111,
+              "end": 126
+            },
+            {
+              "text": "r Mo",
+              "label": "MISC",
+              "score": 0.6895542144775391,
+              "start": 135,
+              "end": 139
+            },
+            {
+              "text": "Edwin Buzz Aldr",
+              "label": "PER",
+              "score": 0.9988980740308762,
+              "start": 150,
+              "end": 165
+            },
+            {
+              "text": "Earth",
+              "label": "LOC",
+              "score": 0.49116042256355286,
+              "start": 184,
+              "end": 189
+            }
+          ]
+        }
+      },
+      {
+        "precision": "fp32",
+        "device": "webgpu",
+        "status": "fail",
+        "runtime": {
+          "loadMs": 56146.5,
+          "inferenceMs": 79.39999997615814,
+          "totalMs": 57656.60000002384,
+          "grade": "good",
+          "textsPerSecond": 12.594458442068959
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 4
+        },
+        "quality": {
+          "finite": true,
+          "validOffsets": true,
+          "nondegenerate": true,
+          "expected": [
+            {
+              "text": "Cape Kennedy",
+              "label": "LOC",
+              "found": true,
+              "score": 0.9919500946998596,
+              "pass": true
+            },
+            {
+              "text": "Neil Armstrong",
+              "label": "PER",
+              "found": true,
+              "score": 0.9995951950550079,
+              "pass": true
+            },
+            {
+              "text": "Michael Collins",
+              "label": "PER",
+              "found": true,
+              "score": 0.9996791481971741,
+              "pass": true
+            },
+            {
+              "text": "Edwin Buzz Aldrin",
+              "label": "PER",
+              "found": false,
+              "score": null,
+              "pass": false
+            }
+          ],
+          "recall": 0.75,
+          "grade": "failed"
+        },
+        "nativeOutput": {
+          "entities": [
+            {
+              "text": "Apollo 11",
+              "label": "MISC",
+              "score": 0.9915124475955963,
+              "start": 0,
+              "end": 9
+            },
+            {
+              "text": "Cape Kennedy",
+              "label": "LOC",
+              "score": 0.9919500946998596,
+              "start": 24,
+              "end": 36
+            },
+            {
+              "text": "Neil Armstrong",
+              "label": "PER",
+              "score": 0.9995951950550079,
+              "start": 74,
+              "end": 88
+            },
+            {
+              "text": "Mo",
+              "label": "MISC",
+              "score": 0.802666425704956,
+              "start": 98,
+              "end": 100
+            },
+            {
+              "text": "Michael Collins",
+              "label": "PER",
+              "score": 0.9996791481971741,
+              "start": 111,
+              "end": 126
+            },
+            {
+              "text": "r Mo",
+              "label": "MISC",
+              "score": 0.6895533949136734,
+              "start": 135,
+              "end": 139
+            },
+            {
+              "text": "Edwin Buzz Aldr",
+              "label": "PER",
+              "score": 0.9988980740308762,
+              "start": 150,
+              "end": 165
+            },
+            {
+              "text": "Earth",
+              "label": "LOC",
+              "score": 0.49116092920303345,
+              "start": 184,
+              "end": 189
+            }
+          ]
+        }
+      },
+      {
+        "precision": "fp16",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 29800.399999976158,
+          "grade": "failed"
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 5
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 1, ERROR_MESSAGE: /mnt/vss/_work/1/s/onnxruntime/core/graph/graph_utils.cc:30 int onnxruntime::graph_utils::GetIndexFromName(const Node &, const std::string &, bool) itr != node_args.end() was false. Attempting to get index by a name which does not exist:InsertedPrecisionFreeCast_/bert/encoder/layer.11/output/LayerNorm/Constant_output_0for node: /bert/embeddings/LayerNorm/Mul/SimplifiedLayerNormFusion/\n"
+      },
+      {
+        "precision": "fp16",
+        "device": "webgpu",
+        "status": "fail",
+        "runtime": {
+          "loadMs": 27688,
+          "inferenceMs": 68.30000007152557,
+          "totalMs": 29063.399999976158,
+          "grade": "good",
+          "textsPerSecond": 14.641288418049392
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 5
+        },
+        "quality": {
+          "finite": true,
+          "validOffsets": true,
+          "nondegenerate": true,
+          "expected": [
+            {
+              "text": "Cape Kennedy",
+              "label": "LOC",
+              "found": true,
+              "score": 0.9120904207229614,
+              "pass": true
+            },
+            {
+              "text": "Neil Armstrong",
+              "label": "PER",
+              "found": true,
+              "score": 0.9852735102176666,
+              "pass": true
+            },
+            {
+              "text": "Michael Collins",
+              "label": "PER",
+              "found": true,
+              "score": 0.9911523163318634,
+              "pass": true
+            },
+            {
+              "text": "Edwin Buzz Aldrin",
+              "label": "PER",
+              "found": false,
+              "score": null,
+              "pass": false
+            }
+          ],
+          "recall": 0.75,
+          "grade": "failed"
+        },
+        "nativeOutput": {
+          "entities": [
+            {
+              "text": "Apollo 11",
+              "label": "MISC",
+              "score": 0.9693282246589661,
+              "start": 0,
+              "end": 9
+            },
+            {
+              "text": "Cape Kennedy",
+              "label": "LOC",
+              "score": 0.9120904207229614,
+              "start": 24,
+              "end": 36
+            },
+            {
+              "text": "Neil Armstrong",
+              "label": "PER",
+              "score": 0.9852735102176666,
+              "start": 74,
+              "end": 88
+            },
+            {
+              "text": "Michael Collins",
+              "label": "PER",
+              "score": 0.9911523163318634,
+              "start": 111,
+              "end": 126
+            },
+            {
+              "text": "Edwin Buzz Aldr",
+              "label": "PER",
+              "score": 0.9529557377099991,
+              "start": 150,
+              "end": 165
+            }
+          ]
+        }
+      },
+      {
+        "precision": "int8",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": 19456.799999952316,
+          "inferenceMs": 194.29999995231628,
+          "totalMs": 21021.399999976158,
+          "grade": "slow",
+          "textsPerSecond": 5.146680392410771
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 5
+        },
+        "quality": {
+          "finite": true,
+          "validOffsets": true,
+          "nondegenerate": true,
+          "expected": [
+            {
+              "text": "Cape Kennedy",
+              "label": "LOC",
+              "found": true,
+              "score": 0.9895126521587372,
+              "pass": true
+            },
+            {
+              "text": "Neil Armstrong",
+              "label": "PER",
+              "found": true,
+              "score": 0.9993838667869568,
+              "pass": true
+            },
+            {
+              "text": "Michael Collins",
+              "label": "PER",
+              "found": true,
+              "score": 0.9995821416378021,
+              "pass": true
+            },
+            {
+              "text": "Edwin Buzz Aldrin",
+              "label": "PER",
+              "found": false,
+              "score": null,
+              "pass": false
+            }
+          ],
+          "recall": 0.75,
+          "grade": "failed"
+        },
+        "nativeOutput": {
+          "entities": [
+            {
+              "text": "Apollo 11",
+              "label": "MISC",
+              "score": 0.9847011566162109,
+              "start": 0,
+              "end": 9
+            },
+            {
+              "text": "Cape Kennedy",
+              "label": "LOC",
+              "score": 0.9895126521587372,
+              "start": 24,
+              "end": 36
+            },
+            {
+              "text": "Neil Armstrong",
+              "label": "PER",
+              "score": 0.9993838667869568,
+              "start": 74,
+              "end": 88
+            },
+            {
+              "text": "Mo",
+              "label": "MISC",
+              "score": 0.5436915159225464,
+              "start": 98,
+              "end": 100
+            },
+            {
+              "text": "Michael Collins",
+              "label": "PER",
+              "score": 0.9995821416378021,
+              "start": 111,
+              "end": 126
+            },
+            {
+              "text": "Luna",
+              "label": "ORG",
+              "score": 0.5437778234481812,
+              "start": 131,
+              "end": 135
+            },
+            {
+              "text": "r Mo",
+              "label": "MISC",
+              "score": 0.7193880677223206,
+              "start": 135,
+              "end": 139
+            },
+            {
+              "text": "Edwin Buzz Aldr",
+              "label": "PER",
+              "score": 0.9942123293876648,
+              "start": 150,
+              "end": 165
+            }
+          ]
+        }
+      },
+      {
+        "precision": "int8",
+        "device": "webgpu",
+        "status": "fail",
+        "runtime": {
+          "loadMs": 18314.100000023842,
+          "inferenceMs": 362.09999990463257,
+          "totalMs": 19945.100000023842,
+          "grade": "slow",
+          "textsPerSecond": 2.7616680482280396
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 5
+        },
+        "quality": {
+          "finite": true,
+          "validOffsets": true,
+          "nondegenerate": true,
+          "expected": [
+            {
+              "text": "Cape Kennedy",
+              "label": "LOC",
+              "found": true,
+              "score": 0.9833778142929077,
+              "pass": true
+            },
+            {
+              "text": "Neil Armstrong",
+              "label": "PER",
+              "found": true,
+              "score": 0.9993617832660675,
+              "pass": true
+            },
+            {
+              "text": "Michael Collins",
+              "label": "PER",
+              "found": true,
+              "score": 0.9995712041854858,
+              "pass": true
+            },
+            {
+              "text": "Edwin Buzz Aldrin",
+              "label": "PER",
+              "found": false,
+              "score": null,
+              "pass": false
+            }
+          ],
+          "recall": 0.75,
+          "grade": "failed"
+        },
+        "nativeOutput": {
+          "entities": [
+            {
+              "text": "Apollo 11",
+              "label": "MISC",
+              "score": 0.9845874309539795,
+              "start": 0,
+              "end": 9
+            },
+            {
+              "text": "Cape Kennedy",
+              "label": "LOC",
+              "score": 0.9833778142929077,
+              "start": 24,
+              "end": 36
+            },
+            {
+              "text": "Neil Armstrong",
+              "label": "PER",
+              "score": 0.9993617832660675,
+              "start": 74,
+              "end": 88
+            },
+            {
+              "text": "Mo",
+              "label": "MISC",
+              "score": 0.5497977137565613,
+              "start": 98,
+              "end": 100
+            },
+            {
+              "text": "Michael Collins",
+              "label": "PER",
+              "score": 0.9995712041854858,
+              "start": 111,
+              "end": 126
+            },
+            {
+              "text": "Luna",
+              "label": "ORG",
+              "score": 0.5676622986793518,
+              "start": 131,
+              "end": 135
+            },
+            {
+              "text": "r Mo",
+              "label": "MISC",
+              "score": 0.6439396739006042,
+              "start": 135,
+              "end": 139
+            },
+            {
+              "text": "Edwin Buzz Aldr",
+              "label": "PER",
+              "score": 0.9971764236688614,
+              "start": 150,
+              "end": 165
+            }
+          ]
+        }
+      },
+      {
+        "precision": "uint8",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": 20562.299999952316,
+          "inferenceMs": 197.29999995231628,
+          "totalMs": 22139.100000023842,
+          "grade": "slow",
+          "textsPerSecond": 5.068423721447954
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 5
+        },
+        "quality": {
+          "finite": true,
+          "validOffsets": true,
+          "nondegenerate": true,
+          "expected": [
+            {
+              "text": "Cape Kennedy",
+              "label": "LOC",
+              "found": true,
+              "score": 0.979133665561676,
+              "pass": true
+            },
+            {
+              "text": "Neil Armstrong",
+              "label": "PER",
+              "found": true,
+              "score": 0.9994161427021027,
+              "pass": true
+            },
+            {
+              "text": "Michael Collins",
+              "label": "PER",
+              "found": true,
+              "score": 0.9995928108692169,
+              "pass": true
+            },
+            {
+              "text": "Edwin Buzz Aldrin",
+              "label": "PER",
+              "found": false,
+              "score": null,
+              "pass": false
+            }
+          ],
+          "recall": 0.75,
+          "grade": "failed"
+        },
+        "nativeOutput": {
+          "entities": [
+            {
+              "text": "Apollo 11",
+              "label": "MISC",
+              "score": 0.979265421628952,
+              "start": 0,
+              "end": 9
+            },
+            {
+              "text": "Cape Kennedy",
+              "label": "LOC",
+              "score": 0.979133665561676,
+              "start": 24,
+              "end": 36
+            },
+            {
+              "text": "Neil Armstrong",
+              "label": "PER",
+              "score": 0.9994161427021027,
+              "start": 74,
+              "end": 88
+            },
+            {
+              "text": "Command",
+              "label": "ORG",
+              "score": 0.4575088620185852,
+              "start": 90,
+              "end": 97
+            },
+            {
+              "text": "Mo",
+              "label": "MISC",
+              "score": 0.6478571891784668,
+              "start": 98,
+              "end": 100
+            },
+            {
+              "text": "Michael Collins",
+              "label": "PER",
+              "score": 0.9995928108692169,
+              "start": 111,
+              "end": 126
+            },
+            {
+              "text": "Luna",
+              "label": "ORG",
+              "score": 0.48540082573890686,
+              "start": 131,
+              "end": 135
+            },
+            {
+              "text": "r Mo",
+              "label": "MISC",
+              "score": 0.719475269317627,
+              "start": 135,
+              "end": 139
+            },
+            {
+              "text": "Edwin Buzz Aldr",
+              "label": "PER",
+              "score": 0.9953564256429672,
+              "start": 150,
+              "end": 165
+            },
+            {
+              "text": "Earth",
+              "label": "MISC",
+              "score": 0.4429987072944641,
+              "start": 184,
+              "end": 189
+            }
+          ]
+        }
+      },
+      {
+        "precision": "uint8",
+        "device": "webgpu",
+        "status": "fail",
+        "runtime": {
+          "loadMs": 18230.300000071526,
+          "inferenceMs": 285.7999999523163,
+          "totalMs": 19954.700000047684,
+          "grade": "slow",
+          "textsPerSecond": 3.4989503154893034
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 5
+        },
+        "quality": {
+          "finite": true,
+          "validOffsets": true,
+          "nondegenerate": true,
+          "expected": [
+            {
+              "text": "Cape Kennedy",
+              "label": "LOC",
+              "found": true,
+              "score": 0.9817031025886536,
+              "pass": true
+            },
+            {
+              "text": "Neil Armstrong",
+              "label": "PER",
+              "found": true,
+              "score": 0.9994866847991943,
+              "pass": true
+            },
+            {
+              "text": "Michael Collins",
+              "label": "PER",
+              "found": true,
+              "score": 0.9995744526386261,
+              "pass": true
+            },
+            {
+              "text": "Edwin Buzz Aldrin",
+              "label": "PER",
+              "found": false,
+              "score": null,
+              "pass": false
+            }
+          ],
+          "recall": 0.75,
+          "grade": "failed"
+        },
+        "nativeOutput": {
+          "entities": [
+            {
+              "text": "Apollo 11",
+              "label": "MISC",
+              "score": 0.9818187952041626,
+              "start": 0,
+              "end": 9
+            },
+            {
+              "text": "Cape Kennedy",
+              "label": "LOC",
+              "score": 0.9817031025886536,
+              "start": 24,
+              "end": 36
+            },
+            {
+              "text": "Neil Armstrong",
+              "label": "PER",
+              "score": 0.9994866847991943,
+              "start": 74,
+              "end": 88
+            },
+            {
+              "text": "Mo",
+              "label": "MISC",
+              "score": 0.645115077495575,
+              "start": 98,
+              "end": 100
+            },
+            {
+              "text": "Michael Collins",
+              "label": "PER",
+              "score": 0.9995744526386261,
+              "start": 111,
+              "end": 126
+            },
+            {
+              "text": "r Mo",
+              "label": "MISC",
+              "score": 0.693332701921463,
+              "start": 135,
+              "end": 139
+            },
+            {
+              "text": "Edwin Buzz Aldr",
+              "label": "PER",
+              "score": 0.9960633367300034,
+              "start": 150,
+              "end": 165
+            },
+            {
+              "text": "Earth",
+              "label": "LOC",
+              "score": 0.5496315360069275,
+              "start": 184,
+              "end": 189
+            }
+          ]
+        }
+      },
+      {
+        "precision": "q8",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 19248.100000023842,
+          "inferenceMs": 198.39999997615814,
+          "totalMs": 20881.299999952316,
+          "grade": "slow",
+          "textsPerSecond": 5.0403225812508605
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 5
+        },
+        "quality": {
+          "finite": true,
+          "validOffsets": true,
+          "nondegenerate": true,
+          "expected": [
+            {
+              "text": "Cape Kennedy",
+              "label": "LOC",
+              "found": true,
+              "score": 0.9723472595214844,
+              "pass": true
+            },
+            {
+              "text": "Neil Armstrong",
+              "label": "PER",
+              "found": true,
+              "score": 0.999410480260849,
+              "pass": true
+            },
+            {
+              "text": "Michael Collins",
+              "label": "PER",
+              "found": true,
+              "score": 0.9996160864830017,
+              "pass": true
+            },
+            {
+              "text": "Edwin Buzz Aldrin",
+              "label": "PER",
+              "found": true,
+              "score": 0.9106517434120178,
+              "pass": true
+            }
+          ],
+          "recall": 1,
+          "grade": "ner-span-pass"
+        },
+        "nativeOutput": {
+          "entities": [
+            {
+              "text": "Apollo 11",
+              "label": "MISC",
+              "score": 0.9887833893299103,
+              "start": 0,
+              "end": 9
+            },
+            {
+              "text": "Cape Kennedy",
+              "label": "LOC",
+              "score": 0.9723472595214844,
+              "start": 24,
+              "end": 36
+            },
+            {
+              "text": "Neil Armstrong",
+              "label": "PER",
+              "score": 0.999410480260849,
+              "start": 74,
+              "end": 88
+            },
+            {
+              "text": "Mo",
+              "label": "MISC",
+              "score": 0.7967544198036194,
+              "start": 98,
+              "end": 100
+            },
+            {
+              "text": "Michael Collins",
+              "label": "PER",
+              "score": 0.9996160864830017,
+              "start": 111,
+              "end": 126
+            },
+            {
+              "text": "r Mo",
+              "label": "MISC",
+              "score": 0.7257153689861298,
+              "start": 135,
+              "end": 139
+            },
+            {
+              "text": "Edwin Buzz Aldrin",
+              "label": "PER",
+              "score": 0.9106517434120178,
+              "start": 150,
+              "end": 167
+            },
+            {
+              "text": "Earth",
+              "label": "LOC",
+              "score": 0.5879764556884766,
+              "start": 184,
+              "end": 189
+            }
+          ]
+        }
+      },
+      {
+        "precision": "q8",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 16627.100000023842,
+          "inferenceMs": 363,
+          "totalMs": 18244.899999976158,
+          "grade": "slow",
+          "textsPerSecond": 2.7548209366391183
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 5
+        },
+        "quality": {
+          "finite": true,
+          "validOffsets": true,
+          "nondegenerate": true,
+          "expected": [
+            {
+              "text": "Cape Kennedy",
+              "label": "LOC",
+              "found": true,
+              "score": 0.9673751592636108,
+              "pass": true
+            },
+            {
+              "text": "Neil Armstrong",
+              "label": "PER",
+              "found": true,
+              "score": 0.9993798434734344,
+              "pass": true
+            },
+            {
+              "text": "Michael Collins",
+              "label": "PER",
+              "found": true,
+              "score": 0.999609112739563,
+              "pass": true
+            },
+            {
+              "text": "Edwin Buzz Aldrin",
+              "label": "PER",
+              "found": true,
+              "score": 0.9028891444206237,
+              "pass": true
+            }
+          ],
+          "recall": 1,
+          "grade": "ner-span-pass"
+        },
+        "nativeOutput": {
+          "entities": [
+            {
+              "text": "Apollo 11",
+              "label": "MISC",
+              "score": 0.9879066050052643,
+              "start": 0,
+              "end": 9
+            },
+            {
+              "text": "Cape Kennedy",
+              "label": "LOC",
+              "score": 0.9673751592636108,
+              "start": 24,
+              "end": 36
+            },
+            {
+              "text": "Neil Armstrong",
+              "label": "PER",
+              "score": 0.9993798434734344,
+              "start": 74,
+              "end": 88
+            },
+            {
+              "text": "Mo",
+              "label": "MISC",
+              "score": 0.8009626865386963,
+              "start": 98,
+              "end": 100
+            },
+            {
+              "text": "Michael Collins",
+              "label": "PER",
+              "score": 0.999609112739563,
+              "start": 111,
+              "end": 126
+            },
+            {
+              "text": "r Mo",
+              "label": "MISC",
+              "score": 0.6981872171163559,
+              "start": 135,
+              "end": 139
+            },
+            {
+              "text": "Edwin Buzz Aldrin",
+              "label": "PER",
+              "score": 0.9028891444206237,
+              "start": 150,
+              "end": 167
+            },
+            {
+              "text": "Earth",
+              "label": "LOC",
+              "score": 0.5434020757675171,
+              "start": 184,
+              "end": 189
+            }
+          ]
+        }
+      },
+      {
+        "precision": "q4",
+        "device": "wasm",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 20310.100000023842,
+          "inferenceMs": 302.10000002384186,
+          "totalMs": 21789.799999952316,
+          "grade": "slow",
+          "textsPerSecond": 3.31016219768646
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 5
+        },
+        "quality": {
+          "finite": true,
+          "validOffsets": true,
+          "nondegenerate": true,
+          "expected": [
+            {
+              "text": "Cape Kennedy",
+              "label": "LOC",
+              "found": true,
+              "score": 0.9928421080112457,
+              "pass": true
+            },
+            {
+              "text": "Neil Armstrong",
+              "label": "PER",
+              "found": true,
+              "score": 0.9995550215244293,
+              "pass": true
+            },
+            {
+              "text": "Michael Collins",
+              "label": "PER",
+              "found": true,
+              "score": 0.9995963275432587,
+              "pass": true
+            },
+            {
+              "text": "Edwin Buzz Aldrin",
+              "label": "PER",
+              "found": true,
+              "score": 0.9127414464950562,
+              "pass": true
+            }
+          ],
+          "recall": 1,
+          "grade": "ner-span-pass"
+        },
+        "nativeOutput": {
+          "entities": [
+            {
+              "text": "Apollo 11",
+              "label": "MISC",
+              "score": 0.9903784692287445,
+              "start": 0,
+              "end": 9
+            },
+            {
+              "text": "Cape Kennedy",
+              "label": "LOC",
+              "score": 0.9928421080112457,
+              "start": 24,
+              "end": 36
+            },
+            {
+              "text": "Neil Armstrong",
+              "label": "PER",
+              "score": 0.9995550215244293,
+              "start": 74,
+              "end": 88
+            },
+            {
+              "text": "Mo",
+              "label": "MISC",
+              "score": 0.6837272644042969,
+              "start": 98,
+              "end": 100
+            },
+            {
+              "text": "Michael Collins",
+              "label": "PER",
+              "score": 0.9995963275432587,
+              "start": 111,
+              "end": 126
+            },
+            {
+              "text": "Mo",
+              "label": "MISC",
+              "score": 0.7674357295036316,
+              "start": 137,
+              "end": 139
+            },
+            {
+              "text": "Edwin Buzz Aldrin",
+              "label": "PER",
+              "score": 0.9127414464950562,
+              "start": 150,
+              "end": 167
+            },
+            {
+              "text": "Earth",
+              "label": "MISC",
+              "score": 0.40399646759033203,
+              "start": 184,
+              "end": 189
+            }
+          ]
+        }
+      },
+      {
+        "precision": "q4",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 20363,
+          "inferenceMs": 91.39999997615814,
+          "totalMs": 21691.099999904633,
+          "grade": "good",
+          "textsPerSecond": 10.940919040053084
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 5
+        },
+        "quality": {
+          "finite": true,
+          "validOffsets": true,
+          "nondegenerate": true,
+          "expected": [
+            {
+              "text": "Cape Kennedy",
+              "label": "LOC",
+              "found": true,
+              "score": 0.9928420782089233,
+              "pass": true
+            },
+            {
+              "text": "Neil Armstrong",
+              "label": "PER",
+              "found": true,
+              "score": 0.9995550215244293,
+              "pass": true
+            },
+            {
+              "text": "Michael Collins",
+              "label": "PER",
+              "found": true,
+              "score": 0.9995963275432587,
+              "pass": true
+            },
+            {
+              "text": "Edwin Buzz Aldrin",
+              "label": "PER",
+              "found": true,
+              "score": 0.9127416491508484,
+              "pass": true
+            }
+          ],
+          "recall": 1,
+          "grade": "ner-span-pass"
+        },
+        "nativeOutput": {
+          "entities": [
+            {
+              "text": "Apollo 11",
+              "label": "MISC",
+              "score": 0.9903784394264221,
+              "start": 0,
+              "end": 9
+            },
+            {
+              "text": "Cape Kennedy",
+              "label": "LOC",
+              "score": 0.9928420782089233,
+              "start": 24,
+              "end": 36
+            },
+            {
+              "text": "Neil Armstrong",
+              "label": "PER",
+              "score": 0.9995550215244293,
+              "start": 74,
+              "end": 88
+            },
+            {
+              "text": "Mo",
+              "label": "MISC",
+              "score": 0.6837257146835327,
+              "start": 98,
+              "end": 100
+            },
+            {
+              "text": "Michael Collins",
+              "label": "PER",
+              "score": 0.9995963275432587,
+              "start": 111,
+              "end": 126
+            },
+            {
+              "text": "Mo",
+              "label": "MISC",
+              "score": 0.7674339413642883,
+              "start": 137,
+              "end": 139
+            },
+            {
+              "text": "Edwin Buzz Aldrin",
+              "label": "PER",
+              "score": 0.9127416491508484,
+              "start": 150,
+              "end": 167
+            },
+            {
+              "text": "Earth",
+              "label": "MISC",
+              "score": 0.40399664640426636,
+              "start": 184,
+              "end": 189
+            }
+          ]
+        }
+      },
+      {
+        "precision": "q4f16",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": null,
+          "inferenceMs": null,
+          "totalMs": 17129.299999952316,
+          "grade": "failed"
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 5
+        },
+        "error": "Error: Can't create a session. ERROR_CODE: 1, ERROR_MESSAGE: /mnt/vss/_work/1/s/onnxruntime/core/graph/graph_utils.cc:30 int onnxruntime::graph_utils::GetIndexFromName(const Node &, const std::string &, bool) itr != node_args.end() was false. Attempting to get index by a name which does not exist:InsertedPrecisionFreeCast_/bert/embeddings/LayerNorm/Constant_output_0for node: /bert/embeddings/LayerNorm/Mul/SimplifiedLayerNormFusion/\n"
+      },
+      {
+        "precision": "q4f16",
+        "device": "webgpu",
+        "status": "fail",
+        "runtime": {
+          "loadMs": 15915.899999976158,
+          "inferenceMs": 68.89999997615814,
+          "totalMs": 17249.600000023842,
+          "grade": "good",
+          "textsPerSecond": 14.513788103716047
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 5
+        },
+        "quality": {
+          "finite": true,
+          "validOffsets": true,
+          "nondegenerate": true,
+          "expected": [
+            {
+              "text": "Cape Kennedy",
+              "label": "LOC",
+              "found": true,
+              "score": 0.9028969407081604,
+              "pass": true
+            },
+            {
+              "text": "Neil Armstrong",
+              "label": "PER",
+              "found": true,
+              "score": 0.98146653175354,
+              "pass": true
+            },
+            {
+              "text": "Michael Collins",
+              "label": "PER",
+              "found": true,
+              "score": 0.9889111220836639,
+              "pass": true
+            },
+            {
+              "text": "Edwin Buzz Aldrin",
+              "label": "PER",
+              "found": false,
+              "score": null,
+              "pass": false
+            }
+          ],
+          "recall": 0.75,
+          "grade": "failed"
+        },
+        "nativeOutput": {
+          "entities": [
+            {
+              "text": "Apollo 11",
+              "label": "MISC",
+              "score": 0.9702254235744476,
+              "start": 0,
+              "end": 9
+            },
+            {
+              "text": "Cape Kennedy",
+              "label": "LOC",
+              "score": 0.9028969407081604,
+              "start": 24,
+              "end": 36
+            },
+            {
+              "text": "Neil Armstrong",
+              "label": "PER",
+              "score": 0.98146653175354,
+              "start": 74,
+              "end": 88
+            },
+            {
+              "text": "Michael Collins",
+              "label": "PER",
+              "score": 0.9889111220836639,
+              "start": 111,
+              "end": 126
+            },
+            {
+              "text": "Edwin Buzz Aldr",
+              "label": "PER",
+              "score": 0.9181666672229767,
+              "start": 150,
+              "end": 165
+            }
+          ]
+        }
+      },
+      {
+        "precision": "bnb4",
+        "device": "wasm",
+        "status": "fail",
+        "runtime": {
+          "loadMs": 21031.100000023842,
+          "inferenceMs": 234.29999995231628,
+          "totalMs": 22572.199999928474,
+          "grade": "slow",
+          "textsPerSecond": 4.268032437915133
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 5
+        },
+        "quality": {
+          "finite": true,
+          "validOffsets": true,
+          "nondegenerate": true,
+          "expected": [
+            {
+              "text": "Cape Kennedy",
+              "label": "LOC",
+              "found": true,
+              "score": 0.9878316521644592,
+              "pass": true
+            },
+            {
+              "text": "Neil Armstrong",
+              "label": "PER",
+              "found": true,
+              "score": 0.9994357824325562,
+              "pass": true
+            },
+            {
+              "text": "Michael Collins",
+              "label": "PER",
+              "found": true,
+              "score": 0.9995394051074982,
+              "pass": true
+            },
+            {
+              "text": "Edwin Buzz Aldrin",
+              "label": "PER",
+              "found": false,
+              "score": null,
+              "pass": false
+            }
+          ],
+          "recall": 0.75,
+          "grade": "failed"
+        },
+        "nativeOutput": {
+          "entities": [
+            {
+              "text": "Apollo 11",
+              "label": "MISC",
+              "score": 0.9897302091121674,
+              "start": 0,
+              "end": 9
+            },
+            {
+              "text": "Cape Kennedy",
+              "label": "LOC",
+              "score": 0.9878316521644592,
+              "start": 24,
+              "end": 36
+            },
+            {
+              "text": "Neil Armstrong",
+              "label": "PER",
+              "score": 0.9994357824325562,
+              "start": 74,
+              "end": 88
+            },
+            {
+              "text": "Mo",
+              "label": "MISC",
+              "score": 0.6922024488449097,
+              "start": 98,
+              "end": 100
+            },
+            {
+              "text": "Michael Collins",
+              "label": "PER",
+              "score": 0.9995394051074982,
+              "start": 111,
+              "end": 126
+            },
+            {
+              "text": "Mo",
+              "label": "MISC",
+              "score": 0.8602355122566223,
+              "start": 137,
+              "end": 139
+            },
+            {
+              "text": "Edwin Buzz Aldr",
+              "label": "PER",
+              "score": 0.9988054037094116,
+              "start": 150,
+              "end": 165
+            },
+            {
+              "text": "Earth",
+              "label": "MISC",
+              "score": 0.6147610545158386,
+              "start": 184,
+              "end": 189
+            }
+          ]
+        }
+      },
+      {
+        "precision": "bnb4",
+        "device": "webgpu",
+        "status": "fail",
+        "runtime": {
+          "loadMs": 20800.199999928474,
+          "inferenceMs": 417.3000000715256,
+          "totalMs": 22650.799999952316,
+          "grade": "slow",
+          "textsPerSecond": 2.396357536133715
+        },
+        "cleanup": {
+          "modelDisposed": true,
+          "cacheClearedBeforeCase": true,
+          "cacheClearedAfterCase": true,
+          "deletedEntries": 5
+        },
+        "quality": {
+          "finite": true,
+          "validOffsets": true,
+          "nondegenerate": true,
+          "expected": [
+            {
+              "text": "Cape Kennedy",
+              "label": "LOC",
+              "found": true,
+              "score": 0.9878315925598145,
+              "pass": true
+            },
+            {
+              "text": "Neil Armstrong",
+              "label": "PER",
+              "found": true,
+              "score": 0.9994357824325562,
+              "pass": true
+            },
+            {
+              "text": "Michael Collins",
+              "label": "PER",
+              "found": true,
+              "score": 0.9995394051074982,
+              "pass": true
+            },
+            {
+              "text": "Edwin Buzz Aldrin",
+              "label": "PER",
+              "found": false,
+              "score": null,
+              "pass": false
+            }
+          ],
+          "recall": 0.75,
+          "grade": "failed"
+        },
+        "nativeOutput": {
+          "entities": [
+            {
+              "text": "Apollo 11",
+              "label": "MISC",
+              "score": 0.9897301495075226,
+              "start": 0,
+              "end": 9
+            },
+            {
+              "text": "Cape Kennedy",
+              "label": "LOC",
+              "score": 0.9878315925598145,
+              "start": 24,
+              "end": 36
+            },
+            {
+              "text": "Neil Armstrong",
+              "label": "PER",
+              "score": 0.9994357824325562,
+              "start": 74,
+              "end": 88
+            },
+            {
+              "text": "Mo",
+              "label": "MISC",
+              "score": 0.6922008395195007,
+              "start": 98,
+              "end": 100
+            },
+            {
+              "text": "Michael Collins",
+              "label": "PER",
+              "score": 0.9995394051074982,
+              "start": 111,
+              "end": 126
+            },
+            {
+              "text": "Mo",
+              "label": "MISC",
+              "score": 0.8602346181869507,
+              "start": 137,
+              "end": 139
+            },
+            {
+              "text": "Edwin Buzz Aldr",
+              "label": "PER",
+              "score": 0.9988054186105728,
+              "start": 150,
+              "end": 165
+            },
+            {
+              "text": "Earth",
+              "label": "MISC",
+              "score": 0.6147603392601013,
+              "start": 184,
+              "end": 189
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

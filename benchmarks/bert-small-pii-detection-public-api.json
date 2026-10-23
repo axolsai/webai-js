@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "onboardingComplete": false,
+  "contract": "not yet conformant",
+  "recommendedConfiguration": null,
+  "manifestDiscovered": true,
+  "unsupportedConfigurationsRejected": true,
+  "initError": "Error: [WorkerError:initialization_failed] Precision 'q4' is not supported for this model. Supported precisions are: ",
+  "streamError": "Error: Stream generation is not supported by model 'bert-small-pii-detection'.",
+  "clearMemoryVerified": true,
+  "blockers": [
+    "No precision/device combination passes the checked-in contact-span quality gate. All successful inference cases omit the reference phone number. FP16 and Q4F16 fail ONNX session creation on both backends.",
+    "A recommended configuration cannot be verified through the public WebAI API until a combination passes the quality gate."
+  ]
+}

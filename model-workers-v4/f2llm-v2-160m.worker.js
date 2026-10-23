@@ -83,7 +83,7 @@ const MANIFEST = {
   },
   input: {
     description: "One or more non-empty strings.",
-    alternatives: [{ name: "texts", type: "string[]", required: true }],
+    alternatives: [{ name: "texts", type: "string[]", required: true, minItems: 1, items: { type: "string", minLength: 1 } }],
   },
   config: {
     model: [

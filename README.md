@@ -72,18 +72,20 @@ try {
 
 ## Model collection
 
-The v4 directory contains 49 workers. These are examples of the tasks they cover; the [worker directory](model-workers-v4/) is the source of truth for exact model IDs.
+The v4 directory contains 61 workers (including the unsupported BERT PII draft). These are examples of the tasks they cover; the [worker directory](model-workers-v4/) is the source of truth for exact model IDs.
 
 | Task | Example workers | What they return |
 | --- | --- | --- |
 | Chat and text generation | `qwen3.5-0.8b`, `apertus-v1.1-0.5b`, Gemma 4 LiteRT-LM workers | Generated text; streaming where implemented |
 | Embeddings and retrieval | `all-minilm-l6-v2`, `bge-small-en-v1.5`, `bge-m3`, `embeddinggemma-300m`, `granite-embedding-97m-multilingual-r2` | Vectors for similarity or search |
 | Reranking | `bge-reranker-base`, `bge-reranker-large` | Query-document relevance rankings |
-| Speech and audio | Whisper variants, Moonshine variants, `cohere-transcribe-03-2026`, `kokoro-82m-v1`, `wav2vec2-base-superb-er` | Transcripts, synthesized audio, or audio labels |
-| Text classification | `distilbert-base-uncased-finetuned-sst-2-english`, `ettinx-nli-xs`, `rubert-tiny-toxicity`, `privacy-filter` | Task-specific labels, scores, or spans |
-| Image understanding | `florence-2-base-ft`, `siglip-base-patch16-224`, `detr-resnet-50`, `depth-anything-v3-small` | Captions, similarity, detections, or depth |
-| Segmentation and matting | `sam-vit-base`, `sam-vit-large`, `segformer-b3-ade20k`, `modnet`, `vitmatte-small-composition-1k` | Masks or alpha mattes |
-| Landmarks and detection | MediaPipe face/hand workers, `yolox-m-litert`, `face-emotion-detection` | Landmarks, boxes, or classification scores |
+| Speech and audio | Whisper variants, Moonshine variants, `cohere-transcribe-03-2026`, `kokoro-82m-v1`, `speecht5-tts`, `wav2vec2-base-superb-er` | Transcripts, synthesized audio, or audio labels |
+| Text classification | `bert-base-ner`, `distilbert-base-uncased-finetuned-sst-2-english`, `ettinx-nli-xs`, `rubert-tiny-toxicity`, `privacy-filter` | Task-specific labels, scores, or spans |
+| Typed decisions | `open-jev-deberta-v3-large`, `open-jev-laya-multilingual`, `laya-typed-decisions` | Choice, ordered-score, and yes/no distributions |
+| Image understanding | `florence-2-base-ft`, `siglip-base-patch16-224`, `detr-resnet-50`, `grounding-dino-tiny`, `depth-anything-v3-small` | Captions, similarity, fixed-label or prompt-conditioned detections, or depth |
+| Segmentation and matting | `sam-vit-base`, `sam-vit-large`, `segformer-b3-ade20k`, `modnet`, `vitmatte-small-composition-1k`, `vitmatte-base-composition-1k`, `vitmatte-base-distinctions-646` | Masks or alpha mattes |
+| Image super-resolution | `swin2sr-realworld-sr-x4-64-bsrgan-psnr` | 4× RGB image pixels |
+| Landmarks and detection | MediaPipe face/hand workers, `yolov8n-pose`, `yolox-m-litert`, `face-emotion-detection` | Landmarks, boxes, or classification scores |
 
 Each worker has its own required input and output shape. Do not assume that a chat request, an image URL, and an audio buffer are interchangeable just because they use the same `generate()` method. Read the worker's manifest before building a UI for it.
 
@@ -121,3 +123,5 @@ The local, Git-ignored `test-app/` contains task-specific playgrounds and benchm
 WebAI.js is licensed under [Apache 2.0](LICENSE). Individual models have their own licenses; inspect each worker's `model.license` and `model.licenseUrl` before use.
 
 Created by Peng Zhang. [Homepage](https://www.webai-js.com) · [Discussions](https://github.com/axols/webai-js/discussions) · [Discord](https://discord.gg/RkpAKgZC)
+
+BERT Small PII Detection onboarding is blocked: none of its 16 tested precision/backend combinations passed the contact-span quality gate. The draft `bert-small-pii-detection` worker advertises no supported configurations. See [the benchmark report](benchmarks/bert-small-pii-detection.json) for outputs and failures.
