@@ -4,3 +4,4 @@ export * from './utils/types';
 export * from './utils/errors';
 export * from './utils/utils';
 export default WebAI;
+export * from "./utils/samples";

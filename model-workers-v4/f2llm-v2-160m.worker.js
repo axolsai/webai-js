@@ -82,9 +82,26 @@ const MANIFEST = {
     precisions: SUPPORTED,
   },
   input: {
-    description: "One or more non-empty strings.",
-    alternatives: [{ name: "texts", type: "string[]", required: true, minItems: 1, items: { type: "string", minLength: 1 } }],
-  },
+  "description": "One or more non-empty strings.",
+  "alternatives": [
+    {
+      "name": "texts",
+      "description": "One or more non-empty strings.",
+      "fields": [
+        {
+          "name": "texts",
+          "type": "string[]",
+          "required": true,
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      ]
+    }
+  ]
+},
   config: {
     model: [
       {
@@ -190,6 +207,36 @@ const MANIFEST = {
       },
     ],
   },
+
+  samples: [
+  {
+    "id": "standard",
+    "label": "Try sample text",
+    "description": "Standard sample for F2LLM-v2 160M — Multilingual Embeddings.",
+    "userInput": {
+      "texts": [
+        "Instruct: Given a question, retrieve passages that can help answer the question.\nQuery: What is the capital of France?",
+        "Paris is the capital and largest city of France.",
+        "Whales are large marine mammals that live in the ocean."
+      ]
+    },
+    "assets": [],
+    "modelConfig": {
+      "pooling": "last_token",
+      "normalize": true
+    },
+    "generateConfig": {},
+    "source": "Original WebAI semantic retrieval fixture.",
+    "license": "Apache-2.0",
+    "fixture": {
+      "file": "model-samples/f2llm-v2-160m.json",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/f2llm-v2-160m.json",
+      "size": 576,
+      "sha1": "e8a6ac52dcbb23157d108932572d2c44e173e48a"
+    },
+    "benchmarkReport": "benchmarks/f2llm-v2-160m.json"
+  }
+],
 };
 const state = { initializing: false, initialized: false, generating: false };
 let extractor = null;

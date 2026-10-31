@@ -52,6 +52,39 @@ const MANIFEST = {
     invalidatedBy: ["artifact revision change", "runtime version change", "fixture or quality-gate change", "browser/backend behavior change"],
     results: [{"precision":"fp32","device":"wasm","status":"pass","runtime":{"loadMs":14697,"inferenceMs":6142,"totalMs":21042,"grade":"very-slow","megapixelsPerSecond":0.11387040052100293},"quality":{"dimensions":true,"finite":true,"uniqueLabels":true,"requiredLabelsPresent":true,"areas":{"background":0.7762499428074671,"skin":0.05067115437408492,"eye_g":0.018614739659590044,"hair":0.07427165309297218,"hat":0.028283137353587114,"neck":0.00002287701317715959,"cloth":0.05188649569912152},"nonBackgroundRatio":0.22375005719253294,"grade":"face-parsing-pass"},"cleanup":{"modelDisposed":true,"cacheClearedBeforeCase":true,"cacheClearedAfterCase":true,"deletedEntries":3}},{"precision":"fp32","device":"webgpu","status":"pass","runtime":{"loadMs":15167.5,"inferenceMs":820.2000000178814,"totalMs":16193.800000011921,"grade":"slow","megapixelsPerSecond":0.8527090953240093},"quality":{"dimensions":true,"finite":true,"uniqueLabels":true,"requiredLabelsPresent":true,"areas":{"background":0.7762499428074671,"skin":0.05067115437408492,"eye_g":0.018614739659590044,"hair":0.07427165309297218,"hat":0.028283137353587114,"neck":0.00002287701317715959,"cloth":0.05188649569912152},"nonBackgroundRatio":0.22375005719253294,"grade":"face-parsing-pass"},"cleanup":{"modelDisposed":true,"cacheClearedBeforeCase":true,"cacheClearedAfterCase":true,"deletedEntries":3}},{"precision":"fp16","device":"wasm","status":"fail","runtime":{"loadMs":null,"inferenceMs":null,"totalMs":14044.800000011921,"grade":"failed"},"error":"Error: Can't create a session. ERROR_CODE: 1, ERROR_MESSAGE: /mnt/vss/_work/1/s/onnxruntime/core/graph/graph_utils.cc:30 int onnxruntime::graph_utils::GetIndexFromName(const Node &, const std::string &, bool) itr != node_args.end() was false. Attempting to get index by a name which does not exist:InsertedPrecisionFreeCast_/segformer/encoder/block.3.1/layer_norm_2/Constant_output_0for node: /segformer/encoder/patch_embeddings.0/layer_norm/Mul/SimplifiedLayerNormFusion/\n","cleanup":{"modelDisposed":true,"cacheClearedBeforeCase":true,"cacheClearedAfterCase":true,"deletedEntries":4}},{"precision":"fp16","device":"webgpu","status":"pass","runtime":{"loadMs":9184,"inferenceMs":805,"totalMs":10197,"grade":"slow","megapixelsPerSecond":0.8688099378881987},"quality":{"dimensions":true,"finite":true,"uniqueLabels":true,"requiredLabelsPresent":true,"areas":{"background":0.7752605119875549,"skin":0.07139057924597364,"eye_g":0.014512605234260616,"hair":0.07439318722547585,"hat":0.014308141928989751,"neck":0.0000014298133235724744,"cloth":0.05013354456442167},"nonBackgroundRatio":0.22473948801244514,"grade":"face-parsing-pass"},"cleanup":{"modelDisposed":true,"cacheClearedBeforeCase":true,"cacheClearedAfterCase":true,"deletedEntries":4}},{"precision":"q8","device":"wasm","status":"pass","runtime":{"loadMs":6912.300000011921,"inferenceMs":6382.699999988079,"totalMs":13502.59999999404,"grade":"very-slow","megapixelsPerSecond":0.10957619816085767},"quality":{"dimensions":true,"finite":true,"uniqueLabels":true,"requiredLabelsPresent":true,"areas":{"background":0.775972559022694,"skin":0.05380816480600293,"eye_g":0.020390567807467057,"hair":0.0740157165080527,"hat":0.026408652086383603,"neck":0.00014870058565153734,"cloth":0.04925563918374817},"nonBackgroundRatio":0.22402744097730598,"grade":"face-parsing-pass"},"cleanup":{"modelDisposed":true,"cacheClearedBeforeCase":true,"cacheClearedAfterCase":true,"deletedEntries":4}},{"precision":"q8","device":"webgpu","status":"pass","runtime":{"loadMs":7769.399999976158,"inferenceMs":6227.0999999940395,"totalMs":14230.5,"grade":"very-slow","megapixelsPerSecond":0.11231423937317041},"quality":{"dimensions":true,"finite":true,"uniqueLabels":true,"requiredLabelsPresent":true,"areas":{"background":0.7762756794472914,"skin":0.05471609626647145,"eye_g":0.018518942166910687,"hair":0.07415726802708639,"hat":0.026508739019033674,"neck":0.0002516471449487555,"cloth":0.049571627928257686},"nonBackgroundRatio":0.22372432055270863,"grade":"face-parsing-pass"},"cleanup":{"modelDisposed":true,"cacheClearedBeforeCase":true,"cacheClearedAfterCase":true,"deletedEntries":4}}],
   },
+
+  samples: [
+  {
+    "id": "standard",
+    "label": "Try sample image",
+    "description": "Standard sample for Face Parsing — 19-Class Semantic Segmentation.",
+    "userInput": {},
+    "assets": [
+      {
+        "field": "image",
+        "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+        "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+        "mediaType": "image/jpeg",
+        "size": 78124,
+        "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818",
+        "encoding": "blob-url",
+        "width": 1024,
+        "height": 683
+      }
+    ],
+    "modelConfig": {},
+    "generateConfig": {},
+    "source": "https://www.pexels.com/photo/woman-wearing-pink-turtleneck-sweater-5965592/",
+    "license": "Pexels License",
+    "fixture": {
+      "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+      "size": 78124,
+      "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818"
+    },
+    "benchmarkReport": "benchmarks/face-parsing.json"
+  }
+],
 };
 
 const state = { initializing: false, initialized: false, generating: false };

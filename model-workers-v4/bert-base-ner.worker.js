@@ -622,6 +622,29 @@ const MANIFEST = {
       },
     ],
   },
+
+  samples: [
+  {
+    "id": "standard",
+    "label": "Try sample text",
+    "description": "Standard sample for BERT Base NER — English Named Entities.",
+    "userInput": {
+      "text": "Apollo 11 launched from Cape Kennedy on July 16, 1969, carrying Commander Neil Armstrong, Command Module Pilot Michael Collins and Lunar Module Pilot Edwin Buzz Aldrin into an initial Earth orbit."
+    },
+    "assets": [],
+    "modelConfig": {},
+    "generateConfig": {},
+    "source": "NASA Apollo 11 Mission Overview; lightly shortened without changing named entities.",
+    "license": "United States government work",
+    "fixture": {
+      "file": "model-samples/bert-base-ner.json",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/bert-base-ner.json",
+      "size": 676,
+      "sha1": "a90640ef195e01ddb8f45899678975feaee59853"
+    },
+    "benchmarkReport": "benchmarks/bert-base-ner.json"
+  }
+],
 };
 
 const state = { initializing: false, initialized: false, generating: false };

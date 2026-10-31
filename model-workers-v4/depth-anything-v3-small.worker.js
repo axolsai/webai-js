@@ -9,11 +9,61 @@ const MANIFEST = {
   contractVersion: "1.0",
   model: { id: ID, displayName: "Depth Anything V3 Small", provider: "ByteDance Seed", providerUrl: "https://github.com/ByteDance-Seed/depth-anything-3", license: "Apache-2.0", licenseUrl: "https://www.apache.org/licenses/LICENSE-2.0.txt", lastUpdated: "2025-11-13T18:44:51.000Z", sourceRepository: "depth-anything/DA3-SMALL", repository: REPO, artifactRevision: REV, artifactLastUpdated: "2025-11-15T00:18:15.000Z", task: "depth-estimation", description: "A compact monocular geometry model that estimates relative per-pixel depth from one browser image and returns a visual depth map plus numeric summary data.", intendedUses: ["Visualizing relative scene depth.", "Prototyping browser spatial effects and depth-aware image processing."], limitations: ["Depth is relative rather than a calibrated metric distance.", "Thin structures, reflective or transparent surfaces, low light, blur, and unfamiliar visual domains may produce incorrect geometry.", "The single-image worker does not expose the source model's multi-view pose workflow.", "Depth estimates must not be used as the sole input for navigation, robotics, accessibility, or other safety-critical decisions."] },
   runtime: { engine: { name: "Transformers.js", version: "4.2.0" }, precisions: SUPPORTED },
-  input: { description: "Exactly one browser-readable image blob URL.", alternatives: [{ name: "image_blob_url", type: "string(blob URL)", required: true, minLength: 1, format: "blob-url" }] },
+  input: {
+  "description": "Exactly one browser-readable image blob URL.",
+  "alternatives": [
+    {
+      "name": "image_blob_url",
+      "description": "Exactly one browser-readable image blob URL.",
+      "fields": [
+        {
+          "name": "image_blob_url",
+          "type": "string(blob URL)",
+          "required": true,
+          "minLength": 1,
+          "format": "blob-url"
+        }
+      ]
+    }
+  ]
+},
   config: { model: [], generation: [] },
   output: { description: "A grayscale depth-map blob URL and finite numeric depth statistics.", fields: [{ name: "depth_blob_url", type: "string(blob URL)", required: true }, { name: "width", type: "integer", required: true }, { name: "height", type: "integer", required: true }, { name: "statistics", type: "{min,max,mean}", required: true }, { name: "signature", type: "number[]", required: true }], example: { depth_blob_url: "blob:…", width: 518, height: 350, statistics: { min: 0, max: 255, mean: 127 }, signature: [0.2, 0.8] } },
   operations: ["checkModelSupports", "init", "download", "generate", "clearMemory"],
   benchmark: { report: "benchmarks/depth-anything-v3-small.json", testedAt: "2026-09-12T10:18:02.005Z", fixture: { file: "modnet-portrait-pexels-5965592.jpg", url: "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg", size: 78124, sha1: "38212739a4a4f0be25d84863cf991d7fb6c6d818", width: 1024, height: 683, license: "Pexels License", licenseUrl: "https://www.pexels.com/license/", expected: { file: "depth-anything-v3-small.json", size: 727, sha1: "bc7d37b8da85772a0ffb158f3c84fdcd3d8af2e7" } }, candidates: PRECISIONS, qualityGate: "Finite non-flat depth map whose 8×8 normalized signature remains within the checked-in reference tolerance.", invalidatedBy: ["artifact revision change", "runtime version change", "fixture or quality-gate change", "browser/backend behavior change"], results: [{ precision: "fp32", device: "wasm", status: "pass", runtime: { loadMs: 14119.1, inferenceMs: 4820.6, imagesPerSecond: 0.2074, grade: "slow" }, quality: { signatureMeanAbsoluteError: 0 } }, { precision: "fp32", device: "webgpu", status: "pass", runtime: { loadMs: 12408.1, inferenceMs: 200.8, imagesPerSecond: 4.9801, grade: "excellent" }, quality: { signatureMeanAbsoluteError: 0 } }] },
+
+  samples: [
+  {
+    "id": "standard",
+    "label": "Try sample image",
+    "description": "Standard sample for Depth Anything V3 Small.",
+    "userInput": {},
+    "assets": [
+      {
+        "field": "image_blob_url",
+        "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+        "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+        "mediaType": "image/jpeg",
+        "size": 78124,
+        "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818",
+        "encoding": "blob-url",
+        "width": 1024,
+        "height": 683
+      }
+    ],
+    "modelConfig": {},
+    "generateConfig": {},
+    "source": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+    "license": "Pexels License",
+    "fixture": {
+      "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+      "size": 78124,
+      "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818"
+    },
+    "benchmarkReport": "benchmarks/depth-anything-v3-small.json"
+  }
+],
 };
 
 const state = { initializing: false, initialized: false, generating: false };

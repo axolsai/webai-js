@@ -107,6 +107,44 @@ const MANIFEST = {
     candidates: CANDIDATE_PRECISIONS,
     results: BENCHMARK_RESULTS,
   },
+
+  samples: [
+  {
+    "id": "standard",
+    "label": "Try sample text",
+    "description": "Standard sample for Sweep Next-Edit 1.5B — ONNX.",
+    "userInput": {
+      "context_files": {
+        "utils.py": "def get_time_of_day():\n    from datetime import datetime\n    hour = datetime.now().hour\n    if hour < 12:\n        return \"morning\"\n    elif hour < 18:\n        return \"afternoon\"\n    else:\n        return \"evening\"\n"
+      },
+      "recent_diffs": [
+        {
+          "file_path": "greet.py",
+          "original": "def greet():\n    print(\"Hello!\")",
+          "updated": "def greet(name):\n    print(f\"Hello, {name}!\")"
+        }
+      ],
+      "file_path": "greet.py",
+      "original_content": "def greet(name):\n    print(f\"Hello, {name}!\")\n\ngreet(\"Alice\")",
+      "current_content": "from utils import get_time_of_day\n\ndef greet(name):\n    print(f\"Hello, {name}!\")\n\ngreet(\"Alice\")"
+    },
+    "assets": [],
+    "modelConfig": {
+      "max_new_tokens": 160,
+      "do_sample": false
+    },
+    "generateConfig": {},
+    "source": "Adapted from the Apache-2.0 Xenova/sweep-next-edit-1.5B model-card usage example at artifact revision 402c437f67cee450c00d3add669b43ae79e55e50.",
+    "license": "Apache-2.0",
+    "fixture": {
+      "file": "model-samples/sweep-next-edit-1.5b.json",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/sweep-next-edit-1.5b.json",
+      "size": 1291,
+      "sha1": "98a29ff43b6bdcd2faba07f9ba47bb9d9ed36192"
+    },
+    "benchmarkReport": "benchmarks/sweep-next-edit-1.5b.json"
+  }
+],
 };
 const CAPABILITIES = {
   supportedModes: ["webai"],

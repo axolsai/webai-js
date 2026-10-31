@@ -1,0 +1,17 @@
+{
+  "source": "Official OpenAI Privacy Filter model-card Transformers.js example.",
+  "sourceUrl": "https://huggingface.co/openai/privacy-filter/blob/7ffa9a043d54d1be65afb281eddf0ffbe629385b/README.md#transformersjs",
+  "license": "Apache-2.0",
+  "licenseUrl": "https://github.com/openai/privacy-filter/blob/f7f00ca7fb869683eb732c010299d901457f19c3/LICENSE",
+  "input": {
+    "text": "My name is Harry Potter and my email is harry.potter@hogwarts.edu."
+  },
+  "expected": {
+    "entities": [
+      { "entityGroup": "private_person", "text": "Harry Potter", "minimumScore": 0.9 },
+      { "entityGroup": "private_email", "text": "harry.potter@hogwarts.edu", "minimumScore": 0.9 }
+    ],
+    "maximumUnexpectedEntities": 1
+  },
+  "limitations": "This safe fictional example validates known PII spans but does not measure recall across the complete taxonomy, languages, or real-world distributions."
+}

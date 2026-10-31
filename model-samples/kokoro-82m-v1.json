@@ -1,0 +1,14 @@
+{
+  "text": "The quick brown fox jumps over the lazy dog.",
+  "voice": "af_heart",
+  "speed": 1,
+  "source": "WebAI benchmark sentence",
+  "license": "CC0-1.0",
+  "expected": {
+    "samplingRate": 24000,
+    "minimumDurationSeconds": 1.5,
+    "maximumDurationSeconds": 8,
+    "minimumRms": 0.005,
+    "maximumClippedFraction": 0.01
+  }
+}

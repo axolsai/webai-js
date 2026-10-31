@@ -355,6 +355,39 @@ const MANIFEST = {
     ],
     results: RESULTS,
   },
+
+  samples: [
+  {
+    "id": "standard",
+    "label": "Try sample image",
+    "description": "Standard sample for Swin2SR Real-World 4× Super-Resolution.",
+    "userInput": {},
+    "assets": [
+      {
+        "field": "image",
+        "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/swin2sr-portrait-lowres.jpg",
+        "file": "model-samples/swin2sr-portrait-lowres.jpg",
+        "mediaType": "image/jpeg",
+        "size": 5059,
+        "sha1": "86b8839b760031cca032e78fe516dc5bda417a1a",
+        "encoding": "blob-url",
+        "width": 96,
+        "height": 96
+      }
+    ],
+    "modelConfig": {},
+    "generateConfig": {},
+    "source": "https://www.pexels.com/photo/woman-wearing-pink-turtleneck-sweater-5965592/",
+    "license": "Pexels License",
+    "fixture": {
+      "file": "model-samples/swin2sr-portrait-lowres.jpg",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/swin2sr-portrait-lowres.jpg",
+      "size": 5059,
+      "sha1": "86b8839b760031cca032e78fe516dc5bda417a1a"
+    },
+    "benchmarkReport": "benchmarks/swin2sr-realworld-sr-x4-64-bsrgan-psnr.json"
+  }
+],
 };
 const caps = {
   supportedModes: ["webai"],

@@ -474,5 +474,37 @@
         "error": "Chrome Cache API put() failed for large external weights; full download detection failed even with --unlimited-storage. Not advertised."
       }
     ]
-  }
+  },
+  "samples": [
+    {
+      "id": "standard",
+      "label": "Try sample image",
+      "description": "Standard sample for Granite Docling 258M.",
+      "userInput": {},
+      "assets": [
+        {
+          "field": "image",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/granite-docling-new-arxiv.png",
+          "file": "model-samples/granite-docling-new-arxiv.png",
+          "mediaType": "image/png",
+          "size": 523477,
+          "sha1": "fa9ee1b276da7ce7374804e1e392b5b60c501a52",
+          "encoding": "blob-url",
+          "width": 1190,
+          "height": 1540
+        }
+      ],
+      "modelConfig": {},
+      "generateConfig": {},
+      "source": "https://huggingface.co/ibm-granite/granite-docling-258M/blob/982fe3b40f2fa73c365bdb1bcacf6c81b7184bfe/assets/new_arxiv.png",
+      "license": "Apache-2.0",
+      "fixture": {
+        "file": "model-samples/granite-docling-new-arxiv.png",
+        "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/granite-docling-new-arxiv.png",
+        "size": 523477,
+        "sha1": "fa9ee1b276da7ce7374804e1e392b5b60c501a52"
+      },
+      "benchmarkReport": "benchmarks/granite-docling-258m.json"
+    }
+  ]
 }

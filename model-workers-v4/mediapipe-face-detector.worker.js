@@ -39,12 +39,47 @@ const MANIFEST = {
   benchmark: {
     report: "benchmarks/mediapipe-face-detector.json",
     testedAt: "2026-09-09T06:05:00.000Z",
-    fixture: { file: "mediapipe-face-test.jpeg", url: "https://raw.githubusercontent.com/google-ai-edge/mediapipe-samples/7f3cf17410db91f8e084a46f7517df15bce3479a/examples/face_detector/ios/FaceDetectorTests/testImg.jpeg", size: 251136, sha1: "531674bd36742b56558d7879cc3c8461f7ddda31", width: 1280, height: 853, license: "Apache-2.0",
+    fixture: { file: "mediapipe-face-test.jpeg", source: "https://raw.githubusercontent.com/google-ai-edge/mediapipe-samples/7f3cf17410db91f8e084a46f7517df15bce3479a/examples/face_detector/ios/FaceDetectorTests/testImg.jpeg", url: "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/mediapipe-face-test.jpeg", size: 251136, sha1: "531674bd36742b56558d7879cc3c8461f7ddda31", width: 1280, height: 853, license: "Apache-2.0",
     licenseUrl: "https://github.com/google-ai-edge/mediapipe/blob/master/LICENSE", sourceRevision: "google-ai-edge/mediapipe-samples@7f3cf17410db91f8e084a46f7517df15bce3479a" },
     environment: "Codex in-app Chromium 151 on macOS; MediaPipe Tasks Vision 1.0.1 WASM CPU",
     invalidatedBy: ["model artifact generation change", "MediaPipe Tasks Vision version change", "fixture or quality-gate change", "browser/backend behavior change"],
     results: [{ precision: "fp16", device: "wasm", status: "pass", runtime: { loadMs: 127.2, inferenceMs: 43.1, totalMs: 170.3, grade: "excellent" }, quality: { grade: "pass", expectedDetectionCount: 2, actualDetectionCount: 2, minimumScore: 0.925397515296936 } }],
   },
+
+  samples: [
+  {
+    "id": "standard",
+    "label": "Try sample image",
+    "description": "Standard sample for MediaPipe BlazeFace — Short-Range Face Detector.",
+    "userInput": {},
+    "assets": [
+      {
+        "field": "image_blob_url",
+        "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/mediapipe-face-test.jpeg",
+        "file": "model-samples/mediapipe-face-test.jpeg",
+        "mediaType": "image/jpeg",
+        "size": 251136,
+        "sha1": "531674bd36742b56558d7879cc3c8461f7ddda31",
+        "encoding": "blob-url",
+        "width": 1280,
+        "height": 853
+      }
+    ],
+    "modelConfig": {},
+    "generateConfig": {
+      "useImageConversion": true
+    },
+    "source": "https://raw.githubusercontent.com/google-ai-edge/mediapipe-samples/7f3cf17410db91f8e084a46f7517df15bce3479a/examples/face_detector/ios/FaceDetectorTests/testImg.jpeg",
+    "license": "Apache-2.0",
+    "fixture": {
+      "file": "model-samples/mediapipe-face-test.jpeg",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/mediapipe-face-test.jpeg",
+      "size": 251136,
+      "sha1": "531674bd36742b56558d7879cc3c8461f7ddda31"
+    },
+    "benchmarkReport": "benchmarks/mediapipe-face-detector.json"
+  }
+],
 };
 
 function mediaPipeBridge() {

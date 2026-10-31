@@ -1095,5 +1095,42 @@
         ]
       }
     ]
-  }
+  },
+  "samples": [
+    {
+      "id": "standard",
+      "label": "Try sample text",
+      "description": "Standard sample for Open Jev Laya Multilingual — Typed Decisions.",
+      "userInput": {
+        "state": "The payment was charged twice. Please refund the duplicate charge.",
+        "questions": [
+          {
+            "type": "choice",
+            "instructions": "What does the customer need?",
+            "options": [
+              "refund",
+              "password reset",
+              "shipping update"
+            ]
+          },
+          {
+            "type": "noul",
+            "instructions": "Is the customer asking for money back?"
+          }
+        ]
+      },
+      "assets": [],
+      "modelConfig": {},
+      "generateConfig": {},
+      "source": "WebAI-authored multilingual regression cases with unambiguous gold labels.",
+      "license": "CC0-1.0",
+      "fixture": {
+        "file": "model-samples/open-jev-laya-multilingual.json",
+        "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/open-jev-laya-multilingual.json",
+        "size": 1368,
+        "sha1": "ff4a5039dbc0c37a52717f0c82420ff45e0a2803"
+      },
+      "benchmarkReport": "benchmarks/open-jev-laya-multilingual.json"
+    }
+  ]
 }

@@ -61,16 +61,30 @@
           "decodeTokenCount": 2,
           "grade": "excellent"
         },
-        "stream": { "chunkCount": 1, "text": "Paris" },
+        "stream": {
+          "chunkCount": 1,
+          "text": "Paris"
+        },
         "nativeOutput": {
           "result": "Paris",
           "messages": [
-            { "role": "user", "content": "What is the capital of France? Answer with only the city name." },
-            { "role": "assistant", "content": "Paris" }
+            {
+              "role": "user",
+              "content": "What is the capital of France? Answer with only the city name."
+            },
+            {
+              "role": "assistant",
+              "content": "Paris"
+            }
           ],
           "structured_output": false
         },
-        "quality": { "expected": "Paris", "exactNormalizedMatch": true, "nonEmpty": true, "nonRepetitive": true },
+        "quality": {
+          "expected": "Paris",
+          "exactNormalizedMatch": true,
+          "nonEmpty": true,
+          "nonRepetitive": true
+        },
         "fullyAccelerated": true,
         "cleanup": {
           "modelDisposed": true,
@@ -88,5 +102,32 @@
       "fixture or quality-gate change",
       "browser or WebGPU behavior change"
     ]
-  }
+  },
+  "samples": [
+    {
+      "id": "standard",
+      "label": "Try sample text",
+      "description": "Standard sample for Gemma 4 E2B Instruct — LiteRT-LM.",
+      "userInput": {
+        "messages": [
+          {
+            "role": "user",
+            "content": "What is the capital of France? Answer with only the city name."
+          }
+        ]
+      },
+      "assets": [],
+      "modelConfig": {},
+      "generateConfig": {},
+      "source": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/gemma-4-e2b-it-litert-lm.json",
+      "license": "CC0-1.0",
+      "fixture": {
+        "file": "model-samples/gemma-4-e2b-it-litert-lm.json",
+        "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/gemma-4-e2b-it-litert-lm.json",
+        "size": 195,
+        "sha1": "a963a0f87228b86b7c9880699df48d4ab6c33482"
+      },
+      "benchmarkReport": "benchmarks/gemma-4-e2b-it-litert-lm.json"
+    }
+  ]
 }

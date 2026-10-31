@@ -1,0 +1,22 @@
+{
+  "source": "Original WebAI browser LLM benchmark fixture.",
+  "license": "Apache-2.0",
+  "input": {
+    "messages": [
+      {
+        "role": "user",
+        "content": "What is the capital of France? Answer in one concise sentence."
+      }
+    ]
+  },
+  "generation": {
+    "max_new_tokens": 32,
+    "do_sample": false
+  },
+  "expected": {
+    "acceptedAnswers": [
+      "Paris",
+      "The capital of France is Paris"
+    ]
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "source": "https://www.nasa.gov/missions/apollo/apollo-11/apollo-11-mission-overview/",
+  "license": "United States government work; NASA Media Usage Guidelines",
+  "licenseUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+  "text": "Apollo 11 launched from Cape Kennedy on July 16, 1969, carrying Commander Neil Armstrong, Command Module Pilot Michael Collins and Lunar Module Pilot Edwin Buzz Aldrin into an initial Earth orbit.",
+  "expected": [
+    { "text": "Cape Kennedy", "label": "LOC" },
+    { "text": "Neil Armstrong", "label": "PER" },
+    { "text": "Michael Collins", "label": "PER" },
+    { "text": "Edwin Buzz Aldrin", "label": "PER" }
+  ]
+}

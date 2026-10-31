@@ -945,5 +945,60 @@
         }
       }
     ]
-  }
+  },
+  "samples": [
+    {
+      "id": "standard",
+      "label": "Try sample text",
+      "description": "Standard sample for Open Jev DeBERTa V3 Large — Typed Decisions.",
+      "userInput": {
+        "state": "I was charged twice for the same order and nobody answers my emails. I want my money back now.",
+        "questions": [
+          {
+            "type": "choice",
+            "instructions": "Which product area is the message about?",
+            "options": [
+              "fees & charges",
+              "pin & security",
+              "refund & dispute",
+              "top-up",
+              "exchange & fiat",
+              "atm & cash",
+              "transfer",
+              "card",
+              "account & identity",
+              "other"
+            ]
+          },
+          {
+            "type": "score",
+            "instructions": "How positive is the sentiment of this message?",
+            "options": [
+              "very negative",
+              "negative",
+              "neutral",
+              "positive",
+              "very positive"
+            ]
+          },
+          {
+            "type": "noul",
+            "instructions": "The customer is asking for a refund."
+          }
+        ]
+      },
+      "assets": [],
+      "modelConfig": {},
+      "generateConfig": {},
+      "source": "Adapted from the pinned source model card usage example.",
+      "license": "Apache-2.0",
+      "fixture": {
+        "file": "model-samples/open-jev-deberta-v3-large.json",
+        "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/open-jev-deberta-v3-large.json",
+        "size": 819,
+        "sha1": "bf1e5a03646050ac2c9b0fa51bf8f01b72f95ece"
+      },
+      "benchmarkReport": "benchmarks/open-jev-deberta-v3-large.json"
+    }
+  ]
 }

@@ -1,0 +1,7 @@
+{
+  "source": "Original WebAI benchmark fixture.",
+  "license": "Apache-2.0",
+  "input": {"messages": [{"role": "user", "content": "What is the capital of France? Answer with only the city name."}]},
+  "generation": {"max_new_tokens": 32, "do_sample": false},
+  "expected": {"answer": "Paris"}
+}

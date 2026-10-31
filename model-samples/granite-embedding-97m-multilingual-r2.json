@@ -1,0 +1,9 @@
+{
+  "source": "IBM Granite model-card cross-lingual retrieval example, shortened for browser benchmarking.",
+  "sourceUrl": "https://huggingface.co/ibm-granite/granite-embedding-97m-multilingual-r2",
+  "license": "Apache-2.0",
+  "licenseUrl": "https://huggingface.co/ibm-granite/granite-embedding-97m-multilingual-r2/blob/835ad14087e140460703cf0fae09f97d469d65c2/LICENSE",
+  "input": {"texts": ["What is the tallest mountain in Japan?", "富士山は日本で最も高い山です。", "Whales are large marine mammals that live in the ocean."]},
+  "modelConfig": {"pooling": "cls", "normalize": true},
+  "expected": {"rows": 3, "dimensions": 384, "positiveIndex": 1, "negativeIndex": 2, "minimumMargin": 0.1, "normTolerance": 0.02}
+}

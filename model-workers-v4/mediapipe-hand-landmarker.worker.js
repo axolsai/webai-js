@@ -39,12 +39,47 @@ const MANIFEST = {
   benchmark: {
     report: "benchmarks/mediapipe-hand-landmarker.json",
     testedAt: "2026-09-09T06:08:00.000Z",
-    fixture: { file: "mediapipe-hand-test.jpg", url: "https://raw.githubusercontent.com/google-ai-edge/mediapipe-samples/7f3cf17410db91f8e084a46f7517df15bce3479a/examples/hand_landmarker/android/app/src/androidTest/assets/test_image.jpg", size: 33051, sha1: "d44bc4fbfbc8587039ab32df880162dca7fe842e", width: 640, height: 427, license: "Apache-2.0",
+    fixture: { file: "mediapipe-hand-test.jpg", source: "https://raw.githubusercontent.com/google-ai-edge/mediapipe-samples/7f3cf17410db91f8e084a46f7517df15bce3479a/examples/hand_landmarker/android/app/src/androidTest/assets/test_image.jpg", url: "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/mediapipe-hand-test.jpg", size: 33051, sha1: "d44bc4fbfbc8587039ab32df880162dca7fe842e", width: 640, height: 427, license: "Apache-2.0",
     licenseUrl: "https://github.com/google-ai-edge/mediapipe/blob/master/LICENSE", sourceRevision: "google-ai-edge/mediapipe-samples@7f3cf17410db91f8e084a46f7517df15bce3479a" },
     environment: "Codex in-app Chromium 151 on macOS; MediaPipe Tasks Vision 1.0.1 WASM CPU",
     invalidatedBy: ["model artifact generation change", "MediaPipe Tasks Vision version change", "fixture or quality-gate change", "browser/backend behavior change"],
     results: [{ precision: "fp16", device: "wasm", status: "pass", runtime: { loadMs: 2261.4, inferenceMs: 82.6, totalMs: 2344, grade: "excellent" }, quality: { grade: "pass", expectedHandCount: 1, actualHandCount: 1, imageLandmarkCount: 21, worldLandmarkCount: 21, handedness: "Right", handednessScore: 0.703342080116272 } }],
   },
+
+  samples: [
+  {
+    "id": "standard",
+    "label": "Try sample image",
+    "description": "Standard sample for MediaPipe Hand Landmarker.",
+    "userInput": {},
+    "assets": [
+      {
+        "field": "image_blob_url",
+        "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/mediapipe-hand-test.jpg",
+        "file": "model-samples/mediapipe-hand-test.jpg",
+        "mediaType": "image/jpeg",
+        "size": 33051,
+        "sha1": "d44bc4fbfbc8587039ab32df880162dca7fe842e",
+        "encoding": "blob-url",
+        "width": 640,
+        "height": 427
+      }
+    ],
+    "modelConfig": {},
+    "generateConfig": {
+      "useImageConversion": true
+    },
+    "source": "https://raw.githubusercontent.com/google-ai-edge/mediapipe-samples/7f3cf17410db91f8e084a46f7517df15bce3479a/examples/hand_landmarker/android/app/src/androidTest/assets/test_image.jpg",
+    "license": "Apache-2.0",
+    "fixture": {
+      "file": "model-samples/mediapipe-hand-test.jpg",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/mediapipe-hand-test.jpg",
+      "size": 33051,
+      "sha1": "d44bc4fbfbc8587039ab32df880162dca7fe842e"
+    },
+    "benchmarkReport": "benchmarks/mediapipe-hand-landmarker.json"
+  }
+],
 };
 
 function mediaPipeBridge() {

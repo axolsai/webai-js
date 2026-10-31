@@ -1,0 +1,40 @@
+{
+  "cases": [
+    {
+      "domain": "agent-observability",
+      "state": "The tool call timed out twice, the retry budget is exhausted, and no successful result was returned.",
+      "questions": [
+        { "type": "choice", "instructions": "What should the agent do next?", "options": ["escalate to a human", "report success", "repeat indefinitely"] },
+        { "type": "noul", "instructions": "Has the task completed successfully?" }
+      ],
+      "expected": [{ "choice": "escalate to a human" }, { "noulMaximum": 0.5 }]
+    },
+    {
+      "domain": "customer-service",
+      "state": "The customer was charged twice for one order and asks for the duplicate payment to be returned.",
+      "questions": [
+        { "type": "choice", "instructions": "Which resolution best matches the request?", "options": ["issue a duplicate-charge refund", "reset the password", "send tracking information"] },
+        { "type": "noul", "instructions": "Is the customer requesting a refund?" }
+      ],
+      "expected": [{ "choice": "issue a duplicate-charge refund" }, { "noulMinimum": 0.5 }]
+    },
+    {
+      "domain": "invoice-processing",
+      "state": "Invoice INV-204 has a total of $1,250, a due date of October 10, and is still marked unpaid after the due date.",
+      "questions": [
+        { "type": "choice", "instructions": "What is the invoice status?", "options": ["overdue", "paid", "cancelled"] },
+        { "type": "score", "instructions": "How urgent is follow-up?", "options": ["not urgent", "low", "medium", "high", "critical"] }
+      ],
+      "expected": [{ "choice": "overdue" }, { "scoreMinimum": 2, "scoreMaximum": 4 }]
+    },
+    {
+      "domain": "security-incidents",
+      "state": "A workstation downloaded an unsigned executable from an unknown domain and immediately attempted to disable endpoint protection.",
+      "questions": [
+        { "type": "choice", "instructions": "How should this event be classified?", "options": ["likely security incident", "routine maintenance", "benign document edit"] },
+        { "type": "noul", "instructions": "Should the workstation be isolated for investigation?" }
+      ],
+      "expected": [{ "choice": "likely security incident" }, { "noulMinimum": 0.5 }]
+    }
+  ]
+}

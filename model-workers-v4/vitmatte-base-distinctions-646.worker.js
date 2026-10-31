@@ -249,6 +249,50 @@ const MANIFEST = {
       },
     ],
   },
+
+  samples: [
+  {
+    "id": "standard",
+    "label": "Try sample image",
+    "description": "Standard sample for VitMatte Base Distinctions-646 — Trimap Matting.",
+    "userInput": {},
+    "assets": [
+      {
+        "field": "image",
+        "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+        "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+        "mediaType": "image/jpeg",
+        "size": 78124,
+        "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818",
+        "encoding": "blob-url",
+        "width": 1024,
+        "height": 683
+      },
+      {
+        "field": "trimap",
+        "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/vitmatte-portrait-5965592-trimap.png",
+        "file": "model-samples/vitmatte-portrait-5965592-trimap.png",
+        "mediaType": "image/png",
+        "size": 22459,
+        "sha1": "64b06a53a2b0f33507093d2696911ec236a00396",
+        "encoding": "blob-url",
+        "width": 1024,
+        "height": 683
+      }
+    ],
+    "modelConfig": {},
+    "generateConfig": {},
+    "source": "https://www.pexels.com/photo/woman-wearing-pink-turtleneck-sweater-5965592/",
+    "license": "Pexels License",
+    "fixture": {
+      "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+      "size": 78124,
+      "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818"
+    },
+    "benchmarkReport": "benchmarks/vitmatte-base-distinctions-646.json"
+  }
+],
 };
 const state = { initializing: false, initialized: false, generating: false };
 let model = null,

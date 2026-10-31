@@ -1,0 +1,20 @@
+{
+  "source": "Original WebAI semantic retrieval fixture.",
+  "license": "MIT",
+  "input": {
+    "texts": [
+      "What is the capital of France?",
+      "Paris is the capital and largest city of France.",
+      "Whales are large marine mammals that live in the ocean."
+    ]
+  },
+  "modelConfig": { "pooling": "cls", "normalize": true },
+  "expected": {
+    "rows": 3,
+    "dimensions": 1024,
+    "positiveIndex": 1,
+    "negativeIndex": 2,
+    "minimumMargin": 0.1,
+    "normTolerance": 0.02
+  }
+}

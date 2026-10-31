@@ -1563,5 +1563,28 @@
         ]
       }
     ]
-  }
+  },
+  "samples": [
+    {
+      "id": "standard",
+      "label": "Try sample text",
+      "description": "Standard sample for EttinX NLI XS — 32M Cross-Encoder.",
+      "userInput": {
+        "premise": "A man is eating pizza.",
+        "hypothesis": "A man eats something."
+      },
+      "assets": [],
+      "modelConfig": {},
+      "generateConfig": {},
+      "source": "Examples adapted from the pinned source model card.",
+      "license": "MIT",
+      "fixture": {
+        "file": "model-samples/ettinx-nli-xs.json",
+        "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/ettinx-nli-xs.json",
+        "size": 930,
+        "sha1": "18c133130582f80cfa13ca3aa915e686f9dda37c"
+      },
+      "benchmarkReport": "benchmarks/ettinx-nli-xs.json"
+    }
+  ]
 }

@@ -892,5 +892,37 @@
         "decoder_model_merged": "bnb4"
       }
     }
-  }
+  },
+  "samples": [
+    {
+      "id": "standard",
+      "label": "Try sample audio",
+      "description": "Standard sample for Moonshine Tiny — English Speech Recognition.",
+      "userInput": {},
+      "assets": [
+        {
+          "field": "audio",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/whisper-standard.mp3",
+          "file": "model-samples/whisper-standard.mp3",
+          "mediaType": "audio/mpeg",
+          "size": 471925,
+          "sha1": "5faad1507b5d6bc61a39ca3184db5a7b554a7479",
+          "encoding": "audio-pcm-f32",
+          "sampleRate": 16000,
+          "durationSeconds": 29.49225
+        }
+      ],
+      "modelConfig": {},
+      "generateConfig": {},
+      "source": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/whisper-standard.mp3",
+      "license": "Unverified: upstream fixture license not recorded",
+      "fixture": {
+        "file": "model-samples/whisper-standard.mp3",
+        "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/whisper-standard.mp3",
+        "size": 471925,
+        "sha1": "5faad1507b5d6bc61a39ca3184db5a7b554a7479"
+      },
+      "benchmarkReport": "benchmarks/moonshine-tiny.json"
+    }
+  ]
 }

@@ -1,0 +1,31 @@
+{
+  "cases": [
+    {
+      "language": "en",
+      "state": "The payment was charged twice. Please refund the duplicate charge.",
+      "questions": [
+        { "type": "choice", "instructions": "What does the customer need?", "options": ["refund", "password reset", "shipping update"] },
+        { "type": "noul", "instructions": "Is the customer asking for money back?" }
+      ],
+      "expected": [{ "choice": "refund" }, { "noulMinimum": 0.5 }]
+    },
+    {
+      "language": "zh",
+      "state": "包裹今天已经送到，商品完好无损，我很满意。",
+      "questions": [
+        { "type": "choice", "instructions": "客户对结果的态度是什么？", "options": ["满意", "不满意", "不确定"] },
+        { "type": "noul", "instructions": "包裹是否已经送达？" }
+      ],
+      "expected": [{ "choice": "满意" }, { "noulMinimum": 0.5 }]
+    },
+    {
+      "language": "es",
+      "state": "El servicio fue excelente y el problema quedó resuelto rápidamente.",
+      "questions": [
+        { "type": "score", "instructions": "¿Qué tan positiva es la experiencia?", "options": ["muy negativa", "negativa", "neutral", "positiva", "muy positiva"] },
+        { "type": "noul", "instructions": "¿Se resolvió el problema?" }
+      ],
+      "expected": [{ "scoreMinimum": 3, "scoreMaximum": 4 }, { "noulMinimum": 0.5 }]
+    }
+  ]
+}

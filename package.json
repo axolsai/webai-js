@@ -28,7 +28,8 @@
     "docs/worker-template.js",
     "benchmarks/*.json",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "model-samples/"
   ],
   "homepage": "https://www.webai-js.com",
   "keywords": [
@@ -42,7 +43,10 @@
     "build": "tsup",
     "dev": "tsup --watch",
     "typecheck": "tsc --noEmit",
-    "prepublishOnly": "npm run typecheck && npm run build"
+    "prepublishOnly": "npm run typecheck && npm run build",
+    "audit:samples": "node scripts/audit-model-samples.mjs",
+    "test:samples": "node scripts/test-worker-samples.mjs",
+    "audit:samples:api": "node scripts/audit-sample-public-api.mjs"
   },
   "author": "Axols WebAI",
   "license": "Apache-2.0",

@@ -1,0 +1,24 @@
+{
+  "text": "News Media Contacts:\n\nJoshua Finch\nHeadquarters, Washington\n202-358-1100\njoshua.a.finch@nasa.gov",
+  "expected": [
+    {
+      "text": "Joshua Finch",
+      "label": "PERSON"
+    },
+    {
+      "text": "Washington",
+      "label": "LOCATION"
+    },
+    {
+      "text": "202-358-1100",
+      "label": "PHONE_NUMBER"
+    },
+    {
+      "text": "joshua.a.finch@nasa.gov",
+      "label": "EMAIL_ADDRESS"
+    }
+  ],
+  "source": "https://www.nasa.gov/news-release/nasa-spacex-invite-media-to-crew-8-mission-launch-to-space-station/",
+  "license": "United States government work",
+  "licenseUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+}

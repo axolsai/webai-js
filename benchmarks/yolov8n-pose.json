@@ -495,7 +495,7 @@
           "personCount": 1,
           "topPersonScore": 0.8565835356712341,
           "visibleKeypoints": 13,
-          "signatureMeanAbsoluteError": 1.2275912533101746E-7,
+          "signatureMeanAbsoluteError": 1.2275912533101746e-7,
           "maximumSignatureMeanAbsoluteError": 0.08,
           "signature": [
             0.24768729209899906,
@@ -2715,7 +2715,7 @@
           "personCount": 1,
           "topPersonScore": 0.8565835356712341,
           "visibleKeypoints": 13,
-          "signatureMeanAbsoluteError": 1.2275912533101746E-7,
+          "signatureMeanAbsoluteError": 1.2275912533101746e-7,
           "maximumSignatureMeanAbsoluteError": 0.08,
           "signature": [
             0.24768729209899906,
@@ -3159,7 +3159,7 @@
           "personCount": 1,
           "topPersonScore": 0.8565835356712341,
           "visibleKeypoints": 13,
-          "signatureMeanAbsoluteError": 1.2275912533101746E-7,
+          "signatureMeanAbsoluteError": 1.2275912533101746e-7,
           "maximumSignatureMeanAbsoluteError": 0.08,
           "signature": [
             0.24768729209899906,
@@ -3359,5 +3359,37 @@
         }
       }
     ]
-  }
+  },
+  "samples": [
+    {
+      "id": "standard",
+      "label": "Try sample image",
+      "description": "Standard sample for YOLOv8 Nano Pose.",
+      "userInput": {},
+      "assets": [
+        {
+          "field": "image",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+          "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+          "mediaType": "image/jpeg",
+          "size": 78124,
+          "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818",
+          "encoding": "blob-url",
+          "width": 1024,
+          "height": 683
+        }
+      ],
+      "modelConfig": {},
+      "generateConfig": {},
+      "source": "https://www.pexels.com/photo/woman-wearing-pink-turtleneck-sweater-5965592/",
+      "license": "Pexels License",
+      "fixture": {
+        "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+        "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+        "size": 78124,
+        "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818"
+      },
+      "benchmarkReport": "benchmarks/yolov8n-pose.json"
+    }
+  ]
 }

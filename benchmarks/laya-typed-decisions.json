@@ -729,5 +729,42 @@
         ]
       }
     ]
-  }
+  },
+  "samples": [
+    {
+      "id": "standard",
+      "label": "Try sample text",
+      "description": "Standard sample for Laya Typed Decisions — Q4.",
+      "userInput": {
+        "state": "The tool call timed out twice, the retry budget is exhausted, and no successful result was returned.",
+        "questions": [
+          {
+            "type": "choice",
+            "instructions": "What should the agent do next?",
+            "options": [
+              "escalate to a human",
+              "report success",
+              "repeat indefinitely"
+            ]
+          },
+          {
+            "type": "noul",
+            "instructions": "Has the task completed successfully?"
+          }
+        ]
+      },
+      "assets": [],
+      "modelConfig": {},
+      "generateConfig": {},
+      "source": "WebAI-authored regression cases representing the source model's four intended workflow families.",
+      "license": "CC0-1.0",
+      "fixture": {
+        "file": "model-samples/laya-typed-decisions.json",
+        "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/laya-typed-decisions.json",
+        "size": 2242,
+        "sha1": "cee490dc2efc280f3d781dd6c7ec47c6d23ba737"
+      },
+      "benchmarkReport": "benchmarks/laya-typed-decisions.json"
+    }
+  ]
 }

@@ -54,6 +54,39 @@ const MANIFEST = {
       { precision: "fp16", device: "webgpu", status: "pass", runtime: { loadMs: 6405.9, inferenceMs: 50.9, totalMs: 6456.8, grade: "good" }, quality: { grade: "acceptable", matchingGridLocations: 16, maximumGridDistance: 0.0625 }, fullyAccelerated: true }
     ],
   },
+
+  samples: [
+  {
+    "id": "standard",
+    "label": "Try sample image",
+    "description": "Standard sample for Lightweight OpenPose — LiteRT Pose Estimation.",
+    "userInput": {},
+    "assets": [
+      {
+        "field": "image_blob_url",
+        "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+        "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+        "mediaType": "image/jpeg",
+        "size": 78124,
+        "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818",
+        "encoding": "blob-url",
+        "width": 1024,
+        "height": 683
+      }
+    ],
+    "modelConfig": {},
+    "generateConfig": {},
+    "source": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+    "license": "Pexels License",
+    "fixture": {
+      "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+      "size": 78124,
+      "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818"
+    },
+    "benchmarkReport": "benchmarks/lightweight-openpose-litert.json"
+  }
+],
 };
 
 function liteRtBridge() {

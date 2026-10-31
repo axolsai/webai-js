@@ -1,0 +1,430 @@
+{
+  "checkedAt": "2026-10-31T11:18:18.941Z",
+  "discovery": [
+    {
+      "id": "all-minilm-l6-v2",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "apertus-v1.1-0.5b",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "bert-base-ner",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "bert-small-pii-detection",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "bge-m3",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "bge-reranker-base",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "bge-reranker-large",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "bge-small-en-v1.5",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "bge-small-zh-v1.5",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "cohere-transcribe-03-2026",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "depth-anything-v3-small",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "detr-resnet-50",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "distilbert-base-uncased-finetuned-sst-2-english",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "embeddinggemma-300m",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "ettinx-nli-xs",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "f2llm-v2-160m",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "face-emotion-detection",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "face-parsing",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "florence-2-base-ft",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "gemma-4-e2b-it-litert-lm",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "gemma-4-e4b-it-litert-lm",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "granite-docling-258m",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "granite-embedding-97m-multilingual-r2",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "grounding-dino-tiny",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "kokoro-82m-v1",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "laya-typed-decisions",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "lfm2.5-350m",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "lightweight-openpose-litert",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "mediapipe-face-detector",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "mediapipe-hand-landmarker",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "mediapipe-selfie-segmenter",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "mobilenet-v2-litert",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "modnet",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "moonshine-base-en",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "moonshine-tiny",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "open-jev-deberta-v3-large",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "open-jev-laya-multilingual",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "ormbg",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "paraphrase-multilingual-minilm-l12-v2",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "privacy-filter",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "qwen3-embedding-0.6b",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "qwen3.5-0.8b",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "rubert-tiny-toxicity",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "sam-vit-base",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "sam-vit-large",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "segformer-b3-ade20k",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "siglip-base-patch16-224",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "slimsam-77-uniform",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "speecht5-tts",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "sweep-next-edit-1.5b",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "swin2sr-realworld-sr-x4-64-bsrgan-psnr",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "vitmatte-base-composition-1k",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "vitmatte-base-distinctions-646",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "vitmatte-small-composition-1k",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "wav2vec2-base-superb-er",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "whisper-base",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "whisper-large-v3-turbo",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "whisper-small",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "whisper-tiny",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "yolov8n-pose",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    },
+    {
+      "id": "yolox-m-litert",
+      "passed": true,
+      "samples": 1,
+      "initialized": false
+    }
+  ],
+  "inference": [
+    {
+      "configuration": {
+        "id": "all-minilm-l6-v2",
+        "precision": "q8",
+        "device": "wasm"
+      },
+      "passed": true,
+      "quality": {
+        "rows": 3,
+        "dimensions": 384,
+        "positiveSimilarity": 0.7722416643690213,
+        "negativeSimilarity": 0.027980527186719884,
+        "margin": 0.7442611371823015
+      },
+      "runtime": {
+        "durationMs": 42.29999999701977
+      },
+      "memoryReleased": true,
+      "cacheRetained": true
+    },
+    {
+      "configuration": {
+        "id": "ormbg",
+        "precision": "q8",
+        "device": "wasm"
+      },
+      "passed": true,
+      "quality": {
+        "width": 1024,
+        "height": 683,
+        "meanAbsoluteError": 0.0002075528234719951,
+        "intersectionOverUnion": 0.999459016302014
+      },
+      "runtime": {
+        "durationMs": 7649.20000000298
+      },
+      "memoryReleased": true,
+      "cacheRetained": true
+    },
+    {
+      "configuration": {
+        "id": "moonshine-tiny",
+        "precision": "q4",
+        "device": "wasm"
+      },
+      "passed": true,
+      "quality": {
+        "text": "You know, there's this scientific method which I've very much believed in where something is true to the degree that it is testably so. And otherwise you're really just talking about preferences or untestable beliefs or that kind of thing. So, then there's a being somewhat of a semantic question where we're conflating a lot of things with the word intelligence.",
+        "wordErrorRate": 0.208955223880597
+      },
+      "runtime": {
+        "durationMs": 2062.9000000059605
+      },
+      "memoryReleased": true,
+      "cacheRetained": true
+    }
+  ],
+  "passed": true
+}

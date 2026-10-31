@@ -409,6 +409,40 @@ const MANIFEST = {
     ],
     results: RESULTS,
   },
+
+  samples: [
+  {
+    "id": "standard",
+    "label": "Try sample text",
+    "description": "Standard sample for SpeechT5 — English Text to Speech.",
+    "userInput": {
+      "text": "The quick brown fox jumps over the lazy dog near the river bank.",
+      "speakerEmbedding": "/test-audio/speecht5-speaker-embedding.bin"
+    },
+    "assets": [
+      {
+        "field": "speakerEmbedding",
+        "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/speecht5-speaker-embedding.bin",
+        "file": "model-samples/speecht5-speaker-embedding.bin",
+        "mediaType": "application/octet-stream",
+        "size": 2048,
+        "sha1": "7eca50ca7a6e271a2107f7f2db31c00d0bcdfb66",
+        "encoding": "blob-url"
+      }
+    ],
+    "modelConfig": {},
+    "generateConfig": {},
+    "source": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/speecht5-tts.json",
+    "license": "CC0-1.0",
+    "fixture": {
+      "file": "model-samples/speecht5-tts.json",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/speecht5-tts.json",
+      "size": 2177,
+      "sha1": "b11a7a07ab6586b410c367c280b46c44edcff514"
+    },
+    "benchmarkReport": "benchmarks/speecht5-tts.json"
+  }
+],
 };
 const caps = {
   supportedModes: ["webai"],

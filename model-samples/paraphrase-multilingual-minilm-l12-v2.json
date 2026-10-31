@@ -1,0 +1,23 @@
+{
+  "input": {
+    "texts": [
+      "A child is playing with a dog in the park.",
+      "Un niño juega con un perro en el parque.",
+      "Quantum mechanics describes matter at atomic scales."
+    ]
+  },
+  "modelConfig": {
+    "pooling": "mean",
+    "normalize": true
+  },
+  "expected": {
+    "rows": 3,
+    "dimensions": 384,
+    "positiveIndex": 1,
+    "negativeIndex": 2,
+    "normTolerance": 0.001,
+    "minimumMargin": 0.1
+  },
+  "source": "WebAI multilingual semantic-similarity benchmark",
+  "license": "CC0-1.0"
+}

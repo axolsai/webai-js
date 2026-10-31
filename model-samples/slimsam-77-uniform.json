@@ -1,0 +1,14 @@
+{
+  "source": "WebAI point-prompt fixture using the existing Pexels portrait benchmark image.",
+  "license": "Pexels License",
+  "image": "/test-images/modnet-portrait-pexels-5965592.jpg",
+  "input_points": [[[470, 330]]],
+  "input_labels": [[1]],
+  "expected": {
+    "width": 1024,
+    "height": 683,
+    "point": [470, 330],
+    "minimumForegroundRatio": 0.05,
+    "maximumForegroundRatio": 0.65
+  }
+}

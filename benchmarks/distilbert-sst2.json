@@ -1303,5 +1303,27 @@
         ]
       }
     ]
-  }
+  },
+  "samples": [
+    {
+      "id": "standard",
+      "label": "Try sample text",
+      "description": "Standard sample for DistilBERT SST-2 English Sentiment.",
+      "userInput": {
+        "text": "I love transformers!"
+      },
+      "assets": [],
+      "modelConfig": {},
+      "generateConfig": {},
+      "source": "Xenova model-card positive example and WebAI-authored negative review",
+      "license": "Apache-2.0",
+      "fixture": {
+        "file": "model-samples/distilbert-sst2.json",
+        "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/distilbert-sst2.json",
+        "size": 486,
+        "sha1": "226199feb31ba0ad6ffa6629585a76930b240a3a"
+      },
+      "benchmarkReport": "benchmarks/distilbert-sst2.json"
+    }
+  ]
 }

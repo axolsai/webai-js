@@ -1,0 +1,10 @@
+{
+  "messages": [
+    {
+      "role": "user",
+      "content": "What is the capital of France? Answer with only the city name."
+    }
+  ],
+  "expectedContains": "Paris",
+  "license": "CC0-1.0"
+}

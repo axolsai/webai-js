@@ -44,6 +44,41 @@ const MANIFEST = {
     invalidatedBy: ["model artifact generation change", "MediaPipe Tasks Vision version change", "fixture or quality-gate change", "browser/backend behavior change"],
     results: [{ precision: "fp16", device: "wasm", status: "pass", runtime: { loadMs: 4605.1, inferenceMs: 69.6, totalMs: 4944.4, megapixelsPerSecond: 10.049, grade: "good" }, quality: { passed: true, grade: "excellent", meanAbsoluteError: 0, intersectionOverUnion: 1, foregroundRatio: 0.251478 }, cacheCleanup: { supported: true, deleted: 1 } }, { precision: "fp16", device: "webgpu", status: "fail", error: "Unsupported device: webgpu (MediaPipe worker uses the measured CPU/WASM delegate)", runtime: { loadMs: null, inferenceMs: null, totalMs: 3.6, grade: "failed" }, cacheCleanup: { supported: true, deleted: 0 } }],
   },
+
+  samples: [
+  {
+    "id": "standard",
+    "label": "Try sample image",
+    "description": "Standard sample for MediaPipe Selfie Segmenter.",
+    "userInput": {},
+    "assets": [
+      {
+        "field": "image_blob_url",
+        "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+        "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+        "mediaType": "image/jpeg",
+        "size": 78124,
+        "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818",
+        "encoding": "blob-url",
+        "width": 1024,
+        "height": 683
+      }
+    ],
+    "modelConfig": {},
+    "generateConfig": {
+      "useImageConversion": true
+    },
+    "source": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+    "license": "Pexels License",
+    "fixture": {
+      "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+      "size": 78124,
+      "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818"
+    },
+    "benchmarkReport": "benchmarks/mediapipe-selfie-segmenter.json"
+  }
+],
 };
 
 function mediaPipeBridge() {

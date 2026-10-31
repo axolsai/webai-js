@@ -60,9 +60,22 @@ const MANIFEST = {
     precisions: SUPPORTED,
   },
   input: {
-    description: "One non-empty mono Float32Array sampled at 16 kHz.",
-    alternatives: [{ name: "audio", type: "Float32Array", required: true, minItems: 1 }],
-  },
+  "description": "One non-empty mono Float32Array sampled at 16 kHz.",
+  "alternatives": [
+    {
+      "name": "audio",
+      "description": "One non-empty mono Float32Array sampled at 16 kHz.",
+      "fields": [
+        {
+          "name": "audio",
+          "type": "Float32Array",
+          "required": true,
+          "minItems": 1
+        }
+      ]
+    }
+  ]
+},
   config: {
     model: [
       { name: "top_k", type: "integer", default: 4, minimum: 1, maximum: 4 },
@@ -124,6 +137,39 @@ const MANIFEST = {
       { precision: "bnb4", device: "webgpu", status: "pass", runtime: { loadMs: 12688.4, inferenceMs: 109, realTimeFactor: 0.015967, grade: "excellent" }, quality: { passed: true, topLabel: "ang", topScore: 0.990655, margin: 0.984396 } },
     ],
   },
+
+  samples: [
+  {
+    "id": "standard",
+    "label": "Try sample audio",
+    "description": "Standard sample for Wav2Vec2 Base SUPERB — Emotion Recognition.",
+    "userInput": {},
+    "assets": [
+      {
+        "field": "audio",
+        "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/crema-d-1001-dfa-ang.wav",
+        "file": "model-samples/crema-d-1001-dfa-ang.wav",
+        "mediaType": "audio/wav",
+        "size": 72862,
+        "sha1": "3d62067948a906c4df841268c31a96d3f9d14da5",
+        "encoding": "audio-pcm-f32",
+        "sampleRate": 16000,
+        "durationSeconds": 2.2755625
+      }
+    ],
+    "modelConfig": {},
+    "generateConfig": {},
+    "source": "CREMA-D 1001_DFA_ANG_XX.wav",
+    "license": "ODbL-1.0 / DbCL-1.0",
+    "fixture": {
+      "file": "model-samples/crema-d-1001-dfa-ang.wav",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/crema-d-1001-dfa-ang.wav",
+      "size": 72862,
+      "sha1": "3d62067948a906c4df841268c31a96d3f9d14da5"
+    },
+    "benchmarkReport": "benchmarks/wav2vec2-base-superb-er.json"
+  }
+],
 };
 const state = { initializing: false, initialized: false, generating: false };
 let classifier = null;

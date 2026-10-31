@@ -765,5 +765,34 @@
         }
       }
     ]
-  }
+  },
+  "samples": [
+    {
+      "id": "standard",
+      "label": "Try sample text",
+      "description": "Standard sample for Granite Embedding 97M Multilingual R2.",
+      "userInput": {
+        "texts": [
+          "What is the tallest mountain in Japan?",
+          "富士山は日本で最も高い山です。",
+          "Whales are large marine mammals that live in the ocean."
+        ]
+      },
+      "assets": [],
+      "modelConfig": {
+        "pooling": "cls",
+        "normalize": true
+      },
+      "generateConfig": {},
+      "source": "IBM Granite model-card cross-lingual retrieval example, shortened for browser benchmarking.",
+      "license": "Apache-2.0",
+      "fixture": {
+        "file": "model-samples/granite-embedding-97m-multilingual-r2.json",
+        "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/granite-embedding-97m-multilingual-r2.json",
+        "size": 735,
+        "sha1": "721d37a672010fd5ec9cdf564c697319d598e342"
+      },
+      "benchmarkReport": "benchmarks/granite-embedding-97m-multilingual-r2.json"
+    }
+  ]
 }

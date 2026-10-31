@@ -68,8 +68,37 @@ export type WebAIWorkerField = {
   format?: "url" | "blob-url";
 };
 
+/** A UI-ready sample. Assets are fetched and verified before binding to userInput. */
+export type WebAIWorkerSampleAsset = {
+  field: string;
+  url: string;
+  file: string;
+  mediaType: string;
+  size: number;
+  sha1: string;
+  encoding: "blob-url" | "audio-pcm-f32";
+  sampleRate?: number;
+  width?: number;
+  height?: number;
+  durationSeconds?: number;
+};
+export type WebAIWorkerSample = {
+  id: string;
+  label: string;
+  description: string;
+  userInput: Record<string, unknown>;
+  assets: WebAIWorkerSampleAsset[];
+  modelConfig: Record<string, unknown>;
+  generateConfig: Record<string, unknown>;
+  source: string;
+  license: string;
+  fixture: { file: string; url: string; size: number; sha1: string };
+  benchmarkReport: string;
+};
+
 export type WebAIWorkerManifest = {
   contractVersion: "1.0";
+  samples: WebAIWorkerSample[];
   model: {
     id: string;
     displayName: string;

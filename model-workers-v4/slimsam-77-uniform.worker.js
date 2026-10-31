@@ -71,13 +71,36 @@ const MANIFEST = {
     precisions: SUPPORTED,
   },
   input: {
-    description: "A browser-readable image URL and one prompt group containing image-space points with matching labels.",
-    alternatives: [{
-      name: "image URL and points",
-      type: "{ image: string, input_points: number[][][], input_labels?: number[][] }",
-      required: true,
-    }],
-  },
+  "description": "A browser-readable image URL and one prompt group containing image-space points with matching labels.",
+  "alternatives": [
+    {
+      "name": "image and points",
+      "description": "A browser-readable image URL and one prompt group containing image-space points with matching labels.",
+      "fields": [
+        {
+          "name": "image",
+          "type": "string",
+          "required": true,
+          "minLength": 1,
+          "format": "url"
+        },
+        {
+          "name": "input_points",
+          "type": "number[][][]",
+          "required": true,
+          "minItems": 1,
+          "description": "One prompt group with one or more finite [x,y] image-space points."
+        },
+        {
+          "name": "input_labels",
+          "type": "number[][]",
+          "required": false,
+          "description": "When supplied, matches input_points and contains only 0 or 1."
+        }
+      ]
+    }
+  ]
+},
   config: { model: [], generation: [] },
   output: {
     description: "The highest-scoring post-processed boolean mask plus every candidate IoU score.",
@@ -112,6 +135,51 @@ const MANIFEST = {
       { precision: "fp32", device: "webgpu", status: "pass", runtime: { megapixelsPerSecond: 0.587, grade: "slow" } },
     ],
   },
+
+  samples: [
+  {
+    "id": "standard",
+    "label": "Try sample text",
+    "description": "Standard sample for SlimSAM 77 Uniform — Point-Prompt Segmentation.",
+    "userInput": {
+      "input_points": [
+        [
+          [
+            470,
+            330
+          ]
+        ]
+      ],
+      "input_labels": [
+        [
+          1
+        ]
+      ]
+    },
+    "assets": [
+      {
+        "field": "image",
+        "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+        "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+        "mediaType": "image/jpeg",
+        "size": 78124,
+        "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818",
+        "encoding": "blob-url"
+      }
+    ],
+    "modelConfig": {},
+    "generateConfig": {},
+    "source": "WebAI point-prompt fixture using the existing Pexels portrait benchmark image.",
+    "license": "Pexels License",
+    "fixture": {
+      "file": "model-samples/slimsam-77-uniform.json",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/slimsam-77-uniform.json",
+      "size": 404,
+      "sha1": "f03c558b1d0dfd0dcb2db0dcaffbd9038aac6cf8"
+    },
+    "benchmarkReport": "benchmarks/slimsam-77-uniform.json"
+  }
+],
 };
 
 const state = { initializing: false, initialized: false, generating: false };

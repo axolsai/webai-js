@@ -1,0 +1,9 @@
+{
+  "source": "Xenova model-card positive example and WebAI-authored negative review",
+  "sourceUrl": "https://huggingface.co/Xenova/distilbert-base-uncased-finetuned-sst-2-english/blob/0b6928efcb76139cae2c6881d49cda67fe119f42/README.md",
+  "license": "Apache-2.0",
+  "cases": [
+    { "text": "I love transformers!", "expected": "POSITIVE", "minimumScore": 0.8 },
+    { "text": "This movie was terrible. I hated every minute of it.", "expected": "NEGATIVE", "minimumScore": 0.8 }
+  ]
+}

@@ -476,5 +476,27 @@
         "error": "Error: Can't create a session. ERROR_CODE: 6, ERROR_MESSAGE: std::bad_alloc"
       }
     ]
-  }
+  },
+  "samples": [
+    {
+      "id": "standard",
+      "label": "Try sample text",
+      "description": "Standard sample for OpenAI Privacy Filter — PII Span Detection.",
+      "userInput": {
+        "text": "My name is Harry Potter and my email is harry.potter@hogwarts.edu."
+      },
+      "assets": [],
+      "modelConfig": {},
+      "generateConfig": {},
+      "source": "Official OpenAI Privacy Filter model-card Transformers.js example.",
+      "license": "Apache-2.0",
+      "fixture": {
+        "file": "model-samples/privacy-filter.json",
+        "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/privacy-filter.json",
+        "size": 899,
+        "sha1": "39b9188d3224c759479738aa156538e01a283414"
+      },
+      "benchmarkReport": "benchmarks/privacy-filter.json"
+    }
+  ]
 }

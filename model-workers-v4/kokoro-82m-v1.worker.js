@@ -44,7 +44,24 @@ const MANIFEST = {
     limitations: ["The bundled phonemizer and advertised voices support English only.", "Names, acronyms, numbers, and unusual punctuation may be pronounced incorrectly.", "Long text is truncated to the model context; split long passages into sentences.", "Synthetic speech can sound unnatural and must not be used to impersonate a person or mislead listeners."],
   },
   runtime: { engine: { name: "kokoro-js (Transformers.js adapter)", version: "1.2.1 / 3.5.1" }, precisions: SUPPORTED },
-  input: { description: "A non-empty English text string.", alternatives: [{ name: "text", type: "string", required: true, minLength: 1, maximumLength: 2000 }] },
+  input: {
+  "description": "A non-empty English text string.",
+  "alternatives": [
+    {
+      "name": "text",
+      "description": "A non-empty English text string.",
+      "fields": [
+        {
+          "name": "text",
+          "type": "string",
+          "required": true,
+          "minLength": 1,
+          "maxLength": 2000
+        }
+      ]
+    }
+  ]
+},
   config: {
     model: [],
     generation: [
@@ -79,6 +96,32 @@ const MANIFEST = {
       { precision: "uint8f16", device: "webgpu", status: "fail", failure: "kokoro-js rejects the uint8f16 dtype" },
     ],
   },
+
+  samples: [
+  {
+    "id": "standard",
+    "label": "Try sample text",
+    "description": "Standard sample for Kokoro 82M v1.0 — Text to Speech.",
+    "userInput": {
+      "text": "The quick brown fox jumps over the lazy dog."
+    },
+    "assets": [],
+    "modelConfig": {},
+    "generateConfig": {
+      "voice": "af_heart",
+      "speed": 1
+    },
+    "source": "WebAI benchmark sentence",
+    "license": "CC0-1.0",
+    "fixture": {
+      "file": "model-samples/kokoro-82m-v1.json",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/kokoro-82m-v1.json",
+      "size": 338,
+      "sha1": "9b670566697f3b67757bbbb2f15a20512540258a"
+    },
+    "benchmarkReport": "benchmarks/kokoro-82m-v1.json"
+  }
+],
 };
 
 const state = { initializing: false, initialized: false, generating: false };

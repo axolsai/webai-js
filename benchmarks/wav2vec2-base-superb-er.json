@@ -639,5 +639,37 @@
       }
     ],
     "environment": "Headless Google Chrome on macOS; Transformers.js 4.2.0"
-  }
+  },
+  "samples": [
+    {
+      "id": "standard",
+      "label": "Try sample audio",
+      "description": "Standard sample for Wav2Vec2 Base SUPERB — Emotion Recognition.",
+      "userInput": {},
+      "assets": [
+        {
+          "field": "audio",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/crema-d-1001-dfa-ang.wav",
+          "file": "model-samples/crema-d-1001-dfa-ang.wav",
+          "mediaType": "audio/wav",
+          "size": 72862,
+          "sha1": "3d62067948a906c4df841268c31a96d3f9d14da5",
+          "encoding": "audio-pcm-f32",
+          "sampleRate": 16000,
+          "durationSeconds": 2.2755625
+        }
+      ],
+      "modelConfig": {},
+      "generateConfig": {},
+      "source": "CREMA-D 1001_DFA_ANG_XX.wav",
+      "license": "ODbL-1.0 / DbCL-1.0",
+      "fixture": {
+        "file": "model-samples/crema-d-1001-dfa-ang.wav",
+        "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/crema-d-1001-dfa-ang.wav",
+        "size": 72862,
+        "sha1": "3d62067948a906c4df841268c31a96d3f9d14da5"
+      },
+      "benchmarkReport": "benchmarks/wav2vec2-base-superb-er.json"
+    }
+  ]
 }

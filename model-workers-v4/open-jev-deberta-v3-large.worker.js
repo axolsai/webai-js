@@ -85,6 +85,62 @@ const MANIFEST = {
     invalidatedBy: ["artifact revision change", "runtime version change", "fixture or quality-gate change", "browser/backend behavior change"],
     results: [{"precision":"fp32","device":"wasm","status":"pass","runtime":{"loadMs":182152.3,"inferenceMs":1475.1,"totalMs":185097.3,"grade":"slow","questionsPerSecond":2.0338},"quality":{"normalized":true,"finite":true,"expected":true,"nondegenerate":true,"grade":"typed-decision-pass"},"cleanup":{"modelDisposed":true,"cacheClearedBeforeCase":true,"cacheClearedAfterCase":true,"deletedEntries":4}},{"precision":"fp32","device":"webgpu","status":"pass","runtime":{"loadMs":181271.3,"inferenceMs":445.4,"totalMs":183191.6,"grade":"good","questionsPerSecond":6.7355},"quality":{"normalized":true,"finite":true,"expected":true,"nondegenerate":true,"grade":"typed-decision-pass"},"cleanup":{"modelDisposed":true,"cacheClearedBeforeCase":true,"cacheClearedAfterCase":true,"deletedEntries":4}},{"precision":"fp16","device":"wasm","status":"pass","runtime":{"loadMs":110955.2,"inferenceMs":2716.9,"totalMs":115036.4,"grade":"slow","questionsPerSecond":1.1042},"quality":{"normalized":true,"finite":true,"expected":true,"nondegenerate":true,"grade":"typed-decision-pass"},"cleanup":{"modelDisposed":true,"cacheClearedBeforeCase":true,"cacheClearedAfterCase":true,"deletedEntries":4}},{"precision":"fp16","device":"webgpu","status":"pass","runtime":{"loadMs":97316.4,"inferenceMs":965.6,"totalMs":99586.3,"grade":"good","questionsPerSecond":3.1069},"quality":{"normalized":true,"finite":true,"expected":true,"nondegenerate":true,"grade":"typed-decision-pass"},"cleanup":{"modelDisposed":true,"cacheClearedBeforeCase":true,"cacheClearedAfterCase":true,"deletedEntries":4}},{"precision":"q4","device":"wasm","status":"fail","runtime":{"loadMs":null,"inferenceMs":null,"totalMs":64089.3,"grade":"failed"},"error":"Could not find a WASM implementation for GatherBlockQuantized(1).","cleanup":{"modelDisposed":true,"cacheClearedBeforeCase":true,"cacheClearedAfterCase":true,"deletedEntries":4}},{"precision":"q4","device":"webgpu","status":"pass","runtime":{"loadMs":58865.6,"inferenceMs":745.3,"totalMs":61101.1,"grade":"good","questionsPerSecond":4.0252},"quality":{"normalized":true,"finite":true,"expected":true,"nondegenerate":true,"grade":"typed-decision-pass"},"cleanup":{"modelDisposed":true,"cacheClearedBeforeCase":true,"cacheClearedAfterCase":true,"deletedEntries":4}},{"precision":"q4f16","device":"wasm","status":"fail","runtime":{"loadMs":null,"inferenceMs":null,"totalMs":43624.3,"grade":"failed"},"error":"No CPUExecutionProvider kernel was found for GatherBlockQuantized(1).","cleanup":{"modelDisposed":true,"cacheClearedBeforeCase":true,"cacheClearedAfterCase":true,"deletedEntries":4}},{"precision":"q4f16","device":"webgpu","status":"pass","runtime":{"loadMs":45219.2,"inferenceMs":387.9,"totalMs":47054.6,"grade":"good","questionsPerSecond":7.734},"quality":{"normalized":true,"finite":true,"expected":true,"nondegenerate":true,"grade":"typed-decision-pass"},"cleanup":{"modelDisposed":true,"cacheClearedBeforeCase":true,"cacheClearedAfterCase":true,"deletedEntries":4}}],
   },
+
+  samples: [
+  {
+    "id": "standard",
+    "label": "Try sample text",
+    "description": "Standard sample for Open Jev DeBERTa V3 Large — Typed Decisions.",
+    "userInput": {
+      "state": "I was charged twice for the same order and nobody answers my emails. I want my money back now.",
+      "questions": [
+        {
+          "type": "choice",
+          "instructions": "Which product area is the message about?",
+          "options": [
+            "fees & charges",
+            "pin & security",
+            "refund & dispute",
+            "top-up",
+            "exchange & fiat",
+            "atm & cash",
+            "transfer",
+            "card",
+            "account & identity",
+            "other"
+          ]
+        },
+        {
+          "type": "score",
+          "instructions": "How positive is the sentiment of this message?",
+          "options": [
+            "very negative",
+            "negative",
+            "neutral",
+            "positive",
+            "very positive"
+          ]
+        },
+        {
+          "type": "noul",
+          "instructions": "The customer is asking for a refund."
+        }
+      ]
+    },
+    "assets": [],
+    "modelConfig": {},
+    "generateConfig": {},
+    "source": "Adapted from the pinned source model card usage example.",
+    "license": "Apache-2.0",
+    "fixture": {
+      "file": "model-samples/open-jev-deberta-v3-large.json",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/open-jev-deberta-v3-large.json",
+      "size": 819,
+      "sha1": "bf1e5a03646050ac2c9b0fa51bf8f01b72f95ece"
+    },
+    "benchmarkReport": "benchmarks/open-jev-deberta-v3-large.json"
+  }
+],
 };
 
 const state = { initializing: false, initialized: false, generating: false };

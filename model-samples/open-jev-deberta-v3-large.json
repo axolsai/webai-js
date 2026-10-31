@@ -1,0 +1,25 @@
+{
+  "state": "I was charged twice for the same order and nobody answers my emails. I want my money back now.",
+  "questions": [
+    {
+      "type": "choice",
+      "instructions": "Which product area is the message about?",
+      "options": ["fees & charges", "pin & security", "refund & dispute", "top-up", "exchange & fiat", "atm & cash", "transfer", "card", "account & identity", "other"]
+    },
+    {
+      "type": "score",
+      "instructions": "How positive is the sentiment of this message?",
+      "options": ["very negative", "negative", "neutral", "positive", "very positive"]
+    },
+    {
+      "type": "noul",
+      "instructions": "The customer is asking for a refund."
+    }
+  ],
+  "expected": {
+    "choice": "fees & charges",
+    "scoreMinimum": 0,
+    "scoreMaximum": 1.5,
+    "noulMinimum": 0.5
+  }
+}

@@ -55,9 +55,35 @@ const MANIFEST = {
   },
   runtime: { engine: { name: "Transformers.js", version: "4.2.0" }, precisions: SUPPORTED },
   input: {
-    description: "Provide exactly one 16 kHz mono Float32Array or a browser blob URL containing WAV/MP3 audio.",
-    alternatives: [{ name: "audio", type: "Float32Array", required: true, minItems: 1 }, { name: "audio_blob_url", type: "string(blob URL)", required: true, minLength: 1, format: "blob-url" }],
-  },
+  "description": "Provide exactly one 16 kHz mono Float32Array or a browser blob URL containing WAV/MP3 audio.",
+  "alternatives": [
+    {
+      "name": "audio",
+      "description": "Provide exactly one 16 kHz mono Float32Array or a browser blob URL containing WAV/MP3 audio.",
+      "fields": [
+        {
+          "name": "audio",
+          "type": "Float32Array",
+          "required": true,
+          "minItems": 1
+        }
+      ]
+    },
+    {
+      "name": "audio_blob_url",
+      "description": "Provide exactly one 16 kHz mono Float32Array or a browser blob URL containing WAV/MP3 audio.",
+      "fields": [
+        {
+          "name": "audio_blob_url",
+          "type": "string(blob URL)",
+          "required": true,
+          "minLength": 1,
+          "format": "blob-url"
+        }
+      ]
+    }
+  ]
+},
   config: {
     model: [{ name: "language", type: "string", default: "en", enum: ["en", "fr", "de", "es", "it", "pt", "nl", "pl", "el", "ar", "ja", "zh", "vi", "ko"], description: "Required spoken language: en (English), fr (French), de (German), es (Spanish), it (Italian), pt (Portuguese), nl (Dutch), pl (Polish), el (Greek), ar (Arabic), ja (Japanese), zh (Chinese/Mandarin), vi (Vietnamese), or ko (Korean). Automatic detection and code-switching are not supported." }, { name: "max_new_tokens", type: "integer", default: 256, minimum: 1, maximum: 1024 }],
     generation: [],
@@ -94,6 +120,39 @@ const MANIFEST = {
       { precision: "q4f16", device: "webgpu", status: "fail", failure: "Runtime module fetch failed in the isolated browser; support was not established." },
     ],
   },
+
+  samples: [
+  {
+    "id": "standard",
+    "label": "Try sample audio",
+    "description": "Standard sample for Cohere Transcribe 03-2026 — Multilingual ASR.",
+    "userInput": {},
+    "assets": [
+      {
+        "field": "audio",
+        "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/whisper-standard.mp3",
+        "file": "model-samples/whisper-standard.mp3",
+        "mediaType": "audio/mpeg",
+        "size": 471925,
+        "sha1": "5faad1507b5d6bc61a39ca3184db5a7b554a7479",
+        "encoding": "audio-pcm-f32",
+        "sampleRate": 16000,
+        "durationSeconds": 29.49225
+      }
+    ],
+    "modelConfig": {},
+    "generateConfig": {},
+    "source": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/whisper-standard.mp3",
+    "license": "Unverified: upstream fixture license not recorded",
+    "fixture": {
+      "file": "model-samples/whisper-standard.mp3",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/whisper-standard.mp3",
+      "size": 471925,
+      "sha1": "5faad1507b5d6bc61a39ca3184db5a7b554a7479"
+    },
+    "benchmarkReport": "benchmarks/cohere-transcribe-03-2026.json"
+  }
+],
 };
 
 const state = { initializing: false, initialized: false, generating: false };

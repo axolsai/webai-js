@@ -621,5 +621,35 @@
       }
     ],
     "environment": "Chrome 151.0.7922.176; darwin/arm64; Transformers.js 4.2.0"
-  }
+  },
+  "samples": [
+    {
+      "id": "standard",
+      "label": "Try sample text",
+      "description": "Standard sample for LFM2.5 350M — Edge Chat.",
+      "userInput": {
+        "messages": [
+          {
+            "role": "user",
+            "content": "What is the capital of France? Answer in one concise sentence."
+          }
+        ]
+      },
+      "assets": [],
+      "modelConfig": {
+        "max_new_tokens": 32,
+        "do_sample": false
+      },
+      "generateConfig": {},
+      "source": "Original WebAI browser LLM benchmark fixture.",
+      "license": "Apache-2.0",
+      "fixture": {
+        "file": "model-samples/lfm2.5-350m.json",
+        "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/lfm2.5-350m.json",
+        "size": 435,
+        "sha1": "86006415fb2c4eb6d65678c2ce856f83268c2e98"
+      },
+      "benchmarkReport": "benchmarks/lfm2.5-350m.json"
+    }
+  ]
 }

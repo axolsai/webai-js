@@ -34,43 +34,100 @@
       "sha1": "a963a0f87228b86b7c9880699df48d4ab6c33482",
       "license": "CC0-1.0"
     },
-    "qualityGate": { "expectedNormalizedOutput": "paris", "requiresNonEmpty": true, "rejectsRepetition": true },
-    "environment": { "browser": "Codex in-app Chromium", "os": "macOS", "backend": "WebGPU", "runtime": "LiteRT-LM JS 0.17.0" },
-    "results": [{
-      "precision": "q4",
-      "device": "webgpu",
-      "status": "pass",
-      "runtime": {
-        "loadMs": 183812.2,
-        "inferenceMs": 6132.6,
-        "totalMs": 189944.8,
-        "timeToFirstTokenMs": 6087.25,
-        "prefillTokensPerSecond": 3.7913129481579166,
-        "prefillTokenCount": 23,
-        "decodeTokensPerSecond": 48.192771084337345,
-        "decodeTokenCount": 2,
-        "grade": "good"
-      },
-      "stream": { "chunkCount": 1, "text": "Paris" },
-      "nativeOutput": {
-        "result": "Paris",
-        "messages": [
-          { "role": "user", "content": "What is the capital of France? Answer with only the city name." },
-          { "role": "assistant", "content": "Paris" }
-        ],
-        "structured_output": false
-      },
-      "quality": { "expected": "Paris", "exactNormalizedMatch": true, "nonEmpty": true, "nonRepetitive": true },
-      "fullyAccelerated": true,
-      "cleanup": {
-        "modelDisposed": true,
-        "conversationsDisposed": true,
-        "modelCacheClearedBeforeCase": true,
-        "modelCacheEntriesClearedBefore": 0,
-        "modelCacheClearedAfterCase": true,
-        "modelCacheEntriesClearedAfter": 1
+    "qualityGate": {
+      "expectedNormalizedOutput": "paris",
+      "requiresNonEmpty": true,
+      "rejectsRepetition": true
+    },
+    "environment": {
+      "browser": "Codex in-app Chromium",
+      "os": "macOS",
+      "backend": "WebGPU",
+      "runtime": "LiteRT-LM JS 0.17.0"
+    },
+    "results": [
+      {
+        "precision": "q4",
+        "device": "webgpu",
+        "status": "pass",
+        "runtime": {
+          "loadMs": 183812.2,
+          "inferenceMs": 6132.6,
+          "totalMs": 189944.8,
+          "timeToFirstTokenMs": 6087.25,
+          "prefillTokensPerSecond": 3.7913129481579166,
+          "prefillTokenCount": 23,
+          "decodeTokensPerSecond": 48.192771084337345,
+          "decodeTokenCount": 2,
+          "grade": "good"
+        },
+        "stream": {
+          "chunkCount": 1,
+          "text": "Paris"
+        },
+        "nativeOutput": {
+          "result": "Paris",
+          "messages": [
+            {
+              "role": "user",
+              "content": "What is the capital of France? Answer with only the city name."
+            },
+            {
+              "role": "assistant",
+              "content": "Paris"
+            }
+          ],
+          "structured_output": false
+        },
+        "quality": {
+          "expected": "Paris",
+          "exactNormalizedMatch": true,
+          "nonEmpty": true,
+          "nonRepetitive": true
+        },
+        "fullyAccelerated": true,
+        "cleanup": {
+          "modelDisposed": true,
+          "conversationsDisposed": true,
+          "modelCacheClearedBeforeCase": true,
+          "modelCacheEntriesClearedBefore": 0,
+          "modelCacheClearedAfterCase": true,
+          "modelCacheEntriesClearedAfter": 1
+        }
       }
-    }],
-    "invalidatedBy": ["model artifact revision change", "LiteRT-LM version change", "fixture or quality-gate change", "browser or WebGPU behavior change"]
-  }
+    ],
+    "invalidatedBy": [
+      "model artifact revision change",
+      "LiteRT-LM version change",
+      "fixture or quality-gate change",
+      "browser or WebGPU behavior change"
+    ]
+  },
+  "samples": [
+    {
+      "id": "standard",
+      "label": "Try sample text",
+      "description": "Standard sample for Gemma 4 E4B Instruct — LiteRT-LM.",
+      "userInput": {
+        "messages": [
+          {
+            "role": "user",
+            "content": "What is the capital of France? Answer with only the city name."
+          }
+        ]
+      },
+      "assets": [],
+      "modelConfig": {},
+      "generateConfig": {},
+      "source": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/gemma-4-e4b-it-litert-lm.json",
+      "license": "CC0-1.0",
+      "fixture": {
+        "file": "model-samples/gemma-4-e4b-it-litert-lm.json",
+        "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/gemma-4-e4b-it-litert-lm.json",
+        "size": 195,
+        "sha1": "a963a0f87228b86b7c9880699df48d4ab6c33482"
+      },
+      "benchmarkReport": "benchmarks/gemma-4-e4b-it-litert-lm.json"
+    }
+  ]
 }

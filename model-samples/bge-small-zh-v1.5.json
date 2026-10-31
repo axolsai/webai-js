@@ -1,0 +1,23 @@
+{
+  "source": "WebAI-authored English/Chinese retrieval examples with upstream BGE query instruction",
+  "license": "MIT",
+  "input": {
+    "texts": [
+      "为这个句子生成表示以用于检索相关文章：中国的首都是哪里？",
+      "北京是中华人民共和国的首都。",
+      "鲸鱼是生活在海洋中的大型哺乳动物。"
+    ]
+  },
+  "modelConfig": {
+    "pooling": "cls",
+    "normalize": true
+  },
+  "expected": {
+    "rows": 3,
+    "dimensions": 512,
+    "positiveIndex": 1,
+    "negativeIndex": 2,
+    "minimumMargin": 0.1,
+    "normTolerance": 0.02
+  }
+}

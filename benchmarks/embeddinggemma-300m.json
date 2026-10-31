@@ -523,5 +523,33 @@
       }
     ],
     "environment": "Headless Chrome on macOS; Transformers.js 4.2.0"
-  }
+  },
+  "samples": [
+    {
+      "id": "standard",
+      "label": "Try sample text",
+      "description": "Standard sample for EmbeddingGemma 300M.",
+      "userInput": {
+        "texts": [
+          "task: search result | query: Which planet is known as the Red Planet?",
+          "title: Mars | text: Mars is known for its reddish appearance and is called the Red Planet.",
+          "title: Ocean life | text: Whales are large marine mammals that live in the ocean."
+        ]
+      },
+      "assets": [],
+      "modelConfig": {
+        "dimensions": 768
+      },
+      "generateConfig": {},
+      "source": "Original WebAI semantic-retrieval fixture following EmbeddingGemma's documented query and document formats.",
+      "license": "Apache-2.0",
+      "fixture": {
+        "file": "model-samples/embeddinggemma-300m.json",
+        "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/embeddinggemma-300m.json",
+        "size": 634,
+        "sha1": "9a1d261338de718b559f5544e81e488477672779"
+      },
+      "benchmarkReport": "benchmarks/embeddinggemma-300m.json"
+    }
+  ]
 }

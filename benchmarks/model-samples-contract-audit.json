@@ -1,0 +1,1237 @@
+{
+  "checkedAt": "2026-10-31T12:01:29.793Z",
+  "scope": "Sample metadata, packaged fixtures, remote integrity and unchanged advertised support evidence; not a fresh inference matrix.",
+  "workers": 61,
+  "assets": 36,
+  "remote": true,
+  "results": [
+    {
+      "id": "all-minilm-l6-v2",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "fp32/wasm",
+        "fp32/webgpu",
+        "fp16/webgpu",
+        "int8/wasm",
+        "int8/webgpu",
+        "uint8/wasm",
+        "uint8/webgpu",
+        "q8/wasm",
+        "q8/webgpu",
+        "q4/wasm",
+        "q4/webgpu",
+        "q4f16/webgpu",
+        "bnb4/wasm",
+        "bnb4/webgpu"
+      ],
+      "errors": []
+    },
+    {
+      "id": "apertus-v1.1-0.5b",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "q4/wasm",
+        "q4/webgpu",
+        "q4f16/wasm",
+        "q4f16/webgpu"
+      ],
+      "errors": []
+    },
+    {
+      "id": "bert-base-ner",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "q8/wasm",
+        "q8/webgpu",
+        "q4/wasm",
+        "q4/webgpu"
+      ],
+      "errors": []
+    },
+    {
+      "id": "bert-small-pii-detection",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [],
+      "errors": []
+    },
+    {
+      "id": "bge-m3",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "q8/wasm",
+        "q8/webgpu",
+        "int8/wasm",
+        "int8/webgpu",
+        "uint8/wasm",
+        "uint8/webgpu",
+        "q4f16/webgpu",
+        "q4/wasm",
+        "bnb4/wasm",
+        "fp16/webgpu"
+      ],
+      "errors": []
+    },
+    {
+      "id": "bge-reranker-base",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "fp32/wasm",
+        "fp32/webgpu",
+        "int8/wasm",
+        "int8/webgpu",
+        "uint8/wasm",
+        "uint8/webgpu",
+        "q8/wasm",
+        "q8/webgpu",
+        "q4/wasm",
+        "q4/webgpu",
+        "bnb4/wasm",
+        "bnb4/webgpu"
+      ],
+      "errors": []
+    },
+    {
+      "id": "bge-reranker-large",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "fp16/webgpu",
+        "int8/wasm",
+        "int8/webgpu",
+        "uint8/wasm",
+        "uint8/webgpu",
+        "q8/wasm",
+        "q8/webgpu",
+        "q4/wasm",
+        "q4f16/webgpu",
+        "bnb4/wasm"
+      ],
+      "errors": []
+    },
+    {
+      "id": "bge-small-en-v1.5",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "fp32/wasm",
+        "fp32/webgpu",
+        "fp16/webgpu",
+        "int8/wasm",
+        "int8/webgpu",
+        "uint8/wasm",
+        "uint8/webgpu",
+        "q8/wasm",
+        "q8/webgpu",
+        "q4/wasm",
+        "q4/webgpu",
+        "q4f16/webgpu",
+        "bnb4/wasm",
+        "bnb4/webgpu"
+      ],
+      "errors": []
+    },
+    {
+      "id": "bge-small-zh-v1.5",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "fp32/wasm",
+        "fp32/webgpu",
+        "fp16/webgpu",
+        "int8/wasm",
+        "int8/webgpu",
+        "uint8/wasm",
+        "uint8/webgpu",
+        "q8/wasm",
+        "q8/webgpu",
+        "q4/wasm",
+        "q4/webgpu",
+        "q4f16/webgpu",
+        "bnb4/wasm",
+        "bnb4/webgpu"
+      ],
+      "errors": []
+    },
+    {
+      "id": "cohere-transcribe-03-2026",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [
+        "Shared benchmark audio upstream source/license is not recorded."
+      ],
+      "passingConfigurations": [
+        "q4/webgpu"
+      ],
+      "errors": []
+    },
+    {
+      "id": "depth-anything-v3-small",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "fp32/wasm",
+        "fp32/webgpu"
+      ],
+      "errors": []
+    },
+    {
+      "id": "detr-resnet-50",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "fp32/wasm",
+        "fp32/webgpu",
+        "fp16/webgpu",
+        "q8/wasm",
+        "q8/webgpu",
+        "uint8/wasm",
+        "uint8/webgpu",
+        "q4/wasm",
+        "q4/webgpu",
+        "q4f16/webgpu",
+        "bnb4/wasm",
+        "bnb4/webgpu"
+      ],
+      "errors": []
+    },
+    {
+      "id": "distilbert-base-uncased-finetuned-sst-2-english",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "fp32/wasm",
+        "fp32/webgpu",
+        "fp16/webgpu",
+        "int8/wasm",
+        "int8/webgpu",
+        "uint8/wasm",
+        "uint8/webgpu",
+        "q8/wasm",
+        "q8/webgpu",
+        "q4/wasm",
+        "q4/webgpu",
+        "q4f16/webgpu",
+        "bnb4/wasm",
+        "bnb4/webgpu"
+      ],
+      "errors": []
+    },
+    {
+      "id": "embeddinggemma-300m",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "fp32/wasm",
+        "fp32/webgpu",
+        "fp16/wasm",
+        "q8/wasm",
+        "q8/webgpu",
+        "q4/webgpu",
+        "no_gather_q4/wasm",
+        "no_gather_q4/webgpu"
+      ],
+      "errors": []
+    },
+    {
+      "id": "ettinx-nli-xs",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "fp32/wasm",
+        "fp32/webgpu",
+        "int8/wasm",
+        "int8/webgpu",
+        "uint8/wasm",
+        "uint8/webgpu",
+        "q8/wasm",
+        "q8/webgpu",
+        "q4/wasm",
+        "q4/webgpu",
+        "bnb4/wasm",
+        "bnb4/webgpu"
+      ],
+      "errors": []
+    },
+    {
+      "id": "f2llm-v2-160m",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "fp32/wasm",
+        "fp32/webgpu",
+        "q8/wasm",
+        "q8/webgpu"
+      ],
+      "errors": []
+    },
+    {
+      "id": "face-emotion-detection",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "fp32/wasm",
+        "fp32/webgpu",
+        "fp16/wasm",
+        "fp16/webgpu",
+        "int8/webgpu",
+        "uint8/wasm",
+        "uint8/webgpu",
+        "q8/webgpu",
+        "q4/wasm",
+        "q4/webgpu",
+        "q4f16/wasm",
+        "q4f16/webgpu",
+        "bnb4/wasm",
+        "bnb4/webgpu"
+      ],
+      "errors": []
+    },
+    {
+      "id": "face-parsing",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "fp32/wasm",
+        "fp32/webgpu",
+        "fp16/webgpu",
+        "q8/wasm",
+        "q8/webgpu"
+      ],
+      "errors": []
+    },
+    {
+      "id": "florence-2-base-ft",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "fp32/wasm",
+        "fp32/webgpu",
+        "int8/wasm",
+        "int8/webgpu",
+        "uint8/wasm",
+        "uint8/webgpu",
+        "q8/wasm",
+        "q8/webgpu",
+        "q4/wasm",
+        "q4/webgpu",
+        "bnb4/wasm",
+        "bnb4/webgpu"
+      ],
+      "errors": []
+    },
+    {
+      "id": "gemma-4-e2b-it-litert-lm",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "q4/webgpu"
+      ],
+      "errors": []
+    },
+    {
+      "id": "gemma-4-e4b-it-litert-lm",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "q4/webgpu"
+      ],
+      "errors": []
+    },
+    {
+      "id": "granite-docling-258m",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "fp32/webgpu",
+        "q4/wasm",
+        "q4/webgpu"
+      ],
+      "errors": []
+    },
+    {
+      "id": "granite-embedding-97m-multilingual-r2",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "fp32/wasm",
+        "fp32/webgpu",
+        "int8/wasm",
+        "int8/webgpu",
+        "uint8/wasm",
+        "uint8/webgpu",
+        "q8/wasm",
+        "q8/webgpu",
+        "q4/wasm",
+        "q4/webgpu",
+        "bnb4/wasm",
+        "bnb4/webgpu"
+      ],
+      "errors": []
+    },
+    {
+      "id": "grounding-dino-tiny",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "fp32/wasm",
+        "fp32/webgpu",
+        "int8/wasm",
+        "int8/webgpu",
+        "q8/wasm",
+        "q8/webgpu",
+        "uint8/wasm",
+        "uint8/webgpu",
+        "q4/wasm",
+        "q4/webgpu",
+        "bnb4/wasm",
+        "bnb4/webgpu"
+      ],
+      "errors": []
+    },
+    {
+      "id": "kokoro-82m-v1",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "fp32/wasm",
+        "fp32/webgpu",
+        "fp16/wasm",
+        "fp16/webgpu",
+        "q4/wasm",
+        "q4/webgpu",
+        "q4f16/wasm",
+        "q4f16/webgpu",
+        "q8/wasm",
+        "uint8/wasm"
+      ],
+      "errors": []
+    },
+    {
+      "id": "laya-typed-decisions",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "q4/wasm",
+        "q4/webgpu"
+      ],
+      "errors": []
+    },
+    {
+      "id": "lfm2.5-350m",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "fp32/wasm",
+        "fp32/webgpu",
+        "fp16/wasm",
+        "fp16/webgpu",
+        "q8/webgpu",
+        "q4/webgpu",
+        "q4f16/webgpu"
+      ],
+      "errors": []
+    },
+    {
+      "id": "lightweight-openpose-litert",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "fp32/wasm",
+        "fp32/webgpu",
+        "fp16/wasm",
+        "fp16/webgpu"
+      ],
+      "errors": []
+    },
+    {
+      "id": "mediapipe-face-detector",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "fp16/wasm"
+      ],
+      "errors": []
+    },
+    {
+      "id": "mediapipe-hand-landmarker",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "fp16/wasm"
+      ],
+      "errors": []
+    },
+    {
+      "id": "mediapipe-selfie-segmenter",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "fp16/wasm"
+      ],
+      "errors": []
+    },
+    {
+      "id": "mobilenet-v2-litert",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "fp32/wasm",
+        "fp32/webgpu"
+      ],
+      "errors": []
+    },
+    {
+      "id": "modnet",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "fp32/wasm",
+        "fp32/webgpu",
+        "fp16/wasm",
+        "fp16/webgpu",
+        "q8/wasm",
+        "q8/webgpu",
+        "uint8/wasm",
+        "uint8/webgpu",
+        "q4/wasm",
+        "q4f16/wasm",
+        "bnb4/wasm"
+      ],
+      "errors": []
+    },
+    {
+      "id": "moonshine-base-en",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [
+        "Shared benchmark audio upstream source/license is not recorded."
+      ],
+      "passingConfigurations": [
+        "fp32/wasm",
+        "fp32/webgpu",
+        "int8/webgpu",
+        "uint8/webgpu",
+        "q8/webgpu",
+        "q4/wasm",
+        "q4/webgpu",
+        "bnb4/wasm",
+        "bnb4/webgpu"
+      ],
+      "errors": []
+    },
+    {
+      "id": "moonshine-tiny",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [
+        "Shared benchmark audio upstream source/license is not recorded."
+      ],
+      "passingConfigurations": [
+        "fp32/wasm",
+        "fp32/webgpu",
+        "int8/webgpu",
+        "uint8/webgpu",
+        "q8/webgpu",
+        "q4/wasm",
+        "q4/webgpu",
+        "bnb4/wasm",
+        "bnb4/webgpu"
+      ],
+      "errors": []
+    },
+    {
+      "id": "open-jev-deberta-v3-large",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "fp32/wasm",
+        "fp32/webgpu",
+        "fp16/wasm",
+        "fp16/webgpu",
+        "q4/webgpu",
+        "q4f16/webgpu"
+      ],
+      "errors": []
+    },
+    {
+      "id": "open-jev-laya-multilingual",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "fp32/wasm",
+        "fp32/webgpu",
+        "fp16/wasm",
+        "fp16/webgpu"
+      ],
+      "errors": []
+    },
+    {
+      "id": "ormbg",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "fp32/wasm",
+        "fp32/webgpu",
+        "fp16/wasm",
+        "fp16/webgpu",
+        "int8/wasm",
+        "int8/webgpu",
+        "q8/wasm",
+        "q8/webgpu",
+        "uint8/wasm",
+        "uint8/webgpu",
+        "q4/wasm",
+        "q4/webgpu",
+        "q4f16/wasm",
+        "q4f16/webgpu",
+        "bnb4/wasm",
+        "bnb4/webgpu"
+      ],
+      "errors": []
+    },
+    {
+      "id": "paraphrase-multilingual-minilm-l12-v2",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "q4f16/webgpu",
+        "q4/wasm",
+        "q4/webgpu",
+        "q8/wasm",
+        "q8/webgpu",
+        "fp16/webgpu",
+        "fp32/wasm",
+        "fp32/webgpu",
+        "int8/wasm",
+        "int8/webgpu",
+        "uint8/wasm",
+        "uint8/webgpu",
+        "bnb4/wasm",
+        "bnb4/webgpu"
+      ],
+      "errors": []
+    },
+    {
+      "id": "privacy-filter",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "q4/webgpu",
+        "q4f16/webgpu"
+      ],
+      "errors": []
+    },
+    {
+      "id": "qwen3-embedding-0.6b",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "q8/wasm",
+        "q8/webgpu",
+        "q4/wasm",
+        "q4/webgpu",
+        "q4f16/wasm",
+        "q4f16/webgpu",
+        "fp16/wasm",
+        "fp16/webgpu",
+        "fp32/wasm",
+        "fp32/webgpu"
+      ],
+      "errors": []
+    },
+    {
+      "id": "qwen3.5-0.8b",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "fp32/webgpu",
+        "fp16/webgpu",
+        "q8/webgpu",
+        "q4/webgpu",
+        "q4f16/webgpu"
+      ],
+      "errors": []
+    },
+    {
+      "id": "rubert-tiny-toxicity",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "fp32/wasm",
+        "fp32/webgpu",
+        "int8/wasm",
+        "int8/webgpu",
+        "uint8/wasm",
+        "uint8/webgpu",
+        "q8/wasm",
+        "q8/webgpu",
+        "q4/wasm",
+        "q4/webgpu",
+        "bnb4/wasm",
+        "bnb4/webgpu"
+      ],
+      "errors": []
+    },
+    {
+      "id": "sam-vit-base",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "q8/wasm",
+        "q8/webgpu",
+        "fp16/webgpu",
+        "fp32/wasm",
+        "fp32/webgpu"
+      ],
+      "errors": []
+    },
+    {
+      "id": "sam-vit-large",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "q8/wasm",
+        "q8/webgpu",
+        "fp16/webgpu",
+        "fp32/webgpu"
+      ],
+      "errors": []
+    },
+    {
+      "id": "segformer-b3-ade20k",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "fp32/wasm",
+        "fp32/webgpu",
+        "fp16/wasm",
+        "fp16/webgpu",
+        "int8/wasm",
+        "int8/webgpu",
+        "uint8/wasm",
+        "uint8/webgpu",
+        "q8/wasm",
+        "q8/webgpu",
+        "q4/wasm",
+        "q4/webgpu",
+        "q4f16/wasm",
+        "q4f16/webgpu",
+        "bnb4/wasm",
+        "bnb4/webgpu"
+      ],
+      "errors": []
+    },
+    {
+      "id": "siglip-base-patch16-224",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "q8/wasm",
+        "q8/webgpu",
+        "int8/wasm",
+        "int8/webgpu",
+        "uint8/wasm",
+        "uint8/webgpu",
+        "q4/wasm",
+        "q4/webgpu",
+        "bnb4/wasm",
+        "bnb4/webgpu"
+      ],
+      "errors": []
+    },
+    {
+      "id": "slimsam-77-uniform",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "q8/wasm",
+        "q8/webgpu",
+        "fp16/webgpu",
+        "fp32/wasm",
+        "fp32/webgpu"
+      ],
+      "errors": []
+    },
+    {
+      "id": "speecht5-tts",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "fp32/wasm",
+        "fp16/wasm",
+        "q8/wasm",
+        "q4/wasm",
+        "q4f16/wasm"
+      ],
+      "errors": []
+    },
+    {
+      "id": "sweep-next-edit-1.5b",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [],
+      "errors": []
+    },
+    {
+      "id": "swin2sr-realworld-sr-x4-64-bsrgan-psnr",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "fp32/wasm",
+        "fp32/webgpu",
+        "uint8/wasm",
+        "uint8/webgpu",
+        "q8/wasm",
+        "q8/webgpu",
+        "q4/wasm",
+        "q4/webgpu",
+        "bnb4/wasm",
+        "bnb4/webgpu"
+      ],
+      "errors": []
+    },
+    {
+      "id": "vitmatte-base-composition-1k",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "fp32/wasm",
+        "fp32/webgpu",
+        "q8/wasm",
+        "q8/webgpu"
+      ],
+      "errors": []
+    },
+    {
+      "id": "vitmatte-base-distinctions-646",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "fp32/wasm",
+        "fp32/webgpu",
+        "q8/wasm",
+        "q8/webgpu"
+      ],
+      "errors": []
+    },
+    {
+      "id": "vitmatte-small-composition-1k",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "fp32/wasm",
+        "fp32/webgpu",
+        "q8/wasm",
+        "q8/webgpu"
+      ],
+      "errors": []
+    },
+    {
+      "id": "wav2vec2-base-superb-er",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "fp32/wasm",
+        "fp32/webgpu",
+        "fp16/wasm",
+        "fp16/webgpu",
+        "q4/wasm",
+        "q4/webgpu",
+        "q4f16/wasm",
+        "q4f16/webgpu",
+        "bnb4/wasm",
+        "bnb4/webgpu"
+      ],
+      "errors": []
+    },
+    {
+      "id": "whisper-base",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [
+        "Shared benchmark audio upstream source/license is not recorded."
+      ],
+      "passingConfigurations": [
+        "fp32/wasm",
+        "fp32/webgpu",
+        "int8/webgpu",
+        "uint8/webgpu",
+        "q8/webgpu",
+        "q4/wasm",
+        "q4/webgpu",
+        "bnb4/wasm",
+        "bnb4/webgpu"
+      ],
+      "errors": []
+    },
+    {
+      "id": "whisper-large-v3-turbo",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [
+        "Shared benchmark audio upstream source/license is not recorded."
+      ],
+      "passingConfigurations": [
+        "q4/wasm",
+        "q4/webgpu",
+        "bnb4/wasm",
+        "bnb4/webgpu",
+        "q4f16/webgpu",
+        "q8/webgpu",
+        "int8/webgpu",
+        "uint8/webgpu",
+        "fp16/webgpu"
+      ],
+      "errors": []
+    },
+    {
+      "id": "whisper-small",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [
+        "Shared benchmark audio upstream source/license is not recorded."
+      ],
+      "passingConfigurations": [
+        "fp32/wasm",
+        "fp32/webgpu",
+        "int8/webgpu",
+        "uint8/webgpu",
+        "q8/webgpu",
+        "q4/wasm",
+        "q4/webgpu",
+        "bnb4/wasm",
+        "bnb4/webgpu"
+      ],
+      "errors": []
+    },
+    {
+      "id": "whisper-tiny",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [
+        "Shared benchmark audio upstream source/license is not recorded."
+      ],
+      "passingConfigurations": [
+        "fp32/wasm",
+        "fp32/webgpu",
+        "uint8/webgpu",
+        "q8/webgpu",
+        "q4/wasm",
+        "q4/webgpu"
+      ],
+      "errors": []
+    },
+    {
+      "id": "yolov8n-pose",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "fp32/wasm",
+        "fp32/webgpu",
+        "fp16/wasm",
+        "fp16/webgpu",
+        "int8/wasm",
+        "int8/webgpu",
+        "uint8/wasm",
+        "uint8/webgpu",
+        "q8/wasm",
+        "q8/webgpu",
+        "q4/wasm",
+        "q4/webgpu",
+        "bnb4/wasm",
+        "bnb4/webgpu"
+      ],
+      "errors": []
+    },
+    {
+      "id": "yolox-m-litert",
+      "samples": 1,
+      "benchmarkEvidenceReused": true,
+      "provenanceGaps": [],
+      "passingConfigurations": [
+        "fp16/wasm",
+        "fp16/webgpu"
+      ],
+      "errors": []
+    }
+  ],
+  "remoteResults": [
+    {
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/all-minilm-l6-v2.json",
+      "passed": true,
+      "size": 407,
+      "sha1": "8beb837ef1dfd6c35b4a100d7d947f414f03c0f6"
+    },
+    {
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/bert-base-ner.json",
+      "passed": true,
+      "size": 676,
+      "sha1": "a90640ef195e01ddb8f45899678975feaee59853"
+    },
+    {
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/apertus-v1.1-0.5b.json",
+      "passed": true,
+      "size": 397,
+      "sha1": "01931912845892dd559d20d4f628d65a2e6999d8"
+    },
+    {
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/bert-small-pii-detection.json",
+      "passed": true,
+      "size": 669,
+      "sha1": "fc2f62bbf3218bc6f0622190e688310d5d9d9007"
+    },
+    {
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/bge-m3.json",
+      "passed": true,
+      "size": 500,
+      "sha1": "75a7770d06fc312ddeb39987712a8b4bbe6f1e08"
+    },
+    {
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/bge-small-en-v1.5.json",
+      "passed": true,
+      "size": 606,
+      "sha1": "2f3cc9dccba6004ab0061011297a862c5bda1634"
+    },
+    {
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/distilbert-sst2.json",
+      "passed": true,
+      "size": 486,
+      "sha1": "226199feb31ba0ad6ffa6629585a76930b240a3a"
+    },
+    {
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+      "passed": true,
+      "size": 78124,
+      "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818"
+    },
+    {
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/bge-small-zh-v1.5.json",
+      "passed": true,
+      "size": 596,
+      "sha1": "2365b808a87dc8e3e77199ae98192506c7826988"
+    },
+    {
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/whisper-standard.mp3",
+      "passed": true,
+      "size": 471925,
+      "sha1": "5faad1507b5d6bc61a39ca3184db5a7b554a7479"
+    },
+    {
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/gemma-4-e2b-it-litert-lm.json",
+      "passed": true,
+      "size": 195,
+      "sha1": "a963a0f87228b86b7c9880699df48d4ab6c33482"
+    },
+    {
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/f2llm-v2-160m.json",
+      "passed": true,
+      "size": 576,
+      "sha1": "e8a6ac52dcbb23157d108932572d2c44e173e48a"
+    },
+    {
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/kokoro-82m-v1.json",
+      "passed": true,
+      "size": 338,
+      "sha1": "9b670566697f3b67757bbbb2f15a20512540258a"
+    },
+    {
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/granite-embedding-97m-multilingual-r2.json",
+      "passed": true,
+      "size": 735,
+      "sha1": "721d37a672010fd5ec9cdf564c697319d598e342"
+    },
+    {
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/ettinx-nli-xs.json",
+      "passed": true,
+      "size": 930,
+      "sha1": "18c133130582f80cfa13ca3aa915e686f9dda37c"
+    },
+    {
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/gemma-4-e4b-it-litert-lm.json",
+      "passed": true,
+      "size": 195,
+      "sha1": "a963a0f87228b86b7c9880699df48d4ab6c33482"
+    },
+    {
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/laya-typed-decisions.json",
+      "passed": true,
+      "size": 2242,
+      "sha1": "cee490dc2efc280f3d781dd6c7ec47c6d23ba737"
+    },
+    {
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/embeddinggemma-300m.json",
+      "passed": true,
+      "size": 634,
+      "sha1": "9a1d261338de718b559f5544e81e488477672779"
+    },
+    {
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/mediapipe-face-test.jpeg",
+      "passed": true,
+      "size": 251136,
+      "sha1": "531674bd36742b56558d7879cc3c8461f7ddda31"
+    },
+    {
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/open-jev-deberta-v3-large.json",
+      "passed": true,
+      "size": 819,
+      "sha1": "bf1e5a03646050ac2c9b0fa51bf8f01b72f95ece"
+    },
+    {
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/paraphrase-multilingual-minilm-l12-v2.json",
+      "passed": true,
+      "size": 523,
+      "sha1": "0294528b8c4ca8006eadb7a4872cad2a5ce29416"
+    },
+    {
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/mediapipe-hand-test.jpg",
+      "passed": true,
+      "size": 33051,
+      "sha1": "d44bc4fbfbc8587039ab32df880162dca7fe842e"
+    },
+    {
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/lfm2.5-350m.json",
+      "passed": true,
+      "size": 435,
+      "sha1": "86006415fb2c4eb6d65678c2ce856f83268c2e98"
+    },
+    {
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/privacy-filter.json",
+      "passed": true,
+      "size": 899,
+      "sha1": "39b9188d3224c759479738aa156538e01a283414"
+    },
+    {
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/qwen3-embedding-0.6b.json",
+      "passed": true,
+      "size": 649,
+      "sha1": "1de6f9cb512dd37a77b155454b595322c5eeff9f"
+    },
+    {
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/granite-docling-new-arxiv.png",
+      "passed": true,
+      "size": 523477,
+      "sha1": "fa9ee1b276da7ce7374804e1e392b5b60c501a52"
+    },
+    {
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/open-jev-laya-multilingual.json",
+      "passed": true,
+      "size": 1368,
+      "sha1": "ff4a5039dbc0c37a52717f0c82420ff45e0a2803"
+    },
+    {
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/sweep-next-edit-1.5b.json",
+      "passed": true,
+      "size": 1291,
+      "sha1": "98a29ff43b6bdcd2faba07f9ba47bb9d9ed36192"
+    },
+    {
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/rubert-tiny-toxicity.json",
+      "passed": true,
+      "size": 700,
+      "sha1": "f136212c8f17ea8b87f6c567580ddae3ad924bcc"
+    },
+    {
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/speecht5-speaker-embedding.bin",
+      "passed": true,
+      "size": 2048,
+      "sha1": "7eca50ca7a6e271a2107f7f2db31c00d0bcdfb66"
+    },
+    {
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/qwen3.5-0.8b.json",
+      "passed": true,
+      "size": 296,
+      "sha1": "842e28ba6ec5218cbc34eb677df214d89064119a"
+    },
+    {
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/speecht5-tts.json",
+      "passed": true,
+      "size": 2177,
+      "sha1": "b11a7a07ab6586b410c367c280b46c44edcff514"
+    },
+    {
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/slimsam-77-uniform.json",
+      "passed": true,
+      "size": 404,
+      "sha1": "f03c558b1d0dfd0dcb2db0dcaffbd9038aac6cf8"
+    },
+    {
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/swin2sr-portrait-lowres.jpg",
+      "passed": true,
+      "size": 5059,
+      "sha1": "86b8839b760031cca032e78fe516dc5bda417a1a"
+    },
+    {
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/vitmatte-portrait-5965592-trimap.png",
+      "passed": true,
+      "size": 22459,
+      "sha1": "64b06a53a2b0f33507093d2696911ec236a00396"
+    },
+    {
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/crema-d-1001-dfa-ang.wav",
+      "passed": true,
+      "size": 72862,
+      "sha1": "3d62067948a906c4df841268c31a96d3f9d14da5"
+    }
+  ],
+  "fullFixtureProvenancePassed": false,
+  "passed": true
+}

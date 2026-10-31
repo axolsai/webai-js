@@ -1,0 +1,13 @@
+{
+  "source": "Original WebAI semantic-retrieval fixture following EmbeddingGemma's documented query and document formats.",
+  "license": "Apache-2.0",
+  "input": {
+    "texts": [
+      "task: search result | query: Which planet is known as the Red Planet?",
+      "title: Mars | text: Mars is known for its reddish appearance and is called the Red Planet.",
+      "title: Ocean life | text: Whales are large marine mammals that live in the ocean."
+    ]
+  },
+  "modelConfig": { "dimensions": 768 },
+  "expected": { "rows": 3, "dimensions": 768, "positiveIndex": 1, "negativeIndex": 2, "minimumMargin": 0.1, "normTolerance": 0.02 }
+}

@@ -28,12 +28,99 @@
   },
   "runtime": {
     "precisions": {
-      "bnb4": { "size": 291617358, "weightsSize": 287215655, "supportedDevices": ["wasm", "webgpu"], "modelKeys": ["encoder_model_bnb4.onnx", "decoder_model_merged_bnb4.onnx"], "dtype": { "encoder_model": "bnb4", "decoder_model_merged": "bnb4" } },
-      "q4": { "size": 304001406, "weightsSize": 299599703, "supportedDevices": ["wasm", "webgpu"], "modelKeys": ["encoder_model_q4.onnx", "decoder_model_merged_q4.onnx"], "dtype": { "encoder_model": "q4", "decoder_model_merged": "q4" } },
-      "q8": { "size": 253437951, "weightsSize": 249036248, "supportedDevices": ["webgpu"], "modelKeys": ["encoder_model_quantized.onnx", "decoder_model_merged_quantized.onnx"], "dtype": { "encoder_model": "q8", "decoder_model_merged": "q8" } },
-      "int8": { "size": 253437918, "weightsSize": 249036215, "supportedDevices": ["webgpu"], "modelKeys": ["encoder_model_int8.onnx", "decoder_model_merged_int8.onnx"], "dtype": { "encoder_model": "int8", "decoder_model_merged": "int8" } },
-      "uint8": { "size": 253438012, "weightsSize": 249036309, "supportedDevices": ["webgpu"], "modelKeys": ["encoder_model_uint8.onnx", "decoder_model_merged_uint8.onnx"], "dtype": { "encoder_model": "uint8", "decoder_model_merged": "uint8" } },
-      "fp32": { "size": 972849700, "weightsSize": 968447997, "supportedDevices": ["wasm", "webgpu"], "modelKeys": ["encoder_model.onnx", "decoder_model_merged.onnx"], "dtype": { "encoder_model": "fp32", "decoder_model_merged": "fp32" } }
+      "bnb4": {
+        "size": 291617358,
+        "weightsSize": 287215655,
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "modelKeys": [
+          "encoder_model_bnb4.onnx",
+          "decoder_model_merged_bnb4.onnx"
+        ],
+        "dtype": {
+          "encoder_model": "bnb4",
+          "decoder_model_merged": "bnb4"
+        }
+      },
+      "q4": {
+        "size": 304001406,
+        "weightsSize": 299599703,
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "modelKeys": [
+          "encoder_model_q4.onnx",
+          "decoder_model_merged_q4.onnx"
+        ],
+        "dtype": {
+          "encoder_model": "q4",
+          "decoder_model_merged": "q4"
+        }
+      },
+      "q8": {
+        "size": 253437951,
+        "weightsSize": 249036248,
+        "supportedDevices": [
+          "webgpu"
+        ],
+        "modelKeys": [
+          "encoder_model_quantized.onnx",
+          "decoder_model_merged_quantized.onnx"
+        ],
+        "dtype": {
+          "encoder_model": "q8",
+          "decoder_model_merged": "q8"
+        }
+      },
+      "int8": {
+        "size": 253437918,
+        "weightsSize": 249036215,
+        "supportedDevices": [
+          "webgpu"
+        ],
+        "modelKeys": [
+          "encoder_model_int8.onnx",
+          "decoder_model_merged_int8.onnx"
+        ],
+        "dtype": {
+          "encoder_model": "int8",
+          "decoder_model_merged": "int8"
+        }
+      },
+      "uint8": {
+        "size": 253438012,
+        "weightsSize": 249036309,
+        "supportedDevices": [
+          "webgpu"
+        ],
+        "modelKeys": [
+          "encoder_model_uint8.onnx",
+          "decoder_model_merged_uint8.onnx"
+        ],
+        "dtype": {
+          "encoder_model": "uint8",
+          "decoder_model_merged": "uint8"
+        }
+      },
+      "fp32": {
+        "size": 972849700,
+        "weightsSize": 968447997,
+        "supportedDevices": [
+          "wasm",
+          "webgpu"
+        ],
+        "modelKeys": [
+          "encoder_model.onnx",
+          "decoder_model_merged.onnx"
+        ],
+        "dtype": {
+          "encoder_model": "fp32",
+          "decoder_model_merged": "fp32"
+        }
+      }
     }
   },
   "input": {
@@ -10616,5 +10703,37 @@
         "decoder_model_merged": "bnb4"
       }
     }
-  }
+  },
+  "samples": [
+    {
+      "id": "standard",
+      "label": "Try sample audio",
+      "description": "Standard sample for Whisper Small — Timestamped.",
+      "userInput": {},
+      "assets": [
+        {
+          "field": "audio",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/whisper-standard.mp3",
+          "file": "model-samples/whisper-standard.mp3",
+          "mediaType": "audio/mpeg",
+          "size": 471925,
+          "sha1": "5faad1507b5d6bc61a39ca3184db5a7b554a7479",
+          "encoding": "audio-pcm-f32",
+          "sampleRate": 16000,
+          "durationSeconds": 29.49225
+        }
+      ],
+      "modelConfig": {},
+      "generateConfig": {},
+      "source": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/whisper-standard.mp3",
+      "license": "Unverified: upstream fixture license not recorded",
+      "fixture": {
+        "file": "model-samples/whisper-standard.mp3",
+        "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/whisper-standard.mp3",
+        "size": 471925,
+        "sha1": "5faad1507b5d6bc61a39ca3184db5a7b554a7479"
+      },
+      "benchmarkReport": "benchmarks/whisper-small_timestamped.json"
+    }
+  ]
 }

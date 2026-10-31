@@ -17053,5 +17053,34 @@
         }
       }
     ]
-  }
+  },
+  "samples": [
+    {
+      "id": "standard",
+      "label": "Try sample text",
+      "description": "Standard sample for BGE Small English v1.5.",
+      "userInput": {
+        "texts": [
+          "Represent this sentence for searching relevant passages: What is the capital of France?",
+          "Paris is the capital and largest city of France.",
+          "Whales are large marine mammals living in the ocean."
+        ]
+      },
+      "assets": [],
+      "modelConfig": {
+        "pooling": "cls",
+        "normalize": true
+      },
+      "generateConfig": {},
+      "source": "WebAI-authored English/Chinese retrieval examples with upstream BGE query instruction",
+      "license": "MIT",
+      "fixture": {
+        "file": "model-samples/bge-small-en-v1.5.json",
+        "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/bge-small-en-v1.5.json",
+        "size": 606,
+        "sha1": "2f3cc9dccba6004ab0061011297a862c5bda1634"
+      },
+      "benchmarkReport": "benchmarks/bge-small-en-v1.5.json"
+    }
+  ]
 }

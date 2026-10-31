@@ -22429,5 +22429,34 @@
         }
       }
     ]
-  }
+  },
+  "samples": [
+    {
+      "id": "standard",
+      "label": "Try sample text",
+      "description": "Standard sample for BGE Small Chinese v1.5.",
+      "userInput": {
+        "texts": [
+          "为这个句子生成表示以用于检索相关文章：中国的首都是哪里？",
+          "北京是中华人民共和国的首都。",
+          "鲸鱼是生活在海洋中的大型哺乳动物。"
+        ]
+      },
+      "assets": [],
+      "modelConfig": {
+        "pooling": "cls",
+        "normalize": true
+      },
+      "generateConfig": {},
+      "source": "WebAI-authored English/Chinese retrieval examples with upstream BGE query instruction",
+      "license": "MIT",
+      "fixture": {
+        "file": "model-samples/bge-small-zh-v1.5.json",
+        "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/bge-small-zh-v1.5.json",
+        "size": 596,
+        "sha1": "2365b808a87dc8e3e77199ae98192506c7826988"
+      },
+      "benchmarkReport": "benchmarks/bge-small-zh-v1.5.json"
+    }
+  ]
 }

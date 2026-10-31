@@ -406,7 +406,7 @@
           "unique": true,
           "topLabel": "a portrait photo of a person",
           "topScore": 0.000056381246395176277,
-          "strongestNegative": 1.3780274343844212E-7,
+          "strongestNegative": 1.3780274343844212e-7,
           "topToNegativeRatio": 409.1445858649567,
           "minimumRatio": 10
         },
@@ -417,11 +417,11 @@
           },
           {
             "label": "a photo of a car",
-            "score": 1.3780274343844212E-7
+            "score": 1.3780274343844212e-7
           },
           {
             "label": "a landscape",
-            "score": 1.2598052023804485E-7
+            "score": 1.2598052023804485e-7
           }
         ]
       },
@@ -448,7 +448,7 @@
           "unique": true,
           "topLabel": "a portrait photo of a person",
           "topScore": 0.00007835849828552455,
-          "strongestNegative": 1.6783047840362997E-7,
+          "strongestNegative": 1.6783047840362997e-7,
           "topToNegativeRatio": 466.89075209017426,
           "minimumRatio": 10
         },
@@ -459,11 +459,11 @@
           },
           {
             "label": "a photo of a car",
-            "score": 1.6783047840362997E-7
+            "score": 1.6783047840362997e-7
           },
           {
             "label": "a landscape",
-            "score": 1.625366223834135E-7
+            "score": 1.625366223834135e-7
           }
         ]
       },
@@ -490,7 +490,7 @@
           "unique": true,
           "topLabel": "a portrait photo of a person",
           "topScore": 0.000056381246395176277,
-          "strongestNegative": 1.3780274343844212E-7,
+          "strongestNegative": 1.3780274343844212e-7,
           "topToNegativeRatio": 409.1445858649567,
           "minimumRatio": 10
         },
@@ -501,11 +501,11 @@
           },
           {
             "label": "a photo of a car",
-            "score": 1.3780274343844212E-7
+            "score": 1.3780274343844212e-7
           },
           {
             "label": "a landscape",
-            "score": 1.2598052023804485E-7
+            "score": 1.2598052023804485e-7
           }
         ]
       },
@@ -532,7 +532,7 @@
           "unique": true,
           "topLabel": "a portrait photo of a person",
           "topScore": 0.00007835849828552455,
-          "strongestNegative": 1.6783047840362997E-7,
+          "strongestNegative": 1.6783047840362997e-7,
           "topToNegativeRatio": 466.89075209017426,
           "minimumRatio": 10
         },
@@ -543,11 +543,11 @@
           },
           {
             "label": "a photo of a car",
-            "score": 1.6783047840362997E-7
+            "score": 1.6783047840362997e-7
           },
           {
             "label": "a landscape",
-            "score": 1.625366223834135E-7
+            "score": 1.625366223834135e-7
           }
         ]
       },
@@ -574,7 +574,7 @@
           "unique": true,
           "topLabel": "a portrait photo of a person",
           "topScore": 0.00005717068779631518,
-          "strongestNegative": 1.8804314549925039E-7,
+          "strongestNegative": 1.8804314549925039e-7,
           "topToNegativeRatio": 304.0296291817937,
           "minimumRatio": 10
         },
@@ -585,11 +585,11 @@
           },
           {
             "label": "a photo of a car",
-            "score": 1.8804314549925039E-7
+            "score": 1.8804314549925039e-7
           },
           {
             "label": "a landscape",
-            "score": 1.5649325746380782E-7
+            "score": 1.5649325746380782e-7
           }
         ]
       },
@@ -616,7 +616,7 @@
           "unique": true,
           "topLabel": "a portrait photo of a person",
           "topScore": 0.0000776401357143186,
-          "strongestNegative": 1.5467284697479045E-7,
+          "strongestNegative": 1.5467284697479045e-7,
           "topToNegativeRatio": 501.96357817718894,
           "minimumRatio": 10
         },
@@ -627,11 +627,11 @@
           },
           {
             "label": "a landscape",
-            "score": 1.5467284697479045E-7
+            "score": 1.5467284697479045e-7
           },
           {
             "label": "a photo of a car",
-            "score": 1.1392697274459351E-7
+            "score": 1.1392697274459351e-7
           }
         ]
       },
@@ -658,7 +658,7 @@
           "unique": true,
           "topLabel": "a portrait photo of a person",
           "topScore": 0.0001224326842930168,
-          "strongestNegative": 7.488825417567568E-7,
+          "strongestNegative": 7.488825417567568e-7,
           "topToNegativeRatio": 163.48716583218723,
           "minimumRatio": 10
         },
@@ -669,11 +669,11 @@
           },
           {
             "label": "a landscape",
-            "score": 7.488825417567568E-7
+            "score": 7.488825417567568e-7
           },
           {
             "label": "a photo of a car",
-            "score": 2.1147380380170944E-7
+            "score": 2.1147380380170944e-7
           }
         ]
       },
@@ -700,7 +700,7 @@
           "unique": true,
           "topLabel": "a portrait photo of a person",
           "topScore": 0.0001224323350470513,
-          "strongestNegative": 7.488789606213686E-7,
+          "strongestNegative": 7.488789606213686e-7,
           "topToNegativeRatio": 163.48748126862228,
           "minimumRatio": 10
         },
@@ -711,11 +711,11 @@
           },
           {
             "label": "a landscape",
-            "score": 7.488789606213686E-7
+            "score": 7.488789606213686e-7
           },
           {
             "label": "a photo of a car",
-            "score": 2.1147138795640785E-7
+            "score": 2.1147138795640785e-7
           }
         ]
       },
@@ -742,7 +742,7 @@
           "unique": true,
           "topLabel": "a portrait photo of a person",
           "topScore": 0.00009681785013526678,
-          "strongestNegative": 3.172833089593041E-7,
+          "strongestNegative": 3.172833089593041e-7,
           "topToNegativeRatio": 305.14637045620634,
           "minimumRatio": 10
         },
@@ -753,11 +753,11 @@
           },
           {
             "label": "a landscape",
-            "score": 3.172833089593041E-7
+            "score": 3.172833089593041e-7
           },
           {
             "label": "a photo of a car",
-            "score": 5.572021066768684E-8
+            "score": 5.572021066768684e-8
           }
         ]
       },
@@ -784,7 +784,7 @@
           "unique": true,
           "topLabel": "a portrait photo of a person",
           "topScore": 0.00009681803931016475,
-          "strongestNegative": 3.172833089593041E-7,
+          "strongestNegative": 3.172833089593041e-7,
           "topToNegativeRatio": 305.1469666895808,
           "minimumRatio": 10
         },
@@ -795,15 +795,53 @@
           },
           {
             "label": "a landscape",
-            "score": 3.172833089593041E-7
+            "score": 3.172833089593041e-7
           },
           {
             "label": "a photo of a car",
-            "score": 5.572116990038012E-8
+            "score": 5.572116990038012e-8
           }
         ]
       }
     ],
     "environment": "Headless Google Chrome on macOS; Transformers.js 4.2.0"
-  }
+  },
+  "samples": [
+    {
+      "id": "standard",
+      "label": "Try sample image",
+      "description": "Standard sample for SigLIP Base Patch16 224 — Zero-Shot Image Classification.",
+      "userInput": {
+        "candidate_labels": [
+          "a portrait photo of a person",
+          "a photo of a car",
+          "a landscape"
+        ]
+      },
+      "assets": [
+        {
+          "field": "image_blob_url",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+          "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+          "mediaType": "image/jpeg",
+          "size": 78124,
+          "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818",
+          "encoding": "blob-url",
+          "width": 1024,
+          "height": 683
+        }
+      ],
+      "modelConfig": {},
+      "generateConfig": {},
+      "source": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+      "license": "Pexels License",
+      "fixture": {
+        "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+        "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+        "size": 78124,
+        "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818"
+      },
+      "benchmarkReport": "benchmarks/siglip-base-patch16-224.json"
+    }
+  ]
 }

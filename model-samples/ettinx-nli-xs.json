@@ -1,0 +1,12 @@
+{
+  "source": "Examples adapted from the pinned source model card.",
+  "sourceUrl": "https://huggingface.co/dleemiller/EttinX-nli-xs/blob/802360b6ffe6d4627f1d28fd3225522e247cd3e8/README.md#usage",
+  "license": "MIT",
+  "licenseUrl": "https://huggingface.co/dleemiller/EttinX-nli-xs/blob/802360b6ffe6d4627f1d28fd3225522e247cd3e8/README.md",
+  "cases": [
+    { "premise": "A man is eating pizza.", "hypothesis": "A man eats something.", "expectedLabel": "entailment", "minimumMargin": 0.3 },
+    { "premise": "A black race car starts up in front of a crowd of people.", "hypothesis": "A man is driving down a lonely road.", "expectedLabel": "contradiction", "minimumMargin": 0.3 },
+    { "premise": "A woman is reading a book in the park.", "hypothesis": "The woman is outdoors.", "expectedLabel": "entailment", "minimumMargin": 0.15 }
+  ],
+  "limitations": "Small semantic sanity set, not a substitute for MNLI/SNLI evaluation."
+}

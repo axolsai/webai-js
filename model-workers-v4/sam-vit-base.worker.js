@@ -111,6 +111,51 @@ const MANIFEST = {
     invalidatedBy: ["artifact revision change", "runtime version change", "fixture or quality gate change", "browser/backend change"],
     results: [{"precision":"q8","device":"wasm","status":"pass","runtime":{"megapixelsPerSecond":0.0305,"grade":"very-slow"},"quality":{"grade":"segmentation-pass","pointInside":true}},{"precision":"q8","device":"webgpu","status":"pass","runtime":{"megapixelsPerSecond":0.0398,"grade":"very-slow"},"quality":{"grade":"segmentation-pass","pointInside":true}},{"precision":"fp16","device":"wasm","status":"fail","failure":"Error: Can't create a session. ERROR_CODE: 1, ERROR_MESSAGE: /mnt/vss/_work/1/s/onnxruntime/core/graph/graph_utils.cc:30 int onnxruntime::graph_utils::GetIndexFromName(const Node &, const std::string &, bool) itr != node_args.end() was false. Attempting to get index by a name which does not exist:InsertedPrecisionFreeCast_/mask_decoder/upscale_layer_norm/Constant_output_0for node: /mask_decoder/transformer/layers.0/layer_norm1/Mul/SimplifiedLayerNormFusion/\n"},{"precision":"fp16","device":"webgpu","status":"pass","runtime":{"megapixelsPerSecond":0.7031,"grade":"slow"},"quality":{"grade":"segmentation-pass","pointInside":true}},{"precision":"fp32","device":"wasm","status":"pass","runtime":{"megapixelsPerSecond":0.0301,"grade":"very-slow"},"quality":{"grade":"segmentation-pass","pointInside":true}},{"precision":"fp32","device":"webgpu","status":"pass","runtime":{"megapixelsPerSecond":0.5461,"grade":"slow"},"quality":{"grade":"segmentation-pass","pointInside":true}}],
   },
+
+  samples: [
+  {
+    "id": "standard",
+    "label": "Try sample text",
+    "description": "Standard sample for SAM ViT Base — Point-Prompt Segmentation.",
+    "userInput": {
+      "input_points": [
+        [
+          [
+            470,
+            330
+          ]
+        ]
+      ],
+      "input_labels": [
+        [
+          1
+        ]
+      ]
+    },
+    "assets": [
+      {
+        "field": "image",
+        "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+        "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+        "mediaType": "image/jpeg",
+        "size": 78124,
+        "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818",
+        "encoding": "blob-url"
+      }
+    ],
+    "modelConfig": {},
+    "generateConfig": {},
+    "source": "WebAI point-prompt fixture using the existing Pexels portrait benchmark image.",
+    "license": "Pexels License",
+    "fixture": {
+      "file": "model-samples/slimsam-77-uniform.json",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/slimsam-77-uniform.json",
+      "size": 404,
+      "sha1": "f03c558b1d0dfd0dcb2db0dcaffbd9038aac6cf8"
+    },
+    "benchmarkReport": "benchmarks/sam-vit-base.json"
+  }
+],
 };
 
 const state = { initializing: false, initialized: false, generating: false };

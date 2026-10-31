@@ -91,9 +91,26 @@ const MANIFEST = {
     precisions: SUPPORTED,
   },
   input: {
-    description: "One or more non-empty strings.",
-    alternatives: [{ name: "texts", type: "string[]", required: true, minItems: 1, items: { type: "string", minLength: 1 } }],
-  },
+  "description": "One or more non-empty strings.",
+  "alternatives": [
+    {
+      "name": "texts",
+      "description": "One or more non-empty strings.",
+      "fields": [
+        {
+          "name": "texts",
+          "type": "string[]",
+          "required": true,
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      ]
+    }
+  ]
+},
   config: {
     model: [
       {
@@ -155,6 +172,36 @@ const MANIFEST = {
       { precision: "bnb4", device: "webgpu", status: "pass", runtime: { embeddingsPerSecond: 13.375, grade: "good" }, quality: { positive: 0.9633, negative: 0.0236, margin: 0.9397 } },
     ],
   },
+
+  samples: [
+  {
+    "id": "standard",
+    "label": "Try sample text",
+    "description": "Standard sample for Paraphrase Multilingual MiniLM L12 v2.",
+    "userInput": {
+      "texts": [
+        "A child is playing with a dog in the park.",
+        "Un niño juega con un perro en el parque.",
+        "Quantum mechanics describes matter at atomic scales."
+      ]
+    },
+    "assets": [],
+    "modelConfig": {
+      "pooling": "mean",
+      "normalize": true
+    },
+    "generateConfig": {},
+    "source": "WebAI multilingual semantic-similarity benchmark",
+    "license": "CC0-1.0",
+    "fixture": {
+      "file": "model-samples/paraphrase-multilingual-minilm-l12-v2.json",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/paraphrase-multilingual-minilm-l12-v2.json",
+      "size": 523,
+      "sha1": "0294528b8c4ca8006eadb7a4872cad2a5ce29416"
+    },
+    "benchmarkReport": "benchmarks/paraphrase-multilingual-minilm-l12-v2.json"
+  }
+],
 };
 const state = { initializing: false, initialized: false, generating: false };
 let extractor = null;

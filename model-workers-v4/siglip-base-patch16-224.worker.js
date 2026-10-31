@@ -60,12 +60,34 @@ const MANIFEST = {
   },
   runtime: { engine: { name: "Transformers.js", version: "4.2.0" }, precisions: SUPPORTED },
   input: {
-    description: "One browser-readable image URL and at least two non-empty English candidate labels.",
-    alternatives: [
-      { name: "image_blob_url", type: "string", required: true, minLength: 1 },
-      { name: "candidate_labels", type: "string[]", required: true, minItems: 1, items: { type: "string", minLength: 1 } },
-    ],
-  },
+  "description": "One browser-readable image URL and at least two non-empty English candidate labels.",
+  "alternatives": [
+    {
+      "name": "image and candidate labels",
+      "description": "One browser-readable image URL and at least two non-empty English candidate labels.",
+      "fields": [
+        {
+          "name": "image_blob_url",
+          "type": "string",
+          "required": true,
+          "minLength": 1,
+          "format": "url"
+        },
+        {
+          "name": "candidate_labels",
+          "type": "string[]",
+          "required": true,
+          "minItems": 2,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "maxItems": 100
+        }
+      ]
+    }
+  ]
+},
   config: { model: [], generation: [{ name: "hypothesis_template", type: "string", default: "This is a photo of {}", description: "English template containing one {} placeholder." }] },
   output: { description: "Candidate labels sorted by descending independent sigmoid score.", fields: [{ name: "predictions", type: "Array<{label:string,score:number}>", required: true }], example: { predictions: [{ label: "a portrait photo of a person", score: 0.91 }] } },
   operations: ["checkModelSupports", "init", "download", "generate", "clearMemory"],
@@ -91,6 +113,45 @@ const MANIFEST = {
       { precision: "bnb4", device: "webgpu", status: "pass", runtime: { imagesPerSecond: 0.6051, grade: "very-slow" }, quality: { topToNegativeRatio: 305.15 } },
     ],
   },
+
+  samples: [
+  {
+    "id": "standard",
+    "label": "Try sample image",
+    "description": "Standard sample for SigLIP Base Patch16 224 — Zero-Shot Image Classification.",
+    "userInput": {
+      "candidate_labels": [
+        "a portrait photo of a person",
+        "a photo of a car",
+        "a landscape"
+      ]
+    },
+    "assets": [
+      {
+        "field": "image_blob_url",
+        "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+        "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+        "mediaType": "image/jpeg",
+        "size": 78124,
+        "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818",
+        "encoding": "blob-url",
+        "width": 1024,
+        "height": 683
+      }
+    ],
+    "modelConfig": {},
+    "generateConfig": {},
+    "source": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+    "license": "Pexels License",
+    "fixture": {
+      "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+      "size": 78124,
+      "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818"
+    },
+    "benchmarkReport": "benchmarks/siglip-base-patch16-224.json"
+  }
+],
 };
 
 const state = { initializing: false, initialized: false, generating: false };

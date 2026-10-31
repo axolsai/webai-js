@@ -85,9 +85,26 @@ const MANIFEST = {
     precisions: SUPPORTED,
   },
   input: {
-    description: "One or more non-empty strings.",
-    alternatives: [{ name: "texts", type: "string[]", required: true, minItems: 1, items: { type: "string", minLength: 1 } }],
-  },
+  "description": "One or more non-empty strings.",
+  "alternatives": [
+    {
+      "name": "texts",
+      "description": "One or more non-empty strings.",
+      "fields": [
+        {
+          "name": "texts",
+          "type": "string[]",
+          "required": true,
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      ]
+    }
+  ]
+},
   config: {
     model: [
       {
@@ -143,6 +160,36 @@ const MANIFEST = {
       { precision: "fp32", device: "webgpu", status: "pass", runtime: { embeddingsPerSecond: 7.953, grade: "slow" } },
     ],
   },
+
+  samples: [
+  {
+    "id": "standard",
+    "label": "Try sample text",
+    "description": "Standard sample for Qwen3 Embedding 0.6B.",
+    "userInput": {
+      "texts": [
+        "Instruct: Given a web search query, retrieve relevant passages that answer the query\nQuery:What is the capital of France?",
+        "Paris is the capital and largest city of France.",
+        "Whales are large marine mammals that live in the ocean."
+      ]
+    },
+    "assets": [],
+    "modelConfig": {
+      "pooling": "last_token",
+      "normalize": true
+    },
+    "generateConfig": {},
+    "source": "Original WebAI semantic retrieval fixture following the Qwen3 Embedding query format.",
+    "license": "Apache-2.0",
+    "fixture": {
+      "file": "model-samples/qwen3-embedding-0.6b.json",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/qwen3-embedding-0.6b.json",
+      "size": 649,
+      "sha1": "1de6f9cb512dd37a77b155454b595322c5eeff9f"
+    },
+    "benchmarkReport": "benchmarks/qwen3-embedding-0.6b.json"
+  }
+],
 };
 const state = { initializing: false, initialized: false, generating: false };
 let extractor = null;

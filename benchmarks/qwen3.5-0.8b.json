@@ -28,11 +28,41 @@
       "version": "4.2.0"
     },
     "precisions": {
-      "q4f16": {"supportedDevices":["webgpu"],"weightsSize":469929410,"size":489174504},
-      "q4": {"supportedDevices":["webgpu"],"weightsSize":551247327,"size":570492421},
-      "q8": {"supportedDevices":["webgpu"],"weightsSize":938947493,"size":958192587},
-      "fp16": {"supportedDevices":["webgpu"],"weightsSize":1538945869,"size":1558190963},
-      "fp32": {"supportedDevices":["webgpu"],"weightsSize":3077060202,"size":3096305296}
+      "q4f16": {
+        "supportedDevices": [
+          "webgpu"
+        ],
+        "weightsSize": 469929410,
+        "size": 489174504
+      },
+      "q4": {
+        "supportedDevices": [
+          "webgpu"
+        ],
+        "weightsSize": 551247327,
+        "size": 570492421
+      },
+      "q8": {
+        "supportedDevices": [
+          "webgpu"
+        ],
+        "weightsSize": 938947493,
+        "size": 958192587
+      },
+      "fp16": {
+        "supportedDevices": [
+          "webgpu"
+        ],
+        "weightsSize": 1538945869,
+        "size": 1558190963
+      },
+      "fp32": {
+        "supportedDevices": [
+          "webgpu"
+        ],
+        "weightsSize": 3077060202,
+        "size": 3096305296
+      }
     }
   },
   "benchmark": {
@@ -471,5 +501,35 @@
         "finishedAt": "2026-09-09T15:07:59.241Z"
       }
     ]
-  }
+  },
+  "samples": [
+    {
+      "id": "standard",
+      "label": "Try sample text",
+      "description": "Standard sample for Qwen3.5 0.8B — Text Chat.",
+      "userInput": {
+        "messages": [
+          {
+            "role": "user",
+            "content": "What is the capital of France? Answer with only the city name."
+          }
+        ]
+      },
+      "assets": [],
+      "modelConfig": {
+        "max_new_tokens": 32,
+        "do_sample": false
+      },
+      "generateConfig": {},
+      "source": "Original WebAI benchmark fixture.",
+      "license": "Apache-2.0",
+      "fixture": {
+        "file": "model-samples/qwen3.5-0.8b.json",
+        "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/qwen3.5-0.8b.json",
+        "size": 296,
+        "sha1": "842e28ba6ec5218cbc34eb677df214d89064119a"
+      },
+      "benchmarkReport": "benchmarks/qwen3.5-0.8b.json"
+    }
+  ]
 }

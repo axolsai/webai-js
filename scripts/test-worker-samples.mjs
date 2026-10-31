@@ -1,0 +1,18 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import vm from 'node:vm';
+import crypto from 'node:crypto';
+import ts from 'typescript';
+const source=ts.transpileModule(fs.readFileSync('src/utils/samples.ts','utf8'),{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.CommonJS}}).outputText;
+const bytes=Buffer.from('sample image bytes'),sha1=crypto.createHash('sha1').update(bytes).digest('hex'),revoked=[],created=[];
+let corrupt=false;
+const exports={};
+vm.runInNewContext(source,{exports,structuredClone,Blob,crypto:crypto.webcrypto,fetch:async()=>new Response(corrupt?'bad':bytes),URL:{createObjectURL:()=>{const url=`blob:test-${created.length}`;created.push(url);return url;},revokeObjectURL:url=>revoked.push(url)},AudioContext:class{async decodeAudioData(){return {duration:1};}async close(){}},OfflineAudioContext:class{createBufferSource(){return {connect(){},start(){}};}async startRendering(){return {getChannelData:()=>new Float32Array([.1,.2])};}}});
+const sample={userInput:{text:'A sample'},modelConfig:{},generateConfig:{},assets:[{field:'image',url:'https://example.test/image',size:bytes.length,sha1,mediaType:'image/png',encoding:'blob-url'}]};
+const result=await exports.prepareWorkerSample(sample);
+assert.equal(result.request.userInput.text,'A sample');assert.equal(result.request.userInput.image,'blob:test-0');assert(!sample.userInput.image);result.dispose();result.dispose();assert.equal(revoked.length,1);
+const audio=structuredClone(sample);audio.assets[0]={...audio.assets[0],field:'audio',encoding:'audio-pcm-f32',sampleRate:16000};const prepared=await exports.prepareWorkerSample(audio);assert(prepared.request.userInput.audio instanceof Float32Array);prepared.dispose();
+corrupt=true;await assert.rejects(()=>exports.prepareWorkerSample(sample),/integrity/);corrupt=false;
+const invalid=structuredClone(sample);invalid.assets.push({...invalid.assets[0],field:'other',encoding:'invalid'});await assert.rejects(()=>exports.prepareWorkerSample(invalid),/Unsupported/);assert.equal(revoked.length,2,'partial preparation cleans up object URLs');
+const controller=new AbortController();controller.abort();await assert.rejects(()=>exports.prepareWorkerSample(sample,{signal:controller.signal}));
+console.log('Sample preparation tests passed: text, verified bytes, PCM audio, immutable inputs, cleanup, integrity errors and cancellation.');

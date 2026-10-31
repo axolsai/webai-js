@@ -110,9 +110,26 @@ const MANIFEST = {
     precisions: SUPPORTED,
   },
   input: {
-    description: "One or more non-empty strings.",
-    alternatives: [{ name: "texts", type: "string[]", required: true, minItems: 1, items: { type: "string", minLength: 1 } }],
-  },
+  "description": "One or more non-empty strings.",
+  "alternatives": [
+    {
+      "name": "texts",
+      "description": "One or more non-empty strings.",
+      "fields": [
+        {
+          "name": "texts",
+          "type": "string[]",
+          "required": true,
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      ]
+    }
+  ]
+},
   config: {
     model: [
       {
@@ -174,6 +191,36 @@ const MANIFEST = {
       { precision: "fp32", device: "webgpu", status: "fail", failure: "bounded browser timeout" },
     ],
   },
+
+  samples: [
+  {
+    "id": "standard",
+    "label": "Try sample text",
+    "description": "Standard sample for BGE-M3 — Multilingual Embeddings.",
+    "userInput": {
+      "texts": [
+        "What is the capital of France?",
+        "Paris is the capital and largest city of France.",
+        "Whales are large marine mammals that live in the ocean."
+      ]
+    },
+    "assets": [],
+    "modelConfig": {
+      "pooling": "cls",
+      "normalize": true
+    },
+    "generateConfig": {},
+    "source": "Original WebAI semantic retrieval fixture.",
+    "license": "MIT",
+    "fixture": {
+      "file": "model-samples/bge-m3.json",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/bge-m3.json",
+      "size": 500,
+      "sha1": "75a7770d06fc312ddeb39987712a8b4bbe6f1e08"
+    },
+    "benchmarkReport": "benchmarks/bge-m3.json"
+  }
+],
 };
 const state = { initializing: false, initialized: false, generating: false };
 let extractor = null;

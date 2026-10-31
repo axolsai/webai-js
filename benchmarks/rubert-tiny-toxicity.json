@@ -1346,5 +1346,27 @@
         ]
       }
     ]
-  }
+  },
+  "samples": [
+    {
+      "id": "standard",
+      "label": "Try sample text",
+      "description": "Standard sample for RuBERT Tiny Russian Toxicity.",
+      "userInput": {
+        "text": "я люблю африканцев"
+      },
+      "assets": [],
+      "modelConfig": {},
+      "generateConfig": {},
+      "source": "Russian examples from the pinned source model card and widget metadata.",
+      "license": "MIT",
+      "fixture": {
+        "file": "model-samples/rubert-tiny-toxicity.json",
+        "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/rubert-tiny-toxicity.json",
+        "size": 700,
+        "sha1": "f136212c8f17ea8b87f6c567580ddae3ad924bcc"
+      },
+      "benchmarkReport": "benchmarks/rubert-tiny-toxicity.json"
+    }
+  ]
 }

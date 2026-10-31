@@ -779,5 +779,31 @@
         "error": "Error: operation does not support unaligned accesses"
       }
     ]
-  }
+  },
+  "samples": [
+    {
+      "id": "standard",
+      "label": "Try sample text",
+      "description": "Standard sample for BGE Reranker Large — Cross-Encoder Ranking.",
+      "userInput": {
+        "query": "What is the capital of France?",
+        "documents": [
+          "Paris is the capital and largest city of France.",
+          "Whales are large marine mammals that live in the ocean."
+        ]
+      },
+      "assets": [],
+      "modelConfig": {},
+      "generateConfig": {},
+      "source": "Original WebAI semantic retrieval fixture, reused unchanged.",
+      "license": "MIT",
+      "fixture": {
+        "file": "model-samples/bge-m3.json",
+        "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/bge-m3.json",
+        "size": 500,
+        "sha1": "75a7770d06fc312ddeb39987712a8b4bbe6f1e08"
+      },
+      "benchmarkReport": "benchmarks/bge-reranker-large.json"
+    }
+  ]
 }

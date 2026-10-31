@@ -300,5 +300,35 @@
     ],
     "environment": "Chrome 151.0.7922.176; darwin/arm64; Transformers.js 4.2.0",
     "qualityGate": "Exact-match answer, non-empty/non-repetitive output, and streamed text equal to final text."
-  }
+  },
+  "samples": [
+    {
+      "id": "standard",
+      "label": "Try sample text",
+      "description": "Standard sample for Apertus v1.1 0.5B Instruct — INT4.",
+      "userInput": {
+        "messages": [
+          {
+            "role": "user",
+            "content": "What is the capital of France? Answer in one concise sentence."
+          }
+        ]
+      },
+      "assets": [],
+      "modelConfig": {
+        "max_new_tokens": 32,
+        "do_sample": false
+      },
+      "generateConfig": {},
+      "source": "Original WebAI browser LLM benchmark fixture.",
+      "license": "Apache-2.0",
+      "fixture": {
+        "file": "model-samples/apertus-v1.1-0.5b.json",
+        "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/apertus-v1.1-0.5b.json",
+        "size": 397,
+        "sha1": "01931912845892dd559d20d4f628d65a2e6999d8"
+      },
+      "benchmarkReport": "benchmarks/apertus-v1.1-0.5b.json"
+    }
+  ]
 }

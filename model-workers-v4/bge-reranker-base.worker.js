@@ -69,6 +69,33 @@ const MANIFEST = {
     invalidatedBy: ["artifact revision change", "runtime version change", "fixture or quality-gate change", "browser/backend behavior change"],
     results: [{"precision":"fp32","device":"wasm","status":"pass","runtime":{"pairsPerSecond":9.62,"grade":"good"},"quality":{"grade":"ranking-pass","margin":0.9997}},{"precision":"fp32","device":"webgpu","status":"pass","runtime":{"pairsPerSecond":4.575,"grade":"slow"},"quality":{"grade":"ranking-pass","margin":0.9997}},{"precision":"fp16","device":"wasm","status":"fail","failure":"Error: Can't create a session. ERROR_CODE: 1, ERROR_MESSAGE: /mnt/vss/_work/1/s/onnxruntime/core/graph/graph_utils.cc:30 int onnxruntime::graph_utils::GetIndexFromName(const Node &, const std::string &, bool) itr != node_args.end() was false. Attempting to get index by a name which does not exist:InsertedPrecisionFreeCast_/roberta/encoder/layer.11/output/LayerNorm/Constant_output_0for node: /roberta/embeddings/LayerNorm/Mul/SimplifiedLayerNormFusion/\n"},{"precision":"fp16","device":"webgpu","status":"fail","failure":"quality gate failed: top=1, margin=-0.24457595644260421"},{"precision":"int8","device":"wasm","status":"pass","runtime":{"pairsPerSecond":8.981,"grade":"good"},"quality":{"grade":"ranking-pass","margin":0.9999}},{"precision":"int8","device":"webgpu","status":"pass","runtime":{"pairsPerSecond":6.527,"grade":"slow"},"quality":{"grade":"ranking-pass","margin":0.9998}},{"precision":"uint8","device":"wasm","status":"pass","runtime":{"pairsPerSecond":9.083,"grade":"good"},"quality":{"grade":"ranking-pass","margin":0.9998}},{"precision":"uint8","device":"webgpu","status":"pass","runtime":{"pairsPerSecond":6.487,"grade":"slow"},"quality":{"grade":"ranking-pass","margin":0.9998}},{"precision":"q8","device":"wasm","status":"pass","runtime":{"pairsPerSecond":9.021,"grade":"good"},"quality":{"grade":"ranking-pass","margin":0.9996}},{"precision":"q8","device":"webgpu","status":"pass","runtime":{"pairsPerSecond":5.402,"grade":"slow"},"quality":{"grade":"ranking-pass","margin":0.9996}},{"precision":"q4","device":"wasm","status":"pass","runtime":{"pairsPerSecond":6.2,"grade":"slow"},"quality":{"grade":"ranking-pass","margin":0.9998}},{"precision":"q4","device":"webgpu","status":"pass","runtime":{"pairsPerSecond":8.361,"grade":"good"},"quality":{"grade":"ranking-pass","margin":0.9998}},{"precision":"q4f16","device":"wasm","status":"fail","failure":"Error: Can't create a session. ERROR_CODE: 1, ERROR_MESSAGE: /mnt/vss/_work/1/s/onnxruntime/core/graph/graph_utils.cc:30 int onnxruntime::graph_utils::GetIndexFromName(const Node &, const std::string &, bool) itr != node_args.end() was false. Attempting to get index by a name which does not exist:InsertedPrecisionFreeCast_/roberta/embeddings/LayerNorm/Constant_output_0for node: /roberta/embeddings/LayerNorm/Mul/SimplifiedLayerNormFusion/\n"},{"precision":"q4f16","device":"webgpu","status":"fail","failure":"quality gate failed: top=1, margin=-0.24198654101080747"},{"precision":"bnb4","device":"wasm","status":"pass","runtime":{"pairsPerSecond":7.66,"grade":"slow"},"quality":{"grade":"ranking-pass","margin":0.9996}},{"precision":"bnb4","device":"webgpu","status":"pass","runtime":{"pairsPerSecond":3.876,"grade":"slow"},"quality":{"grade":"ranking-pass","margin":0.9996}}],
   },
+
+  samples: [
+  {
+    "id": "standard",
+    "label": "Try sample text",
+    "description": "Standard sample for BGE Reranker Base — Cross-Encoder Ranking.",
+    "userInput": {
+      "query": "What is the capital of France?",
+      "documents": [
+        "Paris is the capital and largest city of France.",
+        "Whales are large marine mammals that live in the ocean."
+      ]
+    },
+    "assets": [],
+    "modelConfig": {},
+    "generateConfig": {},
+    "source": "Original WebAI semantic retrieval fixture.",
+    "license": "MIT",
+    "fixture": {
+      "file": "model-samples/bge-m3.json",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/bge-m3.json",
+      "size": 500,
+      "sha1": "75a7770d06fc312ddeb39987712a8b4bbe6f1e08"
+    },
+    "benchmarkReport": "benchmarks/bge-reranker-base.json"
+  }
+],
 };
 
 const state = { initializing: false, initialized: false, generating: false };

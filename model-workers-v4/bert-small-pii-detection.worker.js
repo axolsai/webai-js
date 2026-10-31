@@ -1066,7 +1066,30 @@ const MANIFEST = {
       "version": "4.2.0"
     }
   }
-}
+},
+
+  samples: [
+  {
+    "id": "standard",
+    "label": "Try sample text",
+    "description": "Standard sample for BERT Small PII Detection.",
+    "userInput": {
+      "text": "News Media Contacts:\n\nJoshua Finch\nHeadquarters, Washington\n202-358-1100\njoshua.a.finch@nasa.gov"
+    },
+    "assets": [],
+    "modelConfig": {},
+    "generateConfig": {},
+    "source": "https://www.nasa.gov/news-release/nasa-spacex-invite-media-to-crew-8-mission-launch-to-space-station/",
+    "license": "United States government work",
+    "fixture": {
+      "file": "model-samples/bert-small-pii-detection.json",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/bert-small-pii-detection.json",
+      "size": 669,
+      "sha1": "fc2f62bbf3218bc6f0622190e688310d5d9d9007"
+    },
+    "benchmarkReport": "benchmarks/bert-small-pii-detection.json"
+  }
+],
 };
 MANIFEST.runtime.precisions = SUPPORTED;
 MANIFEST.benchmark.candidates = PRECISIONS;

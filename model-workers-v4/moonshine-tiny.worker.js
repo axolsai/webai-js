@@ -60,9 +60,22 @@ const MANIFEST = {
   },
   runtime: { engine: { name: "Transformers.js", version: "4.2.0" }, precisions: SUPPORTED },
   input: {
-    description: "One non-empty mono Float32Array sampled at 16 kHz.",
-    alternatives: [{ name: "audio", type: "Float32Array", required: true, minItems: 1 }],
-  },
+  "description": "One non-empty mono Float32Array sampled at 16 kHz.",
+  "alternatives": [
+    {
+      "name": "audio",
+      "description": "One non-empty mono Float32Array sampled at 16 kHz.",
+      "fields": [
+        {
+          "name": "audio",
+          "type": "Float32Array",
+          "required": true,
+          "minItems": 1
+        }
+      ]
+    }
+  ]
+},
   config: {
     model: [{ name: "max_new_tokens", type: "integer", default: 256, minimum: 1, maximum: 512 }],
     generation: [],
@@ -105,6 +118,39 @@ const MANIFEST = {
       { precision: "bnb4", device: "webgpu", status: "pass", runtime: { realTimeFactor: 0.0988, grade: "excellent" }, quality: { wordErrorRate: 0.1515, grade: "acceptable" } },
     ],
   },
+
+  samples: [
+  {
+    "id": "standard",
+    "label": "Try sample audio",
+    "description": "Standard sample for Moonshine Tiny — English Speech Recognition.",
+    "userInput": {},
+    "assets": [
+      {
+        "field": "audio",
+        "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/whisper-standard.mp3",
+        "file": "model-samples/whisper-standard.mp3",
+        "mediaType": "audio/mpeg",
+        "size": 471925,
+        "sha1": "5faad1507b5d6bc61a39ca3184db5a7b554a7479",
+        "encoding": "audio-pcm-f32",
+        "sampleRate": 16000,
+        "durationSeconds": 29.49225
+      }
+    ],
+    "modelConfig": {},
+    "generateConfig": {},
+    "source": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/whisper-standard.mp3",
+    "license": "Unverified: upstream fixture license not recorded",
+    "fixture": {
+      "file": "model-samples/whisper-standard.mp3",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/whisper-standard.mp3",
+      "size": 471925,
+      "sha1": "5faad1507b5d6bc61a39ca3184db5a7b554a7479"
+    },
+    "benchmarkReport": "benchmarks/moonshine-tiny.json"
+  }
+],
 };
 
 const state = { initializing: false, initialized: false, generating: false };

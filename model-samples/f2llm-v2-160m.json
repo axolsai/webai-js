@@ -1,0 +1,13 @@
+{
+  "source": "Original WebAI semantic retrieval fixture.",
+  "license": "Apache-2.0",
+  "input": {
+    "texts": [
+      "Instruct: Given a question, retrieve passages that can help answer the question.\nQuery: What is the capital of France?",
+      "Paris is the capital and largest city of France.",
+      "Whales are large marine mammals that live in the ocean."
+    ]
+  },
+  "modelConfig": { "pooling": "last_token", "normalize": true },
+  "expected": { "rows": 3, "dimensions": 640, "positiveIndex": 1, "negativeIndex": 2, "minimumMargin": 0.1, "normTolerance": 0.02 }
+}

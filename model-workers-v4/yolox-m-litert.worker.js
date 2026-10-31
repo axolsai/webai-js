@@ -23,6 +23,39 @@ const MANIFEST = {
   output: { description: "COCO detections with normalized boxes after per-class non-maximum suppression.", fields: [{ name: "detections", type: "Array<{ label: string, classIndex: integer, score: number, box: { xmin: number, ymin: number, xmax: number, ymax: number } }>", required: true }, { name: "fullyAccelerated", type: "boolean", required: true }], example: { detections: [{ label: "person", classIndex: 0, score: 0.9, box: { xmin: 0.1, ymin: 0.1, xmax: 0.8, ymax: 0.9 } }], fullyAccelerated: true } },
   operations: ["checkModelSupports", "init", "download", "generate", "clearMemory"],
   benchmark: { report: "benchmarks/yolox-m-litert.json", testedAt: "2026-09-08T18:10:00.000Z", fixture: { file: "modnet-portrait-pexels-5965592.jpg", url: "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg", size: 78124, sha1: "38212739a4a4f0be25d84863cf991d7fb6c6d818", width: 1024, height: 683, license: "Pexels License" }, environment: "Headless Chrome 151 on macOS; LiteRT.js 2.5.3", invalidatedBy: ["model artifact revision change", "LiteRT.js version change", "fixture or quality-gate change", "browser/backend behavior change"], results: [{ precision: "fp16", device: "wasm", status: "pass", runtime: { loadMs: 10978.9, inferenceMs: 5773.8, totalMs: 16752.7, grade: "very-slow" }, quality: { grade: "reference", label: "person", score: 0.939385 }, fullyAccelerated: false }, { precision: "fp16", device: "webgpu", status: "pass", runtime: { loadMs: 11170.9, inferenceMs: 892.1, totalMs: 12063, grade: "slow" }, quality: { grade: "excellent", label: "person", scoreDifference: 0.000001, maximumBoxDifference: 0.000001 }, fullyAccelerated: true }] },
+
+  samples: [
+  {
+    "id": "standard",
+    "label": "Try sample image",
+    "description": "Standard sample for YOLOX-M — LiteRT Object Detection.",
+    "userInput": {},
+    "assets": [
+      {
+        "field": "image_blob_url",
+        "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+        "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+        "mediaType": "image/jpeg",
+        "size": 78124,
+        "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818",
+        "encoding": "blob-url",
+        "width": 1024,
+        "height": 683
+      }
+    ],
+    "modelConfig": {},
+    "generateConfig": {},
+    "source": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+    "license": "Pexels License",
+    "fixture": {
+      "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+      "size": 78124,
+      "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818"
+    },
+    "benchmarkReport": "benchmarks/yolox-m-litert.json"
+  }
+],
 };
 
 function liteRtBridge() {

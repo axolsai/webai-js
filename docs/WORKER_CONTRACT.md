@@ -1,4 +1,4 @@
-# WebAI worker contract v1.0
+# WebAI v4 worker contract (manifest v1.0)
 
 Every model worker is a self-contained adapter. The main library owns worker lifecycle,
 request correlation, queueing, timeouts, cancellation, and the standard result envelope.
@@ -81,6 +81,51 @@ Do not convert tokenizer limits into character limits. Document token truncation
 description and expose an adjustable token limit as a bounded config field when the adapter
 supports one. Do not invent a maximum batch size when the adapter accepts arbitrary batch sizes;
 declare only the real nonempty-array constraint.
+
+## Reusable samples (required for all v4 workers)
+
+Every manifest must expose a nonempty `samples` array, available immediately after
+`WebAI.create()` without initializing inference. This is additive to `contractVersion: "1.0"`;
+`v4` is the worker generation, not a new wire-protocol version.
+
+Each sample contains `id`, `label`, `description`, JSON-serializable `userInput`, `assets`,
+`modelConfig`, `generateConfig`, `source`, `license`, `fixture`, and `benchmarkReport`.
+Inline all text, arrays, chat messages, prompts, labels, and structured inputs in `userInput`.
+Do not make apps parse benchmark-specific fixture JSON to discover usable input.
+
+Every non-text input must have an asset with `field` (the userInput field to fill), a stable
+public HTTPS `url`, packaged local `file`, `mediaType`, exact byte `size`, SHA-1 `sha1`, and
+`encoding`. Use `blob-url` to fetch/verify bytes and create an object URL, or `audio-pcm-f32`
+to decode, mix to mono, and resample to the declared `sampleRate` before creating a Float32Array.
+Never put ephemeral blob URLs or localhost URLs in manifests. Include every required auxiliary
+asset, such as a trimap or speaker embedding. Width/height/duration are optional helpful metadata.
+Retain redistributable files under `model-samples/`; public B2 assets are preferred.
+
+`fixture` records the original benchmark input file, URL, size, and checksum; `benchmarkReport`
+links to saved correctness evidence. Sample configs must use the worker's actual model/generation
+namespaces and satisfy their schemas. A sample does not grant support: models with no passing
+configuration still remain unsupported. Do not automatically run samples or overwrite user input.
+Consumers must verify bytes, surface download/decode failures, and revoke object URLs after use.
+The library provides `prepareWorkerSample(sample)` and a required `dispose()` cleanup callback:
+
+```js
+const prepared = await prepareWorkerSample(webai.modelManifest.samples[0]);
+try {
+  await webai.init({ precision: "q8", device: "wasm" }); // use a benchmark-passing pair
+  const result = await webai.generate(prepared.request);
+} finally {
+  prepared.dispose();
+  await webai.clearMemory();
+  await webai.terminate();
+}
+```
+
+Never send the `dispose` callback through postMessage; only `prepared.request` is a generation payload.
+
+Run `npm run audit:samples -- --remote` before release to validate all workers, packaged fixtures,
+asset URLs/checksums, required fields, support evidence, and sample/report consistency. Existing
+benchmark matrices may be reused for metadata-only changes while invalidation conditions remain
+unchanged. New input/config/asset behavior requires affected quality benchmarks to run again.
 
 ## Precision benchmark
 

@@ -62,9 +62,26 @@ const MANIFEST = {
     },
   },
   input: {
-    description: "A chat transcript whose final message is from the user.",
-    alternatives: [{ name: "messages", type: "Array<{ role: 'system' | 'user' | 'assistant', content: string }>", required: true, minItems: 1, items: { type: "object", description: "A message with an allowed role and non-empty content." } }],
-  },
+  "description": "A chat transcript whose final message is from the user.",
+  "alternatives": [
+    {
+      "name": "messages",
+      "description": "A chat transcript whose final message is from the user.",
+      "fields": [
+        {
+          "name": "messages",
+          "type": "Array<{ role: 'system' | 'user' | 'assistant', content: string }>",
+          "required": true,
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "description": "A message with an allowed role and non-empty content."
+          }
+        }
+      ]
+    }
+  ]
+},
   config: {
     model: [
       { name: "max_new_tokens", type: "integer", default: 256, minimum: 1, maximum: 2048 },
@@ -108,6 +125,34 @@ const MANIFEST = {
       cleanup: { modelDisposed: true, conversationsDisposed: true, modelCacheClearedBeforeCase: true, modelCacheClearedAfterCase: true },
     }],
   },
+
+  samples: [
+  {
+    "id": "standard",
+    "label": "Try sample text",
+    "description": "Standard sample for Gemma 4 E2B Instruct — LiteRT-LM.",
+    "userInput": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "What is the capital of France? Answer with only the city name."
+        }
+      ]
+    },
+    "assets": [],
+    "modelConfig": {},
+    "generateConfig": {},
+    "source": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/gemma-4-e2b-it-litert-lm.json",
+    "license": "CC0-1.0",
+    "fixture": {
+      "file": "model-samples/gemma-4-e2b-it-litert-lm.json",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/gemma-4-e2b-it-litert-lm.json",
+      "size": 195,
+      "sha1": "a963a0f87228b86b7c9880699df48d4ab6c33482"
+    },
+    "benchmarkReport": "benchmarks/gemma-4-e2b-it-litert-lm.json"
+  }
+],
 };
 
 const CAPABILITIES = {

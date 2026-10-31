@@ -1,0 +1,11 @@
+{
+  "source": "Russian examples from the pinned upstream model card and its widget metadata.",
+  "sourceUrl": "https://huggingface.co/cointegrated/rubert-tiny-toxicity/blob/5d37eff844868e243467e4c38898bad46c271af2/README.md",
+  "license": "MIT",
+  "licenseUrl": "https://huggingface.co/cointegrated/rubert-tiny-toxicity/blob/5d37eff844868e243467e4c38898bad46c271af2/README.md",
+  "cases": [
+    { "text": "я люблю нигеров", "expected": "toxic", "minimumToxicity": 0.9 },
+    { "text": "я люблю африканцев", "expected": "safe", "maximumToxicity": 0.2 }
+  ],
+  "limitations": "A two-example regression fixture; it does not estimate population-level moderation accuracy."
+}

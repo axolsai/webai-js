@@ -32,7 +32,27 @@ const MANIFEST = {
     limitations: ["Retrieval quality depends on using the documented query/document prefixes and varies by language, domain, ambiguity, and input quality.", "Inputs longer than 2,048 tokens are truncated by the model.", "Embedding similarity is not factual verification and can reproduce training-data gaps or bias.", "FP16 activations and derivatives are explicitly unsupported upstream; quantization and Matryoshka truncation can alter ranking margins."],
   },
   runtime: { engine: { name: "Transformers.js", version: "4.2.0" }, precisions: SUPPORTED },
-  input: { description: "One or more non-empty, preformatted query or document strings.", alternatives: [{ name: "texts", type: "string[]", required: true, minItems: 1, items: { type: "string", minLength: 1 } }] },
+  input: {
+  "description": "One or more non-empty, preformatted query or document strings.",
+  "alternatives": [
+    {
+      "name": "texts",
+      "description": "One or more non-empty, preformatted query or document strings.",
+      "fields": [
+        {
+          "name": "texts",
+          "type": "string[]",
+          "required": true,
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      ]
+    }
+  ]
+},
   config: { model: [{ name: "dimensions", type: "integer", default: 768, enum: [768, 512, 256, 128], description: "Matryoshka output dimension; truncated vectors are re-normalized." }], generation: [] },
   output: { description: "One finite normalized embedding per input string.", fields: [{ name: "result", type: "number[][]", required: true }], example: { result: [[0.01, -0.02]] } },
   operations: ["checkModelSupports", "init", "download", "generate", "clearMemory"],
@@ -50,6 +70,35 @@ const MANIFEST = {
     { precision: "no_gather_q4", device: "wasm", status: "pass", runtime: { embeddingsPerSecond: 1.9249, grade: "very-slow" }, quality: { margin: 0.5969 }, advertised: false },
     { precision: "no_gather_q4", device: "webgpu", status: "pass", runtime: { embeddingsPerSecond: 15.9574, grade: "good" }, quality: { margin: 0.5969 }, advertised: false },
   ] },
+
+  samples: [
+  {
+    "id": "standard",
+    "label": "Try sample text",
+    "description": "Standard sample for EmbeddingGemma 300M.",
+    "userInput": {
+      "texts": [
+        "task: search result | query: Which planet is known as the Red Planet?",
+        "title: Mars | text: Mars is known for its reddish appearance and is called the Red Planet.",
+        "title: Ocean life | text: Whales are large marine mammals that live in the ocean."
+      ]
+    },
+    "assets": [],
+    "modelConfig": {
+      "dimensions": 768
+    },
+    "generateConfig": {},
+    "source": "Original WebAI semantic-retrieval fixture following EmbeddingGemma's documented query and document formats.",
+    "license": "Apache-2.0",
+    "fixture": {
+      "file": "model-samples/embeddinggemma-300m.json",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/embeddinggemma-300m.json",
+      "size": 634,
+      "sha1": "9a1d261338de718b559f5544e81e488477672779"
+    },
+    "benchmarkReport": "benchmarks/embeddinggemma-300m.json"
+  }
+],
 };
 
 const state = { initializing: false, initialized: false, generating: false };

@@ -80,6 +80,44 @@ const MANIFEST = {
     invalidatedBy: ["artifact revision change", "runtime version change", "fixture or quality-gate change", "browser/backend behavior change"],
     results: [{"precision":"fp32","device":"wasm","status":"pass","runtime":{"loadMs":141147.9,"inferenceMs":1615.8,"totalMs":144071.1,"grade":"good","questionsPerSecond":3.7133},"quality":{"grade":"multilingual-typed-decision-pass","cases":[{"language":"en","type":"choice","pass":true},{"language":"en","type":"noul","pass":true},{"language":"zh","type":"choice","pass":true},{"language":"zh","type":"noul","pass":true},{"language":"es","type":"score","pass":true},{"language":"es","type":"noul","pass":true}]},"cleanup":{"modelDisposed":true,"cacheClearedBeforeCase":true,"cacheClearedAfterCase":true,"deletedEntries":3}},{"precision":"fp32","device":"webgpu","status":"pass","runtime":{"loadMs":132489.8,"inferenceMs":524.2,"totalMs":134322.4,"grade":"excellent","questionsPerSecond":11.446},"quality":{"grade":"multilingual-typed-decision-pass","cases":[{"language":"en","type":"choice","pass":true},{"language":"en","type":"noul","pass":true},{"language":"zh","type":"choice","pass":true},{"language":"zh","type":"noul","pass":true},{"language":"es","type":"score","pass":true},{"language":"es","type":"noul","pass":true}]},"cleanup":{"modelDisposed":true,"cacheClearedBeforeCase":true,"cacheClearedAfterCase":true,"deletedEntries":3}},{"precision":"fp16","device":"wasm","status":"pass","runtime":{"loadMs":72630.7,"inferenceMs":1860.8,"totalMs":75768.9,"grade":"good","questionsPerSecond":3.2244},"quality":{"grade":"multilingual-typed-decision-pass","cases":[{"language":"en","type":"choice","pass":true},{"language":"en","type":"noul","pass":true},{"language":"zh","type":"choice","pass":true},{"language":"zh","type":"noul","pass":true},{"language":"es","type":"score","pass":true},{"language":"es","type":"noul","pass":true}]},"cleanup":{"modelDisposed":true,"cacheClearedBeforeCase":true,"cacheClearedAfterCase":true,"deletedEntries":3}},{"precision":"fp16","device":"webgpu","status":"pass","runtime":{"loadMs":79046.5,"inferenceMs":1648.2,"totalMs":81778.8,"grade":"good","questionsPerSecond":3.6403},"quality":{"grade":"multilingual-typed-decision-pass","cases":[{"language":"en","type":"choice","pass":true},{"language":"en","type":"noul","pass":true},{"language":"zh","type":"choice","pass":true},{"language":"zh","type":"noul","pass":true},{"language":"es","type":"score","pass":true},{"language":"es","type":"noul","pass":true}]},"cleanup":{"modelDisposed":true,"cacheClearedBeforeCase":true,"cacheClearedAfterCase":true,"deletedEntries":3}}],
   },
+
+  samples: [
+  {
+    "id": "standard",
+    "label": "Try sample text",
+    "description": "Standard sample for Open Jev Laya Multilingual — Typed Decisions.",
+    "userInput": {
+      "state": "The payment was charged twice. Please refund the duplicate charge.",
+      "questions": [
+        {
+          "type": "choice",
+          "instructions": "What does the customer need?",
+          "options": [
+            "refund",
+            "password reset",
+            "shipping update"
+          ]
+        },
+        {
+          "type": "noul",
+          "instructions": "Is the customer asking for money back?"
+        }
+      ]
+    },
+    "assets": [],
+    "modelConfig": {},
+    "generateConfig": {},
+    "source": "WebAI-authored multilingual regression cases with unambiguous gold labels.",
+    "license": "CC0-1.0",
+    "fixture": {
+      "file": "model-samples/open-jev-laya-multilingual.json",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/open-jev-laya-multilingual.json",
+      "size": 1368,
+      "sha1": "ff4a5039dbc0c37a52717f0c82420ff45e0a2803"
+    },
+    "benchmarkReport": "benchmarks/open-jev-laya-multilingual.json"
+  }
+],
 };
 
 const state = { initializing: false, initialized: false, generating: false };

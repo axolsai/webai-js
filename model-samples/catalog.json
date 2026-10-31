@@ -1,0 +1,2139 @@
+[
+  {
+    "id": "all-minilm-l6-v2",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample text",
+        "description": "Standard sample for All MiniLM L6 v2.",
+        "userInput": {
+          "texts": [
+            "What is the capital of France?",
+            "Paris is the capital and largest city of France.",
+            "Whales are large marine mammals living in the ocean."
+          ]
+        },
+        "assets": [],
+        "modelConfig": {
+          "pooling": "mean",
+          "normalize": true
+        },
+        "generateConfig": {},
+        "source": "Original WebAI English retrieval fixture.",
+        "license": "MIT",
+        "fixture": {
+          "file": "model-samples/all-minilm-l6-v2.json",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/all-minilm-l6-v2.json",
+          "size": 407,
+          "sha1": "8beb837ef1dfd6c35b4a100d7d947f414f03c0f6"
+        },
+        "benchmarkReport": "benchmarks/all-minilm-l6-v2.json"
+      }
+    ]
+  },
+  {
+    "id": "apertus-v1.1-0.5b",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample text",
+        "description": "Standard sample for Apertus v1.1 0.5B Instruct — INT4.",
+        "userInput": {
+          "messages": [
+            {
+              "role": "user",
+              "content": "What is the capital of France? Answer in one concise sentence."
+            }
+          ]
+        },
+        "assets": [],
+        "modelConfig": {
+          "max_new_tokens": 32,
+          "do_sample": false
+        },
+        "generateConfig": {},
+        "source": "Original WebAI browser LLM benchmark fixture.",
+        "license": "Apache-2.0",
+        "fixture": {
+          "file": "model-samples/apertus-v1.1-0.5b.json",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/apertus-v1.1-0.5b.json",
+          "size": 397,
+          "sha1": "01931912845892dd559d20d4f628d65a2e6999d8"
+        },
+        "benchmarkReport": "benchmarks/apertus-v1.1-0.5b.json"
+      }
+    ]
+  },
+  {
+    "id": "bert-base-ner",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample text",
+        "description": "Standard sample for BERT Base NER — English Named Entities.",
+        "userInput": {
+          "text": "Apollo 11 launched from Cape Kennedy on July 16, 1969, carrying Commander Neil Armstrong, Command Module Pilot Michael Collins and Lunar Module Pilot Edwin Buzz Aldrin into an initial Earth orbit."
+        },
+        "assets": [],
+        "modelConfig": {},
+        "generateConfig": {},
+        "source": "NASA Apollo 11 Mission Overview; lightly shortened without changing named entities.",
+        "license": "United States government work",
+        "fixture": {
+          "file": "model-samples/bert-base-ner.json",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/bert-base-ner.json",
+          "size": 676,
+          "sha1": "a90640ef195e01ddb8f45899678975feaee59853"
+        },
+        "benchmarkReport": "benchmarks/bert-base-ner.json"
+      }
+    ]
+  },
+  {
+    "id": "bert-small-pii-detection",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample text",
+        "description": "Standard sample for BERT Small PII Detection.",
+        "userInput": {
+          "text": "News Media Contacts:\n\nJoshua Finch\nHeadquarters, Washington\n202-358-1100\njoshua.a.finch@nasa.gov"
+        },
+        "assets": [],
+        "modelConfig": {},
+        "generateConfig": {},
+        "source": "https://www.nasa.gov/news-release/nasa-spacex-invite-media-to-crew-8-mission-launch-to-space-station/",
+        "license": "United States government work",
+        "fixture": {
+          "file": "model-samples/bert-small-pii-detection.json",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/bert-small-pii-detection.json",
+          "size": 669,
+          "sha1": "fc2f62bbf3218bc6f0622190e688310d5d9d9007"
+        },
+        "benchmarkReport": "benchmarks/bert-small-pii-detection.json"
+      }
+    ]
+  },
+  {
+    "id": "bge-m3",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample text",
+        "description": "Standard sample for BGE-M3 — Multilingual Embeddings.",
+        "userInput": {
+          "texts": [
+            "What is the capital of France?",
+            "Paris is the capital and largest city of France.",
+            "Whales are large marine mammals that live in the ocean."
+          ]
+        },
+        "assets": [],
+        "modelConfig": {
+          "pooling": "cls",
+          "normalize": true
+        },
+        "generateConfig": {},
+        "source": "Original WebAI semantic retrieval fixture.",
+        "license": "MIT",
+        "fixture": {
+          "file": "model-samples/bge-m3.json",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/bge-m3.json",
+          "size": 500,
+          "sha1": "75a7770d06fc312ddeb39987712a8b4bbe6f1e08"
+        },
+        "benchmarkReport": "benchmarks/bge-m3.json"
+      }
+    ]
+  },
+  {
+    "id": "bge-reranker-base",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample text",
+        "description": "Standard sample for BGE Reranker Base — Cross-Encoder Ranking.",
+        "userInput": {
+          "query": "What is the capital of France?",
+          "documents": [
+            "Paris is the capital and largest city of France.",
+            "Whales are large marine mammals that live in the ocean."
+          ]
+        },
+        "assets": [],
+        "modelConfig": {},
+        "generateConfig": {},
+        "source": "Original WebAI semantic retrieval fixture.",
+        "license": "MIT",
+        "fixture": {
+          "file": "model-samples/bge-m3.json",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/bge-m3.json",
+          "size": 500,
+          "sha1": "75a7770d06fc312ddeb39987712a8b4bbe6f1e08"
+        },
+        "benchmarkReport": "benchmarks/bge-reranker-base.json"
+      }
+    ]
+  },
+  {
+    "id": "bge-reranker-large",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample text",
+        "description": "Standard sample for BGE Reranker Large — Cross-Encoder Ranking.",
+        "userInput": {
+          "query": "What is the capital of France?",
+          "documents": [
+            "Paris is the capital and largest city of France.",
+            "Whales are large marine mammals that live in the ocean."
+          ]
+        },
+        "assets": [],
+        "modelConfig": {},
+        "generateConfig": {},
+        "source": "Original WebAI semantic retrieval fixture, reused unchanged.",
+        "license": "MIT",
+        "fixture": {
+          "file": "model-samples/bge-m3.json",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/bge-m3.json",
+          "size": 500,
+          "sha1": "75a7770d06fc312ddeb39987712a8b4bbe6f1e08"
+        },
+        "benchmarkReport": "benchmarks/bge-reranker-large.json"
+      }
+    ]
+  },
+  {
+    "id": "bge-small-en-v1.5",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample text",
+        "description": "Standard sample for BGE Small English v1.5.",
+        "userInput": {
+          "texts": [
+            "Represent this sentence for searching relevant passages: What is the capital of France?",
+            "Paris is the capital and largest city of France.",
+            "Whales are large marine mammals living in the ocean."
+          ]
+        },
+        "assets": [],
+        "modelConfig": {
+          "pooling": "cls",
+          "normalize": true
+        },
+        "generateConfig": {},
+        "source": "WebAI-authored English/Chinese retrieval examples with upstream BGE query instruction",
+        "license": "MIT",
+        "fixture": {
+          "file": "model-samples/bge-small-en-v1.5.json",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/bge-small-en-v1.5.json",
+          "size": 606,
+          "sha1": "2f3cc9dccba6004ab0061011297a862c5bda1634"
+        },
+        "benchmarkReport": "benchmarks/bge-small-en-v1.5.json"
+      }
+    ]
+  },
+  {
+    "id": "bge-small-zh-v1.5",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample text",
+        "description": "Standard sample for BGE Small Chinese v1.5.",
+        "userInput": {
+          "texts": [
+            "为这个句子生成表示以用于检索相关文章：中国的首都是哪里？",
+            "北京是中华人民共和国的首都。",
+            "鲸鱼是生活在海洋中的大型哺乳动物。"
+          ]
+        },
+        "assets": [],
+        "modelConfig": {
+          "pooling": "cls",
+          "normalize": true
+        },
+        "generateConfig": {},
+        "source": "WebAI-authored English/Chinese retrieval examples with upstream BGE query instruction",
+        "license": "MIT",
+        "fixture": {
+          "file": "model-samples/bge-small-zh-v1.5.json",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/bge-small-zh-v1.5.json",
+          "size": 596,
+          "sha1": "2365b808a87dc8e3e77199ae98192506c7826988"
+        },
+        "benchmarkReport": "benchmarks/bge-small-zh-v1.5.json"
+      }
+    ]
+  },
+  {
+    "id": "cohere-transcribe-03-2026",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample audio",
+        "description": "Standard sample for Cohere Transcribe 03-2026 — Multilingual ASR.",
+        "userInput": {},
+        "assets": [
+          {
+            "field": "audio",
+            "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/whisper-standard.mp3",
+            "file": "model-samples/whisper-standard.mp3",
+            "mediaType": "audio/mpeg",
+            "size": 471925,
+            "sha1": "5faad1507b5d6bc61a39ca3184db5a7b554a7479",
+            "encoding": "audio-pcm-f32",
+            "sampleRate": 16000,
+            "durationSeconds": 29.49225
+          }
+        ],
+        "modelConfig": {},
+        "generateConfig": {},
+        "source": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/whisper-standard.mp3",
+        "license": "Unverified: upstream fixture license not recorded",
+        "fixture": {
+          "file": "model-samples/whisper-standard.mp3",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/whisper-standard.mp3",
+          "size": 471925,
+          "sha1": "5faad1507b5d6bc61a39ca3184db5a7b554a7479"
+        },
+        "benchmarkReport": "benchmarks/cohere-transcribe-03-2026.json"
+      }
+    ]
+  },
+  {
+    "id": "depth-anything-v3-small",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample image",
+        "description": "Standard sample for Depth Anything V3 Small.",
+        "userInput": {},
+        "assets": [
+          {
+            "field": "image_blob_url",
+            "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+            "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+            "mediaType": "image/jpeg",
+            "size": 78124,
+            "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818",
+            "encoding": "blob-url",
+            "width": 1024,
+            "height": 683
+          }
+        ],
+        "modelConfig": {},
+        "generateConfig": {},
+        "source": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+        "license": "Pexels License",
+        "fixture": {
+          "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+          "size": 78124,
+          "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818"
+        },
+        "benchmarkReport": "benchmarks/depth-anything-v3-small.json"
+      }
+    ]
+  },
+  {
+    "id": "detr-resnet-50",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample image",
+        "description": "Standard sample for DETR ResNet-50 — Object Detection.",
+        "userInput": {},
+        "assets": [
+          {
+            "field": "image",
+            "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+            "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+            "mediaType": "image/jpeg",
+            "size": 78124,
+            "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818",
+            "encoding": "blob-url",
+            "width": 1024,
+            "height": 683
+          }
+        ],
+        "modelConfig": {},
+        "generateConfig": {},
+        "source": "https://www.pexels.com/photo/woman-wearing-pink-turtleneck-sweater-5965592/",
+        "license": "Pexels License",
+        "fixture": {
+          "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+          "size": 78124,
+          "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818"
+        },
+        "benchmarkReport": "benchmarks/detr-resnet-50.json"
+      }
+    ]
+  },
+  {
+    "id": "distilbert-base-uncased-finetuned-sst-2-english",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample text",
+        "description": "Standard sample for DistilBERT SST-2 English Sentiment.",
+        "userInput": {
+          "text": "I love transformers!"
+        },
+        "assets": [],
+        "modelConfig": {},
+        "generateConfig": {},
+        "source": "Xenova model-card positive example and WebAI-authored negative review",
+        "license": "Apache-2.0",
+        "fixture": {
+          "file": "model-samples/distilbert-sst2.json",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/distilbert-sst2.json",
+          "size": 486,
+          "sha1": "226199feb31ba0ad6ffa6629585a76930b240a3a"
+        },
+        "benchmarkReport": "benchmarks/distilbert-sst2.json"
+      }
+    ]
+  },
+  {
+    "id": "embeddinggemma-300m",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample text",
+        "description": "Standard sample for EmbeddingGemma 300M.",
+        "userInput": {
+          "texts": [
+            "task: search result | query: Which planet is known as the Red Planet?",
+            "title: Mars | text: Mars is known for its reddish appearance and is called the Red Planet.",
+            "title: Ocean life | text: Whales are large marine mammals that live in the ocean."
+          ]
+        },
+        "assets": [],
+        "modelConfig": {
+          "dimensions": 768
+        },
+        "generateConfig": {},
+        "source": "Original WebAI semantic-retrieval fixture following EmbeddingGemma's documented query and document formats.",
+        "license": "Apache-2.0",
+        "fixture": {
+          "file": "model-samples/embeddinggemma-300m.json",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/embeddinggemma-300m.json",
+          "size": 634,
+          "sha1": "9a1d261338de718b559f5544e81e488477672779"
+        },
+        "benchmarkReport": "benchmarks/embeddinggemma-300m.json"
+      }
+    ]
+  },
+  {
+    "id": "ettinx-nli-xs",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample text",
+        "description": "Standard sample for EttinX NLI XS — 32M Cross-Encoder.",
+        "userInput": {
+          "premise": "A man is eating pizza.",
+          "hypothesis": "A man eats something."
+        },
+        "assets": [],
+        "modelConfig": {},
+        "generateConfig": {},
+        "source": "Examples adapted from the pinned source model card.",
+        "license": "MIT",
+        "fixture": {
+          "file": "model-samples/ettinx-nli-xs.json",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/ettinx-nli-xs.json",
+          "size": 930,
+          "sha1": "18c133130582f80cfa13ca3aa915e686f9dda37c"
+        },
+        "benchmarkReport": "benchmarks/ettinx-nli-xs.json"
+      }
+    ]
+  },
+  {
+    "id": "f2llm-v2-160m",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample text",
+        "description": "Standard sample for F2LLM-v2 160M — Multilingual Embeddings.",
+        "userInput": {
+          "texts": [
+            "Instruct: Given a question, retrieve passages that can help answer the question.\nQuery: What is the capital of France?",
+            "Paris is the capital and largest city of France.",
+            "Whales are large marine mammals that live in the ocean."
+          ]
+        },
+        "assets": [],
+        "modelConfig": {
+          "pooling": "last_token",
+          "normalize": true
+        },
+        "generateConfig": {},
+        "source": "Original WebAI semantic retrieval fixture.",
+        "license": "Apache-2.0",
+        "fixture": {
+          "file": "model-samples/f2llm-v2-160m.json",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/f2llm-v2-160m.json",
+          "size": 576,
+          "sha1": "e8a6ac52dcbb23157d108932572d2c44e173e48a"
+        },
+        "benchmarkReport": "benchmarks/f2llm-v2-160m.json"
+      }
+    ]
+  },
+  {
+    "id": "face-emotion-detection",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample image",
+        "description": "Standard sample for ViT Face Emotion Detection — FER2013.",
+        "userInput": {},
+        "assets": [
+          {
+            "field": "image",
+            "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+            "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+            "mediaType": "image/jpeg",
+            "size": 78124,
+            "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818",
+            "encoding": "blob-url",
+            "width": 1024,
+            "height": 683
+          }
+        ],
+        "modelConfig": {},
+        "generateConfig": {},
+        "source": "https://www.pexels.com/photo/woman-wearing-pink-turtleneck-sweater-5965592/",
+        "license": "Pexels License",
+        "fixture": {
+          "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+          "size": 78124,
+          "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818"
+        },
+        "benchmarkReport": "benchmarks/face-emotion-detection.json"
+      }
+    ]
+  },
+  {
+    "id": "face-parsing",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample image",
+        "description": "Standard sample for Face Parsing — 19-Class Semantic Segmentation.",
+        "userInput": {},
+        "assets": [
+          {
+            "field": "image",
+            "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+            "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+            "mediaType": "image/jpeg",
+            "size": 78124,
+            "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818",
+            "encoding": "blob-url",
+            "width": 1024,
+            "height": 683
+          }
+        ],
+        "modelConfig": {},
+        "generateConfig": {},
+        "source": "https://www.pexels.com/photo/woman-wearing-pink-turtleneck-sweater-5965592/",
+        "license": "Pexels License",
+        "fixture": {
+          "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+          "size": 78124,
+          "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818"
+        },
+        "benchmarkReport": "benchmarks/face-parsing.json"
+      }
+    ]
+  },
+  {
+    "id": "florence-2-base-ft",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample image",
+        "description": "Standard sample for Florence-2 Base FT — Vision to Text.",
+        "userInput": {},
+        "assets": [
+          {
+            "field": "image_blob_url",
+            "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+            "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+            "mediaType": "image/jpeg",
+            "size": 78124,
+            "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818",
+            "encoding": "blob-url",
+            "width": 1024,
+            "height": 683
+          }
+        ],
+        "modelConfig": {},
+        "generateConfig": {},
+        "source": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+        "license": "Pexels License",
+        "fixture": {
+          "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+          "size": 78124,
+          "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818"
+        },
+        "benchmarkReport": "benchmarks/florence-2-base-ft.json"
+      }
+    ]
+  },
+  {
+    "id": "gemma-4-e2b-it-litert-lm",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample text",
+        "description": "Standard sample for Gemma 4 E2B Instruct — LiteRT-LM.",
+        "userInput": {
+          "messages": [
+            {
+              "role": "user",
+              "content": "What is the capital of France? Answer with only the city name."
+            }
+          ]
+        },
+        "assets": [],
+        "modelConfig": {},
+        "generateConfig": {},
+        "source": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/gemma-4-e2b-it-litert-lm.json",
+        "license": "CC0-1.0",
+        "fixture": {
+          "file": "model-samples/gemma-4-e2b-it-litert-lm.json",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/gemma-4-e2b-it-litert-lm.json",
+          "size": 195,
+          "sha1": "a963a0f87228b86b7c9880699df48d4ab6c33482"
+        },
+        "benchmarkReport": "benchmarks/gemma-4-e2b-it-litert-lm.json"
+      }
+    ]
+  },
+  {
+    "id": "gemma-4-e4b-it-litert-lm",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample text",
+        "description": "Standard sample for Gemma 4 E4B Instruct — LiteRT-LM.",
+        "userInput": {
+          "messages": [
+            {
+              "role": "user",
+              "content": "What is the capital of France? Answer with only the city name."
+            }
+          ]
+        },
+        "assets": [],
+        "modelConfig": {},
+        "generateConfig": {},
+        "source": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/gemma-4-e4b-it-litert-lm.json",
+        "license": "CC0-1.0",
+        "fixture": {
+          "file": "model-samples/gemma-4-e4b-it-litert-lm.json",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/gemma-4-e4b-it-litert-lm.json",
+          "size": 195,
+          "sha1": "a963a0f87228b86b7c9880699df48d4ab6c33482"
+        },
+        "benchmarkReport": "benchmarks/gemma-4-e4b-it-litert-lm.json"
+      }
+    ]
+  },
+  {
+    "id": "granite-docling-258m",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample image",
+        "description": "Standard sample for Granite Docling 258M.",
+        "userInput": {},
+        "assets": [
+          {
+            "field": "image",
+            "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/granite-docling-new-arxiv.png",
+            "file": "model-samples/granite-docling-new-arxiv.png",
+            "mediaType": "image/png",
+            "size": 523477,
+            "sha1": "fa9ee1b276da7ce7374804e1e392b5b60c501a52",
+            "encoding": "blob-url",
+            "width": 1190,
+            "height": 1540
+          }
+        ],
+        "modelConfig": {},
+        "generateConfig": {},
+        "source": "https://huggingface.co/ibm-granite/granite-docling-258M/blob/982fe3b40f2fa73c365bdb1bcacf6c81b7184bfe/assets/new_arxiv.png",
+        "license": "Apache-2.0",
+        "fixture": {
+          "file": "model-samples/granite-docling-new-arxiv.png",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/granite-docling-new-arxiv.png",
+          "size": 523477,
+          "sha1": "fa9ee1b276da7ce7374804e1e392b5b60c501a52"
+        },
+        "benchmarkReport": "benchmarks/granite-docling-258m.json"
+      }
+    ]
+  },
+  {
+    "id": "granite-embedding-97m-multilingual-r2",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample text",
+        "description": "Standard sample for Granite Embedding 97M Multilingual R2.",
+        "userInput": {
+          "texts": [
+            "What is the tallest mountain in Japan?",
+            "富士山は日本で最も高い山です。",
+            "Whales are large marine mammals that live in the ocean."
+          ]
+        },
+        "assets": [],
+        "modelConfig": {
+          "pooling": "cls",
+          "normalize": true
+        },
+        "generateConfig": {},
+        "source": "IBM Granite model-card cross-lingual retrieval example, shortened for browser benchmarking.",
+        "license": "Apache-2.0",
+        "fixture": {
+          "file": "model-samples/granite-embedding-97m-multilingual-r2.json",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/granite-embedding-97m-multilingual-r2.json",
+          "size": 735,
+          "sha1": "721d37a672010fd5ec9cdf564c697319d598e342"
+        },
+        "benchmarkReport": "benchmarks/granite-embedding-97m-multilingual-r2.json"
+      }
+    ]
+  },
+  {
+    "id": "grounding-dino-tiny",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample image",
+        "description": "Standard sample for Grounding DINO Tiny — Open-Vocabulary Detection.",
+        "userInput": {
+          "candidate_labels": [
+            "person"
+          ]
+        },
+        "assets": [
+          {
+            "field": "image",
+            "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+            "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+            "mediaType": "image/jpeg",
+            "size": 78124,
+            "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818",
+            "encoding": "blob-url",
+            "width": 1024,
+            "height": 683
+          }
+        ],
+        "modelConfig": {},
+        "generateConfig": {},
+        "source": "https://www.pexels.com/photo/woman-wearing-pink-turtleneck-sweater-5965592/",
+        "license": "Pexels License",
+        "fixture": {
+          "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+          "size": 78124,
+          "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818"
+        },
+        "benchmarkReport": "benchmarks/grounding-dino-tiny.json"
+      }
+    ]
+  },
+  {
+    "id": "kokoro-82m-v1",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample text",
+        "description": "Standard sample for Kokoro 82M v1.0 — Text to Speech.",
+        "userInput": {
+          "text": "The quick brown fox jumps over the lazy dog."
+        },
+        "assets": [],
+        "modelConfig": {},
+        "generateConfig": {
+          "voice": "af_heart",
+          "speed": 1
+        },
+        "source": "WebAI benchmark sentence",
+        "license": "CC0-1.0",
+        "fixture": {
+          "file": "model-samples/kokoro-82m-v1.json",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/kokoro-82m-v1.json",
+          "size": 338,
+          "sha1": "9b670566697f3b67757bbbb2f15a20512540258a"
+        },
+        "benchmarkReport": "benchmarks/kokoro-82m-v1.json"
+      }
+    ]
+  },
+  {
+    "id": "laya-typed-decisions",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample text",
+        "description": "Standard sample for Laya Typed Decisions — Q4.",
+        "userInput": {
+          "state": "The tool call timed out twice, the retry budget is exhausted, and no successful result was returned.",
+          "questions": [
+            {
+              "type": "choice",
+              "instructions": "What should the agent do next?",
+              "options": [
+                "escalate to a human",
+                "report success",
+                "repeat indefinitely"
+              ]
+            },
+            {
+              "type": "noul",
+              "instructions": "Has the task completed successfully?"
+            }
+          ]
+        },
+        "assets": [],
+        "modelConfig": {},
+        "generateConfig": {},
+        "source": "WebAI-authored regression cases representing the source model's four intended workflow families.",
+        "license": "CC0-1.0",
+        "fixture": {
+          "file": "model-samples/laya-typed-decisions.json",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/laya-typed-decisions.json",
+          "size": 2242,
+          "sha1": "cee490dc2efc280f3d781dd6c7ec47c6d23ba737"
+        },
+        "benchmarkReport": "benchmarks/laya-typed-decisions.json"
+      }
+    ]
+  },
+  {
+    "id": "lfm2.5-350m",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample text",
+        "description": "Standard sample for LFM2.5 350M — Edge Chat.",
+        "userInput": {
+          "messages": [
+            {
+              "role": "user",
+              "content": "What is the capital of France? Answer in one concise sentence."
+            }
+          ]
+        },
+        "assets": [],
+        "modelConfig": {
+          "max_new_tokens": 32,
+          "do_sample": false
+        },
+        "generateConfig": {},
+        "source": "Original WebAI browser LLM benchmark fixture.",
+        "license": "Apache-2.0",
+        "fixture": {
+          "file": "model-samples/lfm2.5-350m.json",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/lfm2.5-350m.json",
+          "size": 435,
+          "sha1": "86006415fb2c4eb6d65678c2ce856f83268c2e98"
+        },
+        "benchmarkReport": "benchmarks/lfm2.5-350m.json"
+      }
+    ]
+  },
+  {
+    "id": "lightweight-openpose-litert",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample image",
+        "description": "Standard sample for Lightweight OpenPose — LiteRT Pose Estimation.",
+        "userInput": {},
+        "assets": [
+          {
+            "field": "image_blob_url",
+            "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+            "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+            "mediaType": "image/jpeg",
+            "size": 78124,
+            "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818",
+            "encoding": "blob-url",
+            "width": 1024,
+            "height": 683
+          }
+        ],
+        "modelConfig": {},
+        "generateConfig": {},
+        "source": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+        "license": "Pexels License",
+        "fixture": {
+          "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+          "size": 78124,
+          "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818"
+        },
+        "benchmarkReport": "benchmarks/lightweight-openpose-litert.json"
+      }
+    ]
+  },
+  {
+    "id": "mediapipe-face-detector",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample image",
+        "description": "Standard sample for MediaPipe BlazeFace — Short-Range Face Detector.",
+        "userInput": {},
+        "assets": [
+          {
+            "field": "image_blob_url",
+            "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/mediapipe-face-test.jpeg",
+            "file": "model-samples/mediapipe-face-test.jpeg",
+            "mediaType": "image/jpeg",
+            "size": 251136,
+            "sha1": "531674bd36742b56558d7879cc3c8461f7ddda31",
+            "encoding": "blob-url",
+            "width": 1280,
+            "height": 853
+          }
+        ],
+        "modelConfig": {},
+        "generateConfig": {
+          "useImageConversion": true
+        },
+        "source": "https://raw.githubusercontent.com/google-ai-edge/mediapipe-samples/7f3cf17410db91f8e084a46f7517df15bce3479a/examples/face_detector/ios/FaceDetectorTests/testImg.jpeg",
+        "license": "Apache-2.0",
+        "fixture": {
+          "file": "model-samples/mediapipe-face-test.jpeg",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/mediapipe-face-test.jpeg",
+          "size": 251136,
+          "sha1": "531674bd36742b56558d7879cc3c8461f7ddda31"
+        },
+        "benchmarkReport": "benchmarks/mediapipe-face-detector.json"
+      }
+    ]
+  },
+  {
+    "id": "mediapipe-hand-landmarker",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample image",
+        "description": "Standard sample for MediaPipe Hand Landmarker.",
+        "userInput": {},
+        "assets": [
+          {
+            "field": "image_blob_url",
+            "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/mediapipe-hand-test.jpg",
+            "file": "model-samples/mediapipe-hand-test.jpg",
+            "mediaType": "image/jpeg",
+            "size": 33051,
+            "sha1": "d44bc4fbfbc8587039ab32df880162dca7fe842e",
+            "encoding": "blob-url",
+            "width": 640,
+            "height": 427
+          }
+        ],
+        "modelConfig": {},
+        "generateConfig": {
+          "useImageConversion": true
+        },
+        "source": "https://raw.githubusercontent.com/google-ai-edge/mediapipe-samples/7f3cf17410db91f8e084a46f7517df15bce3479a/examples/hand_landmarker/android/app/src/androidTest/assets/test_image.jpg",
+        "license": "Apache-2.0",
+        "fixture": {
+          "file": "model-samples/mediapipe-hand-test.jpg",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/mediapipe-hand-test.jpg",
+          "size": 33051,
+          "sha1": "d44bc4fbfbc8587039ab32df880162dca7fe842e"
+        },
+        "benchmarkReport": "benchmarks/mediapipe-hand-landmarker.json"
+      }
+    ]
+  },
+  {
+    "id": "mediapipe-selfie-segmenter",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample image",
+        "description": "Standard sample for MediaPipe Selfie Segmenter.",
+        "userInput": {},
+        "assets": [
+          {
+            "field": "image_blob_url",
+            "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+            "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+            "mediaType": "image/jpeg",
+            "size": 78124,
+            "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818",
+            "encoding": "blob-url",
+            "width": 1024,
+            "height": 683
+          }
+        ],
+        "modelConfig": {},
+        "generateConfig": {
+          "useImageConversion": true
+        },
+        "source": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+        "license": "Pexels License",
+        "fixture": {
+          "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+          "size": 78124,
+          "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818"
+        },
+        "benchmarkReport": "benchmarks/mediapipe-selfie-segmenter.json"
+      }
+    ]
+  },
+  {
+    "id": "mobilenet-v2-litert",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample image",
+        "description": "Standard sample for MobileNet V2 — LiteRT Image Classification.",
+        "userInput": {},
+        "assets": [
+          {
+            "field": "image_blob_url",
+            "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+            "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+            "mediaType": "image/jpeg",
+            "size": 78124,
+            "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818",
+            "encoding": "blob-url",
+            "width": 1024,
+            "height": 683
+          }
+        ],
+        "modelConfig": {},
+        "generateConfig": {},
+        "source": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+        "license": "Pexels License",
+        "fixture": {
+          "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+          "size": 78124,
+          "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818"
+        },
+        "benchmarkReport": "benchmarks/mobilenet-v2-litert.json"
+      }
+    ]
+  },
+  {
+    "id": "modnet",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample image",
+        "description": "Standard sample for MODNet — Portrait Matting.",
+        "userInput": {},
+        "assets": [
+          {
+            "field": "image_blob_url",
+            "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+            "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+            "mediaType": "image/jpeg",
+            "size": 78124,
+            "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818",
+            "encoding": "blob-url",
+            "width": 1024,
+            "height": 683
+          }
+        ],
+        "modelConfig": {},
+        "generateConfig": {},
+        "source": "https://www.pexels.com/photo/woman-wearing-pink-turtleneck-sweater-5965592/",
+        "license": "Pexels License",
+        "fixture": {
+          "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+          "size": 78124,
+          "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818"
+        },
+        "benchmarkReport": "benchmarks/modnet.json"
+      }
+    ]
+  },
+  {
+    "id": "moonshine-base-en",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample audio",
+        "description": "Standard sample for Moonshine Base — English Speech Recognition.",
+        "userInput": {},
+        "assets": [
+          {
+            "field": "audio",
+            "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/whisper-standard.mp3",
+            "file": "model-samples/whisper-standard.mp3",
+            "mediaType": "audio/mpeg",
+            "size": 471925,
+            "sha1": "5faad1507b5d6bc61a39ca3184db5a7b554a7479",
+            "encoding": "audio-pcm-f32",
+            "sampleRate": 16000,
+            "durationSeconds": 29.49225
+          }
+        ],
+        "modelConfig": {},
+        "generateConfig": {},
+        "source": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/whisper-standard.mp3",
+        "license": "Unverified: upstream fixture license not recorded",
+        "fixture": {
+          "file": "model-samples/whisper-standard.mp3",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/whisper-standard.mp3",
+          "size": 471925,
+          "sha1": "5faad1507b5d6bc61a39ca3184db5a7b554a7479"
+        },
+        "benchmarkReport": "benchmarks/moonshine-base-en.json"
+      }
+    ]
+  },
+  {
+    "id": "moonshine-tiny",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample audio",
+        "description": "Standard sample for Moonshine Tiny — English Speech Recognition.",
+        "userInput": {},
+        "assets": [
+          {
+            "field": "audio",
+            "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/whisper-standard.mp3",
+            "file": "model-samples/whisper-standard.mp3",
+            "mediaType": "audio/mpeg",
+            "size": 471925,
+            "sha1": "5faad1507b5d6bc61a39ca3184db5a7b554a7479",
+            "encoding": "audio-pcm-f32",
+            "sampleRate": 16000,
+            "durationSeconds": 29.49225
+          }
+        ],
+        "modelConfig": {},
+        "generateConfig": {},
+        "source": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/whisper-standard.mp3",
+        "license": "Unverified: upstream fixture license not recorded",
+        "fixture": {
+          "file": "model-samples/whisper-standard.mp3",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/whisper-standard.mp3",
+          "size": 471925,
+          "sha1": "5faad1507b5d6bc61a39ca3184db5a7b554a7479"
+        },
+        "benchmarkReport": "benchmarks/moonshine-tiny.json"
+      }
+    ]
+  },
+  {
+    "id": "open-jev-deberta-v3-large",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample text",
+        "description": "Standard sample for Open Jev DeBERTa V3 Large — Typed Decisions.",
+        "userInput": {
+          "state": "I was charged twice for the same order and nobody answers my emails. I want my money back now.",
+          "questions": [
+            {
+              "type": "choice",
+              "instructions": "Which product area is the message about?",
+              "options": [
+                "fees & charges",
+                "pin & security",
+                "refund & dispute",
+                "top-up",
+                "exchange & fiat",
+                "atm & cash",
+                "transfer",
+                "card",
+                "account & identity",
+                "other"
+              ]
+            },
+            {
+              "type": "score",
+              "instructions": "How positive is the sentiment of this message?",
+              "options": [
+                "very negative",
+                "negative",
+                "neutral",
+                "positive",
+                "very positive"
+              ]
+            },
+            {
+              "type": "noul",
+              "instructions": "The customer is asking for a refund."
+            }
+          ]
+        },
+        "assets": [],
+        "modelConfig": {},
+        "generateConfig": {},
+        "source": "Adapted from the pinned source model card usage example.",
+        "license": "Apache-2.0",
+        "fixture": {
+          "file": "model-samples/open-jev-deberta-v3-large.json",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/open-jev-deberta-v3-large.json",
+          "size": 819,
+          "sha1": "bf1e5a03646050ac2c9b0fa51bf8f01b72f95ece"
+        },
+        "benchmarkReport": "benchmarks/open-jev-deberta-v3-large.json"
+      }
+    ]
+  },
+  {
+    "id": "open-jev-laya-multilingual",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample text",
+        "description": "Standard sample for Open Jev Laya Multilingual — Typed Decisions.",
+        "userInput": {
+          "state": "The payment was charged twice. Please refund the duplicate charge.",
+          "questions": [
+            {
+              "type": "choice",
+              "instructions": "What does the customer need?",
+              "options": [
+                "refund",
+                "password reset",
+                "shipping update"
+              ]
+            },
+            {
+              "type": "noul",
+              "instructions": "Is the customer asking for money back?"
+            }
+          ]
+        },
+        "assets": [],
+        "modelConfig": {},
+        "generateConfig": {},
+        "source": "WebAI-authored multilingual regression cases with unambiguous gold labels.",
+        "license": "CC0-1.0",
+        "fixture": {
+          "file": "model-samples/open-jev-laya-multilingual.json",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/open-jev-laya-multilingual.json",
+          "size": 1368,
+          "sha1": "ff4a5039dbc0c37a52717f0c82420ff45e0a2803"
+        },
+        "benchmarkReport": "benchmarks/open-jev-laya-multilingual.json"
+      }
+    ]
+  },
+  {
+    "id": "ormbg",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample image",
+        "description": "Standard sample for ORMBG — Human Background Removal.",
+        "userInput": {},
+        "assets": [
+          {
+            "field": "image_blob_url",
+            "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+            "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+            "mediaType": "image/jpeg",
+            "size": 78124,
+            "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818",
+            "encoding": "blob-url",
+            "width": 1024,
+            "height": 683
+          }
+        ],
+        "modelConfig": {},
+        "generateConfig": {},
+        "source": "https://www.pexels.com/photo/woman-wearing-pink-turtleneck-sweater-5965592/",
+        "license": "Pexels License",
+        "fixture": {
+          "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+          "size": 78124,
+          "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818"
+        },
+        "benchmarkReport": "benchmarks/ormbg.json"
+      }
+    ]
+  },
+  {
+    "id": "paraphrase-multilingual-minilm-l12-v2",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample text",
+        "description": "Standard sample for Paraphrase Multilingual MiniLM L12 v2.",
+        "userInput": {
+          "texts": [
+            "A child is playing with a dog in the park.",
+            "Un niño juega con un perro en el parque.",
+            "Quantum mechanics describes matter at atomic scales."
+          ]
+        },
+        "assets": [],
+        "modelConfig": {
+          "pooling": "mean",
+          "normalize": true
+        },
+        "generateConfig": {},
+        "source": "WebAI multilingual semantic-similarity benchmark",
+        "license": "CC0-1.0",
+        "fixture": {
+          "file": "model-samples/paraphrase-multilingual-minilm-l12-v2.json",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/paraphrase-multilingual-minilm-l12-v2.json",
+          "size": 523,
+          "sha1": "0294528b8c4ca8006eadb7a4872cad2a5ce29416"
+        },
+        "benchmarkReport": "benchmarks/paraphrase-multilingual-minilm-l12-v2.json"
+      }
+    ]
+  },
+  {
+    "id": "privacy-filter",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample text",
+        "description": "Standard sample for OpenAI Privacy Filter — PII Span Detection.",
+        "userInput": {
+          "text": "My name is Harry Potter and my email is harry.potter@hogwarts.edu."
+        },
+        "assets": [],
+        "modelConfig": {},
+        "generateConfig": {},
+        "source": "Official OpenAI Privacy Filter model-card Transformers.js example.",
+        "license": "Apache-2.0",
+        "fixture": {
+          "file": "model-samples/privacy-filter.json",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/privacy-filter.json",
+          "size": 899,
+          "sha1": "39b9188d3224c759479738aa156538e01a283414"
+        },
+        "benchmarkReport": "benchmarks/privacy-filter.json"
+      }
+    ]
+  },
+  {
+    "id": "qwen3-embedding-0.6b",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample text",
+        "description": "Standard sample for Qwen3 Embedding 0.6B.",
+        "userInput": {
+          "texts": [
+            "Instruct: Given a web search query, retrieve relevant passages that answer the query\nQuery:What is the capital of France?",
+            "Paris is the capital and largest city of France.",
+            "Whales are large marine mammals that live in the ocean."
+          ]
+        },
+        "assets": [],
+        "modelConfig": {
+          "pooling": "last_token",
+          "normalize": true
+        },
+        "generateConfig": {},
+        "source": "Original WebAI semantic retrieval fixture following the Qwen3 Embedding query format.",
+        "license": "Apache-2.0",
+        "fixture": {
+          "file": "model-samples/qwen3-embedding-0.6b.json",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/qwen3-embedding-0.6b.json",
+          "size": 649,
+          "sha1": "1de6f9cb512dd37a77b155454b595322c5eeff9f"
+        },
+        "benchmarkReport": "benchmarks/qwen3-embedding-0.6b.json"
+      }
+    ]
+  },
+  {
+    "id": "qwen3.5-0.8b",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample text",
+        "description": "Standard sample for Qwen3.5 0.8B — Text Chat.",
+        "userInput": {
+          "messages": [
+            {
+              "role": "user",
+              "content": "What is the capital of France? Answer with only the city name."
+            }
+          ]
+        },
+        "assets": [],
+        "modelConfig": {
+          "max_new_tokens": 32,
+          "do_sample": false
+        },
+        "generateConfig": {},
+        "source": "Original WebAI benchmark fixture.",
+        "license": "Apache-2.0",
+        "fixture": {
+          "file": "model-samples/qwen3.5-0.8b.json",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/qwen3.5-0.8b.json",
+          "size": 296,
+          "sha1": "842e28ba6ec5218cbc34eb677df214d89064119a"
+        },
+        "benchmarkReport": "benchmarks/qwen3.5-0.8b.json"
+      }
+    ]
+  },
+  {
+    "id": "rubert-tiny-toxicity",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample text",
+        "description": "Standard sample for RuBERT Tiny Russian Toxicity.",
+        "userInput": {
+          "text": "я люблю африканцев"
+        },
+        "assets": [],
+        "modelConfig": {},
+        "generateConfig": {},
+        "source": "Russian examples from the pinned source model card and widget metadata.",
+        "license": "MIT",
+        "fixture": {
+          "file": "model-samples/rubert-tiny-toxicity.json",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/rubert-tiny-toxicity.json",
+          "size": 700,
+          "sha1": "f136212c8f17ea8b87f6c567580ddae3ad924bcc"
+        },
+        "benchmarkReport": "benchmarks/rubert-tiny-toxicity.json"
+      }
+    ]
+  },
+  {
+    "id": "sam-vit-base",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample text",
+        "description": "Standard sample for SAM ViT Base — Point-Prompt Segmentation.",
+        "userInput": {
+          "input_points": [
+            [
+              [
+                470,
+                330
+              ]
+            ]
+          ],
+          "input_labels": [
+            [
+              1
+            ]
+          ]
+        },
+        "assets": [
+          {
+            "field": "image",
+            "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+            "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+            "mediaType": "image/jpeg",
+            "size": 78124,
+            "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818",
+            "encoding": "blob-url"
+          }
+        ],
+        "modelConfig": {},
+        "generateConfig": {},
+        "source": "WebAI point-prompt fixture using the existing Pexels portrait benchmark image.",
+        "license": "Pexels License",
+        "fixture": {
+          "file": "model-samples/slimsam-77-uniform.json",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/slimsam-77-uniform.json",
+          "size": 404,
+          "sha1": "f03c558b1d0dfd0dcb2db0dcaffbd9038aac6cf8"
+        },
+        "benchmarkReport": "benchmarks/sam-vit-base.json"
+      }
+    ]
+  },
+  {
+    "id": "sam-vit-large",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample text",
+        "description": "Standard sample for SAM ViT Large — Point-Prompt Segmentation.",
+        "userInput": {
+          "input_points": [
+            [
+              [
+                470,
+                330
+              ]
+            ]
+          ],
+          "input_labels": [
+            [
+              1
+            ]
+          ]
+        },
+        "assets": [
+          {
+            "field": "image",
+            "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+            "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+            "mediaType": "image/jpeg",
+            "size": 78124,
+            "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818",
+            "encoding": "blob-url"
+          }
+        ],
+        "modelConfig": {},
+        "generateConfig": {},
+        "source": "WebAI point-prompt fixture using the existing Pexels portrait benchmark image.",
+        "license": "Pexels License",
+        "fixture": {
+          "file": "model-samples/slimsam-77-uniform.json",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/slimsam-77-uniform.json",
+          "size": 404,
+          "sha1": "f03c558b1d0dfd0dcb2db0dcaffbd9038aac6cf8"
+        },
+        "benchmarkReport": "benchmarks/sam-vit-large.json"
+      }
+    ]
+  },
+  {
+    "id": "segformer-b3-ade20k",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample image",
+        "description": "Standard sample for SegFormer B3 ADE20K — 150-Class Scene Segmentation.",
+        "userInput": {},
+        "assets": [
+          {
+            "field": "image",
+            "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+            "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+            "mediaType": "image/jpeg",
+            "size": 78124,
+            "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818",
+            "encoding": "blob-url",
+            "width": 1024,
+            "height": 683
+          }
+        ],
+        "modelConfig": {},
+        "generateConfig": {},
+        "source": "https://www.pexels.com/photo/woman-wearing-pink-turtleneck-sweater-5965592/",
+        "license": "Pexels License",
+        "fixture": {
+          "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+          "size": 78124,
+          "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818"
+        },
+        "benchmarkReport": "benchmarks/segformer-b3-ade20k.json"
+      }
+    ]
+  },
+  {
+    "id": "siglip-base-patch16-224",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample image",
+        "description": "Standard sample for SigLIP Base Patch16 224 — Zero-Shot Image Classification.",
+        "userInput": {
+          "candidate_labels": [
+            "a portrait photo of a person",
+            "a photo of a car",
+            "a landscape"
+          ]
+        },
+        "assets": [
+          {
+            "field": "image_blob_url",
+            "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+            "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+            "mediaType": "image/jpeg",
+            "size": 78124,
+            "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818",
+            "encoding": "blob-url",
+            "width": 1024,
+            "height": 683
+          }
+        ],
+        "modelConfig": {},
+        "generateConfig": {},
+        "source": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+        "license": "Pexels License",
+        "fixture": {
+          "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+          "size": 78124,
+          "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818"
+        },
+        "benchmarkReport": "benchmarks/siglip-base-patch16-224.json"
+      }
+    ]
+  },
+  {
+    "id": "slimsam-77-uniform",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample text",
+        "description": "Standard sample for SlimSAM 77 Uniform — Point-Prompt Segmentation.",
+        "userInput": {
+          "input_points": [
+            [
+              [
+                470,
+                330
+              ]
+            ]
+          ],
+          "input_labels": [
+            [
+              1
+            ]
+          ]
+        },
+        "assets": [
+          {
+            "field": "image",
+            "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+            "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+            "mediaType": "image/jpeg",
+            "size": 78124,
+            "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818",
+            "encoding": "blob-url"
+          }
+        ],
+        "modelConfig": {},
+        "generateConfig": {},
+        "source": "WebAI point-prompt fixture using the existing Pexels portrait benchmark image.",
+        "license": "Pexels License",
+        "fixture": {
+          "file": "model-samples/slimsam-77-uniform.json",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/slimsam-77-uniform.json",
+          "size": 404,
+          "sha1": "f03c558b1d0dfd0dcb2db0dcaffbd9038aac6cf8"
+        },
+        "benchmarkReport": "benchmarks/slimsam-77-uniform.json"
+      }
+    ]
+  },
+  {
+    "id": "speecht5-tts",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample text",
+        "description": "Standard sample for SpeechT5 — English Text to Speech.",
+        "userInput": {
+          "text": "The quick brown fox jumps over the lazy dog near the river bank.",
+          "speakerEmbedding": "/test-audio/speecht5-speaker-embedding.bin"
+        },
+        "assets": [
+          {
+            "field": "speakerEmbedding",
+            "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/speecht5-speaker-embedding.bin",
+            "file": "model-samples/speecht5-speaker-embedding.bin",
+            "mediaType": "application/octet-stream",
+            "size": 2048,
+            "sha1": "7eca50ca7a6e271a2107f7f2db31c00d0bcdfb66",
+            "encoding": "blob-url"
+          }
+        ],
+        "modelConfig": {},
+        "generateConfig": {},
+        "source": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/speecht5-tts.json",
+        "license": "CC0-1.0",
+        "fixture": {
+          "file": "model-samples/speecht5-tts.json",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/speecht5-tts.json",
+          "size": 2177,
+          "sha1": "b11a7a07ab6586b410c367c280b46c44edcff514"
+        },
+        "benchmarkReport": "benchmarks/speecht5-tts.json"
+      }
+    ]
+  },
+  {
+    "id": "sweep-next-edit-1.5b",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample text",
+        "description": "Standard sample for Sweep Next-Edit 1.5B — ONNX.",
+        "userInput": {
+          "context_files": {
+            "utils.py": "def get_time_of_day():\n    from datetime import datetime\n    hour = datetime.now().hour\n    if hour < 12:\n        return \"morning\"\n    elif hour < 18:\n        return \"afternoon\"\n    else:\n        return \"evening\"\n"
+          },
+          "recent_diffs": [
+            {
+              "file_path": "greet.py",
+              "original": "def greet():\n    print(\"Hello!\")",
+              "updated": "def greet(name):\n    print(f\"Hello, {name}!\")"
+            }
+          ],
+          "file_path": "greet.py",
+          "original_content": "def greet(name):\n    print(f\"Hello, {name}!\")\n\ngreet(\"Alice\")",
+          "current_content": "from utils import get_time_of_day\n\ndef greet(name):\n    print(f\"Hello, {name}!\")\n\ngreet(\"Alice\")"
+        },
+        "assets": [],
+        "modelConfig": {
+          "max_new_tokens": 160,
+          "do_sample": false
+        },
+        "generateConfig": {},
+        "source": "Adapted from the Apache-2.0 Xenova/sweep-next-edit-1.5B model-card usage example at artifact revision 402c437f67cee450c00d3add669b43ae79e55e50.",
+        "license": "Apache-2.0",
+        "fixture": {
+          "file": "model-samples/sweep-next-edit-1.5b.json",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/sweep-next-edit-1.5b.json",
+          "size": 1291,
+          "sha1": "98a29ff43b6bdcd2faba07f9ba47bb9d9ed36192"
+        },
+        "benchmarkReport": "benchmarks/sweep-next-edit-1.5b.json"
+      }
+    ]
+  },
+  {
+    "id": "swin2sr-realworld-sr-x4-64-bsrgan-psnr",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample image",
+        "description": "Standard sample for Swin2SR Real-World 4× Super-Resolution.",
+        "userInput": {},
+        "assets": [
+          {
+            "field": "image",
+            "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/swin2sr-portrait-lowres.jpg",
+            "file": "model-samples/swin2sr-portrait-lowres.jpg",
+            "mediaType": "image/jpeg",
+            "size": 5059,
+            "sha1": "86b8839b760031cca032e78fe516dc5bda417a1a",
+            "encoding": "blob-url",
+            "width": 96,
+            "height": 96
+          }
+        ],
+        "modelConfig": {},
+        "generateConfig": {},
+        "source": "https://www.pexels.com/photo/woman-wearing-pink-turtleneck-sweater-5965592/",
+        "license": "Pexels License",
+        "fixture": {
+          "file": "model-samples/swin2sr-portrait-lowres.jpg",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/swin2sr-portrait-lowres.jpg",
+          "size": 5059,
+          "sha1": "86b8839b760031cca032e78fe516dc5bda417a1a"
+        },
+        "benchmarkReport": "benchmarks/swin2sr-realworld-sr-x4-64-bsrgan-psnr.json"
+      }
+    ]
+  },
+  {
+    "id": "vitmatte-base-composition-1k",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample image",
+        "description": "Standard sample for VitMatte Base Composition-1K — Trimap Matting.",
+        "userInput": {},
+        "assets": [
+          {
+            "field": "image",
+            "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+            "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+            "mediaType": "image/jpeg",
+            "size": 78124,
+            "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818",
+            "encoding": "blob-url",
+            "width": 1024,
+            "height": 683
+          },
+          {
+            "field": "trimap",
+            "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/vitmatte-portrait-5965592-trimap.png",
+            "file": "model-samples/vitmatte-portrait-5965592-trimap.png",
+            "mediaType": "image/png",
+            "size": 22459,
+            "sha1": "64b06a53a2b0f33507093d2696911ec236a00396",
+            "encoding": "blob-url",
+            "width": 1024,
+            "height": 683
+          }
+        ],
+        "modelConfig": {},
+        "generateConfig": {},
+        "source": "https://www.pexels.com/photo/woman-wearing-pink-turtleneck-sweater-5965592/",
+        "license": "Pexels License",
+        "fixture": {
+          "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+          "size": 78124,
+          "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818"
+        },
+        "benchmarkReport": "benchmarks/vitmatte-base-composition-1k.json"
+      }
+    ]
+  },
+  {
+    "id": "vitmatte-base-distinctions-646",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample image",
+        "description": "Standard sample for VitMatte Base Distinctions-646 — Trimap Matting.",
+        "userInput": {},
+        "assets": [
+          {
+            "field": "image",
+            "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+            "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+            "mediaType": "image/jpeg",
+            "size": 78124,
+            "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818",
+            "encoding": "blob-url",
+            "width": 1024,
+            "height": 683
+          },
+          {
+            "field": "trimap",
+            "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/vitmatte-portrait-5965592-trimap.png",
+            "file": "model-samples/vitmatte-portrait-5965592-trimap.png",
+            "mediaType": "image/png",
+            "size": 22459,
+            "sha1": "64b06a53a2b0f33507093d2696911ec236a00396",
+            "encoding": "blob-url",
+            "width": 1024,
+            "height": 683
+          }
+        ],
+        "modelConfig": {},
+        "generateConfig": {},
+        "source": "https://www.pexels.com/photo/woman-wearing-pink-turtleneck-sweater-5965592/",
+        "license": "Pexels License",
+        "fixture": {
+          "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+          "size": 78124,
+          "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818"
+        },
+        "benchmarkReport": "benchmarks/vitmatte-base-distinctions-646.json"
+      }
+    ]
+  },
+  {
+    "id": "vitmatte-small-composition-1k",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample image",
+        "description": "Standard sample for VitMatte Small Composition-1K — Trimap Matting.",
+        "userInput": {},
+        "assets": [
+          {
+            "field": "image",
+            "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+            "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+            "mediaType": "image/jpeg",
+            "size": 78124,
+            "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818",
+            "encoding": "blob-url",
+            "width": 1024,
+            "height": 683
+          },
+          {
+            "field": "trimap",
+            "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/vitmatte-portrait-5965592-trimap.png",
+            "file": "model-samples/vitmatte-portrait-5965592-trimap.png",
+            "mediaType": "image/png",
+            "size": 22459,
+            "sha1": "64b06a53a2b0f33507093d2696911ec236a00396",
+            "encoding": "blob-url",
+            "width": 1024,
+            "height": 683
+          }
+        ],
+        "modelConfig": {},
+        "generateConfig": {},
+        "source": "https://www.pexels.com/photo/woman-wearing-pink-turtleneck-sweater-5965592/",
+        "license": "Pexels License",
+        "fixture": {
+          "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+          "size": 78124,
+          "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818"
+        },
+        "benchmarkReport": "benchmarks/vitmatte-small-composition-1k.json"
+      }
+    ]
+  },
+  {
+    "id": "wav2vec2-base-superb-er",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample audio",
+        "description": "Standard sample for Wav2Vec2 Base SUPERB — Emotion Recognition.",
+        "userInput": {},
+        "assets": [
+          {
+            "field": "audio",
+            "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/crema-d-1001-dfa-ang.wav",
+            "file": "model-samples/crema-d-1001-dfa-ang.wav",
+            "mediaType": "audio/wav",
+            "size": 72862,
+            "sha1": "3d62067948a906c4df841268c31a96d3f9d14da5",
+            "encoding": "audio-pcm-f32",
+            "sampleRate": 16000,
+            "durationSeconds": 2.2755625
+          }
+        ],
+        "modelConfig": {},
+        "generateConfig": {},
+        "source": "CREMA-D 1001_DFA_ANG_XX.wav",
+        "license": "ODbL-1.0 / DbCL-1.0",
+        "fixture": {
+          "file": "model-samples/crema-d-1001-dfa-ang.wav",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/crema-d-1001-dfa-ang.wav",
+          "size": 72862,
+          "sha1": "3d62067948a906c4df841268c31a96d3f9d14da5"
+        },
+        "benchmarkReport": "benchmarks/wav2vec2-base-superb-er.json"
+      }
+    ]
+  },
+  {
+    "id": "whisper-base",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample audio",
+        "description": "Standard sample for Whisper Base — Timestamped.",
+        "userInput": {},
+        "assets": [
+          {
+            "field": "audio",
+            "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/whisper-standard.mp3",
+            "file": "model-samples/whisper-standard.mp3",
+            "mediaType": "audio/mpeg",
+            "size": 471925,
+            "sha1": "5faad1507b5d6bc61a39ca3184db5a7b554a7479",
+            "encoding": "audio-pcm-f32",
+            "sampleRate": 16000,
+            "durationSeconds": 29.49225
+          }
+        ],
+        "modelConfig": {},
+        "generateConfig": {},
+        "source": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/whisper-standard.mp3",
+        "license": "Unverified: upstream fixture license not recorded",
+        "fixture": {
+          "file": "model-samples/whisper-standard.mp3",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/whisper-standard.mp3",
+          "size": 471925,
+          "sha1": "5faad1507b5d6bc61a39ca3184db5a7b554a7479"
+        },
+        "benchmarkReport": "benchmarks/whisper-base_timestamped.json"
+      }
+    ]
+  },
+  {
+    "id": "whisper-large-v3-turbo",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample audio",
+        "description": "Standard sample for Whisper Large V3 Turbo — Timestamped.",
+        "userInput": {},
+        "assets": [
+          {
+            "field": "audio",
+            "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/whisper-standard.mp3",
+            "file": "model-samples/whisper-standard.mp3",
+            "mediaType": "audio/mpeg",
+            "size": 471925,
+            "sha1": "5faad1507b5d6bc61a39ca3184db5a7b554a7479",
+            "encoding": "audio-pcm-f32",
+            "sampleRate": 16000,
+            "durationSeconds": 29.49225
+          }
+        ],
+        "modelConfig": {},
+        "generateConfig": {},
+        "source": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/whisper-standard.mp3",
+        "license": "Unverified: upstream fixture license not recorded",
+        "fixture": {
+          "file": "model-samples/whisper-standard.mp3",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/whisper-standard.mp3",
+          "size": 471925,
+          "sha1": "5faad1507b5d6bc61a39ca3184db5a7b554a7479"
+        },
+        "benchmarkReport": "benchmarks/whisper-large-v3-turbo_timestamped.json"
+      }
+    ]
+  },
+  {
+    "id": "whisper-small",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample audio",
+        "description": "Standard sample for Whisper Small — Timestamped.",
+        "userInput": {},
+        "assets": [
+          {
+            "field": "audio",
+            "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/whisper-standard.mp3",
+            "file": "model-samples/whisper-standard.mp3",
+            "mediaType": "audio/mpeg",
+            "size": 471925,
+            "sha1": "5faad1507b5d6bc61a39ca3184db5a7b554a7479",
+            "encoding": "audio-pcm-f32",
+            "sampleRate": 16000,
+            "durationSeconds": 29.49225
+          }
+        ],
+        "modelConfig": {},
+        "generateConfig": {},
+        "source": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/whisper-standard.mp3",
+        "license": "Unverified: upstream fixture license not recorded",
+        "fixture": {
+          "file": "model-samples/whisper-standard.mp3",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/whisper-standard.mp3",
+          "size": 471925,
+          "sha1": "5faad1507b5d6bc61a39ca3184db5a7b554a7479"
+        },
+        "benchmarkReport": "benchmarks/whisper-small_timestamped.json"
+      }
+    ]
+  },
+  {
+    "id": "whisper-tiny",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample audio",
+        "description": "Standard sample for Whisper Tiny — Timestamped.",
+        "userInput": {},
+        "assets": [
+          {
+            "field": "audio",
+            "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/whisper-standard.mp3",
+            "file": "model-samples/whisper-standard.mp3",
+            "mediaType": "audio/mpeg",
+            "size": 471925,
+            "sha1": "5faad1507b5d6bc61a39ca3184db5a7b554a7479",
+            "encoding": "audio-pcm-f32",
+            "sampleRate": 16000,
+            "durationSeconds": 29.49225
+          }
+        ],
+        "modelConfig": {},
+        "generateConfig": {},
+        "source": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/whisper-standard.mp3",
+        "license": "Unverified: upstream fixture license not recorded",
+        "fixture": {
+          "file": "model-samples/whisper-standard.mp3",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/whisper-standard.mp3",
+          "size": 471925,
+          "sha1": "5faad1507b5d6bc61a39ca3184db5a7b554a7479"
+        },
+        "benchmarkReport": "benchmarks/whisper-tiny_timestamped.json"
+      }
+    ]
+  },
+  {
+    "id": "yolov8n-pose",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample image",
+        "description": "Standard sample for YOLOv8 Nano Pose.",
+        "userInput": {},
+        "assets": [
+          {
+            "field": "image",
+            "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+            "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+            "mediaType": "image/jpeg",
+            "size": 78124,
+            "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818",
+            "encoding": "blob-url",
+            "width": 1024,
+            "height": 683
+          }
+        ],
+        "modelConfig": {},
+        "generateConfig": {},
+        "source": "https://www.pexels.com/photo/woman-wearing-pink-turtleneck-sweater-5965592/",
+        "license": "Pexels License",
+        "fixture": {
+          "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+          "size": 78124,
+          "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818"
+        },
+        "benchmarkReport": "benchmarks/yolov8n-pose.json"
+      }
+    ]
+  },
+  {
+    "id": "yolox-m-litert",
+    "samples": [
+      {
+        "id": "standard",
+        "label": "Try sample image",
+        "description": "Standard sample for YOLOX-M — LiteRT Object Detection.",
+        "userInput": {},
+        "assets": [
+          {
+            "field": "image_blob_url",
+            "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+            "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+            "mediaType": "image/jpeg",
+            "size": 78124,
+            "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818",
+            "encoding": "blob-url",
+            "width": 1024,
+            "height": 683
+          }
+        ],
+        "modelConfig": {},
+        "generateConfig": {},
+        "source": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+        "license": "Pexels License",
+        "fixture": {
+          "file": "model-samples/modnet-portrait-pexels-5965592.jpg",
+          "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/modnet-portrait-pexels-5965592.jpg",
+          "size": 78124,
+          "sha1": "38212739a4a4f0be25d84863cf991d7fb6c6d818"
+        },
+        "benchmarkReport": "benchmarks/yolox-m-litert.json"
+      }
+    ]
+  }
+]

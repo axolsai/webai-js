@@ -30,6 +30,13 @@ const MANIFEST = {
   },
   config: { model: [], generation: [] },
   output: { description: "Describe the native model output.", fields: [], example: {} },
+  samples: [{
+    id: "standard", label: "Try sample text", description: "Describe this sample.",
+    userInput: { text: "Replace with a representative task input." }, assets: [],
+    modelConfig: {}, generateConfig: {}, source: "Original fixture source", license: "SPDX-license-id",
+    fixture: { file: "model-samples/fixture.json", url: "https://assets.example/fixture.json", size: 1, sha1: "replace" },
+    benchmarkReport: "benchmarks/MODEL.json",
+  }],
   operations: ["checkModelSupports", "init", "download", "generate", "clearMemory"],
   benchmark: {
     report: "benchmarks/MODEL.json",

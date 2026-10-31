@@ -1,0 +1,7 @@
+{
+ "source":"Original WebAI English retrieval fixture.",
+ "license":"MIT",
+ "input":{"texts":["What is the capital of France?","Paris is the capital and largest city of France.","Whales are large marine mammals living in the ocean."]},
+ "modelConfig":{"pooling":"mean","normalize":true},
+ "expected":{"rows":3,"dimensions":384,"positiveIndex":1,"negativeIndex":2,"minimumMargin":0.1,"normTolerance":0.02}
+}

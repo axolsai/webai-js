@@ -17049,5 +17049,34 @@
       }
     ],
     "environment": "Headless Chrome on macOS; Transformers.js 4.2.0"
-  }
+  },
+  "samples": [
+    {
+      "id": "standard",
+      "label": "Try sample text",
+      "description": "Standard sample for All MiniLM L6 v2.",
+      "userInput": {
+        "texts": [
+          "What is the capital of France?",
+          "Paris is the capital and largest city of France.",
+          "Whales are large marine mammals living in the ocean."
+        ]
+      },
+      "assets": [],
+      "modelConfig": {
+        "pooling": "mean",
+        "normalize": true
+      },
+      "generateConfig": {},
+      "source": "Original WebAI English retrieval fixture.",
+      "license": "MIT",
+      "fixture": {
+        "file": "model-samples/all-minilm-l6-v2.json",
+        "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/all-minilm-l6-v2.json",
+        "size": 407,
+        "sha1": "8beb837ef1dfd6c35b4a100d7d947f414f03c0f6"
+      },
+      "benchmarkReport": "benchmarks/all-minilm-l6-v2.json"
+    }
+  ]
 }

@@ -84,6 +84,10 @@ Upload the same immutable fixture to the project's public B2 `assets/benchmarks/
 the public URL, exact byte size, and checksum in the worker and generated benchmark manifests. Keep
 the local copy so tests do not depend on external availability.
 
+Add a UI-ready `manifest.samples` entry following the reusable-samples section of the worker
+contract. Inline text/structured input and describe every binary asset with a verified remote URL,
+packaged local copy, bytes, checksum, target input field, and explicit decoding mode.
+
 ## 6. Benchmark the complete matrix
 
 Seed candidates from repository artifacts, not the worker allow-list. Test every precision on WASM

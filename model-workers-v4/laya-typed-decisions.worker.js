@@ -80,6 +80,44 @@ const MANIFEST = {
     invalidatedBy: ["artifact revision change", "runtime version change", "fixture or quality-gate change", "browser/backend behavior change"],
     results: [{"precision":"q4","device":"wasm","status":"pass","runtime":{"loadMs":53499.4,"inferenceMs":9939.8,"totalMs":64657.9,"grade":"very-slow","questionsPerSecond":0.8048},"quality":{"grade":"typed-decision-pass","cases":[{"domain":"agent-observability","type":"choice","pass":true},{"domain":"agent-observability","type":"noul","pass":true},{"domain":"customer-service","type":"choice","pass":true},{"domain":"customer-service","type":"noul","pass":true},{"domain":"invoice-processing","type":"choice","pass":true},{"domain":"invoice-processing","type":"score","pass":true},{"domain":"security-incidents","type":"choice","pass":true},{"domain":"security-incidents","type":"noul","pass":true}]},"cleanup":{"modelDisposed":true,"cacheClearedBeforeCase":true,"cacheClearedAfterCase":true,"deletedEntries":3}},{"precision":"q4","device":"webgpu","status":"pass","runtime":{"loadMs":53566.3,"inferenceMs":938.7,"totalMs":55818.6,"grade":"good","questionsPerSecond":8.5224},"quality":{"grade":"typed-decision-pass","cases":[{"domain":"agent-observability","type":"choice","pass":true},{"domain":"agent-observability","type":"noul","pass":true},{"domain":"customer-service","type":"choice","pass":true},{"domain":"customer-service","type":"noul","pass":true},{"domain":"invoice-processing","type":"choice","pass":true},{"domain":"invoice-processing","type":"score","pass":true},{"domain":"security-incidents","type":"choice","pass":true},{"domain":"security-incidents","type":"noul","pass":true}]},"cleanup":{"modelDisposed":true,"cacheClearedBeforeCase":true,"cacheClearedAfterCase":true,"deletedEntries":3}}],
   },
+
+  samples: [
+  {
+    "id": "standard",
+    "label": "Try sample text",
+    "description": "Standard sample for Laya Typed Decisions — Q4.",
+    "userInput": {
+      "state": "The tool call timed out twice, the retry budget is exhausted, and no successful result was returned.",
+      "questions": [
+        {
+          "type": "choice",
+          "instructions": "What should the agent do next?",
+          "options": [
+            "escalate to a human",
+            "report success",
+            "repeat indefinitely"
+          ]
+        },
+        {
+          "type": "noul",
+          "instructions": "Has the task completed successfully?"
+        }
+      ]
+    },
+    "assets": [],
+    "modelConfig": {},
+    "generateConfig": {},
+    "source": "WebAI-authored regression cases representing the source model's four intended workflow families.",
+    "license": "CC0-1.0",
+    "fixture": {
+      "file": "model-samples/laya-typed-decisions.json",
+      "url": "https://f005.backblazeb2.com/file/hubters-webai-public/assets/benchmarks/laya-typed-decisions.json",
+      "size": 2242,
+      "sha1": "cee490dc2efc280f3d781dd6c7ec47c6d23ba737"
+    },
+    "benchmarkReport": "benchmarks/laya-typed-decisions.json"
+  }
+],
 };
 
 const state = { initializing: false, initialized: false, generating: false };
